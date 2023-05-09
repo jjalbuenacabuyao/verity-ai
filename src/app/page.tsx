@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, ChangeEvent } from "react";
-import { getItems } from "@/utils/pdfConverter";
 import FileUpload from "@/components/FileUpload";
 
 export default function Home() {
