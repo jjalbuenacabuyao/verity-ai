@@ -16,13 +16,8 @@ const FileUpload: React.FC<FileUploadProps> = () => {
 
   const handleExtract = async () => {
     const text = await getTextFromFiles(files);
-    const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
     setText1(text);
-    // saveAs(blob, "extracted_text.txt");
   };
-
-  console.log(processString(text1))
-  // console.log(text1.split("\n"))
 
   return (
     <div>
