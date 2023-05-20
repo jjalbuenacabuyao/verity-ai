@@ -26,8 +26,3 @@ export default async function getTextFromFiles(files: File[]) {
 
   return text;
 };
-
-
-
-
-sss
