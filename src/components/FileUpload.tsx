@@ -7,21 +7,30 @@ import {processString, detectText, getTextFromFiles} from "@/utils";
 interface FileUploadProps {}
 
 const FileUpload: React.FC<FileUploadProps> = () => {
-  const [files, setFiles] = useState<File[]>([]);
+  const [files, setFiles] = useState<File | null>(null);
   const [text1, setText1] = useState("")
 
-  const handleDrop = (acceptedFiles: File[]) => {
-    setFiles(acceptedFiles);
-  };
+  // const handleDrop = (acceptedFiles: File[]) => {
+  //   setFiles(acceptedFiles);
+  // };
 
   const handleExtract = async () => {
-    const text = await getTextFromFiles(files);
-    setText1(text);
+    // const text = await getTextFromFiles(files);
+    // setText1(text);
+    const formData = new FormData();
+    formData.append('file', files);
+
+    const response = await fetch('/api/handler', {
+      method: 'POST',
+      body: formData,
+    });
+    const data = await response.json();
+    setText1(data.text);
   };
 
   return (
     <div>
-      <Dropzone onDrop={handleDrop}>
+      {/* <Dropzone onDrop={handleDrop}>
         {({ getRootProps, getInputProps, isDragActive }: DropzoneState) => (
           <div {...getRootProps()}>
             <input {...getInputProps()} />
@@ -32,7 +41,8 @@ const FileUpload: React.FC<FileUploadProps> = () => {
             )}
           </div>
         )}
-      </Dropzone>
+      </Dropzone> */}
+      <input type="file" onChange={handleChange} />
       <button onClick={handleExtract}>Extract Text</button>
       <p>{text1}</p>
     </div>
