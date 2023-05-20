@@ -2,6 +2,7 @@
 
 import { useState, ChangeEvent } from "react";
 import FileUpload from "@/components/FileUpload";
+import FileUploadForm from "@/components/FileUploadForm";
 
 export default function Home() {
   // const [file, setFile] = useState<FileList>();
@@ -65,6 +66,6 @@ export default function Home() {
     //   />
     //   <p></p>
     // </form>
-    <FileUpload />
+    <FileUploadForm />
   );
 }
