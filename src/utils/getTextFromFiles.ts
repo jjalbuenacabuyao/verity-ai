@@ -1,19 +1,21 @@
 import mammoth from "mammoth";
 
 export default async function getTextFromFiles(files: File[]) {
+  const pdfFileType = "application/pdf";
+  const docxFileType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+  
   let text = "";
   for (const file of files) {
-    if (file.type === "application/pdf") {
-      // const fileReader = new FileReader();
-      // fileReader.onload((event) => {
-      //   text = event.target.result;
-      //   console.log(text);
-      // })
-      // fileReader.readAsDataURL(file)
-    } else if (
-      file.type ===
-      "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-    ) {
+    if (file.type === pdfFileType) {
+      const formData = new FormData();
+      formData.append('file', file);
+      const response = await fetch('/api/fileHandler', {
+        method: 'POST',
+        body: formData,
+      });
+      const data = await response.json();
+      console.log(data);
+    } else if (file.type === docxFileType) {
       // Extract text from DOCX using mammoth
       const result = await mammoth.extractRawText({
         arrayBuffer: await file.arrayBuffer(),
@@ -21,5 +23,11 @@ export default async function getTextFromFiles(files: File[]) {
       text += result.value;
     }
   }
+
   return text;
 };
+
+
+
+
+sss
