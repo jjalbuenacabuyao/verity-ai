@@ -1,25 +1,31 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { detectText, getTextFromFiles, processString } from "@/utils";
+import { ChangeEvent, FormEvent, useState } from "react";
+import Dropzone, { DropzoneState } from "react-dropzone";
 
 export default function FileUploadForm() {
-  const [file, setFile] = useState<File | null>(null);
+  const [files, setFiles] = useState<File[]>([]);
+  const [text, setText] = useState("");
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (file) {
-      const formData = new FormData();
-      formData.append('file', file);
-      const response = await fetch('/api/fileHandler', {
-        method: 'POST',
-        body: formData,
-      });
-      const data = await response.json();
-      console.log(data);
-    }
+    const extractedText = await getTextFromFiles(files);
+    const processedString = processString(extractedText);
+    setText(processedString)
+    // const result = await detectText(processedString);
+    // console.log(result);
   };
+
+  // const handleDrop = async (acceptedFiles: File[]) => {
+  //   setFiles(acceptedFiles);
+  // };
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
-      setFile(event.target.files[0]);
+      let fileArray = [];
+      for(let i = 0; i < event.target.files.length; i++){
+        fileArray.push(event.target.files[i]);
+      }
+      setFiles(fileArray);
     }
   };
 
@@ -27,6 +33,7 @@ export default function FileUploadForm() {
     <form onSubmit={handleSubmit}>
       <input type="file" onChange={handleFileChange} />
       <button type="submit">Upload</button>
+      <p>{text}</p>
     </form>
   );
 }
