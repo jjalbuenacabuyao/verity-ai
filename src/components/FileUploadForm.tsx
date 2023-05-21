@@ -10,6 +10,8 @@ export default function FileUploadForm() {
     event.preventDefault();
     const extractedText = await getTextFromFiles(files);
     const processedString = processString(extractedText);
+    console.log(processedString);
+    
     setText(processedString)
     // const result = await detectText(processedString);
     // console.log(result);
