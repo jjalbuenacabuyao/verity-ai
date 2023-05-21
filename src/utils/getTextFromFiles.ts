@@ -14,7 +14,7 @@ export default async function getTextFromFiles(files: File[]) {
         body: formData,
       });
       const data = await response.json();
-      console.log(data);
+      text += data.text;
     } else if (file.type === docxFileType) {
       // Extract text from DOCX using mammoth
       const result = await mammoth.extractRawText({
