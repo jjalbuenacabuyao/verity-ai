@@ -7,7 +7,7 @@ export default async function detectText(data: string) {
   const apiUrl = "https://api-inference.huggingface.co/models/roberta-base-openai-detector";
   const header = {
     headers: {
-      Authorization: "Bearer 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",
+      Authorization: "Bearer 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",
     },
     method: "POST",
     body: JSON.stringify(data),
