@@ -9,12 +9,11 @@ export default function FileUploadForm() {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const extractedText = await getTextFromFiles(files);
-    const processedString = processString(extractedText);
-    console.log(processedString);
-    
-    setText(processedString)
-    // const result = await detectText(processedString);
-    // console.log(result);
+    // const processedString = processString(extractedText);
+    extractedText.map(async item => {
+      const result = await detectText(item.extractedText);
+      console.log(result)
+    })
   };
 
   // const handleDrop = async (acceptedFiles: File[]) => {
@@ -24,7 +23,7 @@ export default function FileUploadForm() {
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       let fileArray = [];
-      for(let i = 0; i < event.target.files.length; i++){
+      for (let i = 0; i < event.target.files.length; i++) {
         fileArray.push(event.target.files[i]);
       }
       setFiles(fileArray);
@@ -33,7 +32,12 @@ export default function FileUploadForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="file" onChange={handleFileChange} />
+      <input
+        type="file"
+        onChange={handleFileChange}
+        multiple
+        accept=".doc,.docx,.pdf,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+      />
       <button type="submit">Upload</button>
       <p>{text}</p>
     </form>
