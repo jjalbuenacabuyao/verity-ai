@@ -1,10 +1,13 @@
+import Link from 'next/link'
 import React from 'react'
 
 type Props = {}
 
 const Logo = (props: Props) => {
   return (
-    <div>Logo</div>
+    <Link href={"/"}>
+      <p>AI Detector</p>
+    </Link>
   )
 }
 
