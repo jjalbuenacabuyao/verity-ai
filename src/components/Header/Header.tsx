@@ -1,10 +1,15 @@
 import React from 'react'
+import Logo from '../Logo/Logo'
+import Nav from '../Nav/Nav'
 
 type Props = {}
 
 const Header = (props: Props) => {
   return (
-    <div>Header</div>
+    <header>
+      <Logo />
+      <Nav />
+    </header>
   )
 }
 
