@@ -1,12 +1,12 @@
 import Link from 'next/link'
-import React from 'react'
+import style from "./nav.module.css";
 
 type Props = {}
 
 const Nav = (props: Props) => {
   return (
     <nav>
-      <ul>
+      <ul className={`${style.list}`}>
         <li>
           <Link href={"/"}>Home</Link>
         </li>
