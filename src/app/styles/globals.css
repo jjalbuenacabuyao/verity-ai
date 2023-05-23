@@ -41,6 +41,7 @@ svg {
 
 button {
   border: none;
+  background-color: transparent;
 }
 
 input,
