@@ -1,0 +1,13 @@
+.container,
+.wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  justify-content: space-between;
+}
+
+.wrapper {
+  gap: 2rem;
+}
