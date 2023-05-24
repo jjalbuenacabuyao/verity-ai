@@ -5,15 +5,26 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator erd {
+  provider = "prisma-erd-generator"
+}
+
 datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
+}
+
+//A user can be a standard user or an admin
+enum Role {
+  ADMIN
+  USER
 }
 
 model User {
   id             String @id @default(auto()) @map("_id") @db.ObjectId
   email          String
   hashedPassword String
+  role           Role   @default(USER)
   //Relation to the Name model
   name           Name   @relation(fields: [nameId], references: [id])
   nameId         String @db.ObjectId
