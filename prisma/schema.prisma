@@ -14,7 +14,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-//A user can be a standard user or an admin
+// A user can be a standard user or an admin
 enum Role {
   ADMIN
   USER
