@@ -28,7 +28,9 @@
     "typescript": "5.0.4"
   },
   "devDependencies": {
+    "@mermaid-js/mermaid-cli": "^10.1.0",
     "@types/formidable": "^2.0.6",
-    "@types/pdf-parse": "^1.1.1"
+    "@types/pdf-parse": "^1.1.1",
+    "prisma-erd-generator": "^1.7.0"
   }
 }
