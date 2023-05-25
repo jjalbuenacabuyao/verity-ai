@@ -24,19 +24,17 @@ enum Role {
 
 model User {
   id             String @id @default(auto()) @map("_id") @db.ObjectId
-  email          String
+  email          String @unique
   hashedPassword String
   role           Role   @default(USER)
-  //Relation to the Name model
   name           Name   @relation(fields: [nameId], references: [id])
-  nameId         String @db.ObjectId
+  nameId         String @unique @db.ObjectId
 }
 
 model Name {
   id            String @id @default(auto()) @map("_id") @db.ObjectId
-  // userId        String @unique @db.ObjectId
   firstName     String
   middleInitial String
   lastName      String
-  User          User[] 
+  user          User? 
 }
