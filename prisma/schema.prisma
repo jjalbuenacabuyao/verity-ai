@@ -7,6 +7,8 @@ generator client {
 
 generator erd {
   provider = "prisma-erd-generator"
+  ignoreEnums = true
+  output = "./ERD.png"
 }
 
 datasource db {
@@ -32,9 +34,9 @@ model User {
 
 model Name {
   id            String @id @default(auto()) @map("_id") @db.ObjectId
-  userId        String @unique @db.ObjectId
+  // userId        String @unique @db.ObjectId
   firstName     String
   middleInitial String
   lastName      String
-  User          User[]
+  User          User[] 
 }
