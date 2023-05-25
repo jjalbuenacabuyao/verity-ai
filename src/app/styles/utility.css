@@ -9,3 +9,7 @@
 .flex[data-justify-between] {
   justify-content: space-between;
 }
+
+.flex[data-flex-col] {
+  flex-direction: column;
+}
