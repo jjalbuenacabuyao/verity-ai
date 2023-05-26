@@ -1,3 +1,6 @@
+/* Importing Inter and Work Sans font family from google fonts. */
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Work+Sans:wght@600&display=swap');
+
 *,
 *::after,
 *::before {
@@ -16,6 +19,7 @@ body {
   max-width: 1440px;
   margin-inline: auto;
   font-size: 1rem;
+  font-family: Inter, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
