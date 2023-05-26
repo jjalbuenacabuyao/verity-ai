@@ -13,7 +13,7 @@ const Header = (props: Props) => {
     <header className={style.header}>
       <Logo />
       <Nav />
-      <FiMenu size={24} />
+      <FiMenu size={24} fill="#030712" />
     </header>
   );
 };
