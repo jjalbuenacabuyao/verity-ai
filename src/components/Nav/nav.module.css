@@ -8,6 +8,7 @@
   flex-direction: column;
   gap: 1rem;
   align-items: flex-start;
+  transform: translateX(100%);
 }
 
 .list {
