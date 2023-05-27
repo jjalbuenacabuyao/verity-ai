@@ -7,7 +7,10 @@ const Hero = () => {
   return (
     <div className={style.container}>
       <Image src={"/logo.svg"} width={200} height={200} alt="Veracity" />
-      <h1>Detect AI-Generated Text on Student&apos;s Academic Submissions</h1>
+      <div className={style.textWrapper}>
+        <h1>VeracityAI</h1>
+        <p>Detect AI-Generated Academic Submissions</p>
+      </div>
     </div>
   )
 }
