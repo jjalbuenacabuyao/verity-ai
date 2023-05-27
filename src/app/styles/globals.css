@@ -1,5 +1,5 @@
 /* Importing Inter and Work Sans font family from google fonts. */
-@import url('https://fonts.googleapis.com/css2?family=Inter&family=Work+Sans:wght@600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter&family=Work+Sans:wght@600;900&display=swap");
 
 *,
 *::after,
@@ -20,7 +20,7 @@ body {
   background-color: #f9fafb;
   margin-inline: auto;
   font-size: 1rem;
-  font-family: Inter, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: Inter, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
@@ -64,7 +64,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Work Sans", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Work Sans", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-weight: 600;
   overflow-wrap: break-word;
 }
