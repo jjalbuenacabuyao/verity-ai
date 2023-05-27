@@ -4,11 +4,12 @@
   top: 0;
   left: 0;
   right: 0;
+  contain: strict;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.5rem;
+  padding: 2rem 1.5rem;
 
   backdrop-filter: saturate(180%) blur(5px);
   background-color: hsla(210, 20%, 98%, .8);
