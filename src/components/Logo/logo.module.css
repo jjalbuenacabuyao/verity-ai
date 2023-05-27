@@ -1,5 +1,7 @@
 .logo {
+  display: flex;
+  align-items: center;
+
   font-family: "Work Sans", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #030712;
-  font-size: 1.125rem;
 }
