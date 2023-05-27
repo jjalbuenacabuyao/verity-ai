@@ -2,11 +2,20 @@
   z-index: 999;
   position: sticky;
   top: 0;
-  right: 0;
   left: 0;
+  right: 0;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1.5rem;
+
+  backdrop-filter: saturate(180%) blur(5px);
+  background-color: hsla(210, 20%, 98%, .8);
+  border-bottom: 1px solid transparent;
+  transition: border-color .5s;
+}
+
+.showBorder {
+  border-bottom-color: hsla(240, 6%, 25%, 0.122);
 }
