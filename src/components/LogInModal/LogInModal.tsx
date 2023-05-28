@@ -1,4 +1,5 @@
-import { Root, Trigger, Portal, Overlay, Content, Title } from "@radix-ui/react-dialog"
+import { Root, Trigger, Portal, Overlay, Content, Title } from "@radix-ui/react-dialog";
+import style from "./loginmodal.module.css";
 
 type Props = {}
 
@@ -9,8 +10,8 @@ const LogInModal = (props: Props) => {
         <button>Login</button>
       </Trigger>
       <Portal>
-        <Overlay />
-        <Content>
+        <Overlay className={style.DialogOverlay} />
+        <Content className={style.DialogContent}>
           <Title>Login your account</Title>
           <form>
             <fieldset>
