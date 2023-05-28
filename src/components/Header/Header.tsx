@@ -4,22 +4,30 @@ import React, { useEffect, useState } from "react";
 import Logo from "../Logo/Logo";
 import Nav from "../Nav/Nav";
 import style from "./header.module.css";
-import { FiMenu } from "react-icons/fi"
+import { FiMenu } from "react-icons/fi";
 
 type Props = {};
 
 const Header = (props: Props) => {
   const [scrollPosition, setScrollPosition] = useState<number>(0);
+  const [navOpen, setNavOpen] = useState(false);
 
   useEffect(() => {
     window.addEventListener("scroll", () => setScrollPosition(window.scrollY));
-  }, [scrollPosition])
+  }, [scrollPosition]);
 
   return (
-    <header className={`${style.header} ${scrollPosition !== 0 ? style.showBorder : ""}`}>
+    <header
+      className={`${style.header} ${
+        scrollPosition !== 0 ? style.showBorder : ""
+      }`}
+    >
       <Logo />
-      <Nav />
-      <FiMenu size={24} fill="#030712" />
+      <Nav navOpen={navOpen} />
+
+      <button onClick={() => setNavOpen(!navOpen)} className={style.menuButton}>
+        <FiMenu size={24} fill="#030712" />
+      </button>
     </header>
   );
 };
