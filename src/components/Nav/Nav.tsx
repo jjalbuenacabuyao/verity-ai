@@ -3,12 +3,21 @@
 import Link from 'next/link'
 import style from "./nav.module.css";
 import LogInButton from '../LogInButton/LogInButton';
+import LogInModal from '../LogInModal/LogInModal';
+import { useEffect } from 'react';
 
-type Props = {}
+interface Props {
+  navOpen: boolean
+}
 
-const Nav = (props: Props) => {
+const Nav = ({ navOpen }: Props) => {
+  useEffect(() => {
+    const body = document.body.style;
+    navOpen ? body.overflowY = "hidden" : body.overflowY = "auto";
+  }, [navOpen])
+
   return (
-    <nav className={style.nav}>
+    <nav className={style.nav} data-navopen={navOpen ? "true" : "false"}>
       <ul className={style.list}>
         <li>
           <Link href={"/"}>Home</Link>
@@ -23,8 +32,6 @@ const Nav = (props: Props) => {
           <Link href={"#faq"}>FAQs</Link>
         </li>
       </ul>
-
-      <LogInButton />
     </nav>
   )
 }
