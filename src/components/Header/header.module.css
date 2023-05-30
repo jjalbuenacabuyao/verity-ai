@@ -1,5 +1,5 @@
 .header {
-  z-index: 9999;
+  z-index: 10;
   padding: 1rem 1.5rem;
   position: fixed;
   top: 0;
@@ -17,7 +17,7 @@
 }
 
 .menuButton {
-  z-index: 9999;
+  z-index: 10;
 }
 
 .showBorder {
