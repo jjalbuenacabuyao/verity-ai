@@ -5,6 +5,7 @@ import Logo from "../Logo/Logo";
 import Nav from "../Nav/Nav";
 import style from "./header.module.css";
 import { FiMenu } from "react-icons/fi";
+import { AiOutlineClose } from "react-icons/ai";
 
 type Props = {};
 
@@ -26,7 +27,11 @@ const Header = (props: Props) => {
       <Nav navOpen={navOpen} />
 
       <button onClick={() => setNavOpen(!navOpen)} className={style.menuButton}>
-        <FiMenu size={24} fill="#030712" />
+        {navOpen ? (
+          <AiOutlineClose size={24} fill="#030712" />
+        ) : (
+          <FiMenu size={24} fill="#030712" />
+        )}
       </button>
     </header>
   );
