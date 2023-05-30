@@ -31,6 +31,9 @@ const Nav = ({ navOpen }: Props) => {
         <li>
           <Link href={"#faq"}>FAQs</Link>
         </li>
+        <li>
+          <LogInModal />
+        </li>
       </ul>
     </nav>
   )
