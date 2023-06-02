@@ -10,10 +10,17 @@ export default function FileUploadForm() {
     event.preventDefault();
     const extractedText = await getTextFromFiles(files);
     // const processedString = processString(extractedText);
-    extractedText.map(async item => {
-      const result = await detectText(item.extractedText);
-      console.log(result)
-    })
+    for (let text of extractedText) {
+      const processedString = processString(text.extractedText);
+      for (let str of processedString) {
+        if (str) {
+          console.log(str)
+          const result = await detectText(str);
+          console.log(result);
+        }
+      }
+      // console.log(await detectText(text.extractedText))
+    }
   };
 
   // const handleDrop = async (acceptedFiles: File[]) => {
