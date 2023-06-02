@@ -4,10 +4,10 @@ interface Result {
 }
 
 export default async function detectText(data: string) {
-  const apiUrl = process.env.API_URL!;
+  const apiUrl = "https://api-inference.huggingface.co/models/roberta-base-openai-detector";
   const header = {
     headers: {
-      Authorization: process.env.ACCESS_TOKEN!,
+      Authorization: "Bearer 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",
     },
     method: "POST",
     body: JSON.stringify(data),
