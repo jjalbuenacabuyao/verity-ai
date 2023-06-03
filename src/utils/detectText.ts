@@ -1,18 +1,13 @@
-interface Result {
-  label: string;
-  score: number;
-}
-
 export default async function detectText(data: string) {
-  const apiUrl = "https://api-inference.huggingface.co/models/roberta-base-openai-detector";
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL!;
   const header = {
     headers: {
-      Authorization: "Bearer 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",
+      Authorization: process.env.NEXT_PUBLIC_ACCESS_TOKEN!,
     },
     method: "POST",
     body: JSON.stringify(data),
   }
   const response = await fetch(apiUrl, header);
-  const result: Result[] = await response.json();
+  const result = await response.json();
   return result;
 }
