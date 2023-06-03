@@ -9,17 +9,16 @@ export default function FileUploadForm() {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const extractedText = await getTextFromFiles(files);
-    // const processedString = processString(extractedText);
     for (let text of extractedText) {
       const processedString = processString(text.extractedText);
+      console.log(processedString);
       for (let str of processedString) {
         if (str) {
-          console.log(str)
+          console.log(str);
           const result = await detectText(str);
           console.log(result);
         }
       }
-      // console.log(await detectText(text.extractedText))
     }
   };
 
@@ -28,10 +27,15 @@ export default function FileUploadForm() {
   // };
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files) {
+    const files = event.target.files;
+    if (files) {
+      if (files.length > 50) {
+        return;
+      }
+
       let fileArray = [];
-      for (let i = 0; i < event.target.files.length; i++) {
-        fileArray.push(event.target.files[i]);
+      for (let i = 0; i < files.length; i++) {
+        fileArray.push(files[i]);
       }
       setFiles(fileArray);
     }
