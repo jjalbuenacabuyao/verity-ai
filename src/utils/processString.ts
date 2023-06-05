@@ -1,11 +1,11 @@
 export default function processString(str: string) {
   const normalizedString = str.trim().replace(/(\r\n|\n|\r)/gm, "");
-  const sentenceArray = normalizedString.split(/[a-z]*[?!.]/g);
-  const sentenceSegments: string[][] = [];
+  const sentenceArray = normalizedString.split(/[a-z]*[?!.]/g).map(i => i.trimEnd().concat("."));
+  const sentenceSegments = [];
 
   for (let i = 0; i < sentenceArray.length - 1; i += 10) {
     const segments = sentenceArray.slice(i, i + 10);
-    sentenceSegments.push(segments);
+    sentenceSegments.push(segments.join(""));
   }
 
   console.log(sentenceSegments)
