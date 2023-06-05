@@ -1,5 +1,3 @@
-import countWords from "./countWords";
-
 export default function processString(str: string) {
   const normalizedString = str.trim().replace(/(\r\n|\n|\r)/gm, "");
   const sentenceArray = normalizedString.split(/[a-z]*[?!.]/g);
