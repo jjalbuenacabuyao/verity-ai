@@ -9,9 +9,10 @@ export default function FileUploadForm() {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const extractedText = await getTextFromFiles(files);
+    // console.log(await detectText(extractedText[0].extractedText))
     for (let text of extractedText) {
       const processedString = processString(text.extractedText);
-      console.log(processedString);
+      // console.log(processedString);
       for (let str of processedString) {
         if (str) {
           console.log(str);
