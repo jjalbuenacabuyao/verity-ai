@@ -1,9 +1,9 @@
 import detectText from "./detectText";
 import getTextFromFiles from "./getTextFromFiles";
-import processString from "./processString";
+import splitStringIntoSegments from "./splitStringIntoSegments";
 
 export {
   detectText,
   getTextFromFiles,
-  processString
+  splitStringIntoSegments
 }
