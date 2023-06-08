@@ -1,4 +1,4 @@
-import { detectText, getTextFromFiles, processString } from "@/utils";
+import { detectText, getTextFromFiles, splitStringIntoSegments } from "@/utils";
 import { ChangeEvent, FormEvent, useState } from "react";
 import Dropzone, { DropzoneState } from "react-dropzone";
 
@@ -11,15 +11,14 @@ export default function FileUploadForm() {
     const extractedText = await getTextFromFiles(files);
     // console.log(await detectText(extractedText[0].extractedText))
     for (let text of extractedText) {
-      const processedString = processString(text.extractedText);
-      // console.log(processedString);
-      for (let str of processedString) {
-        if (str) {
-          console.log(str);
-          const result = await detectText(str);
-          console.log(result);
-        }
-      }
+      const processedString = splitStringIntoSegments(text.extractedText)
+      // for (let str of processedString) {
+      //   if (str) {
+      //     console.log(str);
+      //     const result = await detectText(str);
+      //     console.log(result);
+      //   }
+      // }
     }
   };
 
