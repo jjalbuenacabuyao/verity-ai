@@ -8,24 +8,29 @@ import {
 } from "@radix-ui/react-dialog";
 import style from "./loginmodal.module.css";
 import LogInButton from "../LogInButton/LogInButton";
-import { FormEvent, useState } from "react";
-import bcrypt from "bcrypt";
+import { FormEvent } from "react";
 
-type Props = {};
-
-const LogInModal = (props: Props) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
+const LogInModal = () => {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const data = {
+      email: event.currentTarget.email.value,
+      password: event.currentTarget.password.value,
+    };
+    const JSONdata = JSON.stringify(data);
 
-    const hashedPassword = await bcrypt.hash(password, 12);
+    const endpoint = "/api/loginHandler";
 
-    const formData = {
-      email: email,
-      hashedPassword: hashedPassword
-    }
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSONdata,
+    };
+
+    const response = await fetch(endpoint, options);
+    const result = await response.json();
   };
 
   return (
@@ -40,22 +45,12 @@ const LogInModal = (props: Props) => {
           <form onSubmit={handleSubmit}>
             <fieldset>
               <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                onChange={(e) => setEmail(e.target.value)}
-              />
+              <input type="email" name="email" id="email" required />
             </fieldset>
 
             <fieldset>
               <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                onChange={(e) => setPassword(e.target.value)}
-              />
+              <input type="password" name="password" id="password" required />
             </fieldset>
 
             <LogInButton />
