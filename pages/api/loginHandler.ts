@@ -1,12 +1,27 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
+import { NextApiRequest } from "next";
 
 const prisma = new PrismaClient();
 
-export default async function loginHandler(request: Request) {
-  const formData = await request.json();
-  const { email, hashedPassword } = formData;
+/* Configuring the API endpoint to disable the default body parsing middleware provided by Next.js. */
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
 
+/**
+ * Handles user login by checking the email and password against the database and returning the user if the credentials are correct.
+ * @param {NextApiRequest} request - The request object represents the HTTP request that is being made to the server.
+ * @returns the user object if the email and password provided are valid, otherwise it throws an error.
+ */
+
+export default async function loginHandler(request: NextApiRequest) {
+  /* Destructuring the `request.body` object and extracting the `email` and `password` properties from it. This allows us to access these properties directly as variables within the function instead of having to use `request.body.email` and `request.body.password` every time we need to reference them. */
+  const { email, password } = request.body;
+
+  /* Query the database and find a unique user based on the email provided in the request body. */
   const user = await prisma.user.findUnique({
     where: {
       email: email,
@@ -15,7 +30,8 @@ export default async function loginHandler(request: Request) {
 
   if (!user) throw new Error("Invalid email.");
 
-  const isCorrectPassword = await bcrypt.compare(hashedPassword, user.hashedPassword);
+  /* Comparing the password provided in the request body with the hashed password stored in the database. It uses the `bcrypt` library to compare the two passwords and returns a boolean value indicating whether they match or not. */
+  const isCorrectPassword = await bcrypt.compare(password, user.hashedPassword);
 
   if (!isCorrectPassword) throw new Error("Wrong password.");
 
