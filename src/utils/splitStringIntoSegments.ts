@@ -7,25 +7,25 @@ import { split } from "sentence-splitter"
 */
 
 export default function splitStringIntoSegments(extractedText: string): string[] {
-  /* removes any leading or trailing white spaces */
+  /* Removes any leading or trailing white spaces and new line charaters. */
   const trimmedText: string = extractedText.trim();
 
-  /* replaces all occurrences of line breaks with a single space character. */
+  /* Replaces all occurrences of line breaks with a single space character. */
   const normalizedString: string = trimmedText.replace(/(\r\n|\n|\r)/gm, " ");
 
-  /* split the `normalizedString` into an array of sentence objects */
+  /* Split the `normalizedString` into an array of sentence objects */
   const splitSentences = split(normalizedString);
 
-  /* filters out any non-sentence items from the `splitSentences` array */
+  /* Filters out any non-sentence items from the `splitSentences` array */
   const filteredSentences = splitSentences.filter(item => item.type === "Sentence");
 
   /* 
-   * maps the `filteredSentences` array and extracting the `raw` property of each sentence object
+   * Maps the `filteredSentences` array and extracting the `raw` property of each sentence object
    * `raw` property contains the original text of the sentence
   */
   const sentenceArray = filteredSentences.map(item => item.raw);
 
-  /* creates segments of 8 sentences from the `sentenceArray` and pushing them into a new
+  /* Creates segments of 8 sentences from the `sentenceArray` and pushing them into a new
   array called `sentenceSegments` */
   const sentenceSegments = [];
 
