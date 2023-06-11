@@ -18,7 +18,7 @@ export const config = {
  */
 
 export default async function loginHandler(request: NextApiRequest) {
-  /* Destructuring the `request.body` object and extracting the `email` and `password` properties from it. This allows us to access these properties directly as variables within the function instead of having to use `request.body.email` and `request.body.password` every time we need to reference them. */
+  /* Destructuring the `request.body` object and extracting the `email` and `password` properties from it. */
   const { email, password } = request.body;
 
   /* Query the database and find a unique user based on the email provided in the request body. */
