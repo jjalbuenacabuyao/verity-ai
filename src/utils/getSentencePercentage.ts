@@ -6,7 +6,7 @@ export default function getSentencePercentage(
     return 0;
   }
 
-  const sentenceCharacters = text.trim().length;
+  const sentenceCharacters = text.length;
 
   return (sentenceCharacters / totalCharacters) * 100;
 }
