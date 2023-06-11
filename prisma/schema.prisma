@@ -12,15 +12,15 @@ datasource db {
 
 // A user can be a standard user or an admin
 enum Role {
-  ADMINISTRATOR
-  INSTRUCTOR
+  ADMIN
+  USER
 }
 
 model User {
   id             String @id @default(auto()) @map("_id") @db.ObjectId
   email          String @unique
   hashedPassword String
-  role           Role   @default(INSTRUCTOR)
+  role           Role   @default(USER)
   name           Name   @relation(fields: [nameId], references: [id])
   nameId         String @unique @db.ObjectId
 }
