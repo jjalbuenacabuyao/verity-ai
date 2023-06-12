@@ -5,6 +5,7 @@ import style from "./nav.module.css";
 import LogInButton from '../LogInButton/LogInButton';
 import LogInModal from '../LogInModal/LogInModal';
 import { useEffect } from 'react';
+import React from 'react';
 
 interface Props {
   navOpen: boolean
