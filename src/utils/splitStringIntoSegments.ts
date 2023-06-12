@@ -27,7 +27,7 @@ export default function splitStringIntoSegments(extractedText: string): string[]
 
   /* Creates segments of 8 sentences from the `sentenceArray` and pushing them into a new
   array called `sentenceSegments` */
-  const sentenceSegments = [];
+  const sentenceSegments: string[] = [];
 
   for (let i = 0; i < sentenceArray.length; i += 8) {
     const segments = sentenceArray.slice(i, i + 8);
