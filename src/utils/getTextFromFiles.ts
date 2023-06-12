@@ -8,13 +8,18 @@ import mammoth from "mammoth";
  * the corresponding file.
 */
 
+interface FileInfo {
+  filename: string;
+  extractedText: string;
+}
+
 export default async function getTextFromFiles(files: File[]) {
   /* These two constants are defining the MIME types for PDF and DOCX files, respectively. They are
   used later in the function to check if a given file is of type PDF or DOCX. */
   const pdfFileType = "application/pdf";
   const docxFileType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
 
-  const extractedText = []
+  const extractedText: FileInfo[] = []
   
   for (const file of files) {
     let text = "";
