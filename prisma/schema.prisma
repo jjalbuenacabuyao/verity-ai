@@ -17,12 +17,11 @@ enum Role {
 }
 
 model User {
-  id             String @id @default(auto()) @map("_id") @db.ObjectId
+  userId         String @id @default(auto()) @map("_id") @db.ObjectId
   email          String @unique
   hashedPassword String
   role           Role   @default(USER)
-  name           Name   @relation(fields: [nameId], references: [id])
-  nameId         String @unique @db.ObjectId
+  name           Name?
 }
 
 model Name {
@@ -30,5 +29,6 @@ model Name {
   firstName     String
   middleInitial String
   lastName      String
-  user          User?
+  user          User   @relation(fields: [userId], references: [userId], onDelete: Cascade)
+  userId        String @unique @db.ObjectId
 }
