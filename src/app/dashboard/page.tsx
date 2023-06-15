@@ -1,9 +1,8 @@
 "use client";
 
-import Header from "@/components/Header/Header";
+import { Header, AddUserModal } from "@/components";
 import { useEffect, useState } from "react";
 import styles from "./dashboard.module.css";
-import AddUserModal from "@/components/AddUserModal/AddUserModal";
 
 const Dashboard = () => {
   return (
