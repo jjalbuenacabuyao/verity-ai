@@ -1,7 +1,7 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "VeracityAI | Detect AI-Generated Academic Submissions",
+  title: "VerityAI | Detect AI-Generated Academic Submissions",
   description: "Detect AI-Generated Academic Submissions",
 };
 

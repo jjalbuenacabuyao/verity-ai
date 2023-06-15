@@ -1,8 +1,8 @@
 import "../globals.css";
 
 export const metadata = {
-  title: "Dashboard | VeracityAI",
-  description: "User management system for VeracityAI.",
+  title: "Dashboard | VerityAI",
+  description: "User management system for VerityAI.",
 };
 
 export default function RootLayout({
