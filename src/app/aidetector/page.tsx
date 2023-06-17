@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { Header } from '@/components';
+import { Aside, Header } from '@/components';
 
 type Props = {}
 
@@ -10,7 +10,7 @@ const AiDetector = (props: Props) => {
     <>
       <Header />
       <main>
-        
+        <Aside />
       </main>
     </>
   )
