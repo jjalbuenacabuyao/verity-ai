@@ -1,4 +1,5 @@
 import AddUserModal from "./AddUserModal/AddUserModal";
+import Aside from "./Aside/Aside";
 import FileUploadForm from "./FileUploadForm/FileUploadForm";
 import Header from "./Header/Header";
 import LogInButton from "./LogInButton/LogInButton";
@@ -9,6 +10,7 @@ import Nav from "./Nav/Nav";
 
 export {
   AddUserModal,
+  Aside,
   FileUploadForm,
   Header,
   LogInButton,
