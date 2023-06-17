@@ -31,7 +31,7 @@ export default function splitStringIntoSegments(extractedText: string): string[]
 
   for (let i = 0; i < sentenceArray.length; i += 8) {
     const segments = sentenceArray.slice(i, i + 8);
-    sentenceSegments.push(segments.join(""));
+    sentenceSegments.push(segments.join(" "));
   }
 
   return sentenceSegments;
