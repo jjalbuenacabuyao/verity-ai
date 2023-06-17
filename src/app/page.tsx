@@ -1,15 +1,14 @@
 "use client";
 
-import { Header, Hero, FileUploadForm } from "@/components";
+import { Header, Hero } from "@/components";
 
 const page = () => {
   return (
     <>
-      {/* <Header />
+      <Header />
       <main>
         <Hero />
-      </main> */}
-      <FileUploadForm />
+      </main>
     </>
   );
 };
