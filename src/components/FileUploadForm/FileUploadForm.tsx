@@ -2,26 +2,25 @@
 import { detectText, getTextFromFiles, splitStringIntoSegments } from "@/utils";
 import React from "react";
 import { ChangeEvent, FormEvent, useState } from "react";
-import Dropzone, { DropzoneState } from "react-dropzone";
+import { AiFillFileAdd } from "react-icons/ai";
+import styles from "./fileuploadform.module.css"
 
 export default function FileUploadForm() {
   const [files, setFiles] = useState<File[]>([]);
-  const [text, setText] = useState("");
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const extractedText = await getTextFromFiles(files);
-    // console.log(await detectText(extractedText[0].extractedText))
     for (let text of extractedText) {
-      const processedString = splitStringIntoSegments(text.extractedText)
+      const processedString = splitStringIntoSegments(text.extractedText);
       console.log(processedString);
-      // for (let str of processedString) {
-      //   if (str) {
-      //     console.log(str);
-      //     const result = await detectText(str);
-      //     console.log(result);
-      //   }
-      // }
+      for (let str of processedString) {
+        if (str) {
+          console.log(str);
+          const result = await detectText(str);
+          console.log(result);
+        }
+      }
     }
   };
 
@@ -30,14 +29,14 @@ export default function FileUploadForm() {
   // };
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
-    if (files) {
-      if (files.length > 50) {
+    const fileInput = event.target.files;
+    if (fileInput) {
+      if (fileInput.length > 50) {
         return;
       }
 
       let fileArray: File[] = [];
-      for (let i = 0; i < files.length; i++) {
+      for (let i = 0; i < fileInput.length; i++) {
         fileArray.push(files[i]);
       }
       setFiles(fileArray);
@@ -45,15 +44,17 @@ export default function FileUploadForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <label htmlFor="file" className={styles.upload}>
+      <AiFillFileAdd size={24} />
+      Upload File
       <input
+        className={styles.input}
+        id="file"
         type="file"
         onChange={handleFileChange}
         multiple
         accept=".doc,.docx,.pdf,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
       />
-      <button type="submit">Upload</button>
-      <p>{text}</p>
-    </form>
+    </label>
   );
 }
