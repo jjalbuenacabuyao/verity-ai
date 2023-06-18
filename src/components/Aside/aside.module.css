@@ -3,22 +3,12 @@
   font-size: 0.875rem;
 }
 
+.upload {
+  text-align: center;
+  border: 2px dashed rgba(0, 0, 0, 0.2);
+}
+
 .title {
   margin-bottom: 1em;
 }
 
-.buttons {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.report {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-
-  padding: 0.5rem 0.825rem;
-  outline: 1px solid rgba(60, 60, 67, .29);
-  border-radius: 99vh;
-}
