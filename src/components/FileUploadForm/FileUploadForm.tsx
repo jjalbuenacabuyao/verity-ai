@@ -45,8 +45,8 @@ export default function FileUploadForm() {
 
   return (
     <label htmlFor="file" className={styles.upload}>
-      <AiFillFileAdd size={24} />
-      Upload File
+      <AiFillFileAdd size={16} />
+      Upload Files
       <input
         className={styles.input}
         id="file"
