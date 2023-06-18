@@ -2,7 +2,6 @@
 import { detectText, getTextFromFiles, splitStringIntoSegments } from "@/utils";
 import React from "react";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { AiFillFileAdd } from "react-icons/ai";
 import styles from "./fileuploadform.module.css"
 
 export default function FileUploadForm() {
@@ -45,8 +44,7 @@ export default function FileUploadForm() {
 
   return (
     <label htmlFor="file" className={styles.upload}>
-      <AiFillFileAdd size={16} />
-      Upload Files
+      Browse Files
       <input
         className={styles.input}
         id="file"
