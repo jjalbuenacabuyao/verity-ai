@@ -1,5 +1,6 @@
 import React from "react";
 import FileUploadForm from "../FileUploadForm/FileUploadForm";
+import { FiUpload } from "react-icons/fi"
 import styles from "./aside.module.css";
 
 type Props = {};
@@ -7,7 +8,11 @@ type Props = {};
 const Aside = (props: Props) => {
   return (
     <aside className={styles.container}>
-      <FileUploadForm />
+      <div className={styles.upload}>
+        <FiUpload size={44} />
+        <h1 className={styles.title}>Upload pdf or docx files</h1>
+        <FileUploadForm />
+      </div>
     </aside>
   );
 };
