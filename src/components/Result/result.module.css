@@ -1,0 +1,10 @@
+.container {
+  margin-top: 2rem;
+  text-align: center;
+  border: 1px solid rgba(60, 60, 67, .29);
+  border-radius: 0.5rem;
+}
+
+.text {
+  margin-top: 2rem;
+}

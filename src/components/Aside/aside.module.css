@@ -1,4 +1,24 @@
 .container {
-  min-height: 100dvh;
-  margin-top: 5rem;
+  margin: 5rem 1.5rem 0;
+  font-size: 0.875rem;
+}
+
+.title {
+  margin-bottom: 1em;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.report {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  padding: 0.5rem 0.825rem;
+  outline: 1px solid rgba(60, 60, 67, .29);
+  border-radius: 99vh;
 }
