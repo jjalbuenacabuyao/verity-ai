@@ -7,6 +7,7 @@ import Hero from "./Hero/Hero";
 import LogInModal from "./LogInModal/LogInModal";
 import Logo from "./Logo/Logo";
 import Nav from "./Nav/Nav";
+import Result from "./Result/Result";
 
 export {
   AddUserModal,
@@ -18,4 +19,5 @@ export {
   LogInModal,
   Logo,
   Nav,
+  Result,
 }
