@@ -1,8 +1,6 @@
 "use client";
 
 import Link from 'next/link'
-import style from "./nav.module.css";
-import LogInButton from '../LogInButton/LogInButton';
 import LogInModal from '../LogInModal/LogInModal';
 import { useEffect } from 'react';
 import React from 'react';
@@ -18,8 +16,8 @@ const Nav = ({ navOpen }: Props) => {
   }, [navOpen])
 
   return (
-    <nav className={style.nav} data-navopen={navOpen ? "true" : "false"}>
-      <ul className={style.list}>
+    <nav className={`fixed top-0 inset-x-0 py-16 px-6 bg-white translate-x-full transition-transform duration-300 ${navOpen ? "translate-x-0" : ""}`}>
+      <ul className="grid gap-4">
         <li>
           <Link href={"/"}>Home</Link>
         </li>

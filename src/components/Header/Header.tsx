@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import Logo from "../Logo/Logo";
 import Nav from "../Nav/Nav";
-import style from "./header.module.css";
 import { FiMenu } from "react-icons/fi";
 import { AiOutlineClose } from "react-icons/ai";
 
@@ -19,14 +18,14 @@ const Header = (props: Props) => {
 
   return (
     <header
-      className={`${style.header} ${
-        scrollPosition !== 0 ? style.showBorder : ""
+      className={`fixed inset-x-0 top-0 z-10 flex items-center justify-between border-b-[1px] border-solid border-transparent bg-header px-6 py-4 backdrop-blur backdrop-saturate-50 transition-colors duration-75 ease-linear ${
+        scrollPosition !== 0 ? "border-b-off-black" : ""
       }`}
     >
       <Logo />
       <Nav navOpen={navOpen} />
 
-      <button onClick={() => setNavOpen(!navOpen)} className={style.menuButton}>
+      <button onClick={() => setNavOpen(!navOpen)} className="z-10">
         {navOpen ? (
           <AiOutlineClose size={24} fill="#030712" />
         ) : (
