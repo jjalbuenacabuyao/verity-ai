@@ -1,4 +1,3 @@
-// @ts-ignore
 import { detectText, getTextFromFiles, splitStringIntoSegments } from "@/utils";
 import React from "react";
 import { ChangeEvent, FormEvent, useState } from "react";
@@ -22,10 +21,6 @@ export default function FileUploadForm() {
       }
     }
   };
-
-  // const handleDrop = async (acceptedFiles: File[]) => {
-  //   setFiles(acceptedFiles);
-  // };
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const fileInput = event.target.files;
