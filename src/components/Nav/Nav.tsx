@@ -1,41 +1,57 @@
 "use client";
 
-import Link from 'next/link'
-import LogInModal from '../LogInModal/LogInModal';
-import { useEffect } from 'react';
-import React from 'react';
+import Link from "next/link";
+import LogInModal from "../LogInModal/LogInModal";
+import { useEffect } from "react";
+import React from "react";
 
 interface Props {
-  navOpen: boolean
+  navOpen: boolean;
 }
 
 const Nav = ({ navOpen }: Props) => {
   useEffect(() => {
     const body = document.body.style;
-    navOpen ? body.overflowY = "hidden" : body.overflowY = "auto";
-  }, [navOpen])
+    navOpen ? (body.overflowY = "hidden") : (body.overflowY = "auto");
+  }, [navOpen]);
+
+  const links = [
+    {
+      href: "/",
+      link: "Home"
+    },
+    {
+      href: "#features",
+      link: "Features"
+    },
+    {
+      href: "#tutorial",
+      link: "Tutorial"
+    },
+    {
+      href: "#faq",
+      link: "FAQs"
+    },
+  ];
 
   return (
-    <nav className={`fixed top-0 inset-x-0 py-16 px-6 bg-white translate-x-full transition-transform duration-300 ${navOpen ? "translate-x-0" : ""}`}>
+    <nav
+      className={`fixed inset-x-0 top-0 bg-white px-6 py-16 transition-transform duration-300 ${
+        navOpen ? "translate-x-0" : "translate-x-full"
+      }`}
+    >
       <ul className="grid gap-4">
-        <li>
-          <Link href={"/"}>Home</Link>
-        </li>
-        <li>
-          <Link href={"#features"}>Features</Link>
-        </li>
-        <li>
-          <Link href={"#tutorial"}>Tutorial</Link>
-        </li>
-        <li>
-          <Link href={"#faq"}>FAQs</Link>
-        </li>
+        {links.map(({href, link}) => (
+          <li key={link}>
+            <Link href={href}>{link}</Link>
+          </li>
+        ))}
         <li>
           <LogInModal />
         </li>
       </ul>
     </nav>
-  )
-}
+  );
+};
 
-export default Nav
+export default Nav;
