@@ -1,7 +1,7 @@
 import { detectText, getTextFromFiles, splitStringIntoSegments } from "@/utils";
 import React from "react";
 import { ChangeEvent, FormEvent, useState } from "react";
-import styles from "./fileuploadform.module.css"
+import styles from "./fileuploadform.module.css";
 
 export default function FileUploadForm() {
   const [files, setFiles] = useState<File[]>([]);
@@ -38,7 +38,10 @@ export default function FileUploadForm() {
   };
 
   return (
-    <label htmlFor="file" className="flex items-center gap-2 px-6 py-2 bg-sky-500 text-white rounded-full text-sm">
+    <label
+      htmlFor="file"
+      className="flex items-center gap-2 rounded-full bg-sky-500 px-6 py-2 text-sm text-white"
+    >
       Browse Files
       <input
         className="hidden"

@@ -39,7 +39,7 @@ const LogInModal = () => {
         <button>Login</button>
       </Trigger>
       <Portal>
-        <Overlay className="z-20 bg-black/[0.44] fixed inset-0" />
+        <Overlay className="fixed inset-0 z-20 bg-black/[0.44]" />
         <Content className={style.DialogContent}>
           <Title>Login your account</Title>
           <form onSubmit={handleSubmit}>
