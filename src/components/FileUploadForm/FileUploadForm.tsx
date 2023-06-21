@@ -38,10 +38,10 @@ export default function FileUploadForm() {
   };
 
   return (
-    <label htmlFor="file" className={styles.upload}>
+    <label htmlFor="file" className="flex items-center gap-2 px-6 py-2 bg-sky-500 text-white rounded-full text-sm">
       Browse Files
       <input
-        className={styles.input}
+        className="hidden"
         id="file"
         type="file"
         onChange={handleFileChange}
