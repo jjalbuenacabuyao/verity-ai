@@ -18,19 +18,19 @@ const Nav = ({ navOpen }: Props) => {
   const links = [
     {
       href: "/",
-      link: "Home"
+      link: "Home",
     },
     {
       href: "#features",
-      link: "Features"
+      link: "Features",
     },
     {
       href: "#tutorial",
-      link: "Tutorial"
+      link: "Tutorial",
     },
     {
       href: "#faq",
-      link: "FAQs"
+      link: "FAQs",
     },
   ];
 
@@ -41,7 +41,7 @@ const Nav = ({ navOpen }: Props) => {
       }`}
     >
       <ul className="grid gap-4">
-        {links.map(({href, link}) => (
+        {links.map(({ href, link }) => (
           <li key={link}>
             <Link href={href}>{link}</Link>
           </li>
