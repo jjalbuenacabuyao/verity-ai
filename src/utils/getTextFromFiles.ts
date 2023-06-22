@@ -14,8 +14,6 @@ interface FileInfo {
 }
 
 export default async function getTextFromFiles(files: File[]) {
-  /* These two constants are defining the MIME types for PDF and DOCX files, respectively. They are
-  used later in the function to check if a given file is of type PDF or DOCX. */
   const pdfFileType = "application/pdf";
   const docxFileType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
 
@@ -25,7 +23,6 @@ export default async function getTextFromFiles(files: File[]) {
     let text = "";
 
     if (file.type === pdfFileType) {
-      /* Creates a new FormData object and appends the PDF file to it. Then it sends a POST request to the '/api/fileHandler' endpoint. The response from the server is then converted to JSON format and the extracted text is appended to the 'text' variable. Finally, an object containing the filename and extracted text is pushed to the 'extractedText' array. */
       const formData = new FormData();
       formData.append('file', file);
       const response = await fetch('/api/fileHandler', {
