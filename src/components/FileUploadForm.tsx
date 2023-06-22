@@ -1,25 +1,11 @@
-import { detectText, getTextFromFiles, splitStringIntoSegments } from "@/utils";
-import React from "react";
-import { ChangeEvent, FormEvent, useState } from "react";
+"use client";
+
+import getDetectionResult from "@/utils/getDetectionResults";
+import React, { useEffect } from "react";
+import { ChangeEvent, useState } from "react";
 
 export default function FileUploadForm() {
   const [files, setFiles] = useState<File[]>([]);
-
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const extractedText = await getTextFromFiles(files);
-    for (let text of extractedText) {
-      const processedString = splitStringIntoSegments(text.extractedText);
-      console.log(processedString);
-      for (let str of processedString) {
-        if (str) {
-          console.log(str);
-          const result = await detectText(str);
-          console.log(result);
-        }
-      }
-    }
-  };
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const fileInput = event.target.files;
@@ -30,11 +16,18 @@ export default function FileUploadForm() {
 
       let fileArray: File[] = [];
       for (let i = 0; i < fileInput.length; i++) {
-        fileArray.push(files[i]);
+        fileArray.push(fileInput[i]);
       }
       setFiles(fileArray);
     }
   };
+
+  // useEffect(() => {
+  //   if (files.length > 0) {
+  //     const res = getDetectionResult(files);
+  //     console.log(res);
+  //   }
+  // }, [files]);
 
   return (
     <label
