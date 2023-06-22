@@ -6,9 +6,9 @@
 
 export default function countWords(text: string): number {
   return text
-    .trim()
-    .replace(/(\r\n|\n|\r)/gm, " ")
-    .replace(/[ ]{2,}/gi, " ")
+    // .trim()
+    // .replace(/(\r\n|\n|\r)/gm, " ")
+    // .replace(/[ ]{2,}/gi, " ")
     .split(" ")
     .filter((str) => str !== "")
     .length;
