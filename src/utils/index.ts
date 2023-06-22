@@ -1,9 +1,17 @@
 import detectText from "./detectText";
 import getTextFromFiles from "./getTextFromFiles";
-import splitStringIntoSegments from "./splitStringIntoSegments";
+import filterSentences from "./filterSentences";
+import cleanText from "./cleanText";
+import countWords from "./countWords";
+import getDetectionResult from "./getDetectionResults";
+import getSentencePercentage from "./getSentencePercentage";
 
 export {
   detectText,
   getTextFromFiles,
-  splitStringIntoSegments
-}
+  filterSentences,
+  cleanText,
+  countWords,
+  getDetectionResult,
+  getSentencePercentage,
+};
