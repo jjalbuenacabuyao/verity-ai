@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import LogInModal from "../LogInModal/LogInModal";
+import LogInModal from "./LogInModal";
 import { useEffect } from "react";
 import React from "react";
 

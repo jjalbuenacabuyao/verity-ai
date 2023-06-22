@@ -1,7 +1,6 @@
 import { detectText, getTextFromFiles, splitStringIntoSegments } from "@/utils";
 import React from "react";
 import { ChangeEvent, FormEvent, useState } from "react";
-import styles from "./fileuploadform.module.css";
 
 export default function FileUploadForm() {
   const [files, setFiles] = useState<File[]>([]);

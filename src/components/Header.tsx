@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Logo from "../Logo/Logo";
-import Nav from "../Nav/Nav";
+import Logo from "./Logo";
+import Nav from "./Nav";
 import { FiMenu } from "react-icons/fi";
 import { AiOutlineClose } from "react-icons/ai";
 
