@@ -1,16 +1,19 @@
 "use client";
 
-import React from 'react';
-import { Aside, Header } from '@/components';
+import React, { useState } from 'react';
+import { Aside, Header, Result } from '@/components';
 
-type Props = {}
 
-const AiDetector = (props: Props) => {
+const AiDetector = () => {
+  const [files, setFiles] = useState<File[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   return (
     <>
       <Header />
-      <main>
-        <Aside />
+      <main className="mx-6">
+        <Aside setFiles={setFiles} setIsLoading={setIsLoading} />
+        <Result setIsLoading={setIsLoading} files={files} isLoading={isLoading} />
       </main>
     </>
   )
