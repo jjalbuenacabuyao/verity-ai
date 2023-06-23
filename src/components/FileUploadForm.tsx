@@ -1,13 +1,17 @@
 "use client";
 
 import getDetectionResult from "@/utils/getDetectionResults";
-import React, { useEffect } from "react";
+import React, { Dispatch, SetStateAction, useEffect } from "react";
 import { ChangeEvent, useState } from "react";
 
-export default function FileUploadForm() {
-  const [files, setFiles] = useState<File[]>([]);
+interface Props {
+  setFiles: Dispatch<SetStateAction<File[]>>;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
+}
 
+export default function FileUploadForm({ setFiles, setIsLoading }: Props) {
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setIsLoading(true);
     const fileInput = event.target.files;
     if (fileInput) {
       if (fileInput.length > 50) {
