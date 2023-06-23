@@ -1,8 +1,8 @@
 import { createContext, useContext, Dispatch, SetStateAction  } from "react";
 
 interface FileContextTypes {
-  file: FileList | null;
-  setFile: Dispatch<SetStateAction<FileList>>;
+  file: File[] | null;
+  setFile: Dispatch<SetStateAction<File[]>>;
 }
 
 const FileContext = createContext<FileContextTypes>({
