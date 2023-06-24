@@ -1,15 +1,21 @@
 import { createContext, useContext, Dispatch, SetStateAction  } from "react";
 
 interface FileContextTypes {
-  file: File[] | null;
-  setFile: Dispatch<SetStateAction<File[]>>;
+  files: File[] | null;
+  setFiles: Dispatch<SetStateAction<File[]>>;
+  isLoading: boolean;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
 }
 
 const FileContext = createContext<FileContextTypes>({
-  file: null,
-  setFile: () => {},
+  files: null,
+  setFiles: () => { },
+  isLoading: false,
+  setIsLoading: () => {}
 })
 
 export function useFileContext(): FileContextTypes {
   return useContext(FileContext);
 }
+
+export default FileContext;
