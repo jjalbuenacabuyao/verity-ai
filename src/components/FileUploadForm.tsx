@@ -1,15 +1,9 @@
-"use client";
-
-import getDetectionResult from "@/utils/getDetectionResults";
+import { useFileContext } from "@/hooks/FileContext";
 import React, { Dispatch, SetStateAction, useEffect } from "react";
 import { ChangeEvent, useState } from "react";
 
-interface Props {
-  setFiles: Dispatch<SetStateAction<File[]>>;
-  setIsLoading: Dispatch<SetStateAction<boolean>>;
-}
-
-export default function FileUploadForm({ setFiles, setIsLoading }: Props) {
+export default function FileUploadForm() {
+  const { setFiles, setIsLoading } = useFileContext();
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     setIsLoading(true);
     const fileInput = event.target.files;
@@ -18,10 +12,10 @@ export default function FileUploadForm({ setFiles, setIsLoading }: Props) {
         return;
       }
 
-      let fileArray: File[] = [];
-      for (let i = 0; i < fileInput.length; i++) {
-        fileArray.push(fileInput[i]);
-      }
+      const fileArray: File[] = [...fileInput];
+      // for (let i = 0; i < fileInput.length; i++) {
+      //   fileArray.push(fileInput[i]);
+      // }
       setFiles(fileArray);
     }
   };
