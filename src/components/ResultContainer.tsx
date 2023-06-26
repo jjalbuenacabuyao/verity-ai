@@ -5,9 +5,14 @@ import { useFileContext } from "@/hooks/FileContext";
 const ResultContainer = () => {
   const { files, isLoading, setIsLoading } = useFileContext();
   const [result, setResult] = useState();
+
   useEffect(() => {
-    
-  }, [])
+    if (files?.length !== 0) {
+      files?.map(async (file) => {
+        //waiting sa implementation ng detectionHandler api
+      })
+    }
+  }, [files])
 
   return (
     <div className="mb-8 grid gap-6 border-t pt-16">
