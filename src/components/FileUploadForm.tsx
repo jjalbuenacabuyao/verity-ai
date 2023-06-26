@@ -1,6 +1,5 @@
 import { useFileContext } from "@/hooks/FileContext";
-import React, { Dispatch, SetStateAction, useEffect } from "react";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent } from "react";
 
 export default function FileUploadForm() {
   const { setFiles, setIsLoading } = useFileContext();
@@ -20,18 +19,10 @@ export default function FileUploadForm() {
     }
   };
 
-  // useEffect(() => {
-  //   if (files.length > 0) {
-  //     const res = getDetectionResult(files);
-  //     console.log(res);
-  //   }
-  // }, [files]);
-
   return (
     <label
       htmlFor="file"
-      className="flex items-center gap-2 rounded-full bg-sky-500 px-6 py-2 text-sm text-white"
-    >
+      className="flex items-center gap-2 rounded-full bg-sky-500 px-6 py-2 text-sm text-white">
       Browse Files
       <input
         className="hidden"
