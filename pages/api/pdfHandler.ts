@@ -16,7 +16,7 @@ export const config = {
  * @param {NextApiResponse} res - An object representing the HTTP response that will be sent back to the client.
  */
 
-export default async function fileHandler(
+export default async function pdfHandler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
