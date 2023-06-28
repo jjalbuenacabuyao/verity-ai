@@ -1,41 +1,56 @@
-import { cleanText, countWords, detectText, filterSentences, getTextFromFiles } from "@/utils";
-import formidable from "formidable";
+import { countWords, detectText, filterSentences } from "@/utils";
 import { NextApiRequest, NextApiResponse } from "next";
-
-
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
 
 export default async function detectionHandler(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
-  const form = new formidable.IncomingForm();
-  form.parse(request, async (err, fields, files) => {
-    const file: formidable.File = files.file as formidable.File;
+  const { normalizedText } = request.body;
+  const sentences = filterSentences(normalizedText);
+  const wordCount = countWords(normalizedText);
+  const wordCountLimit = 300;
 
-    const { originalFilename } = file;
+  const result = await detectText(normalizedText);
 
-    const { extractedText } = await getTextFromFiles(file as unknown as File);
-    
-    const normalizedText = cleanText(extractedText);
+  const humanWritten = result.label === "LABEL_0";
+  const aiGenerated = result.label === "LABEL_1";
 
-    const wordCount = countWords(normalizedText);
-    //initial pa lang
-    // if (wordCount <= 250) {
-    //   const detectionResult = await detectText(normalizedText);
-    //   const { label, score } = detectionResult;
-    //   const humanWritten = "LABEL_0";
-    //   const aiGenerated = "LABEL_1";
-    //   if (label === humanWritten && !(Math.trunc(score * 100) >= 5)) {
-    //     response.status(200).json({ filename: filename, label: label, score: score })
-    //   }
-    // }
+  const resultAndDescription = { result: result, description: "" };
 
-    const result = await detectText(normalizedText);
-    response.status(200).json([originalFilename, result])
-  })
+  if (humanWritten && wordCount <= wordCountLimit && result.score >= 90) {
+    resultAndDescription.description = "Unlikely to be AI-generated.";
+    response.status(200).json(resultAndDescription)
+  } else if (aiGenerated && wordCount <= 300 && result.score >= 90) {
+    resultAndDescription.description = "Possibly AI-generated.";
+    response.status(200).json(resultAndDescription)
+  }
+
+  if (wordCount > wordCountLimit) {
+    const results = [];
+
+    for (let i = 0; i < sentences.length; i += 10) {
+      const slicedSentence = sentences.slice(i, i + 9).join(" ");
+      const result = await detectText(slicedSentence);
+      results.push({ text: slicedSentence, result: result });
+    }
+
+    const aiGeneratedResults = results.map(({ text, result }) => {
+      if (result.label === "LABEL_0") {
+        return result.score;
+      }
+    });
+
+    const aiGeneratedTexts = results.map(({ text, result }) => {
+      if (result.label === "LABEL_0") {
+        return text;
+      }
+    });
+
+    const totalScore = aiGeneratedResults.reduce( // @ts-ignore
+      (accumulator, currentValue) => accumulator + currentValue,
+      0
+    );
+
+    response.status(200).json({ totalScore: totalScore, aiGeneratedTexts: aiGeneratedTexts })
+  }
 }
