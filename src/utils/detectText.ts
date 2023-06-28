@@ -1,3 +1,8 @@
+interface Result {
+  label: string;
+  score: number;
+}
+
 export default async function detectText(text: string) {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL!;
   const apiTokens = process.env.NEXT_PUBLIC_ACCESS_TOKEN!.split(", ");
@@ -14,5 +19,6 @@ export default async function detectText(text: string) {
   const response = await fetch(apiUrl, header);
   const result = await response.json();
   const [[{ label: scoreLabel, score: aiGenerated }]] = result;
-  return { label: scoreLabel, score: aiGenerated };
+  const data: Result = { label: scoreLabel, score: (Math.trunc(aiGenerated * 100)) };
+  return data;
 }
