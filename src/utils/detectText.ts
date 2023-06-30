@@ -15,10 +15,13 @@ export default async function detectText(text: string) {
     },
     method: "POST",
     body: JSON.stringify(text),
-  }
+  };
   const response = await fetch(apiUrl, header);
   const result = await response.json();
   const [[{ label: scoreLabel, score: aiGenerated }]] = result;
-  const data: Result = { label: scoreLabel, score: (Math.trunc(aiGenerated * 100)) };
+  const data: Result = {
+    label: scoreLabel,
+    score: Math.trunc(aiGenerated * 100),
+  };
   return data;
 }
