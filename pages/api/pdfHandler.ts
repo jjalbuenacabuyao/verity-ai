@@ -34,10 +34,10 @@ export default async function pdfHandler(
       const pdfData = await pdfParse(dataBuffer);
 
       /* Send a JSON response to the client containing the extracted text from the PDF file. */
-      res.status(200).json({ text: pdfData.text });
+      return res.status(200).send({ text: pdfData.text });
     });
   } catch (error: any) {
     /* Send a JSON response to the client with an error message in the response body when an error occured. */
-    res.status(500).json({ error: error.message });
+    return res.status(500).send({ error: error.message });
   }
 }
