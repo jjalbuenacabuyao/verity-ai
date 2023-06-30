@@ -28,75 +28,78 @@ export default async function detectionHandler(
   const result = await detectText(normalizedText);
   const { label, score } = result;
 
-  const humanWritten = label === "LABEL_0";
-  const aiGenerated = label === "LABEL_1";
+  const aiGenerated = label === "LABEL_0";
+  const humanWritten = label === "LABEL_1";
 
-  if (humanWritten && wordCount <= wordCountLimit && score >= 95) {
-    const detectionResult: DetectionResult = {
-      label: Label.HumanWritten,
-      score: score,
-      description: "Unlikely to be AI-generated.",
-      aiGeneratedTexts: "All text are possibly NOT AI-GENERATED.",
-    };
-    response.status(200).json(detectionResult);
-  }
+  console.log(sentences.map(s => s))
+  console.log(result)
+  return response.status(200).send(sentences)
 
-  if (aiGenerated && wordCount <= wordCountLimit && score >= 95) {
-    const detectionResult: DetectionResult = {
-      label: Label.AiGenerated,
-      score: score,
-      description: "Possibly AI-generated.",
-      aiGeneratedTexts: "All text are possibly AI-GENERATED.",
-    };
-    response.status(200).json(detectionResult);
-  }
+  // if (humanWritten && wordCount <= wordCountLimit && Math.trunc(score) >= 95) {
+  //   const detectionResult: DetectionResult = {
+  //     label: Label.HumanWritten,
+  //     score: score,
+  //     description: "Unlikely to be AI-generated.",
+  //     aiGeneratedTexts: "All text are possibly NOT AI-GENERATED.",
+  //   };
+  //   return response.status(200).send(detectionResult);
+  // }
 
-  const results = [];
+  // if (aiGenerated && wordCount <= wordCountLimit && Math.trunc(score) >= 95) {
+  //   const detectionResult: DetectionResult = {
+  //     label: Label.AiGenerated,
+  //     score: score,
+  //     description: "Possibly AI-generated.",
+  //     aiGeneratedTexts: "All text are possibly AI-GENERATED.",
+  //   };
+  //   return response.status(200).send(detectionResult);
+  // }
 
-  for (let i = 0; i < sentences.length; i += 10) {
-    const slicedSentence = sentences.slice(i, i + 9).join(" ");
-    console.log(slicedSentence)
-    const result = await detectText(slicedSentence);
-    results.push({ text: slicedSentence, result: result });
-  }
+  // const results = [];
 
-  const aiGeneratedResults = results.map(({ text, result }) => {
-    if (result.label === "LABEL_1") {
-      return result.score;
-    }
-  });
+  // for (let i = 0; i < sentences.length; i += 10) {
+  //   const slicedSentence = sentences.slice(i, i + 9).join(" ");
+  //   const result = await detectText(slicedSentence);
+  //   results.push({ text: slicedSentence, result: result });
+  // }
 
-  const aiGeneratedTexts = results.map(({ text, result }) => {
-    if (result.label === "LABEL_1") {
-      return text;
-    }
-  });
+  // const aiGeneratedResults = results.map(({text, result}) => {
+  //   if (result.label === "LABEL_1") {
+  //     return result.score * 100;
+  //   }
+  // });
 
-  const totalScore =
-    aiGeneratedResults.reduce(
-      // @ts-ignore
-      (accumulator, currentValue) => accumulator + currentValue,
-      0
-    )! / aiGeneratedResults.length;
+  // const aiGeneratedTexts = results.map(({ text, result }) => {
+  //   if (result.label === "LABEL_1") {
+  //     return text;
+  //   }
+  // });
 
-  const detectionResult: DetectionResult = {
-    label: Label.HumanWritten,
-    score: totalScore,
-    description: "",
-    aiGeneratedTexts: aiGeneratedTexts as string[],
-  };
+  // const totalScore =
+  //   aiGeneratedResults.reduce(
+  //     // @ts-ignore
+  //     (accumulator, currentValue) => accumulator + currentValue,
+  //     0
+  //   )! / aiGeneratedResults.length;
 
-  if (totalScore >= 95) {
-    detectionResult.label = Label.AiGenerated;
-  } else if (totalScore <= 94 && totalScore >= 56) {
-    detectionResult.label = Label.MostlyAiGenerated;
-  } else if (totalScore <= 55 && totalScore >= 45) {
-    detectionResult.label = Label.PartlyAiGenerated;
-  } else if (totalScore <= 44 && totalScore >= 6) {
-    detectionResult.label = Label.MostlyHumanWritten;
-  } else {
-    detectionResult.label = Label.HumanWritten;
-  }
+  // const detectionResult: DetectionResult = {
+  //   label: Label.HumanWritten,
+  //   score: totalScore,
+  //   description: "",
+  //   aiGeneratedTexts: aiGeneratedTexts as string[],
+  // };
 
-  response.status(200).json(detectionResult);
+  // if (totalScore >= 95) {
+  //   detectionResult.label = Label.AiGenerated;
+  // } else if (totalScore <= 94 && totalScore >= 56) {
+  //   detectionResult.label = Label.MostlyAiGenerated;
+  // } else if (totalScore <= 55 && totalScore >= 45) {
+  //   detectionResult.label = Label.PartlyAiGenerated;
+  // } else if (totalScore <= 44 && totalScore >= 6) {
+  //   detectionResult.label = Label.MostlyHumanWritten;
+  // } else {
+  //   detectionResult.label = Label.HumanWritten;
+  // }
+
+  // return response.status(200).json(detectionResult);
 }
