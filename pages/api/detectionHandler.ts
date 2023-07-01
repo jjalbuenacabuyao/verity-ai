@@ -1,4 +1,4 @@
-import { countWords, detectText, filterSentences } from "@/utils";
+import { countWords, detectText } from "@/utils";
 import { NextApiRequest, NextApiResponse } from "next";
 
 enum Label {
@@ -12,7 +12,6 @@ enum Label {
 interface DetectionResult {
   label: Label;
   score: number;
-  description: string;
   aiGeneratedTexts: string[] | string;
 }
 
@@ -21,85 +20,94 @@ export default async function detectionHandler(
   response: NextApiResponse
 ) {
   const { normalizedText } = request.body;
-  const sentences = filterSentences(normalizedText);
-  const wordCount = countWords(normalizedText);
+  const formatedText = normalizedText
+    .split(/[.?!]/g)
+    .filter((item: string) => !(item === " "));
+  const sentences = formatedText.map((item: string, index: number) => {
+    if (item.startsWith(" \n") || item.startsWith("\n") && !(index === 0)) {
+      if (item.slice(2).includes("\n") || item.slice(1).includes("\n")) {
+        return "\n" + item.slice(1).split("\n").join("").concat(".");
+      }
+    }
+
+    return item.replace(/\n+/g, '').concat(".");
+  });
+
+  const paragraphText = sentences.join("");
+  console.log(paragraphText)
+  const wordCount = countWords(paragraphText);
   const wordCountLimit = 300;
+  const aiGenerated = "LABEL_0";
+  const humanWritten = "LABEL_1";
 
-  const result = await detectText(normalizedText);
-  const { label, score } = result;
+  if (wordCount <= wordCountLimit) {
+    const result = await detectText(paragraphText);
+    const { label, score } = result;
+    console.log(result)
 
-  const aiGenerated = label === "LABEL_0";
-  const humanWritten = label === "LABEL_1";
+    if (label === humanWritten && score >= 90) {
+      const detectionResult: DetectionResult = {
+        label: Label.HumanWritten,
+        score: score,
+        aiGeneratedTexts: "All text are possibly NOT AI-GENERATED.",
+      };
+      return response.status(200).send(detectionResult);
+    }
 
-  console.log(sentences.map(s => s))
-  console.log(result)
-  return response.status(200).send(sentences)
+    if (label === aiGenerated && score >= 90) {
+      const detectionResult: DetectionResult = {
+        label: Label.AiGenerated,
+        score: score,
+        aiGeneratedTexts: "All text are possibly AI-GENERATED.",
+      };
+      return response.status(200).send([detectionResult, paragraphText]);
+    }
+  }
 
-  // if (humanWritten && wordCount <= wordCountLimit && Math.trunc(score) >= 95) {
-  //   const detectionResult: DetectionResult = {
-  //     label: Label.HumanWritten,
-  //     score: score,
-  //     description: "Unlikely to be AI-generated.",
-  //     aiGeneratedTexts: "All text are possibly NOT AI-GENERATED.",
-  //   };
-  //   return response.status(200).send(detectionResult);
-  // }
+  const results = [];
 
-  // if (aiGenerated && wordCount <= wordCountLimit && Math.trunc(score) >= 95) {
-  //   const detectionResult: DetectionResult = {
-  //     label: Label.AiGenerated,
-  //     score: score,
-  //     description: "Possibly AI-generated.",
-  //     aiGeneratedTexts: "All text are possibly AI-GENERATED.",
-  //   };
-  //   return response.status(200).send(detectionResult);
-  // }
+  for (let i = 0; i < sentences.length; i += 10) {
+    const slicedSentence = sentences.slice(i, i + 9).join(" ");
+    const result = await detectText(slicedSentence);
+    results.push({ text: slicedSentence, result: result });
+  }
 
-  // const results = [];
+  const aiGeneratedResults = results.map(({ text, result }) => {
+    if (result.label === "LABEL_0") {
+      return result.score;
+    }
 
-  // for (let i = 0; i < sentences.length; i += 10) {
-  //   const slicedSentence = sentences.slice(i, i + 9).join(" ");
-  //   const result = await detectText(slicedSentence);
-  //   results.push({ text: slicedSentence, result: result });
-  // }
+    return 0;
+  });
 
-  // const aiGeneratedResults = results.map(({text, result}) => {
-  //   if (result.label === "LABEL_1") {
-  //     return result.score * 100;
-  //   }
-  // });
+  const aiGeneratedTexts = results.filter(
+    (item) => item.result.label === "LABEL_0"
+  );
 
-  // const aiGeneratedTexts = results.map(({ text, result }) => {
-  //   if (result.label === "LABEL_1") {
-  //     return text;
-  //   }
-  // });
+  const totalScore =
+    aiGeneratedResults.reduce(
+      // @ts-ignore
+      (accumulator, currentValue) => accumulator + currentValue,
+      0
+    )! / aiGeneratedResults.length;
 
-  // const totalScore =
-  //   aiGeneratedResults.reduce(
-  //     // @ts-ignore
-  //     (accumulator, currentValue) => accumulator + currentValue,
-  //     0
-  //   )! / aiGeneratedResults.length;
+  const detectionResult: DetectionResult = {
+    label: Label.HumanWritten,
+    score: totalScore,
+    aiGeneratedTexts: aiGeneratedTexts.map(({ text }) => text),
+  };
 
-  // const detectionResult: DetectionResult = {
-  //   label: Label.HumanWritten,
-  //   score: totalScore,
-  //   description: "",
-  //   aiGeneratedTexts: aiGeneratedTexts as string[],
-  // };
+  if (totalScore >= 95) {
+    detectionResult.label = Label.AiGenerated;
+  } else if (totalScore <= 94 && totalScore >= 56) {
+    detectionResult.label = Label.MostlyAiGenerated;
+  } else if (totalScore <= 55 && totalScore >= 45) {
+    detectionResult.label = Label.PartlyAiGenerated;
+  } else if (totalScore <= 44 && totalScore >= 6) {
+    detectionResult.label = Label.MostlyHumanWritten;
+  } else {
+    detectionResult.label = Label.HumanWritten;
+  }
 
-  // if (totalScore >= 95) {
-  //   detectionResult.label = Label.AiGenerated;
-  // } else if (totalScore <= 94 && totalScore >= 56) {
-  //   detectionResult.label = Label.MostlyAiGenerated;
-  // } else if (totalScore <= 55 && totalScore >= 45) {
-  //   detectionResult.label = Label.PartlyAiGenerated;
-  // } else if (totalScore <= 44 && totalScore >= 6) {
-  //   detectionResult.label = Label.MostlyHumanWritten;
-  // } else {
-  //   detectionResult.label = Label.HumanWritten;
-  // }
-
-  // return response.status(200).json(detectionResult);
+  return response.status(200).json(detectionResult);
 }
