@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Loader from "./Loader";
 import { useFileContext } from "@/hooks/FileContext";
-import { cleanText, getTextFromFiles } from "@/utils";
+import { getTextFromFiles } from "@/utils";
 
 const ResultContainer = () => {
   const { files, isLoading, setIsLoading } = useFileContext();
@@ -11,8 +11,8 @@ const ResultContainer = () => {
     if (files?.length !== 0) {
       const res = files?.map(async (file) => {
         //waiting sa implementation ng detectionHandler api
-        const extractedText = await getTextFromFiles(file);
-        const normalizedText = cleanText(extractedText);
+        const normalizedText = await getTextFromFiles(file);
+        // const normalizedText = cleanText(extractedText);
         const response = await fetch("/api/detectionHandler", {
           method: "POST",
           headers: {
