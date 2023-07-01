@@ -19,8 +19,8 @@ export default async function detectionHandler(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
-  const { normalizedText } = request.body;
-  const formatedText = normalizedText
+  const { extractedText } = request.body;
+  const formatedText = extractedText
     .split(/[.?!]/g)
     .filter((item: string) => !(item === " "));
   const sentences = formatedText.map((item: string, index: number) => {

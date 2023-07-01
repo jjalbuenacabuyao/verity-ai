@@ -11,14 +11,13 @@ const ResultContainer = () => {
     if (files?.length !== 0) {
       const res = files?.map(async (file) => {
         //waiting sa implementation ng detectionHandler api
-        const normalizedText = await getTextFromFiles(file);
-        // const normalizedText = cleanText(extractedText);
+        const extractedText = await getTextFromFiles(file);
         const response = await fetch("/api/detectionHandler", {
           method: "POST",
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ normalizedText }),
+          body: JSON.stringify({ extractedText }),
         });
         return await response.json();
       });
