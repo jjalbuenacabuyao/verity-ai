@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Loader from "./Loader";
 import { useFileContext } from "@/hooks/FileContext";
 import { getTextFromFiles } from "@/utils";
+import detectTextUsingHF from "@/utils/detectTextUsingHF";
 
 const ResultContainer = () => {
   const { files, isLoading, setIsLoading } = useFileContext();

@@ -1,4 +1,5 @@
 import { countWords, detectText } from "@/utils";
+import detectTextUsingHF from "@/utils/detectTextUsingHF";
 import { NextApiRequest, NextApiResponse } from "next";
 
 enum Label {
@@ -34,14 +35,13 @@ export default async function detectionHandler(
   });
 
   const paragraphText = sentences.join("");
-  console.log(paragraphText)
   const wordCount = countWords(paragraphText);
   const wordCountLimit = 300;
   const aiGenerated = "LABEL_0";
   const humanWritten = "LABEL_1";
 
   if (wordCount <= wordCountLimit) {
-    const result = await detectText(paragraphText);
+    const result = await detectTextUsingHF(paragraphText);
     const { label, score } = result;
     console.log(result)
 
@@ -60,15 +60,15 @@ export default async function detectionHandler(
         score: score,
         aiGeneratedTexts: "All text are possibly AI-GENERATED.",
       };
-      return response.status(200).send([detectionResult, paragraphText]);
+      return response.status(200).send(detectionResult);
     }
   }
 
   const results = [];
 
   for (let i = 0; i < sentences.length; i += 10) {
-    const slicedSentence = sentences.slice(i, i + 9).join(" ");
-    const result = await detectText(slicedSentence);
+    const slicedSentence = sentences.slice(i, i + 10).join(" ");
+    const result = await detectTextUsingHF(slicedSentence);
     results.push({ text: slicedSentence, result: result });
   }
 
@@ -77,8 +77,11 @@ export default async function detectionHandler(
       return result.score;
     }
 
-    return 0;
+    return 100 - Math.trunc(result.score);
   });
+
+  console.log(sentences)
+  console.log(aiGeneratedResults)
 
   const aiGeneratedTexts = results.filter(
     (item) => item.result.label === "LABEL_0"
