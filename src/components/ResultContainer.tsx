@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import Loader from "./Loader";
 import { useFileContext } from "@/hooks/FileContext";
 import { getTextFromFiles } from "@/utils";
-import detectTextUsingHF from "@/utils/detectTextUsingHF";
+import { DetectionResult } from "@/types";
 
 const ResultContainer = () => {
   const { files, isLoading, setIsLoading } = useFileContext();
-  const [result, setResult] = useState();
+  const [result, setResult] = useState<Promise<DetectionResult>[]>();
 
   useEffect(() => {
     if (files?.length !== 0) {
@@ -23,7 +23,7 @@ const ResultContainer = () => {
         return await response.json();
       });
 
-      console.log(res)
+      setResult(res);
     }
   }, [files])
 
