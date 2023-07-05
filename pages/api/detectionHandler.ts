@@ -2,18 +2,9 @@ import { countWords, detectText } from "@/utils";
 import detectTextUsingHF from "@/utils/detectTextUsingHF";
 import { NextApiRequest, NextApiResponse } from "next";
 
-enum Label {
-  HumanWritten = "Humman written",
-  AiGenerated = "AI-generated",
-  PartlyAiGenerated = "Partly AI-generated",
-  MostlyAiGenerated = "Mostly AI-generated",
-  MostlyHumanWritten = "Mostly Human written",
-}
-
 interface DetectionResult {
-  label: Label;
-  score: number;
-  aiGeneratedTexts: string[] | string;
+  aiGeneratedPercentage: number | string;
+  aiGeneratedTexts: Object | string;
 }
 
 export default async function detectionHandler(
@@ -22,33 +13,34 @@ export default async function detectionHandler(
 ) {
   const { extractedText } = request.body;
   const formatedText = extractedText
+    .trim()
     .split(/[.?!]/g)
-    .filter((item: string) => !(item === " "));
+    .filter((item: string) => item !== " ");
+
   const sentences = formatedText.map((item: string, index: number) => {
-    if (item.startsWith(" \n") || item.startsWith("\n") && !(index === 0)) {
+    if (item.startsWith(" \n") || (item.startsWith("\n") && index !== 0)) {
       if (item.slice(2).includes("\n") || item.slice(1).includes("\n")) {
         return "\n" + item.slice(1).split("\n").join("").concat(".");
       }
     }
-
-    return item.replace(/\n+/g, '').concat(".");
+    if (item !== "") {
+      return item.replace(/\n+/g, "").concat(".");
+    }
   });
 
   const paragraphText = sentences.join("");
-  const wordCount = countWords(paragraphText);
+  const overallWordCount = countWords(paragraphText);
   const wordCountLimit = 300;
   const aiGenerated = "LABEL_0";
   const humanWritten = "LABEL_1";
 
-  if (wordCount <= wordCountLimit) {
+  if (overallWordCount <= wordCountLimit) {
     const result = await detectTextUsingHF(paragraphText);
     const { label, score } = result;
-    console.log(result)
 
     if (label === humanWritten && score >= 90) {
       const detectionResult: DetectionResult = {
-        label: Label.HumanWritten,
-        score: score,
+        aiGeneratedPercentage: 0,
         aiGeneratedTexts: "All text are possibly NOT AI-GENERATED.",
       };
       return response.status(200).send(detectionResult);
@@ -56,8 +48,7 @@ export default async function detectionHandler(
 
     if (label === aiGenerated && score >= 90) {
       const detectionResult: DetectionResult = {
-        label: Label.AiGenerated,
-        score: score,
+        aiGeneratedPercentage: 100,
         aiGeneratedTexts: "All text are possibly AI-GENERATED.",
       };
       return response.status(200).send(detectionResult);
@@ -72,45 +63,51 @@ export default async function detectionHandler(
     results.push({ text: slicedSentence, result: result });
   }
 
-  const aiGeneratedResults = results.map(({ text, result }) => {
-    if (result.label === "LABEL_0") {
-      return result.score;
-    }
+  // const aiGeneratedResults = results.map(({ text, result }) => {
+  //   if (result.label === "LABEL_0") {
+  //     return result.score;
+  //   }
 
-    return 100 - Math.trunc(result.score);
-  });
-
-  console.log(sentences)
-  console.log(aiGeneratedResults)
+  //   return 100 - Math.trunc(result.score);
+  // });
 
   const aiGeneratedTexts = results.filter(
     (item) => item.result.label === "LABEL_0"
   );
 
-  const totalScore =
-    aiGeneratedResults.reduce(
-      // @ts-ignore
-      (accumulator, currentValue) => accumulator + currentValue,
-      0
-    )! / aiGeneratedResults.length;
+  const totalPercentage =
+    (aiGeneratedTexts
+      .map(({ text }) => countWords(text))
+      .reduce((accumulator, currentValue) => accumulator + currentValue, 0) *
+      100) /
+    overallWordCount;
+
+  // const totalScore =
+  //   aiGeneratedResults.reduce(
+  //     // @ts-ignore
+  //     (accumulator, currentValue) => accumulator + currentValue,
+  //     0
+  //   )! / aiGeneratedResults.length;
 
   const detectionResult: DetectionResult = {
-    label: Label.HumanWritten,
-    score: totalScore,
-    aiGeneratedTexts: aiGeneratedTexts.map(({ text }) => text),
+    aiGeneratedPercentage: totalPercentage.toFixed(2),
+    aiGeneratedTexts: results.map(({ text, result }) => {
+      const { score, label } = result;
+      return { text, score, label }
+    }),
   };
 
-  if (totalScore >= 95) {
-    detectionResult.label = Label.AiGenerated;
-  } else if (totalScore <= 94 && totalScore >= 56) {
-    detectionResult.label = Label.MostlyAiGenerated;
-  } else if (totalScore <= 55 && totalScore >= 45) {
-    detectionResult.label = Label.PartlyAiGenerated;
-  } else if (totalScore <= 44 && totalScore >= 6) {
-    detectionResult.label = Label.MostlyHumanWritten;
-  } else {
-    detectionResult.label = Label.HumanWritten;
-  }
+  // if (totalScore >= 95) {
+  //   detectionResult.label = Label.AiGenerated;
+  // } else if (totalScore <= 94 && totalScore >= 56) {
+  //   detectionResult.label = Label.MostlyAiGenerated;
+  // } else if (totalScore <= 55 && totalScore >= 45) {
+  //   detectionResult.label = Label.PartlyAiGenerated;
+  // } else if (totalScore <= 44 && totalScore >= 6) {
+  //   detectionResult.label = Label.MostlyHumanWritten;
+  // } else {
+  //   detectionResult.label = Label.HumanWritten;
+  // }
 
   return response.status(200).json(detectionResult);
 }
