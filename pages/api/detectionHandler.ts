@@ -1,11 +1,7 @@
 import { countWords, detectText } from "@/utils";
 import detectTextUsingHF from "@/utils/detectTextUsingHF";
 import { NextApiRequest, NextApiResponse } from "next";
-
-interface DetectionResult {
-  aiGeneratedPercentage: number | string;
-  aiGeneratedTexts: Object | string;
-}
+import { DetectionResult } from "@/types";
 
 export default async function detectionHandler(
   request: NextApiRequest,

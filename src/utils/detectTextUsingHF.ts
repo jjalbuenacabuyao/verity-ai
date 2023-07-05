@@ -1,9 +1,5 @@
 import { HfInference } from "@huggingface/inference";
-
-interface Result {
-  label: string;
-  score: number;
-}
+import { InferenceApiResult } from "@/types"
 
 export default async function detectTextUsingHF(text: string) {
   const apiTokens = process.env.NEXT_PUBLIC_ACCESS_TOKEN!.split(", ");
@@ -22,9 +18,9 @@ export default async function detectTextUsingHF(text: string) {
   });
 
   const [{ label: scoreLabel, score: aiGenerated }] = result;
-  const data: Result = {
+  const data: InferenceApiResult = {
     label: scoreLabel,
-    score: Math.trunc(aiGenerated * 100),
+    score: Math.round(aiGenerated * 100),
   };
 
   return data;
