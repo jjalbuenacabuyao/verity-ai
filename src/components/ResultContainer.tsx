@@ -6,26 +6,39 @@ import { DetectionResult } from "@/types";
 
 const ResultContainer = () => {
   const { files, isLoading, setIsLoading } = useFileContext();
-  const [result, setResult] = useState<Promise<DetectionResult>[]>();
+  const [results, setResults] = useState<
+    Promise<{ filename: string; result: DetectionResult } | null>[]
+  >([]);
 
   useEffect(() => {
     if (files?.length !== 0) {
-      const res = files?.map(async (file) => {
-        //waiting sa implementation ng detectionHandler api
+      const result = files!.map(async (file) => {
         const extractedText = await getTextFromFiles(file);
+
         const response = await fetch("/api/detectionHandler", {
           method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({ extractedText }),
         });
-        return await response.json();
+
+        if (!response.ok) {
+          return null;
+        }
+
+        const data: DetectionResult = await response.json();
+        return {
+          filename: file.name,
+          result: data,
+        };
       });
 
-      setResult(res);
+      if (result) {
+        setResults(result);
+      }
     }
-  }, [files])
+  }, [files]);
 
   return (
     <div className="mb-8 grid gap-6 border-t pt-16">
