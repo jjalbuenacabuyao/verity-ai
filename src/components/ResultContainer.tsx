@@ -3,12 +3,13 @@ import Loader from "./Loader";
 import { useFileContext } from "@/hooks/FileContext";
 import { getTextFromFiles } from "@/utils";
 import { DetectionResult } from "@/types";
+import Result from "./Result";
 
 const ResultContainer = () => {
   const { files, isLoading, setIsLoading } = useFileContext();
   const [results, setResults] = useState<
-    Promise<{ filename: string; result: DetectionResult } | null>[]
-  >([]);
+  { filename: string; result: DetectionResult; }[]
+>([]);
 
   useEffect(() => {
     if (files?.length !== 0) {
@@ -23,20 +24,15 @@ const ResultContainer = () => {
           body: JSON.stringify({ extractedText }),
         });
 
-        if (!response.ok) {
-          return null;
-        }
-
         const data: DetectionResult = await response.json();
+        
         return {
           filename: file.name,
           result: data,
         };
       });
 
-      if (result) {
-        setResults(result);
-      }
+      Promise.all(result).then(values => {setResults(values.filter((value) => value !== null))})
     }
   }, [files]);
 
@@ -51,13 +47,20 @@ const ResultContainer = () => {
         </button>
       </div>
       <div className="rounded-xl border py-16 text-center shadow-2xl">
-        {files && isLoading === false && (
+        {/* {files && isLoading === false && (
           <span className="text-sm text-slate-400">
             Results will be shown here.
           </span>
-        )}
+        )} */}
 
-        {isLoading && <Loader />}
+        {results.length !== 0 &&
+          results.map(item => (
+            <Result
+              key={item.filename}
+              filename={item.filename}
+              aiGeneratedPercentage={item.result.aiGeneratedPercentage}
+            />
+          ))}
       </div>
     </div>
   );
