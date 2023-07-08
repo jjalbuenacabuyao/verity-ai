@@ -1,5 +1,4 @@
-import { countWords, detectText } from "@/utils";
-import detectTextUsingHF from "@/utils/detectTextUsingHF";
+import { countWords, detectAiGeneratedText } from "@/utils";
 import { NextApiRequest, NextApiResponse } from "next";
 import { DetectionResult } from "@/types";
 
@@ -31,7 +30,7 @@ export default async function detectionHandler(
   const humanWritten = "LABEL_1";
 
   if (overallWordCount <= wordCountLimit) {
-    const result = await detectTextUsingHF(paragraphText);
+    const result = await detectAiGeneratedText(paragraphText);
     const { label, score } = result;
 
     if (label === humanWritten && score >= 90) {
@@ -55,7 +54,7 @@ export default async function detectionHandler(
 
   for (let i = 0; i < sentences.length; i += 10) {
     const slicedSentence = sentences.slice(i, i + 10).join(" ");
-    const result = await detectTextUsingHF(slicedSentence);
+    const result = await detectAiGeneratedText(slicedSentence);
     results.push({ text: slicedSentence, result: result });
   }
 
