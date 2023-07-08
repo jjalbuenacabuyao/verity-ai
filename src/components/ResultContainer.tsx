@@ -59,7 +59,7 @@ const ResultContainer = () => {
 
         { isLoading && <Loader /> }
 
-        {results.length !== 0 &&
+        {results.length !== 0 && isLoading === false &&
           results.map(item => (
             <Result
               key={item.filename}
