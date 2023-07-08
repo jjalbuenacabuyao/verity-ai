@@ -1,4 +1,4 @@
-import detectText from "./detectText";
+import detectAiGeneratedText from "./detectAiGeneratedText";
 import getTextFromFiles from "./getTextFromFiles";
 import filterSentences from "./filterSentences";
 import cleanText from "./cleanText";
@@ -7,7 +7,7 @@ import getDetectionResult from "./getDetectionResults";
 import getSentencePercentage from "./getSentencePercentage";
 
 export {
-  detectText,
+  detectAiGeneratedText,
   getTextFromFiles,
   filterSentences,
   cleanText,
