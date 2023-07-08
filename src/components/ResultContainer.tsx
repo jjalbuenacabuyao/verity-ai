@@ -13,6 +13,7 @@ const ResultContainer = () => {
 
   useEffect(() => {
     if (files?.length !== 0) {
+      setIsLoading(true)
       const result = files!.map(async (file) => {
         const extractedText = await getTextFromFiles(file);
 
@@ -32,9 +33,12 @@ const ResultContainer = () => {
         };
       });
 
-      Promise.all(result).then(values => {setResults(values.filter((value) => value !== null))})
+      Promise.all(result).then(values => {
+        setResults(values);
+        setIsLoading(false);
+      })
     }
-  }, [files]);
+  }, [files, setIsLoading]);
 
   return (
     <div className="mb-8 grid gap-6 border-t pt-16">
@@ -47,11 +51,13 @@ const ResultContainer = () => {
         </button>
       </div>
       <div className="rounded-xl border py-16 text-center shadow-2xl">
-        {/* {files && isLoading === false && (
+        {files?.length === 0 && isLoading === false && (
           <span className="text-sm text-slate-400">
             Results will be shown here.
           </span>
-        )} */}
+        )}
+
+        { isLoading && <Loader /> }
 
         {results.length !== 0 &&
           results.map(item => (
