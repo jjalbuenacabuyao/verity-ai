@@ -1,23 +1,23 @@
 import AddUserModal from "./AddUserModal";
 import Aside from "./Aside";
-import FileUploadForm from "./FileUploadForm";
 import Header from "./Header";
-import LogInButton from "./LogInButton";
 import Hero from "./Hero";
+import LogInButton from "./LogInButton";
 import LogInModal from "./LogInModal";
 import Logo from "./Logo";
 import Nav from "./Nav";
+import Result from "./Result";
 import ResultContainer from "./ResultContainer";
 
 export {
   AddUserModal,
   Aside,
-  FileUploadForm,
   Header,
-  LogInButton,
   Hero,
+  LogInButton,
   LogInModal,
   Logo,
   Nav,
+  Result,
   ResultContainer,
 };
