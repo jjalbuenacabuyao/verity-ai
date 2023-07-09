@@ -1,13 +1,12 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Header } from "@/components";
-import FileContext from "@/hooks/FileContext";
-import AiDetectorMain from "@/components/AiDetectorMain";
+import { Aside, Header, ResultContainer } from "@/components";
 
 const AiDetector = () => {
   const [files, setFiles] = useState<File[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const [scrollPosition, setScrollPosition] = useState<number>(0);
   const [navOpen, setNavOpen] = useState<boolean>(false);
 
@@ -30,9 +29,14 @@ const AiDetector = () => {
         navOpen={navOpen}
         setNavOpen={setNavOpen}
       />
-      <FileContext.Provider value={{files, setFiles, isLoading, setIsLoading}}>
-        <AiDetectorMain />
-      </FileContext.Provider>
+      <main className="mx-6">
+        <Aside setFiles={setFiles} setIsLoading={setIsLoading} />
+        <ResultContainer
+          files={files}
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
+        />
+      </main>
     </>
   );
 };

@@ -1,16 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Loader from "./Loader";
-import { useFileContext } from "@/hooks/FileContext";
 import { getTextFromFiles } from "@/utils";
 import { DetectionResult } from "@/types";
 import Result from "./Result";
 
-const ResultContainer = () => {
-  const { files, isLoading, setIsLoading } = useFileContext();
+interface Props {
+  files: File[];
+  isLoading: boolean;
+  setIsLoading: Dispatch<SetStateAction<boolean>>
+}
+
+const ResultContainer = ({ files, isLoading, setIsLoading }: Props) => {
   const [results, setResults] = useState<
   { filename: string; result: DetectionResult; }[]
->([]);
-
+    >([]);
+  
   useEffect(() => {
     if (files?.length !== 0) {
       setIsLoading(true)
