@@ -33,10 +33,31 @@ const ResultContainer = () => {
         };
       });
 
-      Promise.all(result).then(values => {
-        setResults(values);
+      // Promise.all(result).then(values => {
+      //   setResults(values);
+      //   setIsLoading(false);
+      // })
+
+      Promise.allSettled(result).then(values => {
+        const fulfilledValues = values
+          .filter(value => value.status === "fulfilled")
+          .map(value => {
+            if (value.status === "fulfilled") {
+              return value.value;
+            }
+          });
+        //@ts-ignore
+        setResults(fulfilledValues);
         setIsLoading(false);
-      })
+      
+        const rejectedValues = values.filter(value => value.status === "rejected");
+        // if (rejectedValues.length > 0) {
+        //   // Handle the errors here
+        //   rejectedValues.forEach(value => {
+        //     console.error(`Error processing file: ${value.reason}`);
+        //   });
+        // }
+      });
     }
   }, [files, setIsLoading]);
 
