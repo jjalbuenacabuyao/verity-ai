@@ -1,5 +1,5 @@
 export interface DetectionResult {
-  aiGeneratedPercentage: number | string;
+  aiGeneratedPercentage: string;
   aiGeneratedTexts:
     | {
         text: string;
