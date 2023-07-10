@@ -7,17 +7,17 @@ import Result from "./Result";
 interface Props {
   files: File[];
   isLoading: boolean;
-  setIsLoading: Dispatch<SetStateAction<boolean>>
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
 }
 
 const ResultContainer = ({ files, isLoading, setIsLoading }: Props) => {
   const [results, setResults] = useState<
-  { filename: string; result: DetectionResult; }[]
-    >([]);
-  
+    { filename: string; result: DetectionResult }[]
+  >([]);
+
   useEffect(() => {
     if (files?.length !== 0) {
-      setIsLoading(true)
+      setIsLoading(true);
       const result = files!.map(async (file) => {
         const extractedText = await getTextFromFiles(file);
 
@@ -30,7 +30,7 @@ const ResultContainer = ({ files, isLoading, setIsLoading }: Props) => {
         });
 
         const data: DetectionResult = await response.json();
-        
+
         return {
           filename: file.name,
           result: data,
@@ -42,10 +42,10 @@ const ResultContainer = ({ files, isLoading, setIsLoading }: Props) => {
       //   setIsLoading(false);
       // })
 
-      Promise.allSettled(result).then(values => {
+      Promise.allSettled(result).then((values) => {
         const fulfilledValues = values
-          .filter(value => value.status === "fulfilled")
-          .map(value => {
+          .filter((value) => value.status === "fulfilled")
+          .map((value) => {
             if (value.status === "fulfilled") {
               return value.value;
             }
@@ -53,8 +53,10 @@ const ResultContainer = ({ files, isLoading, setIsLoading }: Props) => {
         //@ts-ignore
         setResults(fulfilledValues);
         setIsLoading(false);
-      
-        const rejectedValues = values.filter(value => value.status === "rejected");
+
+        const rejectedValues = values.filter(
+          (value) => value.status === "rejected"
+        );
         // if (rejectedValues.length > 0) {
         //   // Handle the errors here
         //   rejectedValues.forEach(value => {
@@ -75,23 +77,31 @@ const ResultContainer = ({ files, isLoading, setIsLoading }: Props) => {
           Download Report
         </button>
       </div>
-      <div className="rounded-xl border py-16 text-center shadow-2xl">
+
+      <div>
         {files?.length === 0 && isLoading === false && (
-          <span className="text-sm text-slate-400">
+          <p className="py-6 text-center text-sm text-slate-400">
             Results will be shown here.
-          </span>
+          </p>
         )}
 
-        { isLoading && <Loader /> }
+        {isLoading && <Loader />}
 
-        {results.length !== 0 && isLoading === false &&
-          results.map(item => (
-            <Result
-              key={item.filename}
-              filename={item.filename}
-              aiGeneratedPercentage={item.result.aiGeneratedPercentage}
-            />
-          ))}
+        {results.length !== 0 && isLoading === false && (
+          <div className="grid gap-3">
+            <div className="flex items-center justify-between text-xs text-slate-400">
+              <span>Filename</span>
+              <span>% of AI-generated text</span>
+            </div>
+            {results.map((item) => (
+              <Result
+                key={item.filename}
+                filename={item.filename}
+                aiGeneratedPercentage={item.result.aiGeneratedPercentage}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
