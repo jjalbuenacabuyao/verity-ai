@@ -21,7 +21,7 @@ const Aside = ({ setIsLoading, setFiles }: Props) => {
   };
 
   return (
-    <aside className="mb-16 mt-20">
+    <aside className="mb-16 mt-24">
       <div className="flex flex-col items-center rounded-lg border-2 border-dashed py-6">
         <FiUpload size={36} />
         <h1 className="mb-6 mt-4">Upload pdf and docx files</h1>
