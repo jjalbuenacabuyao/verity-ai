@@ -35,7 +35,7 @@ export default async function detectionHandler(
 
     if (label === humanWritten && score >= 90) {
       const detectionResult: DetectionResult = {
-        aiGeneratedPercentage: 0,
+        aiGeneratedPercentage: "0",
         aiGeneratedTexts: "All text are possibly NOT AI-GENERATED.",
       };
       return response.status(200).send(detectionResult);
@@ -43,7 +43,7 @@ export default async function detectionHandler(
 
     if (label === aiGenerated && score >= 90) {
       const detectionResult: DetectionResult = {
-        aiGeneratedPercentage: 100,
+        aiGeneratedPercentage: "100",
         aiGeneratedTexts: "All text are possibly AI-GENERATED.",
       };
       return response.status(200).send(detectionResult);
@@ -85,7 +85,7 @@ export default async function detectionHandler(
   //   )! / aiGeneratedResults.length;
 
   const detectionResult: DetectionResult = {
-    aiGeneratedPercentage: totalPercentage.toFixed(2),
+    aiGeneratedPercentage: totalPercentage.toFixed(1),
     aiGeneratedTexts: results.map(({ text, result }) => {
       const { score, label } = result;
       return { text, score, label }
