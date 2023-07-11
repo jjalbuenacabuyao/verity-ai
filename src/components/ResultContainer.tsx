@@ -6,11 +6,10 @@ import Result from "./Result";
 
 interface Props {
   files: File[];
-  isLoading: boolean;
-  setIsLoading: Dispatch<SetStateAction<boolean>>;
 }
 
-const ResultContainer = ({ files, isLoading, setIsLoading }: Props) => {
+const ResultContainer = ({ files }: Props) => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [results, setResults] = useState<
     { filename: string; result: DetectionResult }[]
   >([]);
@@ -79,7 +78,7 @@ const ResultContainer = ({ files, isLoading, setIsLoading }: Props) => {
       </div>
 
       <div>
-        {files?.length === 0 && isLoading === false && (
+        {files?.length === 0 && results.length === 0 && isLoading === false && (
           <p className="py-6 text-center text-sm text-slate-400">
             Results will be shown here.
           </p>
