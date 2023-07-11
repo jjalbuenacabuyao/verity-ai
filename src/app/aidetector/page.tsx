@@ -5,8 +5,6 @@ import { Aside, Header, ResultContainer } from "@/components";
 
 const AiDetector = () => {
   const [files, setFiles] = useState<File[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
   const [scrollPosition, setScrollPosition] = useState<number>(0);
   const [navOpen, setNavOpen] = useState<boolean>(false);
 
@@ -30,11 +28,9 @@ const AiDetector = () => {
         setNavOpen={setNavOpen}
       />
       <main className="mx-6">
-        <Aside setFiles={setFiles} setIsLoading={setIsLoading} />
+        <Aside setFiles={setFiles} />
         <ResultContainer
           files={files}
-          isLoading={isLoading}
-          setIsLoading={setIsLoading}
         />
       </main>
     </>
