@@ -2,13 +2,11 @@ import React, { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { FiUpload } from "react-icons/fi";
 
 interface Props {
-  setIsLoading: Dispatch<SetStateAction<boolean>>;
   setFiles: Dispatch<SetStateAction<File[]>>;
 }
 
-const Aside = ({ setIsLoading, setFiles }: Props) => {
+const Aside = ({ setFiles }: Props) => {
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setIsLoading(true);
     const fileInput = event.target.files;
     if (fileInput) {
       if (fileInput.length > 50) {
