@@ -8,28 +8,25 @@ import {
 } from "@radix-ui/react-dialog";
 import LogInButton from "./LogInButton";
 import { FormEvent } from "react";
+import { signIn } from "next-auth/react"
 
 const LogInModal = () => {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = {
+    const data: {email: string, password: string} = {
       email: event.currentTarget.email.value,
       password: event.currentTarget.password.value,
     };
-    const JSONdata = JSON.stringify(data);
 
-    const endpoint = "/api/loginHandler";
-
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSONdata,
-    };
-
-    const response = await fetch(endpoint, options);
-    const result = await response.json();
+    signIn("credentials", {
+      ...data,
+    }).then((callback) => {
+      if (callback?.error) {
+        console.log(callback.error)
+      } else {
+        console.log(callback?.ok)
+      }
+    });
   };
 
   return (
