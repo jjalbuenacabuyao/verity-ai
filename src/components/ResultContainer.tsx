@@ -3,6 +3,7 @@ import Loader from "./Loader";
 import { getTextFromFiles } from "@/utils";
 import { DetectionResult } from "@/types";
 import Result from "./Result";
+import { useSession } from "next-auth/react";
 
 interface Props {
   files: File[];
@@ -12,7 +13,9 @@ const ResultContainer = ({ files }: Props) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [results, setResults] = useState<
     { filename: string; result: DetectionResult }[]
-  >([]);
+    >([]);
+  const session = useSession();
+  console.log(session)
 
   useEffect(() => {
     if (files?.length !== 0) {
