@@ -81,7 +81,7 @@ const AddUserModal = () => {
                 value={user.role}
                 onChange={handleSelectChange}
               >
-                <option value={"USERE"}>User</option>
+                <option value={"USER"}>User</option>
                 <option value={"ADMIN"}>Admin</option>
               </select>
             </label>
