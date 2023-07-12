@@ -16,7 +16,7 @@ export const authOptions: AuthOptions = {
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          return null;
+          throw new Error("Invalid credentials");
         }
 
         const user = await prisma.user.findUnique({
@@ -38,7 +38,7 @@ export const authOptions: AuthOptions = {
         });
 
         if (!user || !user?.hashedPassword) {
-          return null;
+          throw new Error("User does not exist.");
         }
 
         const isCorrectPassword = await bcrypt.compare(
@@ -47,7 +47,7 @@ export const authOptions: AuthOptions = {
         );
 
         if (!isCorrectPassword) {
-          return null;
+          throw new Error("Incorrect password");
         }
 
         const fullName = `${user.name?.firstName} ${user.name?.middleName} ${user.name?.lastName}`;
@@ -59,12 +59,29 @@ export const authOptions: AuthOptions = {
       },
     }),
   ],
+  callbacks: {
+    async session({ session, user }) {
+      session.user.role = user.role;
+      return session;
+    },
+    async signIn({ user, account, profile }) {
+      if (user.role === 'ADMIN') {
+        return '/dashboard'
+      } else if (user.role === 'USER') {
+        return '/detector'
+      } else {
+        return false
+      }
+    }
+  },
   pages: {
     signIn: "/",
   },
+  debug: process.env.NODE_ENV === "development",
   session: {
-    strategy: "jwt",
+    strategy: "jwt"
   },
+  secret: process.env.NEXTAUTH_SECRET,
 };
 
 export default NextAuth(authOptions);
