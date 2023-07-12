@@ -7,7 +7,6 @@ import styles from "./dashboard.module.css";
 const Dashboard = () => {
   return (
     <>
-      <Header />
       <main>
         <div>
           <h1>Users</h1>
