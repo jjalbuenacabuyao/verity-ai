@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Root,
   Trigger,
@@ -18,15 +20,9 @@ const LogInModal = () => {
       password: event.currentTarget.password.value,
     };
 
-    signIn("credentials", {
+    await signIn("credentials", {
       ...data,
-    }).then((callback) => {
-      if (callback?.error) {
-        console.log(callback.error)
-      } else {
-        console.log(callback?.ok)
-      }
-    });
+    })
   };
 
   return (
