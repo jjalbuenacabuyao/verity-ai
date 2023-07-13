@@ -1,4 +1,4 @@
-import NextAuth, { AuthOptions } from "next-auth";
+import NextAuth, { AuthOptions, User } from "next-auth";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
@@ -23,18 +23,19 @@ export const authOptions: AuthOptions = {
           where: {
             email: credentials.email,
           },
-          select: {
-            id: true,
-            name: {
-              select: {
-                firstName: true,
-                middleName: true,
-                lastName: true,
-              },
-            },
-            hashedPassword: true,
-            role: true,
-          },
+          // select: {
+          //   id: true,
+          //   email: true,
+          //   name: {
+          //     select: {
+          //       firstName: true,
+          //       middleName: true,
+          //       lastName: true,
+          //     },
+          //   },
+          //   hashedPassword: true,
+          //   role: true,
+          // },
         });
 
         if (!user || !user?.hashedPassword) {
@@ -50,29 +51,29 @@ export const authOptions: AuthOptions = {
           throw new Error("Incorrect password");
         }
 
-        const fullName = `${user.name?.firstName} ${user.name?.middleName} ${user.name?.lastName}`;
+        console.log(user)
 
-        return {
-          ...user,
-          name: fullName,
-        };
+        return user as User;
+
+        // const name = `${user.name?.firstName} ${user.name?.lastName}`;
+
+        // return {
+        //   email: user.email,
+        //   name: name
+        // };
       },
     }),
   ],
   callbacks: {
-    async session({ session, user }) {
-      session.user.role = user.role;
-      return session;
-    },
-    async signIn({ user, account, profile }) {
-      if (user.role === 'ADMIN') {
-        return '/dashboard'
-      } else if (user.role === 'USER') {
-        return '/detector'
-      } else {
-        return false
-      }
-    }
+    // async signIn({ user, account, profile }) {
+    //   if (user.role === 'ADMIN') {
+    //     return '/dashboard'
+    //   } else if (user.role === 'USER') {
+    //     return '/detector'
+    //   } else {
+    //     return false
+    //   }
+    // }
   },
   pages: {
     signIn: "/",
@@ -84,4 +85,6 @@ export const authOptions: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
 };
 
-export default NextAuth(authOptions);
+const handler = NextAuth(authOptions);
+
+export { handler as GET, handler as POST }
