@@ -1,4 +1,6 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import Loader from "./Loader";
 import { getTextFromFiles } from "@/utils";
 import { DetectionResult } from "@/types";
@@ -14,8 +16,6 @@ const ResultContainer = ({ files }: Props) => {
   const [results, setResults] = useState<
     { filename: string; result: DetectionResult }[]
     >([]);
-  const session = useSession();
-  console.log(session)
 
   useEffect(() => {
     if (files?.length !== 0) {
