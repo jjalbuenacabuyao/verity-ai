@@ -1,16 +1,27 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import Logo from "./Logo";
 import Nav from "./Nav";
 import { FiMenu } from "react-icons/fi";
 import { AiOutlineClose } from "react-icons/ai";
 
-interface Props {
-  scrollPosition: number;
-  navOpen: boolean;
-  setNavOpen: Dispatch<SetStateAction<boolean>>;
-}
+const Header = () => {
+  const [scrollPosition, setScrollPosition] = useState<number>(0);
+  const [navOpen, setNavOpen] = useState<boolean>(false);
 
-const Header = ({ scrollPosition, navOpen, setNavOpen }: Props) => {
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollPosition(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <header
       className={`fixed inset-x-0 top-0 z-10 flex items-center justify-between border-b-[1px] border-solid border-transparent px-6 py-4 transition-colors duration-75 ease-linear ${
