@@ -1,4 +1,4 @@
-import { Header, Provider } from "@/components";
+import { Header, CurrentUserProvider } from "@/components";
 import "./globals.css";
 import getCurrentUser from "./actions/getCurrentUser";
 
@@ -18,10 +18,10 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className="font-inter text-slate-900">
-        <Provider>
+        <CurrentUserProvider currentUser={currentUser}>
           <Header />
           <main>{children}</main>
-        </Provider>
+        </CurrentUserProvider>
       </body>
     </html>
   );
