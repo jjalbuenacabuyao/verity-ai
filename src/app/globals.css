@@ -4,3 +4,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .primary {
+    background-image: linear-gradient(to top right, theme(colors.light-violet), theme(colors.light-blue));
+    font-size: theme(fontSize.sm);
+    font-weight: theme(fontWeight.bold);
+    color: theme(colors.white);
+    padding-left: theme(padding.6);
+    padding-right: theme(padding.6);
+    padding-top: theme(padding.2);
+    padding-bottom: theme(padding.2);
+    border-radius: theme(borderRadius.full);
+  }
+}
