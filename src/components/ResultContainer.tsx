@@ -6,6 +6,7 @@ import { getTextFromFiles } from "@/utils";
 import { DetectionResult } from "@/types";
 import Result from "./Result";
 import { useSession } from "next-auth/react";
+import Button from "./Button";
 
 interface Props {
   files: File[];
@@ -15,7 +16,7 @@ const ResultContainer = ({ files }: Props) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [results, setResults] = useState<
     { filename: string; result: DetectionResult }[]
-    >([]);
+  >([]);
 
   useEffect(() => {
     if (files?.length !== 0) {
@@ -73,11 +74,7 @@ const ResultContainer = ({ files }: Props) => {
     <div className="mb-8 grid gap-6 border-t pt-16">
       <div className="flex items-center justify-between">
         <h2 className="font-bold">Results</h2>
-        <button
-          className="rounded-full border border-sky-400 bg-slate-50 px-4 py-2 text-xs text-sky-500"
-          title="Download detection Report (.docx)">
-          Download Report
-        </button>
+        <Button text="Download Report" variant="secondary" />
       </div>
 
       <div>
@@ -95,11 +92,11 @@ const ResultContainer = ({ files }: Props) => {
               <span>Filename</span>
               <span>% of AI-generated text</span>
             </div>
-            {results.map((item) => (
+            {results.map(({ filename, result }) => (
               <Result
-                key={item.filename}
-                filename={item.filename}
-                aiGeneratedPercentage={item.result.aiGeneratedPercentage}
+                key={filename}
+                filename={filename}
+                aiGeneratedPercentage={result.aiGeneratedPercentage}
               />
             ))}
           </div>
