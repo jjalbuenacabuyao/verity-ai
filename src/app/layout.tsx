@@ -1,6 +1,7 @@
 import { Header, CurrentUserProvider } from "@/components";
-import "./globals.css";
 import getCurrentUser from "./actions/getCurrentUser";
+import { inter } from "@/fonts";
+import "./globals.css";
 
 export const metadata = {
   title: "VerityAI",
@@ -17,7 +18,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className="font-inter text-slate-900">
+      <body className={`${inter.className} text-slate-900`}>
         <CurrentUserProvider currentUser={currentUser}>
           <Header />
           <main>{children}</main>
