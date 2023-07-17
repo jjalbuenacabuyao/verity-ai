@@ -12,6 +12,7 @@
   .secondary {
     background-color: theme(colors.slate.50);
     border: theme(borderWidth.DEFAULT);
+    border-style: solid;
     border-color: theme(colors.sky.400);
     color: theme(colors.sky.500);
   }
