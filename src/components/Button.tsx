@@ -16,7 +16,7 @@ const Button = ({ variant, type, text, onClick, children }: Props) => {
       className={`${variant} ${
         variant !== "toggler"
           ? "rounded-full px-6 py-2 text-sm font-semibold"
-          : "z-10"
+          : "z-10 lg:hidden"
       }`}>
       {text}
       {children}
