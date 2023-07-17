@@ -25,7 +25,7 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-10 flex items-center justify-between border-b-[1px] border-solid border-transparent px-6 py-4 transition-colors duration-75 ease-linear ${
+      className={`fixed inset-x-0 top-0 z-10 flex items-center justify-between border-b-[1px] border-solid border-transparent px-6 py-4 transition-colors duration-75 ease-linear lg:px-12 ${
         scrollPosition !== 0
           ? "border-b-off-black bg-header backdrop-blur backdrop-saturate-50"
           : ""
