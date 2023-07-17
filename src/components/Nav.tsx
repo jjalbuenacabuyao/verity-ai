@@ -16,7 +16,6 @@ const Nav = ({ navOpen }: Props) => {
   const currentUser = useCurrentUserContext();
 
   useEffect(() => {
-    console.log(currentUser);
     const body = document.body.style;
     navOpen ? (body.overflowY = "hidden") : (body.overflowY = "auto");
   }, [currentUser, navOpen]);
@@ -42,26 +41,26 @@ const Nav = ({ navOpen }: Props) => {
 
   return (
     <nav
-      className={`fixed inset-x-0 top-0 bg-white px-6 py-16 font-medium transition-transform duration-300 ${
+      className={`fixed inset-x-0 top-0 bg-white px-6 py-16 transition-transform duration-300 lg:transform-none lg:bg-transparent lg:p-0 lg:static ${
         navOpen ? "translate-x-0" : "translate-x-full"
       }`}>
-      <ul className="grid gap-4">
+      <ul className="grid gap-4 lg:flex lg:items-center font-medium lg:gap-6">
         {links.map(({ href, link }) => (
           <li key={link}>
-            <Link href={href}>{link}</Link>
+            <Link href={href} className="hover:text-sky-500 transition-colors duration-300">{link}</Link>
           </li>
         ))}
 
         {currentUser?.role === "ADMIN" && (
           <li>
-            <Link href={"/dashboard"}>Dashboard</Link>
+            <Link className="hover:text-sky-500 transition-colors duration-300" href={"/dashboard"}>Dashboard</Link>
           </li>
         )}
 
         {currentUser ? (
           <>
             <li>
-              <Link href={"/detector"}>Detector</Link>
+              <Link className="hover:text-sky-500 transition-colors duration-300" href={"/detector"}>Detector</Link>
             </li>
             <li>
               <Button
