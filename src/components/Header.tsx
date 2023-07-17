@@ -25,7 +25,7 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-10 flex items-center justify-between border-b-[1px] border-solid border-transparent px-6 py-4 transition-colors duration-75 ease-linear lg:px-12 ${
+      className={`fixed inset-x-0 top-0 z-10 flex items-center justify-between border-b-[1px] border-solid border-transparent px-6 py-4 transition-colors duration-75 ease-linear lg:px-16 ${
         scrollPosition !== 0
           ? "border-b-off-black bg-header backdrop-blur backdrop-saturate-50"
           : ""
@@ -34,7 +34,7 @@ const Header = () => {
       
       <Nav navOpen={navOpen} />
 
-      <Button variant="toggler" onClick={() => setNavOpen(!navOpen)}>
+      <Button variant="toggler" onClick={() => setNavOpen(!navOpen)} className="lg:hidden">
         {navOpen ? (
           <AiOutlineClose size={24} fill="#030712" />
         ) : (
