@@ -42,7 +42,7 @@ const Nav = ({ navOpen }: Props) => {
 
   return (
     <nav
-      className={`fixed inset-x-0 top-0 bg-white px-6 py-16 transition-transform duration-300 ${
+      className={`fixed inset-x-0 top-0 bg-white px-6 py-16 font-medium transition-transform duration-300 ${
         navOpen ? "translate-x-0" : "translate-x-full"
       }`}>
       <ul className="grid gap-4">
