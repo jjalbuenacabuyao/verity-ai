@@ -9,7 +9,7 @@ const LogInButton = () => {
   return (
     <Root>
       <Trigger asChild>
-        <Button variant="primary" text="Login" />
+        <Button variant="primary" text="Log in" />
       </Trigger>
       <LogInModal />
     </Root>
