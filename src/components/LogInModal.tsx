@@ -8,6 +8,7 @@ import {
 } from "@radix-ui/react-dialog";
 import { FormEvent } from "react";
 import { signIn } from "next-auth/react";
+import Button from "./Button";
 
 const LogInModal = () => {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -38,7 +39,7 @@ const LogInModal = () => {
             <input type="password" name="password" id="password" required />
           </fieldset>
 
-          <button type="submit">Login</button>
+          <Button text="Log in" variant="primary" type="submit" />
         </form>
       </Content>
     </Portal>
