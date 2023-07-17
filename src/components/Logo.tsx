@@ -1,14 +1,13 @@
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
+import { workSans } from "@/fonts";
 
-type Props = {};
-
-const Logo = (props: Props) => {
+const Logo = () => {
   return (
-    <Link href={"/"} className="z-[9999] flex items-center font-work-sans">
+    <Link href={"/"} className="z-[9999] flex items-center">
       <Image src="/logo.svg" width={36} height={32} alt="Veracity" />
-      <span className="font-bold">VerityAI</span>
+      <span className={`${workSans.className}`}>VerityAI</span>
     </Link>
   );
 };
