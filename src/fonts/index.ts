@@ -1,11 +1,7 @@
-import { Inter, Work_Sans } from "next/font/google";
-
-export const inter = Inter({
-  subsets: ["latin"],
-  display: "swap"
-});
+import { Work_Sans } from "next/font/google";
 
 export const workSans = Work_Sans({
   subsets: ["latin"],
-  display: "swap"
+  display: "swap",
+  weight: ["700", "900"]
 });
