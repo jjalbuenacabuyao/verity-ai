@@ -13,7 +13,11 @@ const Button = ({ variant, type, text, onClick, children }: Props) => {
     <button
       type={type}
       onClick={onClick}
-      className={`${variant} rounded-full px-6 py-2 text-sm`}>
+      className={`${variant} ${
+        variant !== "toggler"
+          ? "rounded-full px-6 py-2 text-sm font-semibold"
+          : "z-10"
+      }`}>
       {text}
       {children}
     </button>
