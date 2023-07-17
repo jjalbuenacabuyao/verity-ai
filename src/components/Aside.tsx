@@ -25,7 +25,7 @@ const Aside = ({ setFiles }: Props) => {
         <h1 className="mb-6 mt-4">Upload pdf and docx files</h1>
         <label
           htmlFor="file"
-          className="flex items-center gap-2 rounded-full bg-sky-500 px-6 py-2 text-sm text-white">
+          className="flex items-center gap-2 rounded-full bg-sky-500 px-6 py-2 text-sm text-white font-semibold">
           Browse Files
           <input
             className="hidden"
