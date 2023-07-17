@@ -5,6 +5,7 @@ import Logo from "./Logo";
 import Nav from "./Nav";
 import { FiMenu } from "react-icons/fi";
 import { AiOutlineClose } from "react-icons/ai";
+import Button from "./Button";
 
 const Header = () => {
   const [scrollPosition, setScrollPosition] = useState<number>(0);
@@ -30,15 +31,16 @@ const Header = () => {
           : ""
       }`}>
       <Logo />
+      
       <Nav navOpen={navOpen} />
 
-      <button onClick={() => setNavOpen(!navOpen)} className="z-10">
+      <Button variant="toggler" onClick={() => setNavOpen(!navOpen)}>
         {navOpen ? (
           <AiOutlineClose size={24} fill="#030712" />
         ) : (
           <FiMenu size={24} fill="#030712" />
         )}
-      </button>
+      </Button>
     </header>
   );
 };
