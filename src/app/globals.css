@@ -4,9 +4,30 @@
 
 @layer components {
   .primary {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
     background-image: linear-gradient(to top right, theme(colors.light-violet), theme(colors.light-blue));
     font-weight: theme(fontWeight.bold);
     color: theme(colors.white);
+  }
+
+  .primary::before {
+    position: absolute;
+    content: "";
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: linear-gradient(to top right, theme(colors.light-blue), theme(colors.light-violet));
+    z-index: -1;
+    opacity: 0;
+    -webkit-transition: opacity 0.25s linear;
+    transition: opacity 0.25s linear;
+  }
+
+  .primary:hover::before {
+    opacity: 1;
   }
 
   .secondary {
