@@ -5,7 +5,6 @@ import Loader from "./Loader";
 import { getTextFromFiles } from "@/utils";
 import { DetectionResult } from "@/types";
 import Result from "./Result";
-import { useSession } from "next-auth/react";
 import Button from "./Button";
 
 interface Props {
@@ -71,13 +70,13 @@ const ResultContainer = ({ files }: Props) => {
   }, [files, setIsLoading]);
 
   return (
-    <div className="mb-8 grid gap-6 border-t pt-16">
-      <div className="flex items-center justify-between">
+    <div className="mb-8 border-t pt-16 lg:pt-0 lg:border-t-0 lg:mb-0 lg:mt-24">
+      <div className="flex items-center justify-between mb-6">
         <h2 className="font-bold">Results</h2>
-        <Button text="Download Report" variant="secondary" />
+        <Button text="Download Report" variant="secondary" className="text-sm" />
       </div>
 
-      <div>
+      <div className="h-full">
         {files?.length === 0 && results.length === 0 && isLoading === false && (
           <p className="py-6 text-center text-sm text-slate-400">
             Results will be shown here.
