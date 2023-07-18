@@ -24,7 +24,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${inter.className} text-slate-600`}>
+      <body className={`${inter.className} text-slate-700 antialiased`}>
         <CurrentUserProvider currentUser={currentUser}>
           <Header />
           <main>{children}</main>
