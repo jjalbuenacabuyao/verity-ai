@@ -19,13 +19,13 @@ const Aside = ({ setFiles }: Props) => {
   };
 
   return (
-    <aside className="mb-16 mt-24">
-      <div className="flex flex-col items-center rounded-lg border-2 border-dashed py-6">
+    <aside className="mb-16 mt-24 lg:mb-0">
+      <div className="flex flex-col items-center rounded-lg border-2 border-gray-300 border-dashed py-6">
         <FiUpload size={36} />
         <h1 className="mb-6 mt-4">Upload pdf and docx files</h1>
         <label
           htmlFor="file"
-          className="flex items-center gap-2 rounded-full bg-sky-500 px-6 py-2 text-sm text-white font-semibold">
+          className="flex items-center gap-2 rounded-full bg-sky-500 px-6 py-2 text-sm tracking-wide text-white font-medium">
           Browse Files
           <input
             className="hidden"
