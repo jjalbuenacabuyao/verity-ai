@@ -10,7 +10,7 @@ const Hero = () => {
           className={`${workSans.className} bg-gradient-to-tr from-light-violet to-light-blue bg-clip-text  text-2xl font-black text-transparent`}>
           VerityAI
         </h1>
-        <p>Detect AI-Generated Academic Submissions</p>
+        <p className="text-2xl font-bold">Detect AI-Generated Academic Submissions</p>
       </div>
     </div>
   );
