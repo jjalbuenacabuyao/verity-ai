@@ -18,7 +18,7 @@ const InputField = ({ type, id, name, required, label }: Props) => {
   return (
     <div className="relative mb-6">
       <input
-        className="peer h-12 w-full rounded-md border border-gray-300 pl-3 placeholder-transparent autofill:bg-transparent focus:outline-sky-500"
+        className="peer h-12 w-full rounded-md border border-gray-400 pl-3 placeholder-transparent autofill:bg-transparent focus:outline-sky-500"
         type={type === "password" && showPassword ? "text" : type}
         id={id}
         name={name}
