@@ -9,7 +9,7 @@ const Detector = () => {
   const currentUser = useCurrentUserContext();
 
   return (
-    <div className="mx-6">
+    <div className="mx-6 lg:mx-16 lg:grid lg:grid-cols-[1fr_3fr] lg:gap-10 lg:h-screen lg:max-h-screen lg:overflow-hidden">
       <Aside setFiles={setFiles} />
       <ResultContainer files={files} />
     </div>
