@@ -6,6 +6,7 @@ import { getTextFromFiles } from "@/utils";
 import { DetectionResult } from "@/types";
 import Result from "./Result";
 import Button from "./Button";
+import Toast from "./Toast";
 
 interface Props {
   files: File[];
@@ -13,6 +14,8 @@ interface Props {
 
 const ResultContainer = ({ files }: Props) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isToastOpen, setIsToastOpen] = useState<boolean>(false);
+  const [errorResult, setErrorResult] = useState<string[]>([]);
   const [results, setResults] = useState<
     { filename: string; result: DetectionResult }[]
   >([]);
@@ -39,11 +42,6 @@ const ResultContainer = ({ files }: Props) => {
         };
       });
 
-      // Promise.all(result).then(values => {
-      //   setResults(values);
-      //   setIsLoading(false);
-      // })
-
       Promise.allSettled(result).then((values) => {
         const fulfilledValues = values
           .filter((value) => value.status === "fulfilled")
@@ -59,25 +57,36 @@ const ResultContainer = ({ files }: Props) => {
         const rejectedValues = values.filter(
           (value) => value.status === "rejected"
         );
-        // if (rejectedValues.length > 0) {
-        //   // Handle the errors here
-        //   rejectedValues.forEach(value => {
-        //     console.error(`Error processing file: ${value.reason}`);
-        //   });
-        // }
+
+        if (rejectedValues.length > 0) {
+          const filenames = files.map((file) => file.name);
+          const fulfilledFiles = fulfilledValues.map(
+            (value) => value?.filename
+          );
+          const rejectedFiles = filenames.filter(
+            (filename) => !fulfilledFiles.includes(filename)
+          );
+          setErrorResult(rejectedFiles);
+          setIsToastOpen(true);
+          setIsLoading(false)
+        }
       });
     }
   }, [files, setIsLoading]);
 
   return (
-    <div className="mb-8 border-t pt-16 lg:pt-0 lg:border-t-0 lg:mb-0 lg:mt-24">
-      <div className="flex items-center justify-between mb-6">
+    <div className="mb-8 border-t pt-16 lg:mb-0 lg:mt-24 lg:border-t-0 lg:pt-0">
+      <div className="mb-6 flex items-center justify-between">
         <h2 className="font-bold">Results</h2>
-        <Button text="Download Report" variant="secondary" className="text-sm" />
+        <Button
+          text="Download Report"
+          variant="secondary"
+          className="text-sm"
+        />
       </div>
 
       <div className="h-full">
-        {files?.length === 0 && results.length === 0 && isLoading === false && (
+        {results.length === 0 && isLoading === false && (
           <p className="py-6 text-center text-sm text-slate-400">
             Results will be shown here.
           </p>
@@ -101,6 +110,16 @@ const ResultContainer = ({ files }: Props) => {
           </div>
         )}
       </div>
+
+      {errorResult.length > 0 &&
+        errorResult.map((filename, index) => (
+          <Toast
+            key={index}
+            filename={filename}
+            isOpen={isToastOpen}
+            setIsOpen={setIsToastOpen}
+          />
+        ))}
     </div>
   );
 };
