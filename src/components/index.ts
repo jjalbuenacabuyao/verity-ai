@@ -1,6 +1,5 @@
 import AddUserModal from "./AddUserModal";
 import Aside from "./Aside";
-import CurrentUserProvider from "./CurrentUserProvider";
 import Header from "./Header";
 import Hero from "./Hero";
 import LogInButton from "./LogInButton";
@@ -13,7 +12,6 @@ import ResultContainer from "./ResultContainer";
 export {
   AddUserModal,
   Aside,
-  CurrentUserProvider,
   Header,
   Hero,
   LogInButton,
