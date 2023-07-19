@@ -23,17 +23,17 @@ const Toast: React.FC<Props> = ({ isOpen, setIsOpen, filename }: Props) => {
       <Root
         open={isOpen}
         onOpenChange={setIsOpen}
-        className="grid grid-cols-[max-content_auto_max-content] grid-rows-2 items-center rounded-md bg-red-500 p-4 text-white shadow-md gap-x-6 gap-y-2 data-[state=open]:animate-slideIn data-[state=closed]:animate-hide data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=cancel]:translate-x-0 data-[swipe=cancel]:transition-[transform_200ms_ease-out] data-[swipe=end]:animate-swipeOut">
+        className="grid grid-cols-[max-content_auto_max-content] grid-rows-2 grid-area-toast items-center rounded-md bg-red-500 p-4 text-white shadow-md gap-x-6 gap-y-2 data-[state=open]:animate-slideIn data-[state=closed]:animate-hide data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=cancel]:translate-x-0 data-[swipe=cancel]:transition-[transform_200ms_ease-out] data-[swipe=end]:animate-swipeOut">
         
-        <BiErrorCircle size={32} className="row-span-2" />
+        <BiErrorCircle size={32} className="area-error-icon" />
 
-        <Title className="leading-none text-sm">Error occured while processing:</Title>
+        <Title className="area-title leading-none text-sm">Error occured while processing:</Title>
 
-        <Description className="col-start-2 row-start-2 font-medium leading-none">
+        <Description className="area-description font-medium leading-none">
           {filename}
         </Description>
 
-        <Close className="col-start-3 row-span-2 row-start-1 ml-4">
+        <Close className="area-close-icon ml-4">
           <AiFillCloseCircle size={24} />
         </Close>
       </Root>
