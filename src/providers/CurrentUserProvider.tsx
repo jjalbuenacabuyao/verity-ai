@@ -9,7 +9,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const CurrentUserProvider = ({ currentUser, children }: Props) => {
+const CurrentUserProvider: React.FC<Props> = ({ currentUser, children }: Props) => {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       { children }
