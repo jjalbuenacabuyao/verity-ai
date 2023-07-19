@@ -2,12 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .area-title {
+    grid-area: title;
+  }
+
+  .area-error-icon {
+    grid-area: error-icon;
+  }
+
+  .area-close-icon {
+    grid-area: close-icon;
+  }
+
+  .area-description {
+    grid-area: description;
+  }
+
+  .grid-area-toast {
+    grid-template-areas:
+      "error-icon title close-icon"
+      "error-icon description close-icon";
+  }
+}
+
 @layer components {
   .primary {
     position: relative;
     z-index: 1;
     overflow: hidden;
-    background-image: linear-gradient(to top right, theme(colors.light-violet), theme(colors.light-blue));
+    background-image: linear-gradient(
+      to top right,
+      theme(colors.light-violet),
+      theme(colors.light-blue)
+    );
     font-weight: theme(fontWeight.bold);
     color: theme(colors.white);
   }
@@ -19,7 +47,11 @@
     right: 0;
     bottom: 0;
     left: 0;
-    background-image: linear-gradient(to top right, theme(colors.light-blue), theme(colors.light-violet));
+    background-image: linear-gradient(
+      to top right,
+      theme(colors.light-blue),
+      theme(colors.light-violet)
+    );
     z-index: -1;
     opacity: 0;
     -webkit-transition: opacity 0.25s linear;
