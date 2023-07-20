@@ -24,7 +24,6 @@ const InputField = ({ type, id, name, required, label }: Props) => {
         name={name}
         required={required}
         placeholder={label}
-        autoComplete="off"
       />
       <label
         htmlFor={id}
@@ -34,7 +33,6 @@ const InputField = ({ type, id, name, required, label }: Props) => {
 
       {type === "password" && (
         <Button
-          type="button"
           variant="toggler"
           onClick={() => setShowPassword(!showPassword)}
           className="absolute top-3.5 right-3">

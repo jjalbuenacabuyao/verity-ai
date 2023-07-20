@@ -31,14 +31,17 @@ const Header = () => {
           : ""
       }`}>
       <Logo />
-      
+
       <Nav navOpen={navOpen} />
 
-      <Button variant="toggler" onClick={() => setNavOpen(!navOpen)} className="lg:hidden">
+      <Button
+        variant="toggler"
+        onClick={() => setNavOpen(!navOpen)}
+        className="lg:hidden">
         {navOpen ? (
-          <AiOutlineClose size={24} fill="#030712" />
+          <AiOutlineClose size={24} title="Close Menu" fill="#030712" />
         ) : (
-          <FiMenu size={24} fill="#030712" />
+          <FiMenu size={24} title="Menu" fill="#030712" />
         )}
       </Button>
     </header>

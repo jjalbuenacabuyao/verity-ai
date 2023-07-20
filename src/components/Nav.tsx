@@ -4,9 +4,12 @@ import Link from "next/link";
 import { useEffect } from "react";
 import React from "react";
 import { useCurrentUserContext } from "@/hooks/userContext";
-import { signOut } from "next-auth/react";
+import dynamic from "next/dynamic";
 import LogInButton from "./LogInButton";
-import Button from "./Button";
+
+const DynamicLogOutButton = dynamic(() => import("../components/LogOutButton"));
+const DynamicDashboardLink = dynamic(() => import("../components/DashboardLink"));
+const DynamicDetectorLink = dynamic(() => import("../components/DetectorLink"));
 
 interface Props {
   navOpen: boolean;
@@ -53,21 +56,17 @@ const Nav = ({ navOpen }: Props) => {
 
         {currentUser?.role === "ADMIN" && (
           <li>
-            <Link className="hover:text-sky-500 transition-colors duration-300" href={"/dashboard"}>Dashboard</Link>
+            <DynamicDashboardLink />
           </li>
         )}
 
         {currentUser ? (
           <>
             <li>
-              <Link className="hover:text-sky-500 transition-colors duration-300" href={"/detector"}>Detector</Link>
+              <DynamicDetectorLink />
             </li>
             <li>
-              <Button
-                onClick={() => signOut({ callbackUrl: "/" })}
-                variant={"primary"}
-                text="Log out"
-              />
+              <DynamicLogOutButton />
             </li>
           </>
         ) : (
