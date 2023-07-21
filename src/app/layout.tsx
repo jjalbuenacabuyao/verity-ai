@@ -24,7 +24,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${inter.className} text-slate-700 antialiased`}>
+      <body className={`${inter.className} text-slate-700 bg-white/95 antialiased`}>
         <CurrentUserProvider currentUser={currentUser}>
           <ToastProvider>
             <Header />
