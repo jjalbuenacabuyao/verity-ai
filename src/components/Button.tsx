@@ -2,7 +2,7 @@ import React from "react";
 
 interface Props {
   variant: "primary" | "secondary" | "toggler";
-  type?: "button" | "reset" | "submit";
+  type?: "button" | "submit" | "reset";
   text?: string;
   children?: React.ReactNode;
   onClick?: () => void;
@@ -23,7 +23,7 @@ const Button = ({
       onClick={onClick}
       className={`${variant} ${
         variant !== "toggler"
-          ? "rounded-full px-6 py-2 font-medium tracking-wide transition-shadow hover:shadow-lg hover:shadow-gray-400"
+          ? "rounded-full px-6 py-2 font-medium tracking-wide transition-shadow hover:shadow-md hover:shadow-gray-400"
           : "z-10"
       } ${className}`}>
       {text}
