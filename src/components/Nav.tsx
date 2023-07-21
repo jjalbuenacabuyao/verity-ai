@@ -47,7 +47,7 @@ const Nav = ({ navOpen }: Props) => {
       className={`fixed inset-x-0 top-0 bg-white px-6 py-16 transition-transform duration-300 lg:transform-none lg:bg-transparent lg:p-0 lg:static ${
         navOpen ? "translate-x-0" : "translate-x-full"
       }`}>
-      <ul className="grid gap-4 lg:flex lg:items-center font-medium lg:gap-6">
+      <ul className="grid gap-4 lg:flex lg:items-center text-sm font-semibold lg:gap-6">
         {links.map(({ href, link }) => (
           <li key={link}>
             <Link href={href} className="hover:text-sky-500 transition-colors duration-300">{link}</Link>
