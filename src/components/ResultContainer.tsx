@@ -1,17 +1,18 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Loader from "./Loader";
 import { getTextFromFiles } from "@/utils";
 import { DetectionResult } from "@/types";
 import Result from "./Result";
-import Button from "./Button";
 import Toast from "./Toast";
 import DownloadReportButton from "./DownloadReportButton";
+import dynamic from "next/dynamic";
 
 interface Props {
   files: File[];
 }
+
+const DynamicLoader = dynamic(() => import("./Loader"));
 
 const ResultContainer = ({ files }: Props) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -69,7 +70,7 @@ const ResultContainer = ({ files }: Props) => {
           );
           setErrorResult(rejectedFiles);
           setIsToastOpen(true);
-          setIsLoading(false)
+          setIsLoading(false);
         }
       });
     }
@@ -89,12 +90,12 @@ const ResultContainer = ({ files }: Props) => {
 
       <div className="h-full">
         {results.length === 0 && isLoading === false && (
-          <p className="py-6 text-center text-sm text-slate-400">
+          <p className="py-6 text-center text-sm text-slate-400 lg:pt-10 lg:text-base">
             Results will be shown here.
           </p>
         )}
 
-        {isLoading && <Loader />}
+        {isLoading && <DynamicLoader />}
 
         {results.length !== 0 && isLoading === false && (
           <div className="grid gap-3">
