@@ -5,9 +5,9 @@ import { workSans } from "@/fonts";
 
 const Logo = () => {
   return (
-    <Link href={"/"} className="z-[9999] flex items-center gap-x-1">
-      <Image src="/logo.svg" width={36} height={32} alt="Veracity" />
-      <span className={`${workSans.className} text-lg lg:text-xl`}>VerityAI</span>
+    <Link href={"/"} className="z-[9999] flex items-center">
+      <Image src="/logo.svg" width={40} height={40} alt="VerityAI" />
+      <span className={`${workSans.className} lg:text-lg`}>VerityAI</span>
     </Link>
   );
 };
