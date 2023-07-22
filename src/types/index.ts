@@ -18,3 +18,8 @@ export interface CurrentUser {
   name: string;
   role: string;
 }
+
+export interface ResultWithFilename {
+  filename: string;
+  result: DetectionResult;
+}
