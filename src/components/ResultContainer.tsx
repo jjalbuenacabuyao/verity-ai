@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { getTextFromFiles } from "@/utils";
-import { DetectionResult } from "@/types";
+import { DetectionResult, ResultWithFilename } from "@/types";
 import Result from "./Result";
 import Toast from "./Toast";
 import DownloadReportButton from "./DownloadReportButton";
@@ -18,9 +18,7 @@ const ResultContainer = ({ files }: Props) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isToastOpen, setIsToastOpen] = useState<boolean>(false);
   const [errorResult, setErrorResult] = useState<string[]>([]);
-  const [results, setResults] = useState<
-    { filename: string; result: DetectionResult }[]
-  >([]);
+  const [results, setResults] = useState<ResultWithFilename[]>([]);
 
   useEffect(() => {
     if (files?.length !== 0) {
@@ -85,7 +83,7 @@ const ResultContainer = ({ files }: Props) => {
           variant="secondary"
           className="text-sm"
         /> */}
-        <DownloadReportButton />
+        <DownloadReportButton results={results} />
       </div>
 
       <div className="h-full">
