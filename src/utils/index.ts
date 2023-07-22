@@ -5,6 +5,7 @@ import cleanText from "./cleanText";
 import countWords from "./countWords";
 import getDetectionResult from "./getDetectionResults";
 import getSentencePercentage from "./getSentencePercentage";
+import createDocumentMarkup from "./createDocumentMarkup";
 
 export {
   detectAiGeneratedText,
@@ -14,4 +15,5 @@ export {
   countWords,
   getDetectionResult,
   getSentencePercentage,
+  createDocumentMarkup,
 };
