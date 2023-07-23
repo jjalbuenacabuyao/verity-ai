@@ -75,14 +75,9 @@ const ResultContainer = ({ files }: Props) => {
   }, [files, setIsLoading]);
 
   return (
-    <div className="mb-8 border-t pt-16 lg:mb-0 lg:mt-24 lg:border-t-0 lg:pt-0">
+    <div className="mb-8 border-t pt-16 lg:mb-0 lg:border-t-0 lg:pt-0">
       <div className="mb-6 flex items-center justify-between">
         <h2 className="font-bold">Results</h2>
-        {/* <Button
-          text="Download Report"
-          variant="secondary"
-          className="text-sm"
-        /> */}
         <DownloadReportButton results={results} />
       </div>
 
@@ -96,7 +91,7 @@ const ResultContainer = ({ files }: Props) => {
         {isLoading && <DynamicLoader />}
 
         {results.length !== 0 && isLoading === false && (
-          <div className="grid gap-3">
+          <div className="grid gap-4">
             <div className="flex items-center justify-between text-xs text-slate-400">
               <span>Filename</span>
               <span>% of AI-generated text</span>
