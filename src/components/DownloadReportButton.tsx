@@ -2,6 +2,7 @@ import { ResultWithFilename } from "@/types";
 import { createDocumentMarkup } from "@/utils";
 import { saveAs } from "file-saver";
 import { asBlob } from "html-docx-ts";
+import Button from "./Button";
 
 interface Props {
   results: ResultWithFilename[];
@@ -41,7 +42,14 @@ const DownloadReportButton = ({ results }: Props) => {
       ); // save as docx document
     });
   }
-  return <button onClick={downloadDocx}>Download Report</button>;
+  return (
+    <Button
+      variant="secondary"
+      text="Download Report"
+      onClick={downloadDocx}
+      disabled={results.length === 0 ? true : false}
+    />
+  );
 };
 
 export default DownloadReportButton;
