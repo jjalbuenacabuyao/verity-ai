@@ -26,8 +26,16 @@ const Button = ({
       onClick={onClick}
       className={`${variant} ${
         variant !== "toggler"
-          ? "rounded-full px-6 py-2 font-medium tracking-wide transition-shadow hover:shadow-lg hover:shadow-gray-300 disabled:opacity-50 disabled:pointer-events-none"
+          ? `rounded-full px-6 py-2 font-medium tracking-wide disabled:cursor-not-allowed disabled:opacity-50 ${
+              disabled
+                ? ""
+                : "transition-shadow hover:shadow-lg hover:shadow-gray-300"
+            }`
           : "z-10"
+      } ${
+        variant === "secondary" && disabled === false
+          ? "outline outline-2 outline-offset-[-2px] outline-blue-600"
+          : ""
       } ${className}`}>
       {text}
       {children}
