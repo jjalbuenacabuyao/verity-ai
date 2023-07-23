@@ -1,6 +1,8 @@
 import { ResultWithFilename } from "@/types";
 
-export default function createDocumentMarkup(results: ResultWithFilename[]): string {
+export default function createDocumentMarkup(
+  results: ResultWithFilename[]
+): string {
   const head: string = `
   <head>
     <meta charset="UTF-8">
@@ -9,6 +11,7 @@ export default function createDocumentMarkup(results: ResultWithFilename[]): str
     <meta http-equiv="Expires" content="0" />
     <title>testTitle</title>
     <style>
+
       body {
         font-family: "Segoe UI";
       }
@@ -18,12 +21,19 @@ export default function createDocumentMarkup(results: ResultWithFilename[]): str
         border-collapse: collapse;
       }
 
+      h1 {
+        font-size: 26px;
+        text-align: center;
+        margin: 16px 0 56px;
+      }
+
       .root td,
       .root th {
         border: 1px solid black;
       }
 
-      .root th {
+      .root th,
+      h1 {
         font-family: "Product Sans", "Segoe UI";
       }
 
@@ -45,6 +55,7 @@ export default function createDocumentMarkup(results: ResultWithFilename[]): str
 
   const body: string = `
   <body>
+    <h1>VerityAI Detection Result</h1>
     <table class="root">
       <tr>
         <th>Filename</th>
@@ -52,26 +63,33 @@ export default function createDocumentMarkup(results: ResultWithFilename[]): str
         <th>Detection result Breakdown</th>
       </tr>
       ${results.map(({ filename, result }) => {
-    return `<tr>
+        return `<tr>
           <td style="padding-left: 8px">${filename}</td>
           <td style="padding-left: 8px">${result.aiGeneratedPercentage}%</td>
           <td>
-            ${typeof result.aiGeneratedTexts === "string" ? result.aiGeneratedTexts
-        : result.aiGeneratedTexts.map(({ text, score, label }) => {
-          return `<table class="inner" cellspacing="0" cellpadding="0">
+            ${
+              typeof result.aiGeneratedTexts === "string"
+                ? result.aiGeneratedTexts
+                : `
+            <table class="inner" cellspacing="0" cellpadding="0">
               <tr>
                 <th style="border-right: 1px solid black;">Phrase</th>
                 <th>Detection Result</th>
               </tr>
-              <tr>
-                <td style="border-right: 1px solid black;">${text}</td>
-                <td>${score}% ${label === "LABEL_0" ? "AI-Generated" : "Human Written"}</td>   
-              </tr> 
+                ${result.aiGeneratedTexts.map(({ text, score, label }) => {
+                  return `
+                  <tr>
+                    <td style="border-right: 1px solid black;">${text}</td>
+                    <td>${score}% ${
+                    label === "LABEL_0" ? "AI-Generated" : "Human Written"
+                    }</td>
+                  </tr>`;
+                })}
             </table>`
-        })}
+            }
           </td>
-        </tr>`
-  })}
+        </tr>`;
+      })}
     </table>
   </body >`;
 
@@ -80,5 +98,5 @@ export default function createDocumentMarkup(results: ResultWithFilename[]): str
   <html lang="en">
     ${head}
     ${body}
-  </html>`
+  </html>`;
 }
