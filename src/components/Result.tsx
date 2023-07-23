@@ -20,9 +20,9 @@ const Result = ({ filename, aiGeneratedPercentage }: Props) => {
   const textColor = pathColor;
   
   return (
-    <div className="grid grid-cols-[75%_25%] items-center p-3 border rounded-md shadow-sm">
+    <div className="grid grid-cols-[75%_25%] items-center p-3 border border-slate-300 rounded-md">
       <span className="text-sm">{filename}</span>
-      <div className="h-auto w-12">
+      <div className="w-12">
         <CircularProgressbar
           minValue={0}
           maxValue={100}
