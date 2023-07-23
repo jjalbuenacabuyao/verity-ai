@@ -45,11 +45,6 @@
     background-color: theme(colors.slate.50);
     border: theme(borderWidth.DEFAULT) solid theme(colors.blue.600);
     color: theme(colors.blue.600);
-    font-size: theme(fontSize.sm);
-  }
-
-  .secondary:hover {
-    outline: theme(outlineWidth.2) solid theme(colors.blue.600);
-    outline-offset: -2px;
+    font-size: theme(fontSize.xs);
   }
 }
