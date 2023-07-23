@@ -50,7 +50,7 @@ const Nav = ({ navOpen }: Props) => {
       <ul className="grid gap-4 lg:flex lg:items-center text-sm font-semibold lg:gap-6">
         {links.map(({ href, link }) => (
           <li key={link}>
-            <Link href={href} className="hover:text-sky-500 transition-colors duration-300">{link}</Link>
+            <Link href={href} className="hover:text-blue-500 transition-colors duration-300">{link}</Link>
           </li>
         ))}
 
