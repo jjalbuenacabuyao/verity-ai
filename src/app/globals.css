@@ -31,25 +31,25 @@
     position: relative;
     z-index: 1;
     overflow: hidden;
-    background-color: theme(colors.sky.400);
+    background-color: theme(colors.blue.600);
     font-weight: theme(fontWeight.bold);
     color: theme(colors.white);
     transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .primary:hover {
-    background-color: theme(colors.sky.500);
+    background-color: theme(colors.blue.800);
   }
 
   .secondary {
     background-color: theme(colors.slate.50);
-    border: theme(borderWidth.DEFAULT) solid theme(colors.sky.400);
-    color: theme(colors.sky.500);
+    border: theme(borderWidth.DEFAULT) solid theme(colors.blue.600);
+    color: theme(colors.blue.600);
     font-size: theme(fontSize.sm);
   }
 
   .secondary:hover {
-    outline: theme(outlineWidth.2) solid theme(colors.sky.400);
+    outline: theme(outlineWidth.2) solid theme(colors.blue.600);
     outline-offset: -2px;
   }
 }
