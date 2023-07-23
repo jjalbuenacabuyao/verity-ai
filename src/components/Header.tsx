@@ -6,10 +6,12 @@ import Nav from "./Nav";
 import { FiMenu } from "react-icons/fi";
 import { AiOutlineClose } from "react-icons/ai";
 import Button from "./Button";
+import { usePathname } from "next/navigation";
 
 const Header = () => {
   const [scrollPosition, setScrollPosition] = useState<number>(0);
   const [navOpen, setNavOpen] = useState<boolean>(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,7 +31,7 @@ const Header = () => {
         scrollPosition !== 0
           ? "border-b-off-black bg-header backdrop-blur backdrop-saturate-50"
           : ""
-      }`}>
+      } ${pathname === "/detector" ? "lg:border-b-off-black" : ""}`}>
       <Logo />
 
       <Nav navOpen={navOpen} />
@@ -39,9 +41,9 @@ const Header = () => {
         onClick={() => setNavOpen(!navOpen)}
         className="lg:hidden">
         {navOpen ? (
-          <AiOutlineClose size={24} title="Close Menu" fill="#030712" />
+          <AiOutlineClose size={24} title="Close Menu" fill="#334155" />
         ) : (
-          <FiMenu size={24} title="Menu" fill="#030712" />
+          <FiMenu size={24} title="Menu" fill="#334155" />
         )}
       </Button>
     </header>
