@@ -3,7 +3,7 @@ import { TailSpin } from "react-loader-spinner";
 
 const Loader = () => {
   return (
-    <div className="grid gap-3 text-center">
+    <div className="grid gap-3 text-center lg:pt-10">
       <TailSpin
         height="40"
         width="40"
