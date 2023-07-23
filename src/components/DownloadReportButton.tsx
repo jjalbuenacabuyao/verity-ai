@@ -24,7 +24,7 @@ const DownloadReportButton = ({ results }: Props) => {
   const option = { orientation: "landscape", margins: {} };
 
   const headerConfig = {
-    leftStr: "VerityAI Detection Report",
+    leftStr: "VerityAI",
     rightStr: dateString,
   };
 
