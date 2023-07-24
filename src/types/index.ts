@@ -23,3 +23,8 @@ export interface ResultWithFilename {
   filename: string;
   result: DetectionResult;
 }
+
+export interface SliceSentenceResult {
+  text: string;
+  result: InferenceApiResult;
+}

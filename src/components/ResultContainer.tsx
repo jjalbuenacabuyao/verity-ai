@@ -91,19 +91,21 @@ const ResultContainer = ({ files }: Props) => {
         {isLoading && <DynamicLoader />}
 
         {results.length !== 0 && isLoading === false && (
-          <div className="grid gap-4">
-            <div className="flex items-center justify-between text-xs text-slate-400">
+          <>
+            <div className="mb-4 flex items-center justify-between text-xs text-slate-400">
               <span>Filename</span>
               <span>% of AI-generated text</span>
             </div>
-            {results.map(({ filename, result }) => (
-              <Result
-                key={filename}
-                filename={filename}
-                aiGeneratedPercentage={result.aiGeneratedPercentage}
-              />
-            ))}
-          </div>
+            <div className="scrollbar grid gap-y-4 overflow-y-scroll lg:max-h-[68%] lg:pr-2">
+              {results.map(({ filename, result }) => (
+                <Result
+                  key={filename}
+                  filename={filename}
+                  aiGeneratedPercentage={result.aiGeneratedPercentage}
+                />
+              ))}
+            </div>
+          </>
         )}
       </div>
 
