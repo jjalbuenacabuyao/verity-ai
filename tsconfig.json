@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ESNext",
     "downlevelIteration": true,
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -11,6 +11,7 @@
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "node",
+    "removeComments": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
@@ -25,7 +26,7 @@
       "@components/*": ["./src/components/*"],
       "@types/*": ["./src/types/*"],
       "@fonts/*": ["./src/fonts/*"],
-      "@providers/*": ["./src/providers/*"],
+      "@providers/*": ["./src/providers/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
