@@ -34,7 +34,7 @@ const Button = ({
           : "z-10"
       } ${
         variant === "secondary" && disabled === false
-          ? "outline outline-2 outline-offset-[-2px] outline-blue-600"
+          ? "hover:outline hover:outline-2 hover:outline-offset-[-2px] hover:outline-blue-600"
           : ""
       } ${className}`}>
       {text}
