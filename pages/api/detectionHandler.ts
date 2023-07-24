@@ -1,13 +1,13 @@
 import { countWords, detectAiGeneratedText } from "@/utils";
 import { NextApiRequest, NextApiResponse } from "next";
-import { DetectionResult } from "@/types";
+import { DetectionResult, SliceSentenceResult } from "@/types";
 
 export default async function detectionHandler(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
   const { extractedText } = request.body;
-  const formatedText = extractedText
+  const formatedText: string[] = extractedText
     .trim()
     .split(/[.?!]/g)
     .filter((item: string) => item !== " ");
@@ -50,7 +50,7 @@ export default async function detectionHandler(
     }
   }
 
-  const results = [];
+  const results: SliceSentenceResult[] = [];
 
   for (let i = 0; i < sentences.length; i += 10) {
     const slicedSentence = sentences.slice(i, i + 10).join(" ");
