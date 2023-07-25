@@ -3,17 +3,16 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    supports: {
+      clamp: "font-size: clamp(1rem, 0.94rem + 0.33vw, 1.25rem)",
+    },
+
     extend: {
       colors: {
         "header": "hsla(210, 20%, 98%, .8)",
         "off-black": "hsla(240, 6%, 25%, 0.122)",
         "light-blue": "#47caff",
         "light-violet": "#bd34fe",
-      },
-
-      fontFamily: {
-        "inter": ["Inter", "ui-sans-serif", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"],
-        "work-sans": ["Work Sans", "ui-sans-serif", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"]
       },
 
       boxShadow: {
