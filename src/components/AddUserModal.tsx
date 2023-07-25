@@ -41,7 +41,6 @@ const AddUserModal = () => {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    console.log(user);
     await axios.post("/api/register", user);
     console.log("User created");
   };
