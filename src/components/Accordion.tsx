@@ -33,7 +33,7 @@ const Accordion = ({ data }: Props) => {
         const textColor = pathColor;
         return (
           <Item asChild value={`item-${index}`} key={index}>
-            <Header className="rounded-md border">
+            <Header className="rounded-md border border-slate-300/80">
               <Trigger className="grid w-full grid-cols-[1fr_auto_auto] gap-x-4 p-4 text-left items-center">
                 <span>{item.filename}</span>
                 <div className="w-12">
