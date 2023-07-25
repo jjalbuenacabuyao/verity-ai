@@ -6,13 +6,12 @@ import { DetectionResult, ResultWithFilename } from "@/types";
 import Result from "./Result";
 import Toast from "./Toast";
 import DownloadReportButton from "./DownloadReportButton";
-import dynamic from "next/dynamic";
+import Loader from "./Loader";
+import Accordion from "./Accordion";
 
 interface Props {
   files: File[];
 }
-
-const DynamicLoader = dynamic(() => import("./Loader"));
 
 const ResultContainer = ({ files }: Props) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -88,7 +87,7 @@ const ResultContainer = ({ files }: Props) => {
           </p>
         )}
 
-        {isLoading && <DynamicLoader />}
+        {isLoading && <Loader />}
 
         {results.length !== 0 && isLoading === false && (
           <>
@@ -96,15 +95,7 @@ const ResultContainer = ({ files }: Props) => {
               <span>Filename</span>
               <span>% of AI-generated text</span>
             </div>
-            <div className="grid gap-y-4 overflow-y-scroll lg:max-h-[68%] lg:pr-2 scrollbar">
-              {results.map(({ filename, result }) => (
-                <Result
-                  key={filename}
-                  filename={filename}
-                  aiGeneratedPercentage={result.aiGeneratedPercentage}
-                />
-              ))}
-            </div>
+            <Accordion data={results} />
           </>
         )}
       </div>
