@@ -96,7 +96,7 @@ const ResultContainer = ({ files }: Props) => {
               <span>Filename</span>
               <span>% of AI-generated text</span>
             </div>
-            <div className="scrollbar grid gap-y-4 overflow-y-scroll lg:max-h-[68%] lg:pr-2">
+            <div className="grid gap-y-4 overflow-y-scroll lg:max-h-[68%] lg:pr-2 scrollbar">
               {results.map(({ filename, result }) => (
                 <Result
                   key={filename}
