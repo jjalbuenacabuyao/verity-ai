@@ -21,7 +21,7 @@ const DownloadReportButton = ({ results }: Props) => {
   const second = date.getSeconds();
 
   const dateString = `${year}-${month}-${dateToday}`;
-  const filename = `Detection Report - ${dateString}/${hour}${minute}${second}.docx`
+  const filename = `Detection Report - (${dateString})_${hour}${minute}${second}.docx`
 
   async function downloadDocx() {
     const buffer = await Packer.toBlob(generatedDocx);
