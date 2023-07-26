@@ -6,7 +6,6 @@ import LogInButton from "./LogInButton";
 import LogInModal from "./LogInModal";
 import Logo from "./Logo";
 import Nav from "./Nav";
-import Result from "./Result";
 import ResultContainer from "./ResultContainer";
 
 export {
@@ -18,6 +17,5 @@ export {
   LogInModal,
   Logo,
   Nav,
-  Result,
   ResultContainer,
 };
