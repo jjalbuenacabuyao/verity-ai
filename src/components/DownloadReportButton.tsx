@@ -1,16 +1,15 @@
 import { ResultWithFilename } from "@/types";
-import { createDocumentMarkup } from "@/utils";
+import { createDetectionReportDocx } from "@/utils";
 import { saveAs } from "file-saver";
-import { asBlob } from "html-docx-ts";
 import Button from "./Button";
-import createDocxUsingDocxJs from "@/utils/createDocxUsingDocxJS";
+import { Packer } from "docx";
 
 interface Props {
   results: ResultWithFilename[];
 }
 
 const DownloadReportButton = ({ results }: Props) => {
-  const html = createDocumentMarkup(results);
+  const generatedDocx = createDetectionReportDocx(results);
 
   const date = new Date();
 
@@ -22,32 +21,17 @@ const DownloadReportButton = ({ results }: Props) => {
   const second = date.getSeconds();
 
   const dateString = `${year}-${month}-${dateToday}`;
-
-  const option = { orientation: "landscape", margins: {} };
-
-  const headerConfig = {
-    leftStr: "VerityAI",
-    rightStr: dateString,
-  };
-
-  const footerConfig = {
-    rightStr: "VerityAI",
-  };
+  const filename = `Detection Report - ${dateString}/${hour}${minute}${second}.docx`
 
   async function downloadDocx() {
-    //@ts-ignore
-    asBlob(html, option, headerConfig, footerConfig).then((blobData) => {
-      saveAs(
-        blobData as Blob,
-        `Detection Result (${dateString}) ${hour}${minute}${second}.docx`
-      ); // save as docx document
-    });
+    const buffer = await Packer.toBlob(generatedDocx);
+    saveAs(buffer, filename);
   }
   return (
     <Button
       variant="secondary"
       text="Download Report"
-      onClick={createDocxUsingDocxJs}
+      onClick={downloadDocx}
       disabled={results.length === 0 ? true : false}
     />
   );
