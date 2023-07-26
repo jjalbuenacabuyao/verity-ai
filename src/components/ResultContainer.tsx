@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import { getTextFromFiles } from "@/utils";
 import { DetectionResult, ResultWithFilename } from "@/types";
-import Result from "./Result";
 import Toast from "./Toast";
 import DownloadReportButton from "./DownloadReportButton";
 import Loader from "./Loader";
@@ -43,15 +42,18 @@ const ResultContainer = ({ files }: Props) => {
 
       Promise.allSettled(result).then((values) => {
         const fulfilledValues = values
-          .filter((value) => value.status === "fulfilled")
-          .map((value) => {
-            if (value.status === "fulfilled") {
-              return value.value;
-            }
-          });
-        //@ts-ignore
-        setResults(fulfilledValues);
-        setIsLoading(false);
+          .filter(
+            (
+              value
+            ): value is PromiseFulfilledResult<{
+              filename: string;
+              result: DetectionResult;
+            }> => value.status === "fulfilled"
+          )
+          .map((value) => value.value);
+        
+          setResults(fulfilledValues);
+          setIsLoading(false);
 
         const rejectedValues = values.filter(
           (value) => value.status === "rejected"
