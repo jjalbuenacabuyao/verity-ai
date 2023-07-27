@@ -7,6 +7,7 @@ import LogInModal from "./LogInModal";
 import Logo from "./Logo";
 import Nav from "./Nav";
 import ResultContainer from "./ResultContainer";
+import Searchbar from "./Searchbar";
 
 export {
   AddUserModal,
@@ -18,4 +19,5 @@ export {
   Logo,
   Nav,
   ResultContainer,
+  Searchbar,
 };
