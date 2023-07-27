@@ -13,10 +13,26 @@ import {
   VerticalAlign,
   BorderStyle,
   AlignmentType,
+  Footer,
+  PageNumber,
 } from "docx";
 
 const TableCellMargin = 100;
 const TableSize = 100;
+const DefaultFont = "Segoe UI";
+const TableHeadingFont = "Product Sans";
+
+const Margin100 = {
+  top: TableCellMargin,
+  bottom: TableCellMargin,
+  left: TableCellMargin,
+  right: TableCellMargin,
+}
+
+const TableWidth = {
+  size: TableSize,
+  type: WidthType.PERCENTAGE,
+}
 
 const documentStyles = {
   paragraphStyles: [
@@ -27,7 +43,7 @@ const documentStyles = {
       next: "Normal",
       quickFormat: true,
       run: {
-        font: "Segoe UI",
+        font: DefaultFont,
       },
     },
   ],
@@ -37,12 +53,12 @@ const headerChildren = new Paragraph({
   children: [
     new TextRun({
       text: "VerityAI | Detection Report",
-      font: "Product Sans",
+      font: TableHeadingFont,
       bold: true,
     }),
     new TextRun({
       text: "\t" + new Date().toLocaleDateString(),
-      font: "Product Sans",      
+      font: TableHeadingFont,
     }),
   ],
   tabStops: [
@@ -73,7 +89,7 @@ const tableHeading = tableHeadingTitles.map(
           children: [
             new TextRun({
               text: title,
-              font: "Product Sans",
+              font: TableHeadingFont,
               bold: true,
             }),
           ],
@@ -93,7 +109,7 @@ const innerTableHeading = innerTableHeadingTitles.map(
           children: [
             new TextRun({
               text: title,
-              font: "Product Sans",
+              font: TableHeadingFont,
               bold: true,
             }),
           ],
@@ -117,12 +133,7 @@ const createDetectionReportDocx = (data: ResultWithFilename[]) => {
               alignment: AlignmentType.CENTER,
             })
           ],
-          margins: {
-            top: TableCellMargin,
-            bottom: TableCellMargin,
-            left: TableCellMargin,
-            right: TableCellMargin,
-          },
+          margins: Margin100,
         }),
 
         new TableCell({
@@ -172,12 +183,7 @@ const createDetectionReportDocx = (data: ResultWithFilename[]) => {
                 text: text,
                 alignment: AlignmentType.JUSTIFIED,
               })],
-              margins: {
-                top: TableCellMargin,
-                bottom: TableCellMargin,
-                left: TableCellMargin,
-                right: TableCellMargin,
-              },
+              margins: Margin100,
             }),
             new TableCell({
               children: [new Paragraph({
@@ -196,10 +202,7 @@ const createDetectionReportDocx = (data: ResultWithFilename[]) => {
       });
   
       const innerTable = new Table({
-        width: {
-          size: TableSize,
-          type: WidthType.PERCENTAGE,
-        },
+        width: TableWidth,
         rows: [
           new TableRow({
             children: innerTableHeading
@@ -242,10 +245,7 @@ const createDetectionReportDocx = (data: ResultWithFilename[]) => {
         headers: header,
         children: [
           new Table({
-            width: {
-              size: TableSize,
-              type: WidthType.PERCENTAGE,
-            },
+            width: TableWidth,
             rows: [
               new TableRow({
                 children: tableHeading,
@@ -254,6 +254,21 @@ const createDetectionReportDocx = (data: ResultWithFilename[]) => {
             ],
           }),
         ],
+        footers: {
+          default: new Footer({
+            children: [
+              new Paragraph({
+                alignment: AlignmentType.RIGHT,
+                children: [
+                  new TextRun({
+                    children: [PageNumber.CURRENT],
+                    font: TableHeadingFont,
+                  })
+                ],
+              }),
+            ],
+          }),
+        }
       },
     ],
   });
