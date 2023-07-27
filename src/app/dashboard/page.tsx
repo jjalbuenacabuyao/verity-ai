@@ -21,12 +21,6 @@ const Dashboard = () => {
     <div>
       <div>
         <h1>Dashboard</h1>
-        {users.map(user => (
-          <div key={user.id}>
-            <p>{user.name.firstName} {user.name.middleName} {user.name.lastName}</p>
-            <p>{user.email} {user.role}</p>
-          </div>
-        ))}
       </div>
       <AddUserModal />
     </div>
