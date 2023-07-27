@@ -1,3 +1,5 @@
+import { User, Name } from "@prisma/client";
+
 export interface DetectionResult {
   aiGeneratedPercentage: string;
   aiGeneratedTexts:
@@ -28,3 +30,9 @@ export interface SliceSentenceResult {
   text: string;
   result: InferenceApiResult;
 }
+
+export type UserType = (
+  User & {
+    name: Name,
+  }
+)
