@@ -1,6 +1,6 @@
 "use client"
 
-import { AddUserModal } from "@/components";
+import { AddUserModal, Searchbar } from "@/components";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { UserType } from "@/types";
@@ -19,8 +19,9 @@ const Dashboard = () => {
 
   return (
     <div>
-      <div>
+      <div className="pt-24 mx-6 lg:pt-28 lg:mx-16">
         <h1>Dashboard</h1>
+        <Searchbar />
       </div>
       <AddUserModal />
     </div>
