@@ -19,6 +19,12 @@ const ResultContainer = ({ files }: Props) => {
   const [results, setResults] = useState<ResultWithFilename[]>([]);
 
   useEffect(() => {
+    const storedState = localStorage.getItem("detectionResult")
+    if (storedState !== null) {
+      setResults(JSON.parse(storedState));
+      setIsLoading(false);
+    }
+
     if (files?.length !== 0) {
       setIsLoading(true);
       const result = files!.map(async (file) => {
@@ -52,8 +58,9 @@ const ResultContainer = ({ files }: Props) => {
           )
           .map((value) => value.value);
         
-          setResults(fulfilledValues);
-          setIsLoading(false);
+        setResults(fulfilledValues);
+        localStorage.setItem("detectionResult", JSON.stringify(fulfilledValues))
+        setIsLoading(false);
 
         const rejectedValues = values.filter(
           (value) => value.status === "rejected"
