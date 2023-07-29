@@ -1,7 +1,7 @@
 "use client";
 
 import { Portal, Overlay, Content, Title } from "@radix-ui/react-dialog";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useState } from "react";
 import { signIn, getSession } from "next-auth/react";
 import Button from "./Button";
 import InputField from "./InputField";
@@ -39,10 +39,6 @@ const LogInModal = () => {
       }
     }
   };
-
-  useEffect(() => {
-    console.log(error);
-  }, [error]);
 
   return (
     <Portal>
