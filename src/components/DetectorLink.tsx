@@ -4,7 +4,7 @@ const DetectorLink = () => {
   return (
     <Link
       className="transition-colors duration-300 hover:text-sky-500"
-      href={"/dashboard"}>
+      href={"/detector"}>
       Detector
     </Link>
   );
