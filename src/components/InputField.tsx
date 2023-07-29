@@ -10,9 +10,10 @@ interface Props {
   name: string;
   required: boolean;
   label: string;
+  error?: string;
 }
 
-const InputField = ({ type, id, name, required, label }: Props) => {
+const InputField = ({ type, id, name, required, label, error }: Props) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   return (
@@ -20,6 +21,10 @@ const InputField = ({ type, id, name, required, label }: Props) => {
       <input
         className={`peer h-12 w-full rounded-md border border-gray-400 px-3 placeholder-transparent autofill:bg-transparent focus:outline-sky-500 ${
           type === "password" ? "pr-9" : ""
+        } ${
+          error === "User does not exist" || error === "Incorrect password"
+            ? "border-red-600 focus:outline-red-600"
+            : ""
         }`}
         type={type === "password" && showPassword ? "text" : type}
         id={id}
@@ -40,6 +45,14 @@ const InputField = ({ type, id, name, required, label }: Props) => {
           className="absolute right-3 top-3.5">
           {showPassword ? <BiShowAlt size={20} /> : <BiHide size={20} />}
         </Button>
+      )}
+
+      {error === "User does not exist" && (
+        <p className="text-red-600 text-sm">User does not exist.</p>
+      )}
+
+      {error === "Incorrect password" && (
+        <p className="text-red-600 text-sm">Incorrect password</p>
       )}
     </div>
   );
