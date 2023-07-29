@@ -29,15 +29,15 @@ const Nav = ({ navOpen }: Props) => {
       link: "Home",
     },
     {
-      href: "#features",
+      href: "/#features",
       link: "Features",
     },
     {
-      href: "#tutorial",
+      href: "/#tutorial",
       link: "Tutorial",
     },
     {
-      href: "#faq",
+      href: "/#faq",
       link: "FAQs",
     },
   ];
