@@ -18,7 +18,9 @@ const InputField = ({ type, id, name, required, label }: Props) => {
   return (
     <div className="relative mb-6">
       <input
-        className="peer h-12 w-full rounded-md border border-gray-400 pl-3 placeholder-transparent autofill:bg-transparent focus:outline-sky-500"
+        className={`peer h-12 w-full rounded-md border border-gray-400 px-3 placeholder-transparent autofill:bg-transparent focus:outline-sky-500 ${
+          type === "password" ? "pr-9" : ""
+        }`}
         type={type === "password" && showPassword ? "text" : type}
         id={id}
         name={name}
@@ -35,7 +37,7 @@ const InputField = ({ type, id, name, required, label }: Props) => {
         <Button
           variant="toggler"
           onClick={() => setShowPassword(!showPassword)}
-          className="absolute top-3.5 right-3">
+          className="absolute right-3 top-3.5">
           {showPassword ? <BiShowAlt size={20} /> : <BiHide size={20} />}
         </Button>
       )}
