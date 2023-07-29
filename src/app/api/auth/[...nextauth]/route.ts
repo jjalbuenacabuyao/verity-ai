@@ -23,19 +23,6 @@ export const authOptions: AuthOptions = {
           where: {
             email: credentials.email,
           },
-          // select: {
-          //   id: true,
-          //   email: true,
-          //   name: {
-          //     select: {
-          //       firstName: true,
-          //       middleName: true,
-          //       lastName: true,
-          //     },
-          //   },
-          //   hashedPassword: true,
-          //   role: true,
-          // },
         });
 
         if (!user || !user?.hashedPassword) {
@@ -51,16 +38,7 @@ export const authOptions: AuthOptions = {
           throw new Error("Incorrect password");
         }
 
-        console.log(user)
-
         return user as User;
-
-        // const name = `${user.name?.firstName} ${user.name?.lastName}`;
-
-        // return {
-        //   email: user.email,
-        //   name: name
-        // };
       },
     }),
   ],
