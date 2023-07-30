@@ -31,7 +31,11 @@ const Header = () => {
         scrollPosition !== 0
           ? "border-b-off-black bg-header backdrop-blur backdrop-saturate-50"
           : ""
-      } ${pathname === "/detector" ? "lg:border-b-off-black" : ""}`}>
+      } ${
+        pathname === "/detector" || pathname === "/dashboard"
+          ? "lg:border-b-off-black"
+          : ""
+      }`}>
       <Logo />
 
       <Nav navOpen={navOpen} />
