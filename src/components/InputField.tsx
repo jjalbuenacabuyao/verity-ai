@@ -17,7 +17,7 @@ const InputField = ({ type, id, name, required, label, error }: Props) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const userNotExist = error === "User does not exist";
-  const incorrectPassword = error === "Incorrect password"
+  const incorrectPassword = error === "Incorrect password";
 
   return (
     <div className="relative mb-6">
@@ -51,11 +51,11 @@ const InputField = ({ type, id, name, required, label, error }: Props) => {
       )}
 
       {userNotExist && (
-        <p className="text-red-600 text-sm">User does not exist</p>
+        <p className="text-sm text-red-600">User does not exist</p>
       )}
 
       {incorrectPassword && (
-        <p className="text-red-600 text-sm">Incorrect password</p>
+        <p className="text-sm text-red-600">Incorrect password</p>
       )}
     </div>
   );
