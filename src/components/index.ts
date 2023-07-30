@@ -8,6 +8,7 @@ import Logo from "./Logo";
 import Nav from "./Nav";
 import ResultContainer from "./ResultContainer";
 import Searchbar from "./Searchbar";
+import UserTable from "./UserTable";
 
 export {
   AddUserModal,
@@ -20,4 +21,5 @@ export {
   Nav,
   ResultContainer,
   Searchbar,
+  UserTable,
 };
