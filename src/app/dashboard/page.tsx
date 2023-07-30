@@ -1,29 +1,52 @@
-"use client"
+"use client";
 
-import { AddUserModal, Searchbar } from "@/components";
+import { AddUserModal, Searchbar, UserTable } from "@/components";
+import { workSans } from "@/fonts";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { UserType } from "@/types";
 
 const Dashboard = () => {
-  const [users, setUsers] = useState<UserType[]>([]);
+  const [users, setUsers] = useState<UserType[] | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   async function getAllUsers() {
-    const fetchedUsers: UserType[] = await axios("/api/users").then(res => res.data);
+    const fetchedUsers: UserType[] | null = await axios("/api/users").then(
+      (res) => res.data
+    );
     setUsers(fetchedUsers);
+    setIsLoading(false)
   }
 
   useEffect(() => {
     getAllUsers();
-  }, [])
+  }, []);
 
   return (
-    <div>
-      <div className="pt-24 mx-6 lg:pt-28 lg:mx-16">
-        <h1>Dashboard</h1>
+    <div className="mx-6 pt-24 lg:mx-16 lg:pt-28">
+      <div className="flex items-center justify-between">
+        <h1
+          className={`${workSans.className} text-2xl font-bold tracking-wide`}>
+          Dashboard
+        </h1>
         <Searchbar />
       </div>
-      <AddUserModal />
+
+      <div className="mt-5 lg:grid lg:grid-cols-[1fr_2.5fr] lg:gap-10">
+        <aside>
+          <div className="rounded-xl bg-blue-500 text-center text-white">
+            <p
+              aria-describedby="title"
+              className={`${workSans.className} text-2xl font-bold`}>
+              {users ? users.length : 0}
+            </p>
+            <p id="title" className="font-bold">
+              Users
+            </p>
+          </div>
+        </aside>
+        {!isLoading && users && <UserTable users={users} />}
+      </div>
     </div>
   );
 };
