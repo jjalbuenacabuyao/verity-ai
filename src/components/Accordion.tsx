@@ -25,7 +25,7 @@ const Accordion = ({ data }: Props) => {
           <Item asChild value={`item-${index}`} key={index}>
             <Header className="rounded-md border border-slate-300/80">
               <Trigger className="grid w-full grid-cols-[1fr_auto_auto] gap-x-4 p-4 text-left items-center">
-                <span>{item.filename}</span>
+                <span className="text-sm font-medium">{item.filename}</span>
                 <CircularProgress value={item.result.aiGeneratedPercentage} />
                 <FaChevronDown size={16} />
               </Trigger>
