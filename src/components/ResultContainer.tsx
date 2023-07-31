@@ -86,7 +86,7 @@ const ResultContainer = ({ files }: Props) => {
     <div className="mb-8 border-t pt-16 lg:mb-0 lg:border-t-0 lg:pt-0">
       <div className="mb-6 flex items-center justify-between">
         <h2 className="font-bold">Results</h2>
-        <DownloadReportButton results={results} />
+        <DownloadReportButton results={results} isLoading={isLoading} />
       </div>
 
       <div className="h-full">
