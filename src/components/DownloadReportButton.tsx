@@ -6,9 +6,10 @@ import { Packer } from "docx";
 
 interface Props {
   results: ResultWithFilename[];
+  isLoading: boolean;
 }
 
-const DownloadReportButton = ({ results }: Props) => {
+const DownloadReportButton = ({ results, isLoading }: Props) => {
   const generatedDocx = createDetectionReportDocx(results);
 
   const date = new Date();
@@ -32,7 +33,7 @@ const DownloadReportButton = ({ results }: Props) => {
       variant="secondary"
       text="Download Report"
       onClick={downloadDocx}
-      disabled={results.length === 0 ? true : false}
+      disabled={results.length === 0 && isLoading ? true : false}
     />
   );
 };
