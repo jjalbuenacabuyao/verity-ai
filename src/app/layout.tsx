@@ -1,19 +1,13 @@
 import { Header } from "@/components";
 import { CurrentUserProvider, ToastProvider } from "@/providers";
 import getCurrentUser from "./actions/getCurrentUser";
-import { Inter } from "next/font/google";
+import { inter } from "@/fonts";
 import "./globals.css";
 
 export const metadata = {
   title: "VerityAI",
   description: "Detect AI-Generated Academic Submissions",
 };
-
-const inter = Inter({
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["400", "500", "600", "700"],
-});
 
 export default async function RootLayout({
   children,
