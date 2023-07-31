@@ -31,7 +31,7 @@ const Searchbar = (props: Props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} role="search" className="relative">
+    <form onSubmit={handleSubmit} role="search" className="relative text-sm">
       <label htmlFor="search" className="hidden">
         Search user
       </label>
