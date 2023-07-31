@@ -34,10 +34,10 @@ const Dashboard = () => {
 
       <div className="mt-5 lg:grid lg:grid-cols-[1fr_2.5fr] lg:gap-10">
         <aside>
-          <div className="rounded-xl bg-blue-500 text-center text-white">
+          <div className="rounded-xl bg-blue-500 text-center text-white py-14">
             <p
               aria-describedby="title"
-              className={`${workSans.className} text-2xl font-bold`}>
+              className={`${workSans.className} text-3xl font-bold`}>
               {users ? users.length : 0}
             </p>
             <p id="title" className="font-bold">
