@@ -33,7 +33,7 @@ const DownloadReportButton = ({ results, isLoading }: Props) => {
       variant="secondary"
       text="Download Report"
       onClick={downloadDocx}
-      disabled={results.length === 0 && isLoading ? true : false}
+      disabled={results.length === 0 || isLoading ? true : false}
     />
   );
 };
