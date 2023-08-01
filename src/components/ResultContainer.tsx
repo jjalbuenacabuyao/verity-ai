@@ -20,7 +20,7 @@ const ResultContainer = ({ files }: Props) => {
 
   useEffect(() => {
     const storedState = localStorage.getItem("detectionResult")
-    if (storedState !== null) {
+    if (storedState) {
       setResults(JSON.parse(storedState));
       setIsLoading(false);
     }
