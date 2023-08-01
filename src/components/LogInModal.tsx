@@ -2,7 +2,7 @@
 
 import { Portal, Overlay, Content, Title } from "@radix-ui/react-dialog";
 import { FormEvent, useState } from "react";
-import { signIn, getSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import Button from "./Button";
 import InputField from "./InputField";
 import { workSans } from "@/fonts";
@@ -29,14 +29,7 @@ const LogInModal = () => {
     if (response?.error) {
       setError(response.error);
     } else {
-      const session = await getSession();
-      if (session?.user.role === "ADMIN") {
-        router.push("/dashboard");
-        router.refresh();
-      } else {
-        router.push("/detector");
-        router.refresh();
-      }
+      router.push("/detector")
     }
   };
 
