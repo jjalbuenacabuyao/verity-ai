@@ -9,7 +9,11 @@ import { workSans } from "@/fonts";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-const LogInModal = () => {
+interface Props {
+  setNavOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const LogInModal = ({ setNavOpen }: Props) => {
   const router = useRouter();
   const [error, setError] = useState<string>("");
 
@@ -29,7 +33,9 @@ const LogInModal = () => {
     if (response?.error) {
       setError(response.error);
     } else {
-      router.push("/detector")
+      setNavOpen(false);
+      router.push("/detector");
+      router.refresh();
     }
   };
 

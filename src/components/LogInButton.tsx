@@ -5,13 +5,17 @@ import { Root, Trigger } from "@radix-ui/react-dialog";
 import LogInModal from "./LogInModal";
 import Button from "./Button";
 
-const LogInButton = () => {
+interface Props {
+  setNavOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const LogInButton = ({ setNavOpen }: Props) => {
   return (
     <Root>
       <Trigger asChild>
         <Button variant="primary" text="Log in" />
       </Trigger>
-      <LogInModal />
+      <LogInModal setNavOpen={setNavOpen} />
     </Root>
   )
 };

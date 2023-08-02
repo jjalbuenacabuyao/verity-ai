@@ -13,9 +13,10 @@ const DynamicDetectorLink = dynamic(() => import("../components/DetectorLink"));
 
 interface Props {
   navOpen: boolean;
+  setNavOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Nav = ({ navOpen }: Props) => {
+const Nav = ({ navOpen, setNavOpen }: Props) => {
   const currentUser = useCurrentUserContext();
 
   useEffect(() => {
@@ -71,7 +72,7 @@ const Nav = ({ navOpen }: Props) => {
           </>
         ) : (
           <li>
-            <LogInButton />
+            <LogInButton setNavOpen={setNavOpen} />
           </li>
         )}
       </ul>

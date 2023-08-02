@@ -14,6 +14,7 @@ const Header = () => {
   const pathname = usePathname();
 
   useEffect(() => {
+    setNavOpen(false);
     const handleScroll = () => {
       setScrollPosition(window.scrollY);
     };
@@ -38,7 +39,7 @@ const Header = () => {
       }`}>
       <Logo />
 
-      <Nav navOpen={navOpen} />
+      <Nav navOpen={navOpen} setNavOpen={setNavOpen} />
 
       <Button
         variant="toggler"
