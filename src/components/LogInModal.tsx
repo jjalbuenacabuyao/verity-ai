@@ -10,10 +10,11 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 interface Props {
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setNavOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const LogInModal = ({ setNavOpen }: Props) => {
+const LogInModal = ({ setIsOpen, setNavOpen }: Props) => {
   const router = useRouter();
   const [error, setError] = useState<string>("");
 
@@ -33,6 +34,7 @@ const LogInModal = ({ setNavOpen }: Props) => {
     if (response?.error) {
       setError(response.error);
     } else {
+      setIsOpen(false);
       setNavOpen(false);
       router.push("/detector");
       router.refresh();
