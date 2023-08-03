@@ -1,10 +1,15 @@
 import Link from "next/link";
 
-const DashboardLink = () => {
+interface Props {
+  setNavOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const DashboardLink = ({ setNavOpen }: Props) => {
   return (
     <Link
       className="transition-colors duration-300 hover:text-sky-500"
-      href={"/dashboard"}>
+      href={"/dashboard"}
+      onClick={() => setNavOpen(false)}>
       Dashboard
     </Link>
   );
