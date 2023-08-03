@@ -33,7 +33,7 @@ const Dashboard = () => {
       </div>
 
       <div className="mt-5 lg:grid lg:grid-cols-[1fr_2.5fr] lg:gap-10">
-        <aside>
+        <aside className="mb-6 lg:mb-0">
           <div className="rounded-xl bg-blue-500 text-center text-white py-14">
             <p
               aria-describedby="title"
