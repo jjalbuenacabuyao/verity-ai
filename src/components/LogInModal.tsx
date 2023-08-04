@@ -8,15 +8,17 @@ import InputField from "./InputField";
 import { workSans } from "@/fonts";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useNavOpenContext } from "@/hooks/navOpenContext";
 
 interface Props {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setNavOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const LogInModal = ({ setIsOpen, setNavOpen }: Props) => {
+const LogInModal = ({ setIsOpen }: Props) => {
   const router = useRouter();
   const [error, setError] = useState<string>("");
+  const navOpenContext = useNavOpenContext()
+  const setNavOpen = navOpenContext!.updater;
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -34,9 +36,9 @@ const LogInModal = ({ setIsOpen, setNavOpen }: Props) => {
     if (response?.error) {
       setError(response.error);
     } else {
+      router.push("/detector");
       setIsOpen(false);
       setNavOpen(false);
-      router.push("/detector");
       router.refresh();
     }
   };
