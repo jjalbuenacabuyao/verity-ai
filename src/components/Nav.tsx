@@ -6,18 +6,18 @@ import React from "react";
 import { useCurrentUserContext } from "@/hooks/userContext";
 import dynamic from "next/dynamic";
 import LogInButton from "./LogInButton";
+import { useNavOpenContext } from "@/hooks/navOpenContext";
 
 const DynamicLogOutButton = dynamic(() => import("../components/LogOutButton"));
 const DynamicDashboardLink = dynamic(() => import("../components/DashboardLink"));
 const DynamicDetectorLink = dynamic(() => import("../components/DetectorLink"));
 
-interface Props {
-  navOpen: boolean;
-  setNavOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
 
-const Nav = ({ navOpen, setNavOpen }: Props) => {
+const Nav = () => {
   const currentUser = useCurrentUserContext();
+  const navOpenContext = useNavOpenContext();
+  const navOpen = navOpenContext?.value;
+  const setNavOpen = navOpenContext!.updater;
 
   useEffect(() => {
     const body = document.body.style;
@@ -72,7 +72,7 @@ const Nav = ({ navOpen, setNavOpen }: Props) => {
           </>
         ) : (
           <li>
-            <LogInButton setNavOpen={setNavOpen} />
+            <LogInButton />
           </li>
         )}
       </ul>
