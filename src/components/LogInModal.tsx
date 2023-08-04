@@ -1,7 +1,7 @@
 "use client";
 
 import { Portal, Overlay, Content, Title } from "@radix-ui/react-dialog";
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, useEffect } from "react";
 import { signIn } from "next-auth/react";
 import Button from "./Button";
 import InputField from "./InputField";
@@ -9,6 +9,7 @@ import { workSans } from "@/fonts";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useNavOpenContext } from "@/hooks/navOpenContext";
+import { TailSpin } from "react-loader-spinner";
 
 interface Props {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -17,7 +18,8 @@ interface Props {
 const LogInModal = ({ setIsOpen }: Props) => {
   const router = useRouter();
   const [error, setError] = useState<string>("");
-  const navOpenContext = useNavOpenContext()
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const navOpenContext = useNavOpenContext();
   const setNavOpen = navOpenContext!.updater;
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -28,6 +30,7 @@ const LogInModal = ({ setIsOpen }: Props) => {
       password: event.currentTarget.password.value,
     };
 
+    setIsLoading(true);
     const response = await signIn("credentials", {
       ...data,
       redirect: false,
@@ -37,11 +40,16 @@ const LogInModal = ({ setIsOpen }: Props) => {
       setError(response.error);
     } else {
       router.push("/detector");
-      setIsOpen(false);
       setNavOpen(false);
       router.refresh();
     }
   };
+
+  useEffect(() => {
+    if (error !== "") {
+      setIsLoading(false);
+    }
+  }, [error]);
 
   return (
     <Portal>
@@ -58,7 +66,7 @@ const LogInModal = ({ setIsOpen }: Props) => {
           Log in your account
         </Title>
         <form onSubmit={handleSubmit}>
-          <fieldset className="text-right">
+          <fieldset className="flex flex-col">
             <InputField
               type="email"
               id="email"
@@ -78,11 +86,29 @@ const LogInModal = ({ setIsOpen }: Props) => {
             />
 
             <Button
-              text="Log in"
               variant="primary"
               type="submit"
-              onClick={() => setError("")}
-            />
+              className={`self-end ${
+                isLoading
+                  ? "pointer-events-none flex h-10 w-24 items-center justify-center"
+                  : ""
+              }`}
+              onClick={() => setError("")}>
+              {isLoading ? (
+                <TailSpin
+                  height="24"
+                  width="24"
+                  color="#fff"
+                  ariaLabel="tail-spin-loading"
+                  radius="1"
+                  wrapperStyle={{}}
+                  wrapperClass=""
+                  visible={true}
+                />
+              ) : (
+                <span>Log in</span>
+              )}
+            </Button>
           </fieldset>
         </form>
       </Content>
