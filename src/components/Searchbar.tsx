@@ -31,7 +31,10 @@ const Searchbar = (props: Props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} role="search" className="relative text-sm">
+    <form
+      onSubmit={handleSubmit}
+      role="search"
+      className="relative w-full text-sm lg:w-auto">
       <label htmlFor="search" className="hidden">
         Search user
       </label>
@@ -40,7 +43,7 @@ const Searchbar = (props: Props) => {
         name="search"
         id="search"
         placeholder="Seach user"
-        className="h-11 rounded-full border border-blue-500 pl-4 pr-9 focus:outline-2 focus:outline-offset-1 focus:outline-blue-500"
+        className="h-11 w-full rounded-full border border-blue-500 pl-4 pr-9 focus:outline-2 focus:outline-offset-1 focus:outline-blue-500 lg:w-auto"
         onChange={handleChange}
       />
       <BiSearch size={20} className="absolute right-3 top-3" />
