@@ -1,6 +1,6 @@
 "use client";
 
-import { AddUserModal, Searchbar, UserTable } from "@/components";
+import { AddUserModal, Searchbar, TableSkeleton, UserTable } from "@/components";
 import { workSans } from "@/fonts";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -9,11 +9,12 @@ import { UserType } from "@/types";
 const Dashboard: React.FC = () => {
   const [users, setUsers] = useState<UserType>();
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [numOfUsers, setNumOfUsers] = useState<number | null>(null);
   const [page, setPage] = useState<number>(1);
 
   async function getTotalUsers() {
+    setIsLoading(true);
     const fetchedUsers: number = await axios("/api/totalusers").then(
       (res) => res.data
     );
@@ -60,6 +61,7 @@ const Dashboard: React.FC = () => {
             </p>
           </div>
         </aside>
+        {isLoading && <TableSkeleton />}
         {!isLoading && !users && <p>No users</p>}
         {!isLoading && users && (
           <UserTable
