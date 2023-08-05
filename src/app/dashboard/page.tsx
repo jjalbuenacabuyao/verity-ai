@@ -5,19 +5,13 @@ import { workSans } from "@/fonts";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { UserType } from "@/types";
-import { Name, User } from "@prisma/client";
 
-const Dashboard = () => {
-  // UserType[] | null
-  const [users, setUsers] = useState<
-    (User & {
-      name: Name | null;
-    })[] | null
-    >();
-  
+const Dashboard: React.FC = () => {
+  const [users, setUsers] = useState<UserType>();
+
   const [isLoading, setIsLoading] = useState(true);
-  const [numOfUsers, setNumOfUsers] = useState<number>(0)
-  const [page, setPage] = useState(2);
+  const [numOfUsers, setNumOfUsers] = useState<number | null>(null);
+  const [page, setPage] = useState<number>(1);
 
   async function getTotalUsers() {
     const fetchedUsers: number = await axios("/api/totalusers").then(
@@ -28,17 +22,24 @@ const Dashboard = () => {
 
   useEffect(() => {
     getTotalUsers();
-    async function fetchUsers() {
-      const fetchedUsers = await axios(`/api/users?page=${page}`).then(res => res.data);
-      setUsers(fetchedUsers)
-      setIsLoading(false)
-    }
+  }, []);
 
-    fetchUsers();
-  }, [page]);
+  useEffect(() => {
+    async function fetchUsers() {
+      const fetchedUsers = await axios(`/api/users?page=${page}`).then(
+        (res) => res.data
+      );
+      setUsers(fetchedUsers);
+      setIsLoading(false);
+    }
+    if (numOfUsers) {
+      fetchUsers();
+    }
+  }, [page, numOfUsers]);
 
   return (
     <div className="mx-6 pb-10 pt-24 lg:mx-16 lg:pb-0 lg:pt-28">
+      <AddUserModal />
       <div className="flex flex-col items-center justify-between lg:flex-row">
         <h1
           className={`${workSans.className} mb-5 text-center text-2xl font-bold lg:mb-0 lg:text-left`}>
@@ -53,14 +54,22 @@ const Dashboard = () => {
             <p
               aria-describedby="title"
               className={`${workSans.className} text-3xl font-bold`}>
-              {users ? users.length : 0}
+              {numOfUsers}
             </p>
             <p id="title" className="font-bold">
               Users
             </p>
           </div>
         </aside>
-        {!isLoading && users ? <UserTable users={users} /> : <p>No users</p>}
+        {!isLoading && !users && <p>No users</p>}
+        {!isLoading && users && (
+          <UserTable
+            users={users}
+            numOfUsers={numOfUsers ? numOfUsers : 0}
+            page={page}
+            setPage={setPage}
+          />
+        )}
       </div>
     </div>
   );
