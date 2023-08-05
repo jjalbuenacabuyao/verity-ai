@@ -31,8 +31,8 @@ export interface SliceSentenceResult {
   result: InferenceApiResult;
 }
 
-export type UserType = (
-  User & {
-    name: Name,
-  }
-)
+export type UserType =
+  | (User & {
+      name: Name | null;
+    })[]
+  | null;
