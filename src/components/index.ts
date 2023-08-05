@@ -8,6 +8,7 @@ import Logo from "./Logo";
 import Nav from "./Nav";
 import ResultContainer from "./ResultContainer";
 import Searchbar from "./Searchbar";
+import TableSkeleton from "./TableSkeleton";
 import UserTable from "./UserTable";
 
 export {
@@ -21,5 +22,6 @@ export {
   Nav,
   ResultContainer,
   Searchbar,
+  TableSkeleton,
   UserTable,
 };
