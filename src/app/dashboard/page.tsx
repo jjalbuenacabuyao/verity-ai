@@ -39,7 +39,6 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="mx-6 pb-10 pt-24 lg:mx-16 lg:pb-0 lg:pt-28">
-      <AddUserModal />
       <div className="flex flex-col items-center justify-between lg:flex-row">
         <h1
           className={`${workSans.className} mb-5 text-center text-2xl font-bold lg:mb-0 lg:text-left`}>
