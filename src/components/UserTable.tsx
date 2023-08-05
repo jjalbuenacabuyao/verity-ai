@@ -26,17 +26,17 @@ const UserTable = ({ users, numOfUsers, page, setPage }: Props) => {
 
     if (type === "prev") {
       return (
-        <a className="block cursor-pointer disabled:cursor-not-allowed">
-          <BsChevronLeft size={20} />
-        </a>
+        <button className="cursor-pointer disabled:cursor-not-allowed disabled:opacity-50">
+          <BsChevronLeft size={16} />
+        </button>
       );
     }
 
     if (type === "next") {
       return (
-        <a className="block cursor-pointer disabled:cursor-not-allowed">
-          <BsChevronRight size={20} />
-        </a>
+        <button className="cursor-pointer disabled:cursor-not-allowed disabled:opacity-50">
+          <BsChevronRight size={16} />
+        </button>
       );
     }
 
@@ -56,12 +56,14 @@ const UserTable = ({ users, numOfUsers, page, setPage }: Props) => {
       {/* To avoid purging of unused classes */}
       <span
         aria-hidden="true"
-        className="rc-pagination-item rc-pagination-item-active hidden"></span>
+        className="rc-pagination-item rc-pagination-item-active rc-pagination-prev rc-pagination-next hidden"></span>
       <table className="w-full table-auto text-sm text-slate-500">
         <thead>
           <tr className="border-b border-b-slate-400 text-left">
             {tableHeadings.map((heading) => (
-              <td key={heading} className="p-8 pb-4 font-semibold text-slate-800">
+              <td
+                key={heading}
+                className="p-8 pb-4 font-semibold text-slate-800">
                 {heading}
               </td>
             ))}
@@ -86,7 +88,7 @@ const UserTable = ({ users, numOfUsers, page, setPage }: Props) => {
             <td colSpan={3}>
               <Pagination
                 locale={locale}
-                className="flex items-center justify-end gap-2 pt-4 pr-8"
+                className="flex items-center justify-end gap-2 pr-8 pt-4"
                 onChange={onChangeHandler}
                 itemRender={itemRender}
                 current={page}
