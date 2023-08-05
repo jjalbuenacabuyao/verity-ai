@@ -1,15 +1,56 @@
+"use client";
+
 import { UserType } from "@/types";
 import { Name, User } from "@prisma/client";
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
+import Pagination from "rc-pagination";
+import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
+import locale from "rc-pagination/es/locale/en_US";
 
 interface Props {
   users: (User & {
     name: Name | null;
   })[];
+  numOfUsers: number;
+  page: number;
+  setPage: Dispatch<SetStateAction<number>>;
 }
 
-const UserTable = ({ users }: Props) => {
+const UserTable = ({ users, numOfUsers, page, setPage }: Props) => {
+  const usersPerPage = 5;
   const tableHeadings = ["Name", "Role", "Actions"];
+  const itemRender = (current: number, type: any, element: any) => {
+    if (type === "page") {
+      return (
+        <a
+          className={`${current === page ? "bg-blue-500 text-white" : ""} p-2`}>
+          {current}
+        </a>
+      );
+    }
+    if (type === "prev") {
+      return (
+        <a>
+          <BsChevronLeft size={20} />
+        </a>
+      );
+    }
+    if (type === "next") {
+      return (
+        <a>
+          <BsChevronRight size={20} />
+        </a>
+      );
+    }
+    if (type === "jump-prev" || type === "jump-next") {
+      return <span>...</span>;
+    }
+    return element;
+  };
+
+  const onChangeHandler = (num: number) => {
+    setPage(num);
+  };
 
   return (
     <div className="relative overflow-x-auto rounded-xl border border-slate-400 pb-8">
@@ -37,6 +78,22 @@ const UserTable = ({ users }: Props) => {
             }
           })}
         </tbody>
+        <tfoot>
+          <tr>
+            <td colSpan={3}>
+              <Pagination
+                locale={locale}
+                className="flex items-center justify-end gap-2"
+                onChange={onChangeHandler}
+                itemRender={itemRender}
+                current={page}
+                pageSize={usersPerPage}
+                total={numOfUsers}
+                showLessItems
+              />
+            </td>
+          </tr>
+        </tfoot>
       </table>
     </div>
   );
