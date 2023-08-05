@@ -6,12 +6,14 @@ const prisma = new PrismaClient()
 export async function GET(req: Request) {
   const url = new URL(req.url);
 
+  const usersPerPage = 5;
+
   const page = Number(url.searchParams.get("page"));
 
-  const skip = (page - 1) * 4;
+  const skip = (page - 1) * usersPerPage;
   
   const users = await prisma.user.findMany({
-    take: 4,
+    take: usersPerPage,
     skip,
     orderBy: {
       id: 'asc',
