@@ -63,4 +63,22 @@
       border-radius: 5px;
     }
   }
+
+  .rc-pagination-item {
+    width: 1.625rem;
+    height: 1.625rem;
+    border: 1px solid theme(colors.blue.700);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: theme(borderRadius.full);
+    cursor: pointer;
+  }
+
+  .rc-pagination-item-active {
+    background-color: theme(colors.blue.500);
+    border: none;
+    color: theme(colors.white);
+    font-weight: theme(fontWeight.semibold);
+  }
 }
