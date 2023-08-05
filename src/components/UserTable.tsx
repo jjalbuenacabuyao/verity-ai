@@ -21,30 +21,29 @@ const UserTable = ({ users, numOfUsers, page, setPage }: Props) => {
   const tableHeadings = ["Name", "Role", "Actions"];
   const itemRender = (current: number, type: any, element: any) => {
     if (type === "page") {
-      return (
-        <a
-          className={`${current === page ? "bg-blue-500 text-white" : ""} p-2`}>
-          {current}
-        </a>
-      );
+      return <a>{current}</a>;
     }
+
     if (type === "prev") {
       return (
-        <a>
+        <a className="block cursor-pointer disabled:cursor-not-allowed">
           <BsChevronLeft size={20} />
         </a>
       );
     }
+
     if (type === "next") {
       return (
-        <a>
+        <a className="block cursor-pointer disabled:cursor-not-allowed">
           <BsChevronRight size={20} />
         </a>
       );
     }
+
     if (type === "jump-prev" || type === "jump-next") {
       return <span>...</span>;
     }
+
     return element;
   };
 
@@ -53,12 +52,16 @@ const UserTable = ({ users, numOfUsers, page, setPage }: Props) => {
   };
 
   return (
-    <div className="relative overflow-x-auto rounded-xl border border-slate-400 pb-8">
-      <table className="w-full table-auto text-sm text-slate-600">
+    <div className="relative overflow-x-auto rounded-xl border border-slate-400 pb-4">
+      {/* To avoid purging of unused classes */}
+      <span
+        aria-hidden="true"
+        className="rc-pagination-item rc-pagination-item-active hidden"></span>
+      <table className="w-full table-auto text-sm text-slate-500">
         <thead>
           <tr className="border-b border-b-slate-400 text-left">
             {tableHeadings.map((heading) => (
-              <td key={heading} className="p-8 pb-4 font-medium text-slate-500">
+              <td key={heading} className="p-8 pb-4 font-semibold text-slate-800">
                 {heading}
               </td>
             ))}
@@ -83,7 +86,7 @@ const UserTable = ({ users, numOfUsers, page, setPage }: Props) => {
             <td colSpan={3}>
               <Pagination
                 locale={locale}
-                className="flex items-center justify-end gap-2"
+                className="flex items-center justify-end gap-2 pt-4 pr-8"
                 onChange={onChangeHandler}
                 itemRender={itemRender}
                 current={page}
