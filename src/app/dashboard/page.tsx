@@ -1,6 +1,6 @@
 "use client";
 
-import { AddUserModal, Searchbar, TableSkeleton, UserTable } from "@/components";
+import { AddUserButton, Searchbar, TableSkeleton, UserTable } from "@/components";
 import { workSans } from "@/fonts";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -49,7 +49,7 @@ const Dashboard: React.FC = () => {
       </div>
 
       <div className="mt-5 lg:grid lg:grid-cols-[1fr_3fr] lg:gap-7">
-        <aside className="mb-6 lg:mb-0">
+        <aside className="mb-6 lg:mb-0 lg:flex lg:flex-col lg:gap-4">
           <div className="rounded-xl bg-blue-500 py-10 text-center text-white">
             <p
               aria-describedby="title"
@@ -60,6 +60,7 @@ const Dashboard: React.FC = () => {
               Total Users
             </p>
           </div>
+          <AddUserButton />
         </aside>
         {isLoading && <TableSkeleton />}
         {!isLoading && !users && <p>No users</p>}
