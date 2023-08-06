@@ -50,14 +50,14 @@ const Dashboard: React.FC = () => {
 
       <div className="mt-5 lg:grid lg:grid-cols-[1fr_3fr] lg:gap-7">
         <aside className="mb-6 lg:mb-0">
-          <div className="rounded-xl bg-blue-500 py-14 text-center text-white">
+          <div className="rounded-xl bg-blue-500 py-10 text-center text-white">
             <p
               aria-describedby="title"
-              className={`${workSans.className} text-3xl font-bold`}>
+              className={`${workSans.className} text-4xl font-bold`}>
               {numOfUsers}
             </p>
-            <p id="title" className="font-bold">
-              Users
+            <p id="title" className="text-sm font-semibold">
+              Total Users
             </p>
           </div>
         </aside>
