@@ -1,3 +1,4 @@
+import AddUserButton from "./AddUserButton";
 import AddUserModal from "./AddUserModal";
 import Aside from "./Aside";
 import Header from "./Header";
@@ -12,6 +13,7 @@ import TableSkeleton from "./TableSkeleton";
 import UserTable from "./UserTable";
 
 export {
+  AddUserButton,
   AddUserModal,
   Aside,
   Header,
