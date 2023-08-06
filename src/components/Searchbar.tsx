@@ -43,10 +43,13 @@ const Searchbar = (props: Props) => {
         name="search"
         id="search"
         placeholder="Seach user"
-        className="h-11 w-full rounded-full border border-blue-500 pl-4 pr-9 focus:outline-2 focus:outline-offset-1 focus:outline-blue-500 lg:w-auto"
+        className="w-full rounded-full border border-blue-500 py-2 pl-9 pr-10 focus:outline-2 focus:outline-offset-1 focus:outline-blue-500 lg:w-72"
         onChange={handleChange}
       />
-      <BiSearch size={20} className="absolute right-3 top-3" />
+      <BiSearch size={18} className="absolute left-3 top-2.5" />
+      <span className="absolute right-3 top-2.5 block rounded border p-1 text-[8px] font-semibold leading-none">
+        Enter
+      </span>
       <input type="submit" hidden />
     </form>
   );
