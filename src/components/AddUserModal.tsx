@@ -1,17 +1,11 @@
 "use client";
 
 import React, { ChangeEvent, FormEvent, useState } from "react";
-import {
-  Root,
-  Trigger,
-  Portal,
-  Overlay,
-  Content,
-  Title,
-} from "@radix-ui/react-dialog";
+import { Portal, Overlay, Content, Title } from "@radix-ui/react-dialog";
 import axios from "axios";
 import InputField from "./InputField";
 import Button from "./Button";
+import { TailSpin } from "react-loader-spinner";
 
 interface User {
   email: string;
@@ -31,6 +25,7 @@ const AddUserModal = () => {
     middleName: "",
     lastName: "",
   });
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -39,8 +34,20 @@ const AddUserModal = () => {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    await axios.post("/api/register", user);
-    console.log("User created");
+    setIsLoading(true);
+    const response = await axios.post("/api/register", user);
+
+    if (response.statusText === "OK") {
+      setIsLoading(false);
+      setUser({
+        email: "",
+        password: "",
+        role: "USER",
+        firstName: "",
+        middleName: "",
+        lastName: "",
+      });
+    }
   };
 
   return (
@@ -129,7 +136,29 @@ const AddUserModal = () => {
             />
           </fieldset>
 
-          <Button variant="primary" type="submit" text="Add User" />
+          <Button
+            variant="primary"
+            type="submit"
+            className={`${
+              isLoading
+                ? "pointer-events-none flex h-10 w-24 items-center justify-center"
+                : ""
+            }`}>
+            {isLoading ? (
+              <TailSpin
+                height="24"
+                width="24"
+                color="#fff"
+                ariaLabel="tail-spin-loading"
+                radius="1"
+                wrapperStyle={{}}
+                wrapperClass=""
+                visible={true}
+              />
+            ) : (
+              <span>Add user</span>
+            )}
+          </Button>
         </form>
       </Content>
     </Portal>
