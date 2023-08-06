@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { BiHide, BiShowAlt } from "react-icons/bi";
 import Button from "./Button";
 
@@ -11,9 +11,11 @@ interface Props {
   required: boolean;
   label: string;
   error?: string;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  value?: string;
 }
 
-const InputField = ({ type, id, name, required, label, error }: Props) => {
+const InputField = ({ type, id, name, required, label, error, value, onChange }: Props) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const userNotExist = error === "User does not exist";
@@ -34,6 +36,12 @@ const InputField = ({ type, id, name, required, label, error }: Props) => {
         name={name}
         required={required}
         placeholder={label}
+        value={value}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
+          if (onChange) {
+            onChange(e)
+          }
+        }}
       />
       <label
         htmlFor={id}
