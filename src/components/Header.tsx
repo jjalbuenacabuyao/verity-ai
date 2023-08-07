@@ -1,61 +1,115 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import Logo from "./Logo";
-import Nav from "./Nav";
-import { FiMenu } from "react-icons/fi";
-import { AiOutlineClose } from "react-icons/ai";
-import Button from "./Button";
-import { usePathname } from "next/navigation";
-import NavOpenContext from "@/hooks/navOpenContext";
+import { useCurrentUserContext } from "@/hooks/userContext";
+import { Divider } from "@nextui-org/divider";
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  NavbarMenu,
+  NavbarMenuItem,
+  NavbarMenuToggle,
+} from "@nextui-org/navbar";
+import Image from "next/image";
+import Link from "next/link";
+import React, { useState } from "react";
+import LogInButtonAndModal from "./LogInButtonAndModal";
+import LogOutButton from "./LogOutButton";
 
 const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean | undefined>(false);
   const [scrollPosition, setScrollPosition] = useState<number>(0);
-  const [navOpen, setNavOpen] = useState<boolean>(false);
-  const pathname = usePathname();
+  const currentUser = useCurrentUserContext();
 
-  useEffect(() => {
-    setNavOpen(false);
-    const handleScroll = () => {
-      setScrollPosition(window.scrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  const menuItems = ["Home", "Features", "Tutorial", "FAQs"];
 
   return (
-    <NavOpenContext.Provider value={{value: navOpen, updater: setNavOpen}}>
-      <header
-      className={`fixed inset-x-0 top-0 z-10 flex items-center justify-between border-b-[1px] border-solid border-transparent px-6 py-4 transition-colors duration-75 ease-linear lg:px-16 ${
-        scrollPosition !== 0
-          ? "border-b-off-black bg-header backdrop-blur backdrop-saturate-50"
-          : ""
-      } ${
-        pathname === "/detector" || pathname === "/dashboard"
-          ? "lg:border-b-off-black"
-          : ""
-      }`}>
-      <Logo />
+    <Navbar
+      onMenuOpenChange={(isOpen) => setIsMenuOpen(isOpen)}
+      onScrollPositionChange={(position) => setScrollPosition(position)}
+      isBordered={scrollPosition === 0 ? false : true}
+      disableScrollHandler={false}
+      classNames={{
+        wrapper: "max-w-7xl sm:px-8 lg:px-10",
+      }}>
+      <NavbarContent className="sm:hidden" justify="start">
+        <NavbarMenuToggle
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+        />
+      </NavbarContent>
 
-      <Nav />
+      <NavbarContent className="hidden gap-4 sm:flex" justify="center">
+        <NavbarBrand>
+          <Image src={"/logo.svg"} width={36} height={36} alt="VerityAI" />
+          <p className="font-bold text-inherit">VerityAI</p>
+        </NavbarBrand>
 
-      <Button
-        variant="toggler"
-        onClick={() => setNavOpen(!navOpen)}
-        className="lg:hidden">
-        {navOpen ? (
-          <AiOutlineClose size={24} title="Close Menu" fill="#334155" />
-        ) : (
-          <FiMenu size={24} title="Menu" fill="#334155" />
+        <Divider
+          orientation="vertical"
+          className="hidden h-auto py-3 sm:block"
+        />
+
+        {menuItems.map((item) => (
+          <NavbarItem key={item}>
+            <Link
+              href={`/${item === "Home" ? "/" : `/#${item.toLowerCase()}`}`}
+              className="text-sm font-semibold">
+              {item}
+            </Link>
+          </NavbarItem>
+        ))}
+
+        {currentUser && (
+          <NavbarItem>
+            <Link href={"/detector"} className="text-sm font-semibold">
+              Detector
+            </Link>
+          </NavbarItem>
         )}
-      </Button>
-    </header>
-    </NavOpenContext.Provider>
-    
+
+        {currentUser?.role === "ADMIN" && (
+          <NavbarItem>
+            <Link href={"/dashboard"} className="text-sm font-semibold">
+              Dashboard
+            </Link>
+          </NavbarItem>
+        )}
+      </NavbarContent>
+
+      <NavbarContent justify="end">
+        <NavbarItem>
+          {currentUser ? <LogOutButton /> : <LogInButtonAndModal />}
+        </NavbarItem>
+      </NavbarContent>
+
+      <NavbarMenu>
+        {menuItems.map((item) => (
+          <NavbarMenuItem key={item}>
+            <Link
+              href={`/${item === "Home" ? "/" : `/#${item.toLowerCase()}`}`}>
+              {item}
+            </Link>
+          </NavbarMenuItem>
+        ))}
+
+        {currentUser && (
+          <NavbarItem>
+            <Link href={"/detector"} className="text-sm font-semibold">
+              Detector
+            </Link>
+          </NavbarItem>
+        )}
+
+        {currentUser?.role === "ADMIN" && (
+          <NavbarItem>
+            <Link href={"/dashboard"} className="text-sm font-semibold">
+              Dashboard
+            </Link>
+          </NavbarItem>
+        )}
+      </NavbarMenu>
+    </Navbar>
   );
 };
 
