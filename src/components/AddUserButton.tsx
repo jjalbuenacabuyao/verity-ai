@@ -1,16 +1,20 @@
 "use client";
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { Root, Trigger } from "@radix-ui/react-dialog";
 import Button from "./Button";
 import AddUserModal from "./AddUserModal";
 
-const AddUserButton = () => {
+interface Props {
+  setUserAdded: Dispatch<SetStateAction<boolean>>;
+}
+
+const AddUserButton = ({ setUserAdded }: Props) => {
   return (
     <Root>
       <Trigger asChild>
         <Button variant="primary" text="Add User" />
       </Trigger>
-      <AddUserModal />
+      <AddUserModal setUserAdded={setUserAdded} />
     </Root>
   )
 }
