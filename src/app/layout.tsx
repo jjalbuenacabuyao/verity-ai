@@ -1,8 +1,8 @@
 import { Header } from "@/components";
-import { CurrentUserProvider, ToastProvider } from "@/providers";
+import { CurrentUserProvider, ToastProvider, UIProvider } from "@/providers";
 import getCurrentUser from "./actions/getCurrentUser";
 import { inter } from "@/fonts";
-import NextTopLoader from 'nextjs-toploader';
+import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
 
 export const metadata = {
@@ -19,14 +19,17 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${inter.className} text-slate-700 bg-white/95 antialiased`}>
-        <NextTopLoader color="#0ea5e9" showSpinner={false} />
-        <CurrentUserProvider currentUser={currentUser}>
-          <ToastProvider>
-            <Header />
-            <main>{children}</main>
-          </ToastProvider>
-        </CurrentUserProvider>
+      <body
+        className={`${inter.className} bg-white/95 text-slate-700 antialiased`}>
+        <UIProvider>
+          <NextTopLoader color="#0ea5e9" showSpinner={false} />
+          <CurrentUserProvider currentUser={currentUser}>
+            <ToastProvider>
+              <Header />
+              <main>{children}</main>
+            </ToastProvider>
+          </CurrentUserProvider>
+        </UIProvider>
       </body>
     </html>
   );
