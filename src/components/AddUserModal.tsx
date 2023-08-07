@@ -19,9 +19,10 @@ interface User {
 
 interface Props {
   setUserAdded: Dispatch<SetStateAction<boolean>>;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-const AddUserModal = ({ setUserAdded }: Props) => {
+const AddUserModal = ({ setUserAdded, setIsOpen }: Props) => {
   const [user, setUser] = useState<User>({
     email: "",
     password: "",
@@ -45,7 +46,8 @@ const AddUserModal = ({ setUserAdded }: Props) => {
 
     if (response.statusText === "OK") {
       setIsLoading(false);
-      setUserAdded(true)
+      setUserAdded(true);
+      setIsOpen(false);
     }
   };
 
