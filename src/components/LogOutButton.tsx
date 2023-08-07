@@ -1,14 +1,16 @@
 import React from "react";
-import Button from "./Button";
 import { signOut } from "next-auth/react";
+import { Button } from "@nextui-org/button";
 
 const LogOutButton = () => {
   return (
     <Button
       onClick={() => signOut({ callbackUrl: "/" })}
-      variant={"primary"}
-      text="Log out"
-    />
+      variant="solid"
+      radius="full"
+      className="bg-blue-500 text-sm font-semibold tracking-wide text-white">
+      Log out
+    </Button>
   );
 };
 
