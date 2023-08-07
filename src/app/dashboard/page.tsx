@@ -5,10 +5,11 @@ import { workSans } from "@/fonts";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { UserType } from "@/types";
+import { TailSpin } from "react-loader-spinner";
 
 const Dashboard: React.FC = () => {
   const [users, setUsers] = useState<UserType>();
-
+  const [userAdded, setUserAdded] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(false);
   const [numOfUsers, setNumOfUsers] = useState<number | null>(null);
   const [page, setPage] = useState<number>(1);
@@ -23,7 +24,7 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     getTotalUsers();
-  }, []);
+  }, [userAdded]);
 
   useEffect(() => {
     async function fetchUsers() {
@@ -54,13 +55,22 @@ const Dashboard: React.FC = () => {
             <p
               aria-describedby="title"
               className={`${workSans.className} text-4xl font-bold`}>
-              {numOfUsers}
+              {isLoading ? <TailSpin
+                height="40"
+                width="40"
+                color="#fff"
+                ariaLabel="tail-spin-loading"
+                radius="1"
+                wrapperStyle={{"justify-content": "center", "margin-bottom": "1.25rem"}}
+                wrapperClass=""
+                visible={true}
+              /> : numOfUsers}
             </p>
             <p id="title" className="text-sm font-semibold">
               Total Users
             </p>
           </div>
-          <AddUserButton />
+          <AddUserButton setUserAdded={setUserAdded} />
         </aside>
         {isLoading && <TableSkeleton />}
         {!isLoading && !users && <p>No users</p>}
