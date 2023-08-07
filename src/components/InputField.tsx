@@ -17,7 +17,6 @@ interface Props {
 
 const InputField = ({ type, id, name, required, label, error, value, onChange }: Props) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
-
   const userNotExist = error === "User does not exist";
   const incorrectPassword = error === "Incorrect password";
 
@@ -42,6 +41,7 @@ const InputField = ({ type, id, name, required, label, error, value, onChange }:
             onChange(e)
           }
         }}
+        autoComplete={type === "password" ? "on" : "off"}
       />
       <label
         htmlFor={id}
