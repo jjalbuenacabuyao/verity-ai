@@ -40,6 +40,7 @@
     "react-dropzone": "^14.2.3",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.8.0",
+    "react-idle-timer": "^5.7.2",
     "react-loader-spinner": "^5.3.4",
     "sentence-splitter": "^4.2.1",
     "typescript": "5.0.4"
