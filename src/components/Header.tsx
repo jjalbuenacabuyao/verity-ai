@@ -11,20 +11,28 @@ import {
   NavbarMenuToggle,
 } from "@nextui-org/navbar";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LogInButtonAndModal from "./LogInButtonAndModal";
 import LogOutButton from "./LogOutButton";
 import Logo from "./Logo";
+import { usePathname } from "next/navigation";
 
 const Header = () => {
+  const currentUser = useCurrentUserContext();
+
   const [isMenuOpen, setIsMenuOpen] = useState<boolean | undefined>(false);
   const [scrollPosition, setScrollPosition] = useState<number>(0);
-  const currentUser = useCurrentUserContext();
+  const currentPath = usePathname();
 
   const menuItems = ["Home", "Features", "Tutorial", "FAQs"];
 
+  useEffect(() => {
+    setIsMenuOpen(false)
+  }, [currentPath])
+
   return (
     <Navbar
+      isMenuOpen={isMenuOpen}
       onMenuOpenChange={(isOpen) => setIsMenuOpen(isOpen)}
       onScrollPositionChange={(position) => setScrollPosition(position)}
       isBordered={scrollPosition === 0 ? false : true}
@@ -89,6 +97,7 @@ const Header = () => {
             <Link
               href={`/${item === "Home" ? "/" : `/#${item.toLowerCase()}`}`}
               className="text-base sm:text-sm font-semibold"
+              onClick={() => setIsMenuOpen(false)}
             >
               {item}
             </Link>
@@ -97,7 +106,7 @@ const Header = () => {
 
         {currentUser && (
           <NavbarMenuItem>
-            <Link href={"/detector"} className="text-base sm:text-sm font-semibold">
+            <Link href={"/detector"} className="text-base sm:text-sm font-semibold" onClick={() => setIsMenuOpen(false)}>
               Detector
             </Link>
           </NavbarMenuItem>
@@ -105,7 +114,7 @@ const Header = () => {
 
         {currentUser?.role === "ADMIN" && (
           <NavbarMenuItem>
-            <Link href={"/dashboard"} className="text-base sm:text-sm font-semibold">
+            <Link href={"/dashboard"} className="text-base sm:text-sm font-semibold" onClick={() => setIsMenuOpen(false)}>
               Dashboard
             </Link>
           </NavbarMenuItem>
