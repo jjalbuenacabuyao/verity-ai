@@ -54,7 +54,7 @@ const Header = () => {
           <NavbarItem key={item}>
             <Link
               href={`/${item === "Home" ? "/" : `/#${item.toLowerCase()}`}`}
-              className="text-sm font-semibold">
+              className="text-base sm:text-sm font-semibold">
               {item}
             </Link>
           </NavbarItem>
@@ -62,7 +62,7 @@ const Header = () => {
 
         {currentUser && (
           <NavbarItem>
-            <Link href={"/detector"} className="text-sm font-semibold">
+            <Link href={"/detector"} className="text-base sm:text-sm font-semibold">
               Detector
             </Link>
           </NavbarItem>
@@ -70,7 +70,7 @@ const Header = () => {
 
         {currentUser?.role === "ADMIN" && (
           <NavbarItem>
-            <Link href={"/dashboard"} className="text-sm font-semibold">
+            <Link href={"/dashboard"} className="text-base sm:text-sm font-semibold">
               Dashboard
             </Link>
           </NavbarItem>
@@ -88,7 +88,7 @@ const Header = () => {
           <NavbarMenuItem key={item}>
             <Link
               href={`/${item === "Home" ? "/" : `/#${item.toLowerCase()}`}`}
-              className="text-sm font-semibold"
+              className="text-base sm:text-sm font-semibold"
             >
               {item}
             </Link>
@@ -97,7 +97,7 @@ const Header = () => {
 
         {currentUser && (
           <NavbarMenuItem>
-            <Link href={"/detector"} className="text-sm font-semibold">
+            <Link href={"/detector"} className="text-base sm:text-sm font-semibold">
               Detector
             </Link>
           </NavbarMenuItem>
@@ -105,7 +105,7 @@ const Header = () => {
 
         {currentUser?.role === "ADMIN" && (
           <NavbarMenuItem>
-            <Link href={"/dashboard"} className="text-sm font-semibold">
+            <Link href={"/dashboard"} className="text-base sm:text-sm font-semibold">
               Dashboard
             </Link>
           </NavbarMenuItem>
