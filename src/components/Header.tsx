@@ -33,18 +33,20 @@ const Header = () => {
       classNames={{
         wrapper: "max-w-7xl sm:px-8 lg:px-10",
       }}>
-      <NavbarContent className="sm:hidden" justify="start">
+      <ul>
+        <NavbarBrand>
+          <Image src={"/logo.svg"} width={36} height={36} alt="VerityAI" />
+          <p className="font-bold text-inherit">VerityAI</p>
+        </NavbarBrand>
+      </ul>
+
+      <NavbarContent className="sm:hidden" justify="end">
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         />
       </NavbarContent>
 
-      <NavbarContent className="hidden gap-4 sm:flex" justify="center">
-        <NavbarBrand>
-          <Image src={"/logo.svg"} width={36} height={36} alt="VerityAI" />
-          <p className="font-bold text-inherit">VerityAI</p>
-        </NavbarBrand>
-
+      <NavbarContent className="hidden gap-4 sm:flex" justify="start">
         <Divider
           orientation="vertical"
           className="hidden h-auto py-3 sm:block"
@@ -77,7 +79,7 @@ const Header = () => {
         )}
       </NavbarContent>
 
-      <NavbarContent justify="end">
+      <NavbarContent className="hidden sm:flex" justify="end">
         <NavbarItem>
           {currentUser ? <LogOutButton /> : <LogInButtonAndModal />}
         </NavbarItem>
@@ -87,27 +89,33 @@ const Header = () => {
         {menuItems.map((item) => (
           <NavbarMenuItem key={item}>
             <Link
-              href={`/${item === "Home" ? "/" : `/#${item.toLowerCase()}`}`}>
+              href={`/${item === "Home" ? "/" : `/#${item.toLowerCase()}`}`}
+              className="text-sm font-semibold"
+            >
               {item}
             </Link>
           </NavbarMenuItem>
         ))}
 
         {currentUser && (
-          <NavbarItem>
+          <NavbarMenuItem>
             <Link href={"/detector"} className="text-sm font-semibold">
               Detector
             </Link>
-          </NavbarItem>
+          </NavbarMenuItem>
         )}
 
         {currentUser?.role === "ADMIN" && (
-          <NavbarItem>
+          <NavbarMenuItem>
             <Link href={"/dashboard"} className="text-sm font-semibold">
               Dashboard
             </Link>
-          </NavbarItem>
+          </NavbarMenuItem>
         )}
+
+        <NavbarItem>
+          {currentUser ? <LogOutButton /> : <LogInButtonAndModal />}
+        </NavbarItem>
       </NavbarMenu>
     </Navbar>
   );
