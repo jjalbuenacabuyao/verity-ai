@@ -23,19 +23,23 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean | undefined>(false);
   const [scrollPosition, setScrollPosition] = useState<number>(0);
   const currentPath = usePathname();
+  const pathIsDetectorOrDashboard =
+    currentPath === "/detector" || currentPath === "/dashboard";
 
   const menuItems = ["Home", "Features", "Tutorial", "FAQs"];
 
   useEffect(() => {
-    setIsMenuOpen(false)
-  }, [currentPath])
+    setIsMenuOpen(false);
+  }, [currentPath]);
 
   return (
     <Navbar
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={(isOpen) => setIsMenuOpen(isOpen)}
       onScrollPositionChange={(position) => setScrollPosition(position)}
-      isBordered={scrollPosition === 0 ? false : true}
+      isBordered={
+        scrollPosition !== 0 || pathIsDetectorOrDashboard
+      }
       disableScrollHandler={false}
       classNames={{
         wrapper: "max-w-7xl sm:px-8 lg:px-10",
@@ -62,7 +66,7 @@ const Header = () => {
           <NavbarItem key={item}>
             <Link
               href={`/${item === "Home" ? "/" : `/#${item.toLowerCase()}`}`}
-              className="text-base sm:text-sm font-semibold">
+              className="text-base font-semibold sm:text-sm">
               {item}
             </Link>
           </NavbarItem>
@@ -70,7 +74,9 @@ const Header = () => {
 
         {currentUser && (
           <NavbarItem>
-            <Link href={"/detector"} className="text-base sm:text-sm font-semibold">
+            <Link
+              href={"/detector"}
+              className="text-base font-semibold sm:text-sm">
               Detector
             </Link>
           </NavbarItem>
@@ -78,7 +84,9 @@ const Header = () => {
 
         {currentUser?.role === "ADMIN" && (
           <NavbarItem>
-            <Link href={"/dashboard"} className="text-base sm:text-sm font-semibold">
+            <Link
+              href={"/dashboard"}
+              className="text-base font-semibold sm:text-sm">
               Dashboard
             </Link>
           </NavbarItem>
@@ -96,9 +104,8 @@ const Header = () => {
           <NavbarMenuItem key={item}>
             <Link
               href={`/${item === "Home" ? "/" : `/#${item.toLowerCase()}`}`}
-              className="text-base sm:text-sm font-semibold"
-              onClick={() => setIsMenuOpen(false)}
-            >
+              className="text-base font-semibold sm:text-sm"
+              onClick={() => setIsMenuOpen(false)}>
               {item}
             </Link>
           </NavbarMenuItem>
@@ -106,7 +113,10 @@ const Header = () => {
 
         {currentUser && (
           <NavbarMenuItem>
-            <Link href={"/detector"} className="text-base sm:text-sm font-semibold" onClick={() => setIsMenuOpen(false)}>
+            <Link
+              href={"/detector"}
+              className="text-base font-semibold sm:text-sm"
+              onClick={() => setIsMenuOpen(false)}>
               Detector
             </Link>
           </NavbarMenuItem>
@@ -114,7 +124,10 @@ const Header = () => {
 
         {currentUser?.role === "ADMIN" && (
           <NavbarMenuItem>
-            <Link href={"/dashboard"} className="text-base sm:text-sm font-semibold" onClick={() => setIsMenuOpen(false)}>
+            <Link
+              href={"/dashboard"}
+              className="text-base font-semibold sm:text-sm"
+              onClick={() => setIsMenuOpen(false)}>
               Dashboard
             </Link>
           </NavbarMenuItem>
