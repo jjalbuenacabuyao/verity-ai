@@ -59,7 +59,7 @@ const LogInButtonAndModal = () => {
         className="bg-blue-500 text-sm font-semibold tracking-wide text-white">
         Log in
       </Button>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="center">
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="center" className="mx-4 my-4">
         <ModalContent>
           {(onClose) => (
             <form onSubmit={handleSubmit}>
