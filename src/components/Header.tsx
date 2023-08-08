@@ -4,18 +4,17 @@ import { useCurrentUserContext } from "@/hooks/userContext";
 import { Divider } from "@nextui-org/divider";
 import {
   Navbar,
-  NavbarBrand,
   NavbarContent,
   NavbarItem,
   NavbarMenu,
   NavbarMenuItem,
   NavbarMenuToggle,
 } from "@nextui-org/navbar";
-import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import LogInButtonAndModal from "./LogInButtonAndModal";
 import LogOutButton from "./LogOutButton";
+import Logo from "./Logo";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean | undefined>(false);
@@ -32,12 +31,11 @@ const Header = () => {
       disableScrollHandler={false}
       classNames={{
         wrapper: "max-w-7xl sm:px-8 lg:px-10",
+        toggle: "w-8",
+        toggleIcon: "before:w-8 after:w-8 before:h-0.5 after:h-0.5",
       }}>
       <ul>
-        <NavbarBrand>
-          <Image src={"/logo.svg"} width={36} height={36} alt="VerityAI" />
-          <p className="font-bold text-inherit">VerityAI</p>
-        </NavbarBrand>
+        <Logo />
       </ul>
 
       <NavbarContent className="sm:hidden" justify="end">
