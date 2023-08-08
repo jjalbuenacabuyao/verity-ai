@@ -5,6 +5,7 @@ import Header from "./Header";
 import Hero from "./Hero";
 import LogInModal from "./LogInModal";
 import Logo from "./Logo";
+import ResultsAccordion from "./ResultsAccordion";
 import ResultContainer from "./ResultContainer";
 import Searchbar from "./Searchbar";
 import TableSkeleton from "./TableSkeleton";
@@ -18,6 +19,7 @@ export {
   Hero,
   LogInModal,
   Logo,
+  ResultsAccordion,
   ResultContainer,
   Searchbar,
   TableSkeleton,
