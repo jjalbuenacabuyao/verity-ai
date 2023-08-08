@@ -63,7 +63,7 @@ const LogInButtonAndModal = () => {
         <ModalContent>
           {(onClose) => (
             <form onSubmit={handleSubmit}>
-              <ModalHeader className="flex flex-col gap-1">Log in</ModalHeader>
+              <ModalHeader className="flex flex-col gap-1">Login</ModalHeader>
               <ModalBody>
                 <Input
                   autoFocus
@@ -105,24 +105,22 @@ const LogInButtonAndModal = () => {
                   errorMessage={error === "Incorrect password" ? "Incorrect password" : ""}
                 />
                 <div className="flex justify-end px-1 py-2">
-                  <Link href="#">Forgot password?</Link>
+                  <Link href="#" className="text-sm text-blue-500">Forgot password?</Link>
                 </div>
               </ModalBody>
               <ModalFooter>
                 <Button
                   color="danger"
                   variant="flat"
-                  onClick={onClose}
-                  radius="full">
+                  onClick={onClose}>
                   Close
                 </Button>
                 <Button
                   isLoading={isLoading}
                   type="submit"
                   variant="solid"
-                  radius="full"
                   className="bg-blue-500 text-sm font-semibold tracking-wide text-white">
-                  Log in
+                  {isLoading ? "Logging in" : "Log in"}
                 </Button>
               </ModalFooter>
             </form>
