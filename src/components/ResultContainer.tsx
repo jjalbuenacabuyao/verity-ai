@@ -6,7 +6,7 @@ import { DetectionResult, ResultWithFilename } from "@/types";
 import Toast from "./Toast";
 import DownloadReportButton from "./DownloadReportButton";
 import Loader from "./Loader";
-import Accordion from "./Accordion";
+import ResultsAccordion from "./ResultsAccordion";
 
 interface Props {
   files: File[];
@@ -19,7 +19,7 @@ const ResultContainer = ({ files }: Props) => {
   const [results, setResults] = useState<ResultWithFilename[]>([]);
 
   useEffect(() => {
-    const storedState = localStorage.getItem("detectionResult")
+    const storedState = localStorage.getItem("detectionResult");
     if (storedState) {
       setResults(JSON.parse(storedState));
       setIsLoading(false);
@@ -57,9 +57,12 @@ const ResultContainer = ({ files }: Props) => {
             }> => value.status === "fulfilled"
           )
           .map((value) => value.value);
-        
+
         setResults(fulfilledValues);
-        localStorage.setItem("detectionResult", JSON.stringify(fulfilledValues))
+        localStorage.setItem(
+          "detectionResult",
+          JSON.stringify(fulfilledValues)
+        );
         setIsLoading(false);
 
         const rejectedValues = values.filter(
@@ -83,13 +86,13 @@ const ResultContainer = ({ files }: Props) => {
   }, [files, setIsLoading]);
 
   return (
-    <div className="mb-8 border-t pt-16 lg:mb-0 lg:border-t-0 lg:pt-0">
+    <div className="mb-8 border-t pt-16 lg:mb-0 lg:border-t-0 lg:pt-10">
       <div className="mb-6 flex items-center justify-between">
         <h2 className="font-bold">Results</h2>
         <DownloadReportButton results={results} isLoading={isLoading} />
       </div>
 
-      <div className="h-full">
+      <div>
         {results.length === 0 && isLoading === false && (
           <p className="py-6 text-center text-sm text-slate-400 lg:pt-10 lg:text-base">
             Results will be shown here.
@@ -100,11 +103,8 @@ const ResultContainer = ({ files }: Props) => {
 
         {results.length !== 0 && isLoading === false && (
           <>
-            <div className="mb-4 flex items-center justify-between text-xs text-slate-400">
-              <span>Filename</span>
-              <span>% of AI-generated text</span>
-            </div>
-            <Accordion data={results} />
+            {/* <Accordion data={results} /> */}
+            <ResultsAccordion data={results} />
           </>
         )}
       </div>
