@@ -1,4 +1,4 @@
-import { countWords, detectAiGeneratedText } from "@/utils";
+import { cleanText, countWords, detectAiGeneratedText } from "@/utils";
 import { NextApiRequest, NextApiResponse } from "next";
 import { DetectionResult, SliceSentenceResult } from "@/types";
 
@@ -88,6 +88,7 @@ export default async function detectionHandler(
     aiGeneratedPercentage: totalPercentage.toFixed(1),
     aiGeneratedTexts: results.map(({ text, result }) => {
       const { score, label } = result;
+      text = cleanText(text)
       return { text, score, label }
     }),
   };
