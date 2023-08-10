@@ -16,7 +16,9 @@ export async function GET(req: Request) {
     take: usersPerPage,
     skip,
     orderBy: {
-      id: 'asc',
+      name: {
+        firstName: "asc",
+      }
     },
     include: {
       name: true,
