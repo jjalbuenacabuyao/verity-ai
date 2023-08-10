@@ -33,8 +33,8 @@ const ResultBreakdownTable = ({ aiGeneratedTexts }: Props) => {
   return (
     <Table aria-label="Detection Result Breakdown">
       <TableHeader>
-        <TableColumn>Paragraphs</TableColumn>
-        <TableColumn>Result</TableColumn>
+        <TableColumn key="paragraph">Paragraphs</TableColumn>
+        <TableColumn key="result">Result</TableColumn>
       </TableHeader>
       <TableBody>
         {aiGeneratedTexts?.map(({ text, score, label }, index) => (
