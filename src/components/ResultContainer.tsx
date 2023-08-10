@@ -13,7 +13,7 @@ interface Props {
 }
 
 const ResultContainer = ({ files }: Props) => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isToastOpen, setIsToastOpen] = useState<boolean>(false);
   const [errorResult, setErrorResult] = useState<string[]>([]);
   const [results, setResults] = useState<ResultWithFilename[]>([]);
@@ -26,7 +26,6 @@ const ResultContainer = ({ files }: Props) => {
     }
 
     if (files?.length !== 0) {
-      setIsLoading(true);
       const result = files!.map(async (file) => {
         const extractedText = await getTextFromFiles(file);
 
@@ -93,17 +92,16 @@ const ResultContainer = ({ files }: Props) => {
       </div>
 
       <div>
+        {isLoading && <Loader />}
+
         {results.length === 0 && isLoading === false && (
           <p className="py-6 text-center text-sm text-slate-400 lg:pt-10 lg:text-base">
             Results will be shown here.
           </p>
         )}
 
-        {isLoading && <Loader />}
-
         {results.length !== 0 && isLoading === false && (
           <>
-            {/* <Accordion data={results} /> */}
             <ResultsAccordion data={results} />
           </>
         )}
