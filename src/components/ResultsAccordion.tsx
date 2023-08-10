@@ -6,6 +6,7 @@ import React from "react";
 import CircularProgressbarWithLabel from "./CircularProgressbarWithLabel";
 import ResultBreakdownTable from "./ResultBreakdownTable";
 import { DiTerminalBadge } from "react-icons/di";
+import AccordionItemSectionTitle from "./AccordionItemSectionTitle";
 
 interface Props {
   data: ResultWithFilename[];
@@ -36,11 +37,11 @@ const ResultsAccordion = ({ data }: Props) => {
             title={filename}>
             <div>
               <div className="mb-6">
-                <p className="mb-3 flex items-center gap-2">
-                  <DiTerminalBadge size={20} />
-                  <span>Overall Result</span>
-                </p>
-                <div className="flex flex-col gap-4 items-start lg:items-center lg:gap-8 lg:flex-row">
+                <AccordionItemSectionTitle
+                  title="Overall Result"
+                  description="This represents how much of the entire text in the document was likely created by an AI."
+                />
+                <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-8">
                   <CircularProgressbarWithLabel
                     label="AI-Generated"
                     icon={<FaRobot size={20} />}
@@ -56,13 +57,11 @@ const ResultsAccordion = ({ data }: Props) => {
 
               {typeof aiGeneratedTexts !== "string" && (
                 <div className="px-1">
-                  <p className="mb-3 flex items-center gap-2">
-                    <DiTerminalBadge size={20} />
-                    <span>Breakdown of Result</span>
-                  </p>
-                  <ResultBreakdownTable
-                    aiGeneratedTexts={aiGeneratedTexts}
+                  <AccordionItemSectionTitle
+                    title="Breakdown of Result"
+                    description="This section allows you to see which specific paragraphs are more likely to have been created by an AI."
                   />
+                  <ResultBreakdownTable aiGeneratedTexts={aiGeneratedTexts} />
                 </div>
               )}
             </div>
