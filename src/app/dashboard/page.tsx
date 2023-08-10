@@ -1,21 +1,21 @@
 "use client";
 
-import { AddUserButton, Searchbar, TableSkeleton, UserTable } from "@/components";
+import { AddUserButton, Searchbar } from "@/components";
 import { workSans } from "@/fonts";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { UserType } from "@/types";
-import { TailSpin } from "react-loader-spinner";
+import NextUIUserTable from "@/components/NextUIUserTable";
+import { Spinner } from "@nextui-org/spinner";
 
 const Dashboard: React.FC = () => {
   const [users, setUsers] = useState<UserType>();
   const [userAdded, setUserAdded] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [numOfUsers, setNumOfUsers] = useState<number | null>(null);
   const [page, setPage] = useState<number>(1);
 
   async function getTotalUsers() {
-    setIsLoading(true);
     const fetchedUsers: number = await axios("/api/totalusers").then(
       (res) => res.data
     );
@@ -40,7 +40,7 @@ const Dashboard: React.FC = () => {
   }, [page, numOfUsers]);
 
   return (
-    <div className="mx-6 pb-10 pt-10 lg:mx-16 lg:pb-0 lg:pt-28">
+    <div className="mx-6 pb-10 pt-8 lg:mx-16 lg:pb-0 lg:pt-10">
       <div className="flex flex-col items-center justify-between lg:flex-row">
         <h1
           className={`${workSans.className} mb-5 text-center text-2xl font-bold lg:mb-0 lg:text-left`}>
@@ -55,16 +55,7 @@ const Dashboard: React.FC = () => {
             <p
               aria-describedby="title"
               className={`${workSans.className} text-4xl font-bold`}>
-              {isLoading ? <TailSpin
-                height="40"
-                width="40"
-                color="#fff"
-                ariaLabel="tail-spin-loading"
-                radius="1"
-                wrapperStyle={{"justify-content": "center", "margin-bottom": "1.25rem"}}
-                wrapperClass=""
-                visible={true}
-              /> : numOfUsers}
+              {isLoading ? <Spinner color="default" /> : numOfUsers}
             </p>
             <p id="title" className="text-sm font-semibold">
               Total Users
@@ -72,10 +63,10 @@ const Dashboard: React.FC = () => {
           </div>
           <AddUserButton setUserAdded={setUserAdded} />
         </aside>
-        {isLoading && <TableSkeleton />}
+        {isLoading && <Spinner label="Loading..." />}
         {!isLoading && !users && <p>No users</p>}
         {!isLoading && users && (
-          <UserTable
+          <NextUIUserTable
             users={users}
             numOfUsers={numOfUsers ? numOfUsers : 0}
             page={page}
