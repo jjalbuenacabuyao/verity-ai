@@ -9,7 +9,7 @@ const Logo = () => {
     <Link href={"/"}>
       <NavbarBrand>
         <Image src="/logo.svg" width={36} height={36} alt="VerityAI" />
-        <p className={`${workSans.className} lg:text-lg`}>VerityAI</p>
+        <p className={`${workSans.className} lg:text-lg sm:hidden lg:block`}>VerityAI</p>
       </NavbarBrand>
     </Link>
   );
