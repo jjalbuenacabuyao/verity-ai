@@ -1,24 +1,19 @@
 "use client";
 import React, { Dispatch, SetStateAction, useState } from "react";
 import {
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
   useDisclosure,
 } from "@nextui-org/modal";
 import { Button } from "@nextui-org/button";
-import { Input } from "@nextui-org/input";
 import PlusIcon from "./PlusIcon";
 import AddUserModal from "./AddUserModal";
 
 interface Props {
+  userAdded: boolean;
   setUserAdded: Dispatch<SetStateAction<boolean>>;
 }
 
-const AddUserButton = ({ setUserAdded }: Props) => {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+const AddUserButton = ({ setUserAdded, userAdded }: Props) => {
+  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 
   return (
     <>
@@ -29,7 +24,13 @@ const AddUserButton = ({ setUserAdded }: Props) => {
         Add user
       </Button>
 
-      <AddUserModal isOpen={isOpen} onOpenChange={onOpenChange} />
+      <AddUserModal
+        isOpen={isOpen}
+        userAdded={userAdded}
+        setUserAdded={setUserAdded}
+        onOpenChange={onOpenChange}
+        onClose={onClose}
+      />
     </>
   );
 };
