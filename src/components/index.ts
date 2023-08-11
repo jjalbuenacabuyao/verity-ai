@@ -8,8 +8,6 @@ import Logo from "./Logo";
 import ResultsAccordion from "./ResultsAccordion";
 import ResultContainer from "./ResultContainer";
 import Searchbar from "./Searchbar";
-import TableSkeleton from "./TableSkeleton";
-import UserTable from "./UserTable";
 
 export {
   AddUserButton,
@@ -22,6 +20,4 @@ export {
   ResultsAccordion,
   ResultContainer,
   Searchbar,
-  TableSkeleton,
-  UserTable,
 };

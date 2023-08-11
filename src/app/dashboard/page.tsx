@@ -63,7 +63,7 @@ const Dashboard: React.FC = () => {
           </div>
           <AddUserButton setUserAdded={setUserAdded} />
         </aside>
-        {isLoading && <Spinner label="Loading..." />}
+        {isLoading && <Spinner size="lg" label="Loading..." />}
         {!isLoading && !users && <p>No users</p>}
         {!isLoading && users && (
           <NextUIUserTable

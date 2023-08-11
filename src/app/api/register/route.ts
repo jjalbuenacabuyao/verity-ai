@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 
 export async function POST(request: Request) {
   const body = await request.json();
-  const { email, password, role, firstName, middleName, lastName } = body;
+  const { email, password, role, firstname, middlename, lastname } = body;
 
   const hashedPassword = await bcrypt.hash(password, 12);
 
@@ -18,9 +18,9 @@ export async function POST(request: Request) {
         role,
         name: {
           create: {
-            firstName,
-            middleName,
-            lastName,
+            firstName: firstname,
+            middleName: middlename,
+            lastName: lastname,
           },
         },
       },
