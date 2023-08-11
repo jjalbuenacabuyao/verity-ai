@@ -60,7 +60,7 @@ const Dashboard: React.FC = () => {
               Total Users
             </p>
           </div>
-          <AddUserButton setUserAdded={setUserAdded} />
+          <AddUserButton userAdded={userAdded} setUserAdded={setUserAdded} />
         </aside>
         {isLoading && <Spinner size="lg" label="Loading..." />}
         {!isLoading && !users && <p>No users</p>}
