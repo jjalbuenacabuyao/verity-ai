@@ -23,7 +23,7 @@ interface Props {
   setPage: Dispatch<SetStateAction<number>>;
 }
 
-const NextUIUserTable = ({ users, numOfUsers, page, setPage }: Props) => {
+const UserTable = ({ users, numOfUsers, page, setPage }: Props) => {
   const usersPerPage = 5;
   const pages = Math.ceil(numOfUsers / usersPerPage);
   const tableHeadings = ["Name", "Role", "Action"];
@@ -81,4 +81,4 @@ const NextUIUserTable = ({ users, numOfUsers, page, setPage }: Props) => {
   );
 };
 
-export default NextUIUserTable;
+export default UserTable;
