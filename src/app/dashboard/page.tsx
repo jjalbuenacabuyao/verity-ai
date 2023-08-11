@@ -49,7 +49,7 @@ const Dashboard: React.FC = () => {
       </div>
 
       <div className="mt-5 lg:grid lg:grid-cols-[1fr_3fr] lg:gap-7">
-        <aside className="mb-6 lg:mb-0 lg:flex lg:flex-col lg:gap-4">
+        <aside className="mb-6 lg:mb-0 flex flex-col gap-4">
           <div className="rounded-xl bg-blue-500 py-10 text-center text-white">
             <p
               aria-describedby="title"
