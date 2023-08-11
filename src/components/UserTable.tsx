@@ -1,3 +1,5 @@
+"use client";
+
 import { Name, User } from "@prisma/client";
 import React, { Dispatch, SetStateAction } from "react";
 //@ts-ignore
