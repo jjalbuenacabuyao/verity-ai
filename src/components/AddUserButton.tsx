@@ -20,6 +20,7 @@ const AddUserButton = ({ setUserAdded, userAdded }: Props) => {
       <Button
         onPress={onOpen}
         endContent={<PlusIcon />}
+        fullWidth
         className="bg-blue-500 font-semibold tracking-wide text-white">
         Add user
       </Button>
