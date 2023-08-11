@@ -1,11 +1,10 @@
 "use client";
 
-import { AddUserButton, Searchbar } from "@/components";
+import { AddUserButton, Searchbar, UserTable } from "@/components";
 import { workSans } from "@/fonts";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { UserType } from "@/types";
-import NextUIUserTable from "@/components/NextUIUserTable";
 import { Spinner } from "@nextui-org/spinner";
 
 const Dashboard: React.FC = () => {
@@ -66,7 +65,7 @@ const Dashboard: React.FC = () => {
         {isLoading && <Spinner size="lg" label="Loading..." />}
         {!isLoading && !users && <p>No users</p>}
         {!isLoading && users && (
-          <NextUIUserTable
+          <UserTable
             users={users}
             numOfUsers={numOfUsers ? numOfUsers : 0}
             page={page}
