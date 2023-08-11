@@ -2,9 +2,7 @@
 
 import React, {
   ChangeEvent,
-  Dispatch,
   FormEvent,
-  SetStateAction,
   useState,
 } from "react";
 import axios from "axios";
