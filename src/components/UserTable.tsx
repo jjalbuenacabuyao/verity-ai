@@ -15,17 +15,19 @@ import { Tooltip } from "@nextui-org/tooltip";
 import { Pagination } from "@nextui-org/react";
 import EditIcon from "./EditIcon";
 import DeleteIcon from "./DeleteIcon";
+import { Spinner } from "@nextui-org/spinner";
 
 interface Props {
   users: (User & {
     name: Name | null;
-  })[];
+  })[] | null;
   numOfUsers: number;
   page: number;
   setPage: Dispatch<SetStateAction<number>>;
+  isLoading: boolean;
 }
 
-const UserTable = ({ users, numOfUsers, page, setPage }: Props) => {
+const UserTable = ({ users, numOfUsers, page, setPage, isLoading }: Props) => {
   const usersPerPage = 5;
   const pages = Math.ceil(numOfUsers / usersPerPage);
   const tableHeadings = ["Name", "Role", "Action"];
@@ -51,7 +53,9 @@ const UserTable = ({ users, numOfUsers, page, setPage }: Props) => {
         ))}
       </TableHeader>
       <TableBody>
-        {users.map(({ id, name, email, role }) => (
+        {isLoading && <Spinner size="lg" label="Loading..." />}
+        {users && (
+          {users.map(({ id, name, email, role }) => (
           <TableRow key={id}>
             <TableCell>
               <p className="font-medium">
@@ -78,6 +82,7 @@ const UserTable = ({ users, numOfUsers, page, setPage }: Props) => {
             </TableCell>
           </TableRow>
         ))}
+        )}
       </TableBody>
     </Table>
   );
