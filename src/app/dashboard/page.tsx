@@ -8,7 +8,7 @@ import { UserType } from "@/types";
 import { Spinner } from "@nextui-org/spinner";
 
 const Dashboard: React.FC = () => {
-  const [users, setUsers] = useState<UserType>();
+  const [users, setUsers] = useState<UserType | null>(null);
   const [userAdded, setUserAdded] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(true);
   const [numOfUsers, setNumOfUsers] = useState<number | null>(null);
@@ -49,7 +49,7 @@ const Dashboard: React.FC = () => {
       </div>
 
       <div className="mt-5 lg:grid lg:grid-cols-[1fr_3fr] lg:gap-7">
-        <aside className="mb-6 lg:mb-0 flex flex-col gap-4">
+        <aside className="mb-6 flex flex-col gap-4 lg:mb-0">
           <div className="rounded-xl bg-blue-500 py-10 text-center text-white">
             <p
               aria-describedby="title"
@@ -62,7 +62,14 @@ const Dashboard: React.FC = () => {
           </div>
           <AddUserButton userAdded={userAdded} setUserAdded={setUserAdded} />
         </aside>
-        {isLoading && (
+        <UserTable
+          users={users}
+          numOfUsers={numOfUsers ? numOfUsers : 0}
+          page={page}
+          setPage={setPage}
+          isLoading={isLoading}
+        />
+        {/* {isLoading && (
           <div className="flex justify-center pt-4 lg:pt-0">
             <Spinner size="lg" label="Loading..." />
           </div>)}
@@ -73,8 +80,9 @@ const Dashboard: React.FC = () => {
             numOfUsers={numOfUsers ? numOfUsers : 0}
             page={page}
             setPage={setPage}
+            isLoading={isLoading}
           />
-        )}
+        )} */}
       </div>
     </div>
   );
