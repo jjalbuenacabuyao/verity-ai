@@ -16,11 +16,10 @@ import { Pagination } from "@nextui-org/react";
 import EditIcon from "./EditIcon";
 import DeleteIcon from "./DeleteIcon";
 import { Spinner } from "@nextui-org/spinner";
+import { UserType } from "@/types";
 
 interface Props {
-  users: (User & {
-    name: Name | null;
-  })[] | null;
+  users: UserType;
   numOfUsers: number;
   page: number;
   setPage: Dispatch<SetStateAction<number>>;
@@ -36,26 +35,32 @@ const UserTable = ({ users, numOfUsers, page, setPage, isLoading }: Props) => {
     <Table
       aria-label="Table of Users"
       bottomContent={
-        <div className="flex w-full justify-end">
-          <Pagination
-            isCompact
-            showControls
-            showShadow
-            page={page}
-            total={pages}
-            onChange={(page) => setPage(page)}
-          />
-        </div>
-      }>
+        !isLoading && (
+          <div className="flex w-full justify-end">
+            <Pagination
+              isCompact
+              showControls
+              showShadow
+              page={page}
+              total={pages}
+              onChange={(page) => setPage(page)}
+            />
+          </div>
+        )
+      }
+      classNames={{
+        table: "min-h-[200px]",
+      }}
+    >
       <TableHeader>
-        {tableHeadings.map((heading) => (
+        {tableHeadings.map(heading => (
           <TableColumn key={heading}>{heading}</TableColumn>
         ))}
       </TableHeader>
-      <TableBody>
-        {isLoading && <Spinner size="lg" label="Loading..." />}
-        {users && (
-          {users.map(({ id, name, email, role }) => (
+      <TableBody
+        isLoading={isLoading}
+        loadingContent={<Spinner size="lg" label="Loading..." className="text-sm pt-12" />}>
+        {users.map(({ id, name, email, role }) => (
           <TableRow key={id}>
             <TableCell>
               <p className="font-medium">
@@ -66,7 +71,7 @@ const UserTable = ({ users, numOfUsers, page, setPage, isLoading }: Props) => {
             <TableCell>
               {role.charAt(0) + role.slice(1).toLocaleLowerCase()}
             </TableCell>
-            <TableCell>
+            <TableCell className={`${isLoading ? "hidden" : ""}`}>
               <div className="flex items-center gap-2">
                 <Tooltip content="Edit user permission">
                   <span className="cursor-pointer text-lg text-default-400 active:opacity-50">
@@ -82,7 +87,6 @@ const UserTable = ({ users, numOfUsers, page, setPage, isLoading }: Props) => {
             </TableCell>
           </TableRow>
         ))}
-        )}
       </TableBody>
     </Table>
   );
