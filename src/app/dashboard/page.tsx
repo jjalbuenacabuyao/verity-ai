@@ -8,11 +8,27 @@ import { UserType } from "@/types";
 import { Spinner } from "@nextui-org/spinner";
 
 const Dashboard: React.FC = () => {
-  const [users, setUsers] = useState<UserType | null>(null);
+  const [users, setUsers] = useState<UserType>();
   const [userAdded, setUserAdded] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(true);
   const [numOfUsers, setNumOfUsers] = useState<number | null>(null);
   const [page, setPage] = useState<number>(1);
+
+  const defaultUser = [
+    {
+      id: "",
+      email: "",
+      hashedPassword: "",
+      role: "",
+      name: {
+        id: "",
+        firstName: "",
+        middleName: "",
+        lastName: "",
+        userId: "",
+      },
+    },
+  ];
 
   async function getTotalUsers() {
     const fetchedUsers: number = await axios("/api/totalusers").then(
@@ -63,26 +79,12 @@ const Dashboard: React.FC = () => {
           <AddUserButton userAdded={userAdded} setUserAdded={setUserAdded} />
         </aside>
         <UserTable
-          users={users}
+          users={users || (defaultUser as UserType)}
           numOfUsers={numOfUsers ? numOfUsers : 0}
           page={page}
           setPage={setPage}
           isLoading={isLoading}
         />
-        {/* {isLoading && (
-          <div className="flex justify-center pt-4 lg:pt-0">
-            <Spinner size="lg" label="Loading..." />
-          </div>)}
-        {!isLoading && !users && <p>No users</p>}
-        {!isLoading && users && (
-          <UserTable
-            users={users}
-            numOfUsers={numOfUsers ? numOfUsers : 0}
-            page={page}
-            setPage={setPage}
-            isLoading={isLoading}
-          />
-        )} */}
       </div>
     </div>
   );
