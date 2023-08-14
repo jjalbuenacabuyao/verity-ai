@@ -34,10 +34,10 @@ const Dashboard: React.FC = () => {
   ];
 
   async function getTotalUsers() {
-    const fetchedUsers: number = await axios("/api/totalusers").then(
+    const totalUsers: number = await axios("/api/totalusers").then(
       (res) => res.data
     );
-    setNumOfUsers(fetchedUsers);
+    setNumOfUsers(totalUsers);
     setIsFetchingNumOfUsers(false);
   }
 
@@ -60,7 +60,7 @@ const Dashboard: React.FC = () => {
   }, [page, numOfUsers, search]);
 
   return (
-    <div className="mx-6 pb-10 pt-8 lg:mx-16 lg:pb-0 lg:pt-10">
+    <div className="mx-6 pb-10 pt-8 lg:mx-16 lg:pt-10">
       <div className="flex flex-col items-center justify-between lg:flex-row">
         <h1
           className={`${workSans.className} mb-5 text-center text-2xl font-bold lg:mb-0 lg:text-left`}>
@@ -90,6 +90,7 @@ const Dashboard: React.FC = () => {
           page={page}
           setPage={setPage}
           isLoading={isLoading}
+          search={search}
         />
       </div>
     </div>
