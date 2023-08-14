@@ -35,40 +35,40 @@ const UserTable = ({ users, numOfUsers, page, setPage, isLoading }: Props) => {
     <Table
       aria-label="Table of Users"
       bottomContent={
-        !isLoading && (
-          <div className="flex w-full justify-end">
-            <Pagination
-              isCompact
-              showControls
-              showShadow
-              page={page}
-              total={pages}
-              onChange={(page) => setPage(page)}
-            />
-          </div>
-        )
+        <div className="flex w-full justify-end">
+          <Pagination
+            isCompact
+            showControls
+            showShadow
+            page={page}
+            total={pages}
+            onChange={(page) => setPage(page)}
+            isDisabled={isLoading}
+          />
+        </div>
       }
       classNames={{
-        table: "min-h-[200px]",
-      }}
-    >
+        table: "min-h-[300px]",
+      }}>
       <TableHeader>
-        {tableHeadings.map(heading => (
+        {tableHeadings.map((heading) => (
           <TableColumn key={heading}>{heading}</TableColumn>
         ))}
       </TableHeader>
       <TableBody
         isLoading={isLoading}
-        loadingContent={<Spinner size="lg" label="Loading..." className="text-sm pt-12" />}>
+        loadingContent={
+          <Spinner size="lg" label="Loading..." className="pt-12 text-sm" />
+        }>
         {users.map(({ id, name, email, role }) => (
           <TableRow key={id}>
-            <TableCell>
+            <TableCell className={`${isLoading ? "hidden" : ""}`}>
               <p className="font-medium">
                 {`${name?.firstName} ${name?.middleName} ${name?.lastName}`}
               </p>
               <p className="text-xs">{email}</p>
             </TableCell>
-            <TableCell>
+            <TableCell className={`${isLoading ? "hidden" : ""}`}>
               {role.charAt(0) + role.slice(1).toLocaleLowerCase()}
             </TableCell>
             <TableCell className={`${isLoading ? "hidden" : ""}`}>
