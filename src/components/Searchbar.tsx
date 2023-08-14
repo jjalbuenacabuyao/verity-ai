@@ -1,40 +1,20 @@
 "use client";
 
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { ChangeEvent, Dispatch, FormEvent, SetStateAction, useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import { UserType } from "@/types";
 import axios from "axios";
 
 type Props = {
   className: string;
+  setSearch: Dispatch<SetStateAction<string>>;
 };
 
-const Searchbar = ({ className }: Props) => {
-  const [search, setSearch] = useState<string>("");
-  const [searchResult, setSearchResult] = useState<UserType[] | string>();
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
-    setSearch(event.target.value);
-  };
-
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    if (search.length > 0) {
-      const searchResult: UserType[] | string = await axios
-        .post("/api/search-user", { search })
-        .then((response) => response.data);
-
-      setSearchResult(searchResult);
-    }
-
-    return;
-  };
+const Searchbar = ({ className, setSearch }: Props) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value);
 
   return (
     <form
-      onSubmit={handleSubmit}
       role="search"
       className={`relative w-full text-sm lg:w-auto ${className}`}>
       <label htmlFor="search" className="hidden">
@@ -52,7 +32,6 @@ const Searchbar = ({ className }: Props) => {
       <span className="absolute right-3 top-2.5 block rounded border p-1 text-[8px] font-semibold leading-none">
         Enter
       </span>
-      <input type="submit" hidden />
     </form>
   );
 };
