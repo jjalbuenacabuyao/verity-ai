@@ -43,6 +43,7 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     async function fetchUsers() {
+      setIsLoading(true);
       const fetchedUsers = await axios(`/api/users?page=${page}`).then(
         (res) => res.data
       );
