@@ -12,8 +12,6 @@ export async function GET(req: Request) {
   
   if (search !== "") {
     const searchResult = await prisma.user.findMany({
-      take: usersPerPage,
-      skip,
       orderBy: {
         name: {
           firstName: "asc",
