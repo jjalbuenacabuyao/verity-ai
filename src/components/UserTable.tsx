@@ -24,9 +24,17 @@ interface Props {
   page: number;
   setPage: Dispatch<SetStateAction<number>>;
   isLoading: boolean;
+  search: string;
 }
 
-const UserTable = ({ users, numOfUsers, page, setPage, isLoading }: Props) => {
+const UserTable = ({
+  users,
+  numOfUsers,
+  page,
+  setPage,
+  isLoading,
+  search,
+}: Props) => {
   const usersPerPage = 5;
   const pages = Math.ceil(numOfUsers / usersPerPage);
   const tableHeadings = ["Name", "Role", "Action"];
@@ -35,20 +43,22 @@ const UserTable = ({ users, numOfUsers, page, setPage, isLoading }: Props) => {
     <Table
       aria-label="Table of Users"
       bottomContent={
-        <div className="flex w-full justify-end">
-          <Pagination
-            isCompact
-            showControls
-            showShadow
-            page={page}
-            total={pages}
-            onChange={(page) => setPage(page)}
-            isDisabled={isLoading}
-          />
-        </div>
+        search === "" && !isLoading && (
+          <div className="flex w-full justify-end">
+            <Pagination
+              isCompact
+              showControls
+              showShadow
+              page={page}
+              total={pages}
+              onChange={(page) => setPage(page)}
+              isDisabled={isLoading}
+            />
+          </div>
+        )
       }
       classNames={{
-        table: "min-h-[300px]",
+        table: `${isLoading ? "min-h-[300px]" : ""}`,
       }}>
       <TableHeader>
         {tableHeadings.map((heading) => (
