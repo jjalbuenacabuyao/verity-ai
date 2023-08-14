@@ -62,7 +62,7 @@ const Dashboard: React.FC = () => {
           className={`${workSans.className} mb-5 text-center text-2xl font-bold lg:mb-0 lg:text-left`}>
           Dashboard
         </h1>
-        <Searchbar />
+        <Searchbar className="hidden lg:block" />
       </div>
 
       <div className="mt-5 lg:grid lg:grid-cols-[1fr_3fr] lg:gap-7">
@@ -78,6 +78,7 @@ const Dashboard: React.FC = () => {
             </p>
           </div>
           <AddUserButton userAdded={userAdded} setUserAdded={setUserAdded} />
+          <Searchbar className="lg:hidden" />
         </aside>
         <UserTable
           users={users || (defaultUser as UserType)}
