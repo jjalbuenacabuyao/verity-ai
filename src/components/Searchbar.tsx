@@ -5,9 +5,11 @@ import { BiSearch } from "react-icons/bi";
 import { UserType } from "@/types";
 import axios from "axios";
 
-type Props = {};
+type Props = {
+  className: string;
+};
 
-const Searchbar = (props: Props) => {
+const Searchbar = ({ className }: Props) => {
   const [search, setSearch] = useState<string>("");
   const [searchResult, setSearchResult] = useState<UserType[] | string>();
 
@@ -34,7 +36,7 @@ const Searchbar = (props: Props) => {
     <form
       onSubmit={handleSubmit}
       role="search"
-      className="relative w-full text-sm lg:w-auto">
+      className={`relative w-full text-sm lg:w-auto ${className}`}>
       <label htmlFor="search" className="hidden">
         Search user
       </label>
