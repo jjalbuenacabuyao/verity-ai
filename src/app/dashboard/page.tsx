@@ -11,8 +11,11 @@ const Dashboard: React.FC = () => {
   const [users, setUsers] = useState<UserType>();
   const [userAdded, setUserAdded] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isFetchingNumOfUsers, setIsFetchingNumOfUsers] = useState<boolean>(true);
   const [numOfUsers, setNumOfUsers] = useState<number | null>(null);
   const [page, setPage] = useState<number>(1);
+  
+  const [search, setSearch] = useState<string>("");
 
   const defaultUser = [
     {
@@ -35,6 +38,7 @@ const Dashboard: React.FC = () => {
       (res) => res.data
     );
     setNumOfUsers(fetchedUsers);
+    setIsFetchingNumOfUsers(false);
   }
 
   useEffect(() => {
@@ -44,7 +48,7 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     async function fetchUsers() {
       setIsLoading(true);
-      const fetchedUsers = await axios(`/api/users?page=${page}`).then(
+      const fetchedUsers = await axios(`/api/users?page=${page}&search=${search}`).then(
         (res) => res.data
       );
       setUsers(fetchedUsers);
@@ -53,7 +57,7 @@ const Dashboard: React.FC = () => {
     if (numOfUsers) {
       fetchUsers();
     }
-  }, [page, numOfUsers]);
+  }, [page, numOfUsers, search]);
 
   return (
     <div className="mx-6 pb-10 pt-8 lg:mx-16 lg:pb-0 lg:pt-10">
@@ -62,7 +66,7 @@ const Dashboard: React.FC = () => {
           className={`${workSans.className} mb-5 text-center text-2xl font-bold lg:mb-0 lg:text-left`}>
           Dashboard
         </h1>
-        <Searchbar className="hidden lg:block" />
+        <Searchbar className="hidden lg:block" setSearch={setSearch} />
       </div>
 
       <div className="mt-5 lg:grid lg:grid-cols-[1fr_3fr] lg:gap-7">
@@ -71,14 +75,14 @@ const Dashboard: React.FC = () => {
             <p
               aria-describedby="title"
               className={`${workSans.className} text-4xl font-bold`}>
-              {isLoading ? <Spinner color="default" /> : numOfUsers}
+              {isFetchingNumOfUsers ? <Spinner color="default" /> : numOfUsers}
             </p>
             <p id="title" className="text-sm font-semibold">
               Total Users
             </p>
           </div>
           <AddUserButton userAdded={userAdded} setUserAdded={setUserAdded} />
-          <Searchbar className="lg:hidden" />
+          <Searchbar className="lg:hidden" setSearch={setSearch} />
         </aside>
         <UserTable
           users={users || (defaultUser as UserType)}
