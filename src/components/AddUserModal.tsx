@@ -135,6 +135,7 @@ const AddUserModal = ({ isOpen, onOpenChange, setUserAdded, userAdded, onClose }
                       variant="bordered"
                       name="password"
                       isRequired
+                      onChange={handleChange}
                       endContent={
                         <button
                           className="focus:outline-none"
