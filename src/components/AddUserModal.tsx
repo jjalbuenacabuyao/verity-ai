@@ -15,6 +15,7 @@ import { Radio, RadioGroup } from "@nextui-org/radio";
 import EyeFilledIcon from "./EyeFilledIcon";
 import EyeSlashFilledIcon from "./EyeSlashFilledIcon";
 import UserAddedToast from "./UserAddedToast";
+import { useRouter } from "next/navigation";
 
 interface User {
   email: string;
@@ -34,6 +35,7 @@ interface Props {
 }
 
 const AddUserModal = ({ isOpen, onOpenChange, setUserAdded, userAdded, onClose }: Props) => {
+  const router = useRouter();
   const [user, setUser] = useState<User>({
     email: "",
     password: "",
@@ -59,6 +61,7 @@ const AddUserModal = ({ isOpen, onOpenChange, setUserAdded, userAdded, onClose }
     setIsLoading(false);
     onClose();
     setUserAdded(true);
+    router.refresh();
   };
 
   const nameInputFields = ["firstname", "middlename", "lastname"];
