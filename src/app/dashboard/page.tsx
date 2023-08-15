@@ -42,6 +42,7 @@ const Dashboard: React.FC = () => {
   }
 
   useEffect(() => {
+    setUserAdded(false);
     getTotalUsers();
   }, [userAdded]);
 
