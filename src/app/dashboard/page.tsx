@@ -44,7 +44,7 @@ const Dashboard: React.FC = () => {
     }
 
     getTotalUsers();
-  }, [userAdded]);
+  }, []);
 
   useEffect(() => {
     async function fetchUsers() {
