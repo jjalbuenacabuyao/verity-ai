@@ -55,13 +55,10 @@ const AddUserModal = ({ isOpen, onOpenChange, setUserAdded, userAdded, onClose }
     event.preventDefault();
 
     setIsLoading(true);
-    const response = await axios.post("/api/register", user);
-
-    if (response.statusText === "OK") {
-      setIsLoading(false);
-      setUserAdded(true);
-      onClose();
-    }
+    await axios.post("/api/register", user);
+    setIsLoading(false);
+    setUserAdded(true);
+    onClose();
   };
 
   const nameInputFields = ["firstname", "middlename", "lastname"];
