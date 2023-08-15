@@ -4,10 +4,6 @@ import { NextResponse } from "next/server";
 const prisma = new PrismaClient();
 
 export async function GET() {
-  const users = await prisma.user.findMany();
-  return NextResponse.json(users, {
-    headers: {
-      "Cache-Control": "no-store",
-    },
-  });
+  const totalUsers = await prisma.user.count();
+  return NextResponse.json(totalUsers);
 }

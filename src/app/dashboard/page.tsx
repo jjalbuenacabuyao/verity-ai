@@ -38,13 +38,12 @@ const Dashboard: React.FC = () => {
       const totalUsers = await axios("/api/totalusers").then(
         (res) => res.data
       );
-      console.log(totalUsers);
-      setNumOfUsers(totalUsers.length);
+      setNumOfUsers(totalUsers);
       setIsFetchingNumOfUsers(false);
     }
 
     getTotalUsers();
-  }, []);
+  }, [userAdded]);
 
   useEffect(() => {
     async function fetchUsers() {
