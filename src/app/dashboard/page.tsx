@@ -41,10 +41,10 @@ const Dashboard: React.FC = () => {
       setNumOfUsers(totalUsers);
       setIsFetchingNumOfUsers(false);
     }
-    
+
     setUserAdded(false);
     getTotalUsers();
-  }, [userAdded]);
+  }, []);
 
   useEffect(() => {
     async function fetchUsers() {
