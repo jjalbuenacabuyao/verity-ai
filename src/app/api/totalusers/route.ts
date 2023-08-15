@@ -5,5 +5,9 @@ const prisma = new PrismaClient();
 
 export async function GET() {
   const totalUsers = await prisma.user.count();
-  return NextResponse.json(totalUsers);
+  return NextResponse.json(totalUsers, {
+    headers: {
+      "Cache-Control": "no-store",
+    },
+  });
 }
