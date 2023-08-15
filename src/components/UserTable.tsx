@@ -1,6 +1,5 @@
 "use client";
 
-import { Name, User } from "@prisma/client";
 import React, { Dispatch, SetStateAction } from "react";
 //@ts-ignore
 import {
@@ -90,7 +89,7 @@ const UserTable = ({
                 </Tooltip>
                 <Tooltip color="danger" content="Delete user">
                   <span className="cursor-pointer text-lg text-danger active:opacity-50">
-                    <DeleteIcon />
+                    <DeleteIcon id={id} />
                   </span>
                 </Tooltip>
               </div>
