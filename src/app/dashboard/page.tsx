@@ -42,9 +42,8 @@ const Dashboard: React.FC = () => {
       setIsFetchingNumOfUsers(false);
     }
 
-    setUserAdded(false);
     getTotalUsers();
-  }, []);
+  }, [userAdded]);
 
   useEffect(() => {
     async function fetchUsers() {
