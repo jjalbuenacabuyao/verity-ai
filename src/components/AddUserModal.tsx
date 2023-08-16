@@ -15,7 +15,7 @@ import { Radio, RadioGroup } from "@nextui-org/radio";
 import EyeFilledIcon from "./EyeFilledIcon";
 import EyeSlashFilledIcon from "./EyeSlashFilledIcon";
 import UserAddedToast from "./UserAddedToast";
-import { useRouter } from "next/navigation";
+import EmailAlreadyExistToast from "./EmailAlreadyExistToast";
 
 interface User {
   email: string;
@@ -35,7 +35,6 @@ interface Props {
 }
 
 const AddUserModal = ({ isOpen, onOpenChange, setUserAdded, userAdded, onClose }: Props) => {
-  const router = useRouter();
   const [user, setUser] = useState<User>({
     email: "",
     password: "",
@@ -46,6 +45,7 @@ const AddUserModal = ({ isOpen, onOpenChange, setUserAdded, userAdded, onClose }
   });
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
 
   const toggleVisibility = () => setIsVisible(!isVisible);
 
@@ -57,11 +57,16 @@ const AddUserModal = ({ isOpen, onOpenChange, setUserAdded, userAdded, onClose }
     event.preventDefault();
 
     setIsLoading(true);
-    await axios.post("/api/register", user);
-    setIsLoading(false);
-    onClose();
-    setUserAdded(true);
-    location.reload();
+    try {
+      const response = await axios.post("/api/register", user);
+      setIsLoading(false);
+      onClose();
+      setUserAdded(true);
+      location.reload();
+    } catch (error) {
+      setIsError(true);
+      setIsLoading(false);
+    }
   };
 
   const nameInputFields = ["firstname", "middlename", "lastname"];
@@ -69,6 +74,7 @@ const AddUserModal = ({ isOpen, onOpenChange, setUserAdded, userAdded, onClose }
   return (
     <>
       <Modal
+        isDismissable={false}
         isOpen={isOpen}
         onOpenChange={onOpenChange}
         placement="center"
@@ -170,6 +176,9 @@ const AddUserModal = ({ isOpen, onOpenChange, setUserAdded, userAdded, onClose }
           userAdded={userAdded}
           setUserAdded={setUserAdded}
         />
+      )}
+      {isError && (
+        <EmailAlreadyExistToast isError={isError} setIsError={setIsError} />
       )}
     </>
   );
