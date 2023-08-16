@@ -35,6 +35,7 @@ interface Props {
 }
 
 const AddUserModal = ({ isOpen, onOpenChange, setUserAdded, userAdded, onClose }: Props) => {
+  const router = useRouter();
   const [user, setUser] = useState<User>({
     email: "",
     password: "",
@@ -60,6 +61,7 @@ const AddUserModal = ({ isOpen, onOpenChange, setUserAdded, userAdded, onClose }
     setIsLoading(false);
     onClose();
     setUserAdded(true);
+    location.reload();
   };
 
   const nameInputFields = ["firstname", "middlename", "lastname"];

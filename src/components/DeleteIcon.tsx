@@ -7,7 +7,7 @@ interface Props {
 
 const deleteUser = async (id: string) => {
   const response = await axios.post("/api/delete", { id })
-  console.log(response.status)
+  location.reload();
 }
 
 const DeleteIcon = ({ id, ...props }: Props) => (
