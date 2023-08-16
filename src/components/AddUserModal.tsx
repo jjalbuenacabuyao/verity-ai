@@ -1,6 +1,12 @@
 "use client";
 
-import React, { ChangeEvent, Dispatch, FormEvent, SetStateAction, useState } from "react";
+import React, {
+  ChangeEvent,
+  Dispatch,
+  FormEvent,
+  SetStateAction,
+  useState,
+} from "react";
 import axios from "axios";
 import {
   Modal,
@@ -16,6 +22,7 @@ import EyeFilledIcon from "./EyeFilledIcon";
 import EyeSlashFilledIcon from "./EyeSlashFilledIcon";
 import UserAddedToast from "./UserAddedToast";
 import EmailAlreadyExistToast from "./EmailAlreadyExistToast";
+import PasswordVisibilityToggler from "./PasswordVisibilityToggler";
 
 interface User {
   email: string;
@@ -34,7 +41,13 @@ interface Props {
   setUserAdded: Dispatch<SetStateAction<boolean>>;
 }
 
-const AddUserModal = ({ isOpen, onOpenChange, setUserAdded, userAdded, onClose }: Props) => {
+const AddUserModal = ({
+  isOpen,
+  onOpenChange,
+  setUserAdded,
+  userAdded,
+  onClose,
+}: Props) => {
   const [user, setUser] = useState<User>({
     email: "",
     password: "",
@@ -110,7 +123,9 @@ const AddUserModal = ({ isOpen, onOpenChange, setUserAdded, userAdded, onClose }
                       name="role"
                       //@ts-ignore
                       onChange={handleChange}>
-                      <Radio value="USER" className="rounded-lg border py-2 px-4">
+                      <Radio
+                        value="USER"
+                        className="rounded-lg border px-4 py-2">
                         <p className="font-semibold">User</p>
                         <ul className="text-xs">
                           <li>✅ AI-Detector</li>
@@ -119,7 +134,7 @@ const AddUserModal = ({ isOpen, onOpenChange, setUserAdded, userAdded, onClose }
                       </Radio>
                       <Radio
                         value="ADMIN"
-                        className="ml-4 rounded-lg border py-2 px-4">
+                        className="ml-4 rounded-lg border px-4 py-2">
                         <p className="font-semibold">Admin</p>
                         <ul className="text-xs">
                           <li>✅ AI-Detector</li>
@@ -144,16 +159,10 @@ const AddUserModal = ({ isOpen, onOpenChange, setUserAdded, userAdded, onClose }
                       isRequired
                       onChange={handleChange}
                       endContent={
-                        <button
-                          className="focus:outline-none"
-                          type="button"
-                          onClick={toggleVisibility}>
-                          {isVisible ? (
-                            <EyeSlashFilledIcon className="pointer-events-none text-2xl text-default-400" />
-                          ) : (
-                            <EyeFilledIcon className="pointer-events-none text-2xl text-default-400" />
-                          )}
-                        </button>
+                        <PasswordVisibilityToggler
+                          toggleVisibility={toggleVisibility}
+                          isVisible={isVisible}
+                        />
                       }
                       type={isVisible ? "text" : "password"}
                     />
@@ -173,10 +182,7 @@ const AddUserModal = ({ isOpen, onOpenChange, setUserAdded, userAdded, onClose }
         </form>
       </Modal>
       {userAdded && (
-        <UserAddedToast
-          userAdded={userAdded}
-          setUserAdded={setUserAdded}
-        />
+        <UserAddedToast userAdded={userAdded} setUserAdded={setUserAdded} />
       )}
       {isError && (
         <EmailAlreadyExistToast isError={isError} setIsError={setIsError} />

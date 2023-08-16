@@ -15,6 +15,7 @@ import EyeSlashFilledIcon from "./EyeSlashFilledIcon";
 import EyeFilledIcon from "./EyeFilledIcon";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import PasswordVisibilityToggler from "./PasswordVisibilityToggler";
 
 const LogInButtonAndModal = () => {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
@@ -42,7 +43,7 @@ const LogInButtonAndModal = () => {
 
     if (response?.error) {
       setError(response.error);
-      setIsLoading(false)
+      setIsLoading(false);
     } else {
       router.push("/detector");
       router.refresh();
@@ -59,7 +60,11 @@ const LogInButtonAndModal = () => {
         className="bg-blue-500 text-sm font-semibold tracking-wide text-white">
         Log in
       </Button>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="center" className="mx-4 my-4">
+      <Modal
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        placement="center"
+        className="mx-4 my-4">
         <ModalContent>
           {(onClose) => (
             <form onSubmit={handleSubmit}>
@@ -78,41 +83,36 @@ const LogInButtonAndModal = () => {
                     error === "User does not exist" ? "invalid" : "valid"
                   }
                   errorMessage={
-                    error === "User does not exist"
-                      ? "User does not exist"
-                      : ""
+                    error === "User does not exist" ? "User does not exist" : ""
                   }
                 />
                 <Input
                   endContent={
-                    <button
-                      className="focus:outline-none"
-                      type="button"
-                      onClick={toggleVisibility}>
-                      {isVisible ? (
-                        <EyeSlashFilledIcon className="pointer-events-none text-2xl text-default-400" />
-                      ) : (
-                        <EyeFilledIcon className="pointer-events-none text-2xl text-default-400" />
-                      )}
-                    </button>
+                    <PasswordVisibilityToggler
+                      toggleVisibility={toggleVisibility}
+                      isVisible={isVisible}
+                    />
                   }
                   isRequired
                   label="Password"
                   name="password"
                   type={isVisible ? "text" : "password"}
                   variant="bordered"
-                  validationState={error === "Incorrect password" ? "invalid" : "valid"}
-                  errorMessage={error === "Incorrect password" ? "Incorrect password" : ""}
+                  validationState={
+                    error === "Incorrect password" ? "invalid" : "valid"
+                  }
+                  errorMessage={
+                    error === "Incorrect password" ? "Incorrect password" : ""
+                  }
                 />
                 <div className="flex justify-end px-1 py-2">
-                  <Link href="#" className="text-sm text-blue-500">Forgot password?</Link>
+                  <Link href="#" className="text-sm text-blue-500">
+                    Forgot password?
+                  </Link>
                 </div>
               </ModalBody>
               <ModalFooter>
-                <Button
-                  color="danger"
-                  variant="flat"
-                  onClick={onClose}>
+                <Button color="danger" variant="flat" onClick={onClose}>
                   Close
                 </Button>
                 <Button
