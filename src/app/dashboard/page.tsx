@@ -11,10 +11,11 @@ const Dashboard: React.FC = () => {
   const [users, setUsers] = useState<UserType>();
   const [userAdded, setUserAdded] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [isFetchingNumOfUsers, setIsFetchingNumOfUsers] = useState<boolean>(true);
+  const [isFetchingNumOfUsers, setIsFetchingNumOfUsers] =
+    useState<boolean>(true);
   const [numOfUsers, setNumOfUsers] = useState<number | null>(null);
   const [page, setPage] = useState<number>(1);
-  
+
   const [search, setSearch] = useState<string>("");
 
   const defaultUser = [
@@ -35,9 +36,9 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     async function getTotalUsers() {
-      const totalUsers = await axios("/api/totalusers").then(
-        (res) => res.data
-      );
+      const totalUsers = await axios
+        .get("/api/totalusers", { headers: { "Cache-Control": "no-cache" } })
+        .then((res) => res.data);
       setNumOfUsers(totalUsers);
       setIsFetchingNumOfUsers(false);
     }
@@ -48,9 +49,9 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     async function fetchUsers() {
       setIsLoading(true);
-      const fetchedUsers = await axios(`/api/users?page=${page}&search=${search}`).then(
-        (res) => res.data
-      );
+      const fetchedUsers = await axios(
+        `/api/users?page=${page}&search=${search}`
+      ).then((res) => res.data);
       setUsers(fetchedUsers);
       setIsLoading(false);
     }
