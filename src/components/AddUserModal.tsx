@@ -96,6 +96,7 @@ const AddUserModal = ({ isOpen, onOpenChange, setUserAdded, userAdded, onClose }
                         label={field === "middlename" ? "Middle name" : field}
                         name={field}
                         variant="bordered"
+                        autoComplete="off"
                         isRequired
                         onChange={handleChange}
                       />
