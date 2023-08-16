@@ -18,7 +18,7 @@ const UserAddedToast = ({ userAdded, setUserAdded }: Props) => {
       <Root
         open={userAdded}
         onOpenChange={setUserAdded}
-        className='flex items-center gap-4 text-white p-5 border bg-green-500 rounded-md shadow-md data-[state=open]:animate-slideIn data-[state=closed]:animate-hide data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=cancel]:translate-x-0 data-[swipe=cancel]:transition-[transform_200ms_ease-out] data-[swipe=end]:animate-swipeOut'>
+        className='flex items-center gap-4 text-white p-5 border bg-green-500 rounded-md shadow-lg data-[state=open]:animate-slideIn data-[state=closed]:animate-hide data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=cancel]:translate-x-0 data-[swipe=cancel]:transition-[transform_200ms_ease-out] data-[swipe=end]:animate-swipeOut'>
         <Title className='font-semibold'>User added successfully.</Title>
         <Close>
           <AiFillCloseCircle size={20} />
