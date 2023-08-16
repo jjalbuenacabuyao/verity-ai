@@ -42,7 +42,7 @@ const UserTable = ({
     <Table
       aria-label="Table of Users"
       bottomContent={
-        search === "" && !isLoading && (
+        search === "" && (
           <div className="flex w-full justify-end">
             <Pagination
               isCompact
