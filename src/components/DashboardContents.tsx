@@ -1,54 +1,36 @@
 "use client";
 
-import { workSans } from '@/fonts';
-import { UserType } from '@/types'
-import React, { useEffect, useState } from 'react'
-import Searchbar from './Searchbar';
-import { Spinner } from '@nextui-org/spinner';
-import AddUserButton from './AddUserButton';
-import UserTable from './UserTable';
-import axios from 'axios';
+import { workSans } from "@/fonts";
+import { UserType } from "@/types";
+import React, { useEffect, useState } from "react";
+import Searchbar from "./Searchbar";
+import AddUserButton from "./AddUserButton";
+import UserTable from "./UserTable";
+import axios from "axios";
 
 interface Props {
-  initialUsers: UserType;
   totalUsers: number;
 }
 
-const DashboardContents = ({ initialUsers, totalUsers }: Props) => {
-  const [users, setUsers] = useState<UserType>(initialUsers);
+const DashboardContents = ({ totalUsers }: Props) => {
+  const [users, setUsers] = useState<UserType>([]);
   const [userAdded, setUserAdded] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isFetchingNumOfUsers, setIsFetchingNumOfUsers] =
-    useState<boolean>(false);
-  const [numOfUsers, setNumOfUsers] = useState<number>(totalUsers);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [page, setPage] = useState<number>(1);
   const [search, setSearch] = useState<string>("");
 
-  // useEffect(() => {
-  //   async function getTotalUsers() {
-  //     const totalUsers = await axios
-  //       .get("/api/totalusers", { headers: { "Cache-Control": "no-cache" } })
-  //       .then((res) => res.data);
-  //     setNumOfUsers(totalUsers);
-  //     setIsFetchingNumOfUsers(false);
-  //   }
+  useEffect(() => {
+    async function fetchUsers() {
+      setIsLoading(true);
+      const fetchedUsers = await axios(
+        `/api/users?page=${page}&search=${search}`
+      ).then((res) => res.data);
+      setUsers(fetchedUsers);
+      setIsLoading(false);
+    }
 
-  //   getTotalUsers();
-  // }, [userAdded]);
-
-  // useEffect(() => {
-  //   async function fetchUsers() {
-  //     setIsLoading(true);
-  //     const fetchedUsers = await axios(
-  //       `/api/users?page=${page}&search=${search}`
-  //     ).then((res) => res.data);
-  //     setUsers(fetchedUsers);
-  //     setIsLoading(false);
-  //   }
-  //   if (numOfUsers) {
-  //     fetchUsers();
-  //   }
-  // }, [page, numOfUsers, search]);
+    fetchUsers();
+  }, [search, page]);
 
   return (
     <>
@@ -66,7 +48,7 @@ const DashboardContents = ({ initialUsers, totalUsers }: Props) => {
             <p
               aria-describedby="title"
               className={`${workSans.className} text-4xl font-bold`}>
-              {isFetchingNumOfUsers ? <Spinner color="default" /> : numOfUsers}
+              {totalUsers}
             </p>
             <p id="title" className="text-sm font-semibold">
               Total Users
@@ -77,7 +59,7 @@ const DashboardContents = ({ initialUsers, totalUsers }: Props) => {
         </aside>
         <UserTable
           users={users}
-          numOfUsers={numOfUsers}
+          numOfUsers={totalUsers}
           page={page}
           setPage={setPage}
           isLoading={isLoading}
@@ -85,7 +67,7 @@ const DashboardContents = ({ initialUsers, totalUsers }: Props) => {
         />
       </div>
     </>
-  )
-}
+  );
+};
 
 export default DashboardContents;
