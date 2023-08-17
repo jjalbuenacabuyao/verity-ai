@@ -7,6 +7,7 @@ import Toast from "./Toast";
 import DownloadReportButton from "./DownloadReportButton";
 import Loader from "./Loader";
 import ResultsAccordion from "./ResultsAccordion";
+import axios from "axios";
 
 interface Props {
   files: File[];
@@ -26,18 +27,20 @@ const ResultContainer = ({ files }: Props) => {
     }
 
     if (files?.length !== 0) {
+      setIsLoading(true);
       const result = files!.map(async (file) => {
         const extractedText = await getTextFromFiles(file);
 
-        const response = await fetch("/api/detectionHandler", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ extractedText }),
-        });
+        // const response = await fetch("/api/detectionHandler", {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        //   body: JSON.stringify({ extractedText }),
+        // });
+        const response = await axios.post("/api/detectaitext", {extractedText})
 
-        const data: DetectionResult = await response.json();
+        const data: DetectionResult = await response.data;
 
         return {
           filename: file.name,
