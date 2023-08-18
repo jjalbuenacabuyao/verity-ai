@@ -20,7 +20,7 @@ const Aside = ({ setFiles }: Props) => {
 
   return (
     <aside className="mb-16 pt-8 lg:mb-0 lg:pt-10">
-      <div className="flex flex-col gap-4 lg:sticky lg:inset-x-auto lg:top-auto">
+      <div className="flex flex-col gap-4 lg:sticky lg:inset-x-auto lg:top-[105px]">
         <div className="group flex flex-col items-center rounded-lg border-2 border-dashed border-gray-300 py-6">
           <FiUpload size={36} className="group-hover:animate-bounce" />
           <h1 className="mb-6 mt-4">Upload pdf and docx files</h1>
