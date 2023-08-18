@@ -17,7 +17,7 @@ type Props = {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-const Toast: React.FC<Props> = ({ isOpen, setIsOpen, filename }: Props) => {
+const DetectionErrorToast: React.FC<Props> = ({ isOpen, setIsOpen, filename }: Props) => {
   return (
     <>
       <Root
@@ -42,4 +42,4 @@ const Toast: React.FC<Props> = ({ isOpen, setIsOpen, filename }: Props) => {
   );
 };
 
-export default Toast;
+export default DetectionErrorToast;

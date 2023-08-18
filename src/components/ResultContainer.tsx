@@ -3,11 +3,12 @@
 import React, { useEffect, useState } from "react";
 import { getTextFromFiles } from "@/utils";
 import { DetectionResult, ResultWithFilename } from "@/types";
-import Toast from "./Toast";
+import DetectionErrorToast from "./DetectionErrorToast";
 import DownloadReportButton from "./DownloadReportButton";
 import Loader from "./Loader";
 import ResultsAccordion from "./ResultsAccordion";
 import axios from "axios";
+import { Spinner } from "@nextui-org/spinner";
 
 interface Props {
   files: File[];
@@ -30,14 +31,6 @@ const ResultContainer = ({ files }: Props) => {
       setIsLoading(true);
       const result = files!.map(async (file) => {
         const extractedText = await getTextFromFiles(file);
-
-        // const response = await fetch("/api/detectionHandler", {
-        //   method: "POST",
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //   },
-        //   body: JSON.stringify({ extractedText }),
-        // });
         const response = await axios.post("/api/detectaitext", {extractedText})
 
         const data: DetectionResult = await response.data;
@@ -95,7 +88,7 @@ const ResultContainer = ({ files }: Props) => {
       </div>
 
       <div>
-        {isLoading && <Loader />}
+        {isLoading && <Spinner size="lg" label="Loading..." />}
 
         {results.length === 0 && isLoading === false && (
           <p className="py-6 text-center text-sm text-slate-400 lg:pt-10 lg:text-base">
@@ -112,7 +105,7 @@ const ResultContainer = ({ files }: Props) => {
 
       {errorResult.length > 0 &&
         errorResult.map((filename, index) => (
-          <Toast
+          <DetectionErrorToast
             key={index}
             filename={filename}
             isOpen={isToastOpen}
