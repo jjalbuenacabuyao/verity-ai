@@ -23,6 +23,7 @@ import EyeSlashFilledIcon from "./EyeSlashFilledIcon";
 import UserAddedToast from "./UserAddedToast";
 import EmailAlreadyExistToast from "./EmailAlreadyExistToast";
 import PasswordVisibilityToggler from "./PasswordVisibilityToggler";
+import { useRouter } from "next/navigation";
 
 interface User {
   email: string;
@@ -59,6 +60,7 @@ const AddUserModal = ({
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
+  const router = useRouter();
 
   const toggleVisibility = () => setIsVisible(!isVisible);
 
@@ -75,7 +77,7 @@ const AddUserModal = ({
       setIsLoading(false);
       onClose();
       setUserAdded(true);
-      location.reload();
+      router.refresh();
     } catch (error) {
       setIsError(true);
       setIsLoading(false);

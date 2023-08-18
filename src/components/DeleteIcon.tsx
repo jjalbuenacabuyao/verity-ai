@@ -1,17 +1,21 @@
 import axios from "axios";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { Dispatch, SetStateAction } from "react";
 
 interface Props {
   id: string;
+  setUserDeleted: Dispatch<SetStateAction<boolean>>;
 }
 
-const deleteUser = async (id: string) => {
-  const response = await axios.post("/api/delete", { id })
-  location.reload();
-}
+const DeleteIcon = ({ id, setUserDeleted, ...props }: Props) => {
+  const router = useRouter();
 
-const DeleteIcon = ({ id, ...props }: Props) => (
-  <button onClick={() => deleteUser(id)}>
+  const deleteUser = async (id: string) => {
+    const response = await axios.post("/api/delete", { id })
+    setUserDeleted(true);
+    router.refresh();
+  }
+  return (<button onClick={() => deleteUser(id)}>
     <svg
       aria-hidden="true"
       fill="none"
@@ -59,6 +63,6 @@ const DeleteIcon = ({ id, ...props }: Props) => (
       />
     </svg>
   </button>
-);
+)};
 
 export default DeleteIcon;
