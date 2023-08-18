@@ -1,5 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { ChangeEvent, Dispatch, SetStateAction } from "react";
-import { FiUpload } from "react-icons/fi";
 
 interface Props {
   setFiles: Dispatch<SetStateAction<File[]>>;
@@ -22,7 +22,12 @@ const Aside = ({ setFiles }: Props) => {
     <aside className="mb-16 pt-8 lg:mb-0 lg:pt-10">
       <div className="flex flex-col gap-4 lg:sticky lg:inset-x-auto lg:top-[105px]">
         <div className="group flex flex-col items-center rounded-lg border-2 border-dashed border-gray-300 py-6">
-          <FiUpload size={36} className="group-hover:animate-bounce" />
+          {/* <FiUpload size={36} className="group-hover:animate-bounce" /> */}
+          <img
+            src="/upload.png"
+            alt="Upload files icon - Made by Freepik from www.flaticon.com"
+            className="w-20 h-20 group-hover:scale-105 transition-all duration-300"
+          />
           <h1 className="mb-6 mt-4">Upload pdf and docx files</h1>
           <label
             htmlFor="file"
