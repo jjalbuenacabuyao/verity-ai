@@ -24,6 +24,7 @@ interface Props {
   setPage: Dispatch<SetStateAction<number>>;
   isLoading: boolean;
   search: string;
+  setUserDeleted: Dispatch<SetStateAction<boolean>>;
 }
 
 const UserTable = ({
@@ -33,6 +34,7 @@ const UserTable = ({
   setPage,
   isLoading,
   search,
+  setUserDeleted
 }: Props) => {
   const usersPerPage = 5;
   const pages = Math.ceil(numOfUsers / usersPerPage);
@@ -89,7 +91,7 @@ const UserTable = ({
                 </Tooltip>
                 <Tooltip color="danger" content="Delete user">
                   <span className="cursor-pointer text-lg text-danger active:opacity-50">
-                    <DeleteIcon id={id} />
+                    <DeleteIcon id={id} setUserDeleted={setUserDeleted} />
                   </span>
                 </Tooltip>
               </div>
