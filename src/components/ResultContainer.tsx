@@ -87,7 +87,7 @@ const ResultContainer = ({ files }: Props) => {
         <DownloadReportButton results={results} isLoading={isLoading} />
       </div>
 
-      <div>
+      <div className={`${isLoading ? "flex justify-center pt-12" : ""}`}>
         {isLoading && <Spinner size="lg" label="Loading..." />}
 
         {results.length === 0 && isLoading === false && (
