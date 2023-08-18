@@ -16,6 +16,7 @@ const DashboardContents = ({ totalUsers }: Props) => {
   const [users, setUsers] = useState<UserType>([]);
   const [userAdded, setUserAdded] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [userDeleted, setUserDeleted] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
   const [search, setSearch] = useState<string>("");
 
@@ -30,7 +31,7 @@ const DashboardContents = ({ totalUsers }: Props) => {
     }
 
     fetchUsers();
-  }, [search, page]);
+  }, [search, page, userAdded, userDeleted]);
 
   return (
     <>
@@ -64,6 +65,7 @@ const DashboardContents = ({ totalUsers }: Props) => {
           setPage={setPage}
           isLoading={isLoading}
           search={search}
+          setUserDeleted={setUserDeleted}
         />
       </div>
     </>
