@@ -36,7 +36,7 @@ export async function POST(
 
     if (label === humanWritten && score >= 90) {
       const detectionResult: DetectionResult = {
-        aiGeneratedPercentage: "0",
+        aiGeneratedPercentage: 0,
         aiGeneratedTexts: "All texts are possibly NOT AI-GENERATED.",
       };
       return NextResponse.json(detectionResult);
@@ -44,7 +44,7 @@ export async function POST(
 
     if (label === aiGenerated && score >= 90) {
       const detectionResult: DetectionResult = {
-        aiGeneratedPercentage: "100",
+        aiGeneratedPercentage: 100,
         aiGeneratedTexts: "All texts are possibly AI-GENERATED.",
       };
       return NextResponse.json(detectionResult);
@@ -86,7 +86,7 @@ export async function POST(
   //   )! / aiGeneratedResults.length;
 
   const detectionResult: DetectionResult = {
-    aiGeneratedPercentage: totalPercentage.toFixed(1),
+    aiGeneratedPercentage: Math.round(totalPercentage),
     aiGeneratedTexts: results.map(({ text, result }) => {
       const { score, label } = result;
       text = cleanText(text)
