@@ -45,12 +45,12 @@ const ResultsAccordion = ({ data }: Props) => {
                   <CircularProgressbarWithLabel
                     label="AI-Generated"
                     icon={<FaRobot size={20} />}
-                    value={Number.parseFloat(aiGeneratedPercentage)}
+                    value={aiGeneratedPercentage}
                   />
                   <CircularProgressbarWithLabel
                     label="Human Written"
                     icon={<ImUser size={20} />}
-                    value={100 - Number(aiGeneratedPercentage)}
+                    value={100 - aiGeneratedPercentage}
                   />
                 </div>
               </div>
