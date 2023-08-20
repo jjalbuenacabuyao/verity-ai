@@ -13,9 +13,9 @@ import {
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import LogInButtonAndModal from "./LogInButtonAndModal";
-import LogOutButton from "./LogOutButton";
 import Logo from "./Logo";
 import { usePathname } from "next/navigation";
+import UserMenu from "./UserMenu";
 
 const Header = () => {
   const currentUser = useCurrentUserContext();
@@ -51,6 +51,7 @@ const Header = () => {
       </ul>
 
       <NavbarContent className="sm:hidden" justify="end">
+        {currentUser && <UserMenu currentUser={currentUser} />}
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         />
@@ -95,7 +96,7 @@ const Header = () => {
 
       <NavbarContent className="hidden sm:flex" justify="end">
         <NavbarItem>
-          {currentUser ? <LogOutButton /> : <LogInButtonAndModal />}
+          {currentUser ? <UserMenu currentUser={currentUser} /> : <LogInButtonAndModal />}
         </NavbarItem>
       </NavbarContent>
 
@@ -134,7 +135,7 @@ const Header = () => {
         )}
 
         <NavbarItem>
-          {currentUser ? <LogOutButton /> : <LogInButtonAndModal />}
+          {!currentUser && <LogInButtonAndModal />}
         </NavbarItem>
       </NavbarMenu>
     </Navbar>
