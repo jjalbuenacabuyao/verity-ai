@@ -8,7 +8,7 @@ const Logo = () => {
   return (
     <Link href={"/"}>
       <NavbarBrand>
-        <Image src="/logo.svg" width={36} height={36} alt="VerityAI" />
+        <Image src="/logo.svg" width={36} height={36} alt="VerityAI" unoptimized />
         <p className={`${workSans.className} lg:text-lg sm:hidden lg:block`}>VerityAI</p>
       </NavbarBrand>
     </Link>
