@@ -44,7 +44,7 @@ const AccessDenied = () => {
           We&apos;re sorry, but the page you&apos;re trying to access requires
           you to be logged in. Please log in to your account to continue.
         </p>
-        <div className="flex gap-3">
+        <div className="flex gap-3 justify-center lg:justify-start">
           <LogInButtonAndModal />
           <Button
             color="primary"
