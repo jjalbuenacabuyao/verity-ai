@@ -91,7 +91,10 @@ const UserTable = ({
                 </Tooltip>
                 <Tooltip color="danger" content="Delete user">
                   <span className="cursor-pointer text-lg text-danger active:opacity-50">
-                    <DeleteIcon id={id} setUserDeleted={setUserDeleted} />
+                    <DeleteIcon
+                      id={id}
+                      username={`${name?.firstName} ${name?.lastName}`}
+                      setUserDeleted={setUserDeleted} />
                   </span>
                 </Tooltip>
               </div>
