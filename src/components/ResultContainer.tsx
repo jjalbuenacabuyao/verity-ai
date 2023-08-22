@@ -15,7 +15,7 @@ interface Props {
 }
 
 const ResultContainer = ({ files }: Props) => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isToastOpen, setIsToastOpen] = useState<boolean>(false);
   const [errorResult, setErrorResult] = useState<string[]>([]);
   const [results, setResults] = useState<ResultWithFilename[]>([]);
@@ -23,7 +23,6 @@ const ResultContainer = ({ files }: Props) => {
   useEffect(() => {
     const storedState = localStorage.getItem("detectionResult");
     if (storedState) {
-      setIsLoading(true);
       setResults(JSON.parse(storedState));
       setIsLoading(false);
     }
@@ -79,6 +78,8 @@ const ResultContainer = ({ files }: Props) => {
         }
       });
     }
+
+    setIsLoading(false);
   }, [files, setIsLoading]);
 
   return (
