@@ -17,6 +17,7 @@ interface Props {
   isOpen: boolean;
   username: string;
   onOpenChange: () => void;
+  onClose: () => void;
   setUserDeleted: Dispatch<SetStateAction<boolean>>;
 }
 
@@ -25,6 +26,7 @@ const DeleteUserModal = ({
   isOpen,
   username,
   onOpenChange,
+  onClose,
   setUserDeleted,
 }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -35,6 +37,7 @@ const DeleteUserModal = ({
     const response = await axios.post("/api/delete", { id });
     setUserDeleted(true);
     setIsLoading(false);
+    onClose();
     router.refresh();
   };
 
