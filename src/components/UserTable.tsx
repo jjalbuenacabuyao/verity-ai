@@ -13,9 +13,9 @@ import {
 import { Tooltip } from "@nextui-org/tooltip";
 import { Pagination } from "@nextui-org/react";
 import EditIcon from "./EditIcon";
-import DeleteIcon from "./DeleteIcon";
 import { Spinner } from "@nextui-org/spinner";
 import { UserType } from "@/types";
+import DeleteButton from "./DeleteButton";
 
 interface Props {
   users: UserType;
@@ -91,7 +91,7 @@ const UserTable = ({
                 </Tooltip>
                 <Tooltip color="danger" content="Delete user">
                   <span className="cursor-pointer text-lg text-danger active:opacity-50">
-                    <DeleteIcon
+                    <DeleteButton
                       id={id}
                       username={`${name?.firstName} ${name?.lastName}`}
                       setUserDeleted={setUserDeleted} />
