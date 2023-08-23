@@ -25,6 +25,8 @@ const ResultContainer = ({ files }: Props) => {
     if (storedState) {
       setResults(JSON.parse(storedState));
       setIsLoading(false);
+    } else {
+      setIsLoading(false);
     }
 
     if (files?.length !== 0) {
@@ -78,8 +80,6 @@ const ResultContainer = ({ files }: Props) => {
         }
       });
     }
-
-    setIsLoading(false);
   }, [files, setIsLoading]);
 
   return (
