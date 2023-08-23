@@ -52,14 +52,14 @@ const DeleteUserModal = ({
             <ModalBody>
               <p>
                 Are you sure you want to delete the account of{" "}
-                <span className="font-semibold">{username}</span>?
+                <span className="font-semibold underline">{username}</span>?
               </p>
             </ModalBody>
             <ModalFooter>
               <Button color="default" variant="light" onPress={onClose}>
                 Cancel
               </Button>
-              <Button color="danger" isLoading={isLoading} onPress={deleteUser}>
+              <Button color="danger" className="font-semibold" isLoading={isLoading} onPress={deleteUser}>
                 Delete
               </Button>
             </ModalFooter>
