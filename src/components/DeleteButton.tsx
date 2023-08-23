@@ -8,8 +8,8 @@ interface Props {
   setUserDeleted: Dispatch<SetStateAction<boolean>>;
 }
 
-const DeleteIcon = ({ id, username, setUserDeleted, ...props }: Props) => {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+const DeleteButton = ({ id, username, setUserDeleted, ...props }: Props) => {
+  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 
   return (
     <>
@@ -67,9 +67,10 @@ const DeleteIcon = ({ id, username, setUserDeleted, ...props }: Props) => {
         setUserDeleted={setUserDeleted}
         isOpen={isOpen}
         onOpenChange={onOpenChange}
+        onClose={onClose}
       />
     </>
   );
 };
 
-export default DeleteIcon;
+export default DeleteButton;
