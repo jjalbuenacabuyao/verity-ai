@@ -9,8 +9,7 @@ const Hero = () => {
     <div className="flex flex-col items-center gap-12 px-6 lg:grid lg:grid-cols-2">
       <div className="grid gap-4 pt-6">
         <h1
-          className={`${workSans.className} text-4xl font-semibold tracking-[-0.25px] text-slate-900`}
-        >
+          className={`${workSans.className} text-4xl font-semibold tracking-[-0.25px] text-slate-900`}>
           Advanced AI Content Detector For The Academe
         </h1>
         <p className={`${inter.className}`}>
@@ -21,24 +20,25 @@ const Hero = () => {
           color="primary"
           radius="sm"
           size="lg"
-          className="font-semibold hover:bg-blue-800 hover:shadow-lg"
-        >
+          className="font-semibold hover:bg-blue-800 hover:shadow-lg">
           Get Started
         </Button>
       </div>
 
       <div className="relative pb-10">
-        <div className="flex gap-2">
-          <Image
-            src={"/home-illustration.png"}
-            width={100}
-            height={100}
-            quality={100}
-            unoptimized
-            priority
-            alt="Photo of AI-detector"
-            className="h-auto w-full rounded-lg border shadow-md"
-          />
+        <div className="grid grid-cols-[1fr_auto] gap-2">
+          <div>
+            <Image
+              src={"/home-illustration.png"}
+              width={100}
+              height={100}
+              quality={100}
+              unoptimized
+              priority
+              alt="Photo of AI-detector"
+              className="h-auto w-full rounded-lg border shadow-md"
+            />
+          </div>
           <div className="flex flex-col justify-center gap-2">
             {["/pdf.png", "/docx-file.png"].map((imgSource, index) => (
               <Image
@@ -76,13 +76,12 @@ const Hero = () => {
               variant="bordered"
               color="primary"
               radius="full"
-              className="h-6 px-2 text-[6px]"
-            >
+              className="h-6 px-2 text-[6px]">
               Download Report
             </Button>
           </div>
 
-          <div className="absolute bottom-4 left-[60%] right-0 flex justify-evenly rounded-md border bg-white/10 backdrop-blur px-4 py-2 shadow-lg">
+          <div className="absolute bottom-4 left-[60%] right-0 flex justify-evenly rounded-md border bg-white/10 px-4 py-2 shadow-lg backdrop-blur">
             <CircularProgress
               value={32}
               color="danger"
