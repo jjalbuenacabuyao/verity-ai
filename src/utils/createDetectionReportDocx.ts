@@ -189,7 +189,7 @@ const createDetectionReportDocx = (data: ResultWithFilename[]) => {
               children: [new Paragraph({
                 children: [
                   new TextRun({
-                    text: `${score}% ${textLabel}`,
+                    text: `${score}% Probability of the paragraph being ${textLabel}`,
                     bold: true,
                   })
                 ],
