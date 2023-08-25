@@ -31,7 +31,9 @@ const ResultBreakdownTable = ({ aiGeneratedTexts }: Props) => {
   }
 
   return (
-    <Table aria-label="Detection Result Breakdown">
+    <Table aria-label="Detection Result Breakdown" classNames={{
+      wrapper: "mb-2",
+    }}>
       <TableHeader>
         <TableColumn key="paragraph">Paragraphs</TableColumn>
         <TableColumn key="result">Result</TableColumn>
