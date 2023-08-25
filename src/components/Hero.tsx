@@ -6,8 +6,8 @@ import { CircularProgress } from "@nextui-org/progress";
 
 const Hero = () => {
   return (
-    <div className="relative flex flex-col items-center gap-24 px-6 lg:grid lg:grid-cols-2">
-      <div className="absolute bottom-6 left-1/2 right-6 rounded-lg shadow-lg shadow-slate-300 overflow-hidden">
+    <div className="relative flex flex-col items-center gap-28 px-6 lg:grid lg:grid-cols-2">
+      <div className="absolute bottom-4 left-1/2 right-6 rounded-lg shadow-lg shadow-slate-300 overflow-hidden">
         <Image
           src={"/detection-report.png"}
           width={100}
@@ -20,7 +20,7 @@ const Hero = () => {
         />
       </div>
 
-      <div className="grid gap-4 pt-6">
+      <div className="grid gap-4 pt-10">
         <h1
           className={`${workSans.className} text-4xl font-semibold tracking-[-0.25px] text-slate-900`}
         >
