@@ -27,7 +27,7 @@ const Hero = () => {
           Advanced AI Content Detector For The Academe
         </h1>
         <p className={`${inter.className}`}>
-          Educator's partner in detecting Artificial Intelligence(AI) generated texts from academic
+          Educator&apos;s partner in detecting Artificial Intelligence(AI) generated texts from academic
           submissions using state-of-the-art Large Language Model(LLM).
         </p>
         <Button
