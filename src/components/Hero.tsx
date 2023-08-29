@@ -1,6 +1,5 @@
 import { workSans, inter } from "@/fonts";
 import { Button } from "@nextui-org/button";
-import { CircularProgress } from "@nextui-org/progress";
 import HeroIllustration from "./HeroIllustration";
 
 const Hero = () => {
