@@ -8,14 +8,12 @@ interface Props {
 
 const FeatureCard = ({ title, description, icon }: Props) => {
   return (
-    <div className="flex flex-col gap-2 rounded-2xl border p-4">
-      <div className="flex gap-3 items-center">
-        <div className="p-3 rounded-full bg-blue-50 text-blue-500">
-          {icon}
-        </div>
-        <h3 className="font-semibold">{title}</h3>
+    <div className="flex flex-col gap-4 rounded-2xl border p-5">
+      <div className="flex items-center gap-3">
+        <div className="rounded-full bg-blue-100 p-3 text-blue-500">{icon}</div>
+        <h3 className="text-lg font-semibold">{title}</h3>
       </div>
-      <p>{description}</p>
+      <p className="text-slate-500">{description}</p>
     </div>
   );
 };
