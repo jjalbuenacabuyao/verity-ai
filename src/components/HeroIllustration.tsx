@@ -76,26 +76,19 @@ const HeroIllustration = () => {
         </div>
 
         <div className="absolute bottom-2 left-[55%] right-2 flex justify-evenly rounded-md border bg-white/10 py-2 shadow-lg backdrop-blur">
-          <CircularProgress
-            value={32}
-            color="danger"
-            size="md"
-            showValueLabel
-            classNames={{
-              value: "text-[7px] font-semibold",
-            }}
-            strokeWidth={4}
-          />
-          <CircularProgress
-            value={68}
-            color="primary"
-            size="md"
-            showValueLabel
-            classNames={{
-              value: "text-[7px] font-semibold",
-            }}
-            strokeWidth={4}
-          />
+          {[32, 68].map((value) => (
+            <CircularProgress
+              key={value}
+              value={value}
+              color={value === 32 ? "danger" : "primary"}
+              size="md"
+              showValueLabel
+              classNames={{
+                value: "text-[7px] font-semibold",
+              }}
+              strokeWidth={4}
+            />
+          ))}
         </div>
       </div>
     </div>
