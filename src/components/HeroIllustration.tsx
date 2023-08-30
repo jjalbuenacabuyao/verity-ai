@@ -7,7 +7,7 @@ import { Button } from "@nextui-org/button";
 const HeroIllustration = () => {
   return (
     <div className="relative pb-10">
-      <div className="absolute bottom-2 left-1/2 right-0 z-[1] overflow-hidden rounded-lg shadow-lg shadow-slate-300">
+      <div className="absolute bottom-2 left-1/2 right-0 z-[1] overflow-hidden rounded-lg shadow-lg shadow-slate-300 border">
         <Image
           src={"/detection-report.png"}
           width={100}
@@ -84,7 +84,8 @@ const HeroIllustration = () => {
               size="md"
               showValueLabel
               classNames={{
-                value: "text-[7px] font-semibold",
+                value: "text-[10px] font-semibold",
+                svg: "w-12 h-12",
               }}
               strokeWidth={4}
             />
