@@ -8,10 +8,9 @@ const Page = () => {
   return (
     <motion.div
       initial={{ y: "40vh", opacity: 0 }}
-      whileInView={{ y: 0, opacity: 1 }}
-      viewport={{once: true}}
+      animate={{ y: 0, opacity: 1 }}
       transition={{
-        duration: 0.3,
+        duration: 0.5,
         ease: "easeIn",
         type: "spring",
       }}
