@@ -41,7 +41,7 @@ const Features = () => {
     },
   ];
   return (
-    <section id="features" className="mt-10 px-6">
+    <section id="features" className="mt-10">
       <h2 className="mb-8 text-center text-3xl font-semibold">Features</h2>
       <div className="flex flex-col gap-6">
         {features.map(({ title, description, icon }) => (

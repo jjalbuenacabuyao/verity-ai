@@ -4,7 +4,7 @@ import HeroIllustration from "./HeroIllustration";
 
 const Hero = () => {
   return (
-    <div className="relative flex flex-col items-center gap-32 px-6 lg:grid lg:grid-cols-2">
+    <div className="relative flex flex-col items-center gap-32 lg:grid lg:grid-cols-2">
       <div className="grid gap-4 pt-10">
         <h1
           className={`${workSans.className} text-4xl font-bold tracking-[-0.25px] text-slate-900`}
