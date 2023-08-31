@@ -20,7 +20,7 @@ export default async function RootLayout({
   return (
     <html lang="en" className="overflow-x-hidden">
       <body
-        className={`${inter.className} relative overflow-x-hidden bg-white/95 text-slate-700 antialiased`}
+        className={`${inter.className} relative mx-auto max-w-screen-2xl overflow-x-hidden bg-white/95 text-slate-700 antialiased`}
       >
         <UIProvider>
           <NextTopLoader color="#0ea5e9" showSpinner={false} />
