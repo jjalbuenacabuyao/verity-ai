@@ -19,7 +19,11 @@ module.exports = {
       },
 
       padding: {
-        responsive: "clamp(1.5rem, -0.8417rem + 9.9914vw, 8.75rem)",
+        fluid: "clamp(1.5rem, -0.8417rem + 9.9914vw, 8.75rem)",
+      },
+
+      fontSize: {
+        "heading-fluid": "clamp(2.25rem, 1.7655rem + 2.0672vw, 3.75rem)",
       },
 
       boxShadow: {
