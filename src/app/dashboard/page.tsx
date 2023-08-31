@@ -12,7 +12,7 @@ const Dashboard = async () => {
   }
 
   return (
-    <div className="pb-10 pt-8 supports-clamp:px-responsive lg:pt-10">
+    <div className="px-4 pb-10 pt-8 supports-clamp:px-responsive md:px-16 md:supports-clamp:px-responsive lg:px-24 lg:pt-10 lg:supports-clamp:px-responsive xl:px-28 xl:supports-clamp:px-responsive">
       <DashboardContents totalUsers={totalUsers} />
     </div>
   );

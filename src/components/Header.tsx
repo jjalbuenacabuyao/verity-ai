@@ -37,15 +37,15 @@ const Header = () => {
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={(isOpen) => setIsMenuOpen(isOpen)}
       onScrollPositionChange={(position) => setScrollPosition(position)}
-      isBordered={
-        scrollPosition !== 0 || pathIsDetectorOrDashboard
-      }
+      isBordered={scrollPosition !== 0 || pathIsDetectorOrDashboard}
       disableScrollHandler={false}
       classNames={{
-        wrapper: "max-w-none supports-clamp:px-responsive",
+        wrapper:
+          "max-w-none px-4 md:px-16 lg:px-24 xl:px-28 supports-clamp:px-responsive md:supports-clamp:px-responsive lg:supports-clamp:px-responsive xl:supports-clamp:px-responsive",
         toggle: "w-8",
         toggleIcon: "before:w-8 after:w-8 before:h-0.5 after:h-0.5",
-      }}>
+      }}
+    >
       <ul>
         <Logo />
       </ul>
@@ -67,7 +67,8 @@ const Header = () => {
           <NavbarItem key={item}>
             <Link
               href={`/${item === "Home" ? "/" : `/#${item.toLowerCase()}`}`}
-              className="text-base font-semibold sm:text-sm">
+              className="text-base font-semibold sm:text-sm"
+            >
               {item}
             </Link>
           </NavbarItem>
@@ -77,7 +78,8 @@ const Header = () => {
           <NavbarItem>
             <Link
               href={"/detector"}
-              className="text-base font-semibold sm:text-sm">
+              className="text-base font-semibold sm:text-sm"
+            >
               Detector
             </Link>
           </NavbarItem>
@@ -87,7 +89,8 @@ const Header = () => {
           <NavbarItem>
             <Link
               href={"/dashboard"}
-              className="text-base font-semibold sm:text-sm">
+              className="text-base font-semibold sm:text-sm"
+            >
               Dashboard
             </Link>
           </NavbarItem>
@@ -96,7 +99,11 @@ const Header = () => {
 
       <NavbarContent className="hidden sm:flex" justify="end">
         <NavbarItem>
-          {currentUser ? <UserMenu currentUser={currentUser} /> : <LogInButtonAndModal />}
+          {currentUser ? (
+            <UserMenu currentUser={currentUser} />
+          ) : (
+            <LogInButtonAndModal />
+          )}
         </NavbarItem>
       </NavbarContent>
 
@@ -106,7 +113,8 @@ const Header = () => {
             <Link
               href={`/${item === "Home" ? "/" : `/#${item.toLowerCase()}`}`}
               className="text-base font-semibold sm:text-sm"
-              onClick={() => setIsMenuOpen(false)}>
+              onClick={() => setIsMenuOpen(false)}
+            >
               {item}
             </Link>
           </NavbarMenuItem>
@@ -117,7 +125,8 @@ const Header = () => {
             <Link
               href={"/detector"}
               className="text-base font-semibold sm:text-sm"
-              onClick={() => setIsMenuOpen(false)}>
+              onClick={() => setIsMenuOpen(false)}
+            >
               Detector
             </Link>
           </NavbarMenuItem>
@@ -128,15 +137,14 @@ const Header = () => {
             <Link
               href={"/dashboard"}
               className="text-base font-semibold sm:text-sm"
-              onClick={() => setIsMenuOpen(false)}>
+              onClick={() => setIsMenuOpen(false)}
+            >
               Dashboard
             </Link>
           </NavbarMenuItem>
         )}
 
-        <NavbarItem>
-          {!currentUser && <LogInButtonAndModal />}
-        </NavbarItem>
+        <NavbarItem>{!currentUser && <LogInButtonAndModal />}</NavbarItem>
       </NavbarMenu>
     </Navbar>
   );

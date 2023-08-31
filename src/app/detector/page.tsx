@@ -21,7 +21,7 @@ const Detector = () => {
   });
 
   return (
-    <div className="pb-10 supports-clamp:px-responsive lg:grid lg:grid-cols-[1fr_2.5fr] lg:gap-10">
+    <div className="px-4 pb-10 supports-clamp:px-responsive md:px-16 md:supports-clamp:px-responsive lg:grid lg:grid-cols-[1fr_2.5fr] lg:gap-10 lg:px-24 lg:supports-clamp:px-responsive xl:px-28 xl:supports-clamp:px-responsive">
       <Aside setFiles={setFiles} />
       <ResultContainer files={files} />
     </div>
