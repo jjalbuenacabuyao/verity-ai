@@ -42,7 +42,7 @@ const Header = () => {
       }
       disableScrollHandler={false}
       classNames={{
-        wrapper: "max-w-7xl",
+        wrapper: "max-w-none supports-clamp:px-responsive",
         toggle: "w-8",
         toggleIcon: "before:w-8 after:w-8 before:h-0.5 after:h-0.5",
       }}>

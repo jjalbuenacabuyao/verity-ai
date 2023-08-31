@@ -14,7 +14,7 @@ const Page = () => {
         ease: "easeIn",
         type: "spring",
       }}
-      className="grid gap-10"
+      className="grid gap-10 supports-clamp:px-responsive"
     >
       <Hero />
       <Features />
