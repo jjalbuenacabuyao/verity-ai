@@ -7,7 +7,7 @@ import { Button } from "@nextui-org/button";
 const HeroIllustration = () => {
   return (
     <div className="relative pb-10 lg:pb-0 sm:pt-16 md:pt-20">
-      <div className="absolute bottom-2 left-1/2 right-0 z-[1] overflow-hidden rounded-lg shadow-lg shadow-slate-300 border">
+      <div className="absolute bottom-2 left-1/2 right-0 z-[1] overflow-hidden rounded-lg shadow-lg shadow-slate-300 border lg:-bottom-5">
         <Image
           src={"/detection-report.png"}
           width={100}
