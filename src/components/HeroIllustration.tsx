@@ -57,8 +57,8 @@ const HeroIllustration = () => {
               size="sm"
               color="primary"
               classNames={{
-                name: "font-semibold text-[6px]",
-                base: "w-4 h-4",
+                name: "font-semibold text-[6px] sm:text-[10px]",
+                base: "w-5 h-5 sm:w-7 sm:h-7 ",
               }}
             />
           ))}
@@ -69,7 +69,7 @@ const HeroIllustration = () => {
             variant="bordered"
             color="primary"
             radius="full"
-            className="h-6 px-2 text-[6px] leading-none"
+            className="h-6 px-2 text-[6px] leading-none md:h-10 md:text-xs md:px-6 lg:h-8 lg:text-[8px] lg:px-3"
           >
             Download Report
           </Button>
@@ -84,8 +84,8 @@ const HeroIllustration = () => {
               size="md"
               showValueLabel
               classNames={{
-                value: "text-[10px] font-semibold",
-                svg: "w-12 h-12",
+                value: "text-[10px] font-semibold md:text-base lg:text-xs",
+                svg: "w-12 h-12 md:w-20 md:h-20 lg:w-14 lg:h-14",
               }}
               strokeWidth={4}
             />
