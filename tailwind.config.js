@@ -8,6 +8,8 @@ module.exports = {
   theme: {
     supports: {
       clamp: "font-size: clamp(1rem, 0.94rem + 0.33vw, 1.25rem)",
+      vh: "height: 100vh",
+      dvh: "height: 100dvh"
     },
 
     extend: {
