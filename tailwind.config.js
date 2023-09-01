@@ -9,7 +9,7 @@ module.exports = {
     supports: {
       clamp: "font-size: clamp(1rem, 0.94rem + 0.33vw, 1.25rem)",
       vh: "height: 100vh",
-      dvh: "height: 100dvh"
+      dvh: "height: 100dvh",
     },
 
     extend: {
@@ -26,6 +26,8 @@ module.exports = {
 
       fontSize: {
         "heading-fluid": "clamp(2.25rem, 1.7655rem + 2.0672vw, 3.75rem)",
+        "description-fluid":
+          "font-size: clamp(1rem, 0.9482rem + 0.221vw, 1.125rem);",
       },
 
       boxShadow: {
