@@ -7,9 +7,9 @@ const Hero = () => {
     <div className="relative flex flex-col items-center gap-32 lg:grid lg:h-[calc(100%-64px)] lg:grid-cols-2 lg:supports-vh:h-[calc(100vh-64px)] lg:supports-dvh:h-[calc(100dvh-64px)] lg:items-center lg:gap-0 lg:max-h-[560px]">
       <div className="grid gap-4 pt-10 lg:pt-0 lg:justify-items-start lg:pr-5">
         <h1
-          className={`${workSans.className} text-4xl font-bold leading-none tracking-[-0.25px] text-slate-900 supports-clamp:text-heading-fluid`}
+          className={`${workSans.className} text-4xl font-bold leading-[1.125] tracking-[-0.25px] text-slate-900 supports-clamp:text-heading-fluid`}
         >
-          Advanced AI Generated Text Detector For The Academe
+          Advanced AI generated text detector
         </h1>
         <p className={`${inter.className}`}>
           Educator&apos;s partner in detecting Artificial Intelligence(AI)
