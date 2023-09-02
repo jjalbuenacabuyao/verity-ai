@@ -34,7 +34,7 @@ const UserTable = ({
   setPage,
   isLoading,
   search,
-  setUserDeleted
+  setUserDeleted,
 }: Props) => {
   const usersPerPage = 5;
   const pages = Math.ceil(numOfUsers / usersPerPage);
@@ -60,7 +60,8 @@ const UserTable = ({
       }
       classNames={{
         table: `${isLoading ? "min-h-[300px]" : ""}`,
-      }}>
+      }}
+    >
       <TableHeader>
         {tableHeadings.map((heading) => (
           <TableColumn key={heading}>{heading}</TableColumn>
@@ -70,7 +71,8 @@ const UserTable = ({
         isLoading={isLoading}
         loadingContent={
           <Spinner size="lg" label="Loading..." className="pt-12 text-sm" />
-        }>
+        }
+      >
         {users.map(({ id, name, email, role }) => (
           <TableRow key={id}>
             <TableCell className={`${isLoading ? "hidden" : ""}`}>
@@ -94,7 +96,8 @@ const UserTable = ({
                     <DeleteButton
                       id={id}
                       username={`${name?.firstName} ${name?.lastName}`}
-                      setUserDeleted={setUserDeleted} />
+                      setUserDeleted={setUserDeleted}
+                    />
                   </span>
                 </Tooltip>
               </div>

@@ -1,7 +1,6 @@
 "use client";
 
-import { Hero } from "@/components";
-import Features from "@/components/Features";
+import { Features, Hero } from "@/components";
 import { motion } from "framer-motion";
 
 const Page = () => {

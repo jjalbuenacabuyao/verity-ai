@@ -18,11 +18,11 @@ import {
 import { Input } from "@nextui-org/input";
 import { Button } from "@nextui-org/button";
 import { Radio, RadioGroup } from "@nextui-org/radio";
-import EyeFilledIcon from "./EyeFilledIcon";
-import EyeSlashFilledIcon from "./EyeSlashFilledIcon";
-import UserAddedToast from "./UserAddedToast";
-import EmailAlreadyExistToast from "./EmailAlreadyExistToast";
-import PasswordVisibilityToggler from "./PasswordVisibilityToggler";
+import EyeFilledIcon from "../utilities/EyeFilledIcon";
+import EyeSlashFilledIcon from "../utilities/EyeSlashFilledIcon";
+import UserAddedToast from "../utilities/UserAddedToast";
+import EmailAlreadyExistToast from "../utilities/EmailAlreadyExistToast";
+import PasswordVisibilityToggler from "../utilities/PasswordVisibilityToggler";
 import { useRouter } from "next/navigation";
 
 interface User {
@@ -126,10 +126,12 @@ const AddUserModal = ({
                       orientation="horizontal"
                       name="role"
                       //@ts-ignore
-                      onChange={handleChange}>
+                      onChange={handleChange}
+                    >
                       <Radio
                         value="USER"
-                        className="rounded-lg border px-4 py-2">
+                        className="rounded-lg border px-4 py-2"
+                      >
                         <p className="font-semibold">User</p>
                         <ul className="text-xs">
                           <li>✅ AI-Detector</li>
@@ -138,7 +140,8 @@ const AddUserModal = ({
                       </Radio>
                       <Radio
                         value="ADMIN"
-                        className="ml-4 rounded-lg border px-4 py-2">
+                        className="ml-4 rounded-lg border px-4 py-2"
+                      >
                         <p className="font-semibold">Admin</p>
                         <ul className="text-xs">
                           <li>✅ AI-Detector</li>

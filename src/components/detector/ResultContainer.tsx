@@ -3,9 +3,9 @@
 import React, { useEffect, useState } from "react";
 import { getTextFromFiles } from "@/utils";
 import { DetectionResult, ResultWithFilename } from "@/types";
-import DetectionErrorToast from "./DetectionErrorToast";
+import DetectionErrorToast from "../utilities/DetectionErrorToast";
 import DownloadReportButton from "./DownloadReportButton";
-import Loader from "./Loader";
+import Loader from "../utilities/Loader";
 import ResultsAccordion from "./ResultsAccordion";
 import axios from "axios";
 import { Spinner } from "@nextui-org/spinner";
@@ -33,7 +33,9 @@ const ResultContainer = ({ files }: Props) => {
       setIsLoading(true);
       const result = files!.map(async (file) => {
         const extractedText = await getTextFromFiles(file);
-        const response = await axios.post("/api/detectaitext", {extractedText})
+        const response = await axios.post("/api/detectaitext", {
+          extractedText,
+        });
 
         const data: DetectionResult = await response.data;
 

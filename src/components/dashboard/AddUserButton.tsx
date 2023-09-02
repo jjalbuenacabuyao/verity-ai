@@ -1,10 +1,8 @@
 "use client";
 import React, { Dispatch, SetStateAction, useState } from "react";
-import {
-  useDisclosure,
-} from "@nextui-org/modal";
+import { useDisclosure } from "@nextui-org/modal";
 import { Button } from "@nextui-org/button";
-import PlusIcon from "./PlusIcon";
+import PlusIcon from "../utilities/PlusIcon";
 import AddUserModal from "./AddUserModal";
 
 interface Props {
@@ -21,7 +19,8 @@ const AddUserButton = ({ setUserAdded, userAdded }: Props) => {
         onPress={onOpen}
         endContent={<PlusIcon />}
         fullWidth
-        className="bg-blue-500 font-semibold tracking-wide text-white">
+        className="bg-blue-500 font-semibold tracking-wide text-white"
+      >
         Add user
       </Button>
 

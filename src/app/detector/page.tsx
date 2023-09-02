@@ -5,7 +5,7 @@ import { Aside, ResultContainer } from "@/components";
 import { useCurrentUserContext } from "@/hooks/userContext";
 import { useRouter } from "next/navigation";
 import { useIdleTimer } from "react-idle-timer";
-import AccessDenied from "@/components/AccessDenied";
+import AccessDenied from "@/components/utilities/AccessDenied";
 
 const Detector = () => {
   const [files, setFiles] = useState<File[]>([]);

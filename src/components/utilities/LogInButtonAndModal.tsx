@@ -1,3 +1,5 @@
+"use client";
+
 import React, { FormEvent, useState } from "react";
 import {
   Modal,
@@ -57,14 +59,16 @@ const LogInButtonAndModal = () => {
         onPress={onOpen}
         variant="solid"
         radius="full"
-        className="bg-blue-500 text-sm font-semibold tracking-wide text-white">
+        className="bg-blue-500 text-sm font-semibold tracking-wide text-white"
+      >
         Log in
       </Button>
       <Modal
         isOpen={isOpen}
         onOpenChange={onOpenChange}
         placement="center"
-        className="mx-4 my-4">
+        className="mx-4 my-4"
+      >
         <ModalContent>
           {(onClose) => (
             <form onSubmit={handleSubmit}>
@@ -119,7 +123,8 @@ const LogInButtonAndModal = () => {
                   isLoading={isLoading}
                   type="submit"
                   variant="solid"
-                  className="bg-blue-500 text-sm font-semibold tracking-wide text-white">
+                  className="bg-blue-500 text-sm font-semibold tracking-wide text-white"
+                >
                   {isLoading ? "Logging in" : "Log in"}
                 </Button>
               </ModalFooter>

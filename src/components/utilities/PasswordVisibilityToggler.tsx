@@ -12,7 +12,8 @@ const PasswordVisibilityToggler = ({ toggleVisibility, isVisible }: Props) => {
     <button
       className="focus:outline-none"
       type="button"
-      onClick={toggleVisibility}>
+      onClick={toggleVisibility}
+    >
       {isVisible ? (
         <EyeSlashFilledIcon className="pointer-events-none text-2xl text-default-400" />
       ) : (

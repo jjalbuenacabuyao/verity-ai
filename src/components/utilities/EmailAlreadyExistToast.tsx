@@ -1,3 +1,5 @@
+"use client";
+
 import { Close, Description, Root, Title, Viewport } from '@radix-ui/react-toast'
 import React, { Dispatch, SetStateAction, useState } from 'react'
 import { AiFillCloseCircle } from 'react-icons/ai'

@@ -24,7 +24,8 @@ const ResultsAccordion = ({ data }: Props) => {
         indicator: "text-inherit",
         heading: "data-[open=true]:border-b",
       }}
-      className="px-0">
+      className="px-0"
+    >
       {data.map((item, index) => {
         const { filename, result } = item;
         const { aiGeneratedPercentage, aiGeneratedTexts } = result;
@@ -34,7 +35,8 @@ const ResultsAccordion = ({ data }: Props) => {
             key={index}
             aria-label={label}
             subtitle="Click to expand"
-            title={filename}>
+            title={filename}
+          >
             <div>
               <div className="mb-6">
                 <AccordionItemSectionTitle

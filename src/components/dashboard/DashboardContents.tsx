@@ -37,7 +37,8 @@ const DashboardContents = ({ totalUsers }: Props) => {
     <>
       <div className="flex flex-col items-center justify-between lg:flex-row">
         <h1
-          className={`${workSans.className} mb-5 text-center text-2xl font-bold lg:mb-0 lg:text-left`}>
+          className={`${workSans.className} mb-5 text-center text-2xl font-bold lg:mb-0 lg:text-left`}
+        >
           Dashboard
         </h1>
         <Searchbar className="hidden lg:block" setSearch={setSearch} />
@@ -48,7 +49,8 @@ const DashboardContents = ({ totalUsers }: Props) => {
           <div className="rounded-xl bg-blue-500 py-10 text-center text-white">
             <p
               aria-describedby="title"
-              className={`${workSans.className} text-4xl font-bold`}>
+              className={`${workSans.className} text-4xl font-bold`}
+            >
               {totalUsers}
             </p>
             <p id="title" className="text-sm font-semibold">

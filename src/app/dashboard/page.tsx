@@ -1,4 +1,4 @@
-import AccessDenied from "@/components/AccessDenied";
+import AccessDenied from "@/components/utilities/AccessDenied";
 import { getSession } from "../actions/getCurrentUser";
 import client from "../libs/prismadb";
 import DashboardContents from "@/components/DashboardContents";
