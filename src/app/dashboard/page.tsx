@@ -1,7 +1,6 @@
-import AccessDenied from "@/components/utilities/AccessDenied";
 import { getSession } from "../actions/getCurrentUser";
 import client from "../libs/prismadb";
-import DashboardContents from "@/components/DashboardContents";
+import { DashboardContents, AccessDenied } from "@/components";
 
 const Dashboard = async () => {
   const session = await getSession();

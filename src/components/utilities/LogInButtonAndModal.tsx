@@ -13,8 +13,6 @@ import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
 import Link from "next/link";
 import MailIcon from "./MailIcon";
-import EyeSlashFilledIcon from "./EyeSlashFilledIcon";
-import EyeFilledIcon from "./EyeFilledIcon";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import PasswordVisibilityToggler from "./PasswordVisibilityToggler";

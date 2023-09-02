@@ -18,12 +18,8 @@ import {
 import { Input } from "@nextui-org/input";
 import { Button } from "@nextui-org/button";
 import { Radio, RadioGroup } from "@nextui-org/radio";
-import EyeFilledIcon from "../utilities/EyeFilledIcon";
-import EyeSlashFilledIcon from "../utilities/EyeSlashFilledIcon";
-import UserAddedToast from "../utilities/UserAddedToast";
-import EmailAlreadyExistToast from "../utilities/EmailAlreadyExistToast";
-import PasswordVisibilityToggler from "../utilities/PasswordVisibilityToggler";
 import { useRouter } from "next/navigation";
+import { EmailAlreadyExistToast, PasswordVisibilityToggler, UserAddedToast } from "../utilities";
 
 interface User {
   email: string;

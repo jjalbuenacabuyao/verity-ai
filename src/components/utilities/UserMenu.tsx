@@ -5,7 +5,6 @@ import {
   DropdownTrigger,
 } from "@nextui-org/dropdown";
 import { Avatar } from "@nextui-org/avatar";
-import { FaUserAlt } from "react-icons/fa";
 import React from "react";
 import { CurrentUser } from "@/types";
 import { signOut } from "next-auth/react";

@@ -1,9 +1,5 @@
-"use client";
-
-import React, { ChangeEvent, Dispatch, FormEvent, SetStateAction, useState } from "react";
+import React, { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { BiSearch } from "react-icons/bi";
-import { UserType } from "@/types";
-import axios from "axios";
 
 type Props = {
   className: string;

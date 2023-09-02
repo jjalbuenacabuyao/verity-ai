@@ -2,8 +2,8 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { useDisclosure } from "@nextui-org/modal";
 import { Button } from "@nextui-org/button";
-import PlusIcon from "../utilities/PlusIcon";
 import AddUserModal from "./AddUserModal";
+import { PlusIcon } from "../utilities";
 
 interface Props {
   userAdded: boolean;

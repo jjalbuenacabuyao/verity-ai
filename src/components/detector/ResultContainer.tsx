@@ -3,9 +3,8 @@
 import React, { useEffect, useState } from "react";
 import { getTextFromFiles } from "@/utils";
 import { DetectionResult, ResultWithFilename } from "@/types";
-import DetectionErrorToast from "../utilities/DetectionErrorToast";
+import { DetectionErrorToast } from "../utilities";
 import DownloadReportButton from "./DownloadReportButton";
-import Loader from "../utilities/Loader";
 import ResultsAccordion from "./ResultsAccordion";
 import axios from "axios";
 import { Spinner } from "@nextui-org/spinner";

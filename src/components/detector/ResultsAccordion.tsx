@@ -5,7 +5,6 @@ import { ImUser } from "react-icons/im";
 import React from "react";
 import CircularProgressbarWithLabel from "./CircularProgressbarWithLabel";
 import ResultBreakdownTable from "./ResultBreakdownTable";
-import { DiTerminalBadge } from "react-icons/di";
 import AccordionItemSectionTitle from "./AccordionItemSectionTitle";
 
 interface Props {

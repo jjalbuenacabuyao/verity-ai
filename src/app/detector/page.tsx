@@ -1,11 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import { Aside, ResultContainer } from "@/components";
+import { Aside, ResultContainer, AccessDenied } from "@/components";
 import { useCurrentUserContext } from "@/hooks/userContext";
 import { useRouter } from "next/navigation";
 import { useIdleTimer } from "react-idle-timer";
-import AccessDenied from "@/components/utilities/AccessDenied";
 
 const Detector = () => {
   const [files, setFiles] = useState<File[]>([]);
