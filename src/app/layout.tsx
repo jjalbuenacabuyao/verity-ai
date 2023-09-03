@@ -18,9 +18,9 @@ export default async function RootLayout({
   const currentUser = await getCurrentUser();
 
   return (
-    <html lang="en" className="overflow-x-hidden">
+    <html lang="en">
       <body
-        className={`${inter.className} relative mx-auto max-w-screen-2xl overflow-x-hidden bg-white/95 text-slate-700 antialiased`}
+        className={`${inter.className} mx-auto max-w-screen-2xl bg-white/95 text-slate-700 antialiased`}
       >
         <UIProvider>
           <NextTopLoader color="#0ea5e9" showSpinner={false} />
