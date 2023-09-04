@@ -1,23 +1,13 @@
 "use client";
 
 import { Features, Hero } from "@/components";
-import { motion } from "framer-motion";
 
 const Page = () => {
   return (
-    <motion.div
-      initial={{ y: "40vh", opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{
-        duration: 0.5,
-        ease: "easeIn",
-        type: "spring",
-      }}
-      className="grid gap-10 px-6 supports-clamp:px-fluid md:px-16 md:supports-clamp:px-fluid lg:px-24 lg:supports-clamp:px-fluid xl:px-28 xl:supports-clamp:px-fluid"
-    >
+    <div className="grid gap-10 px-6 supports-clamp:px-fluid md:px-16 md:supports-clamp:px-fluid lg:px-24 lg:supports-clamp:px-fluid xl:px-28 xl:supports-clamp:px-fluid">
       <Hero />
       <Features />
-    </motion.div>
+    </div>
   );
 };
 
