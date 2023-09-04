@@ -10,8 +10,8 @@ type Props = {};
 
 const Tutorials = (props: Props) => {
   return (
-    <div>
-      <Subheading title="Tutorials" />
+    <div id="tutorial" className="pt-[4.5rem]">
+      <Subheading title="Tutorial" />
       <div className="flex justify-center">
         <Tabs aria-label="Tutorial options" color="primary" variant="light">
           <Tab

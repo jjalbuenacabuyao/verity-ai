@@ -44,7 +44,7 @@ const Features = () => {
   return (
     <section
       id="features"
-      className="relative mt-10 overflow-hidden lg:mt-0"
+      className="relative mt-10 overflow-hidden lg:mt-0 pt-[4.5rem]"
     >
       <Subheading title="Features" />
       <div className="flex flex-col gap-6 md:grid md:grid-cols-2 lg:grid-cols-3">
