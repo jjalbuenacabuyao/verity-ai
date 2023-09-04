@@ -5,6 +5,7 @@ import { BsFillShieldLockFill } from "react-icons/bs";
 import { MdCreditCardOff } from "react-icons/md";
 import { BsFillCpuFill } from "react-icons/bs";
 import FeatureCard from "./FeatureCard";
+import Subheading from "./Subheading";
 
 const Features = () => {
   const iconSize = 28;
@@ -41,8 +42,11 @@ const Features = () => {
     },
   ];
   return (
-    <section id="features" className="mt-10 relative overflow-hidden">
-      <h2 className="mb-8 text-center text-3xl font-semibold">Features</h2>
+    <section
+      id="features"
+      className="relative mt-10 overflow-hidden lg:mt-0"
+    >
+      <Subheading title="Features" />
       <div className="flex flex-col gap-6 md:grid md:grid-cols-2 lg:grid-cols-3">
         {features.map(({ title, description, icon }) => (
           <FeatureCard
