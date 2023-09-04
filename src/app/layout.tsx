@@ -18,7 +18,7 @@ export default async function RootLayout({
   const currentUser = await getCurrentUser();
 
   return (
-    <html lang="en" className="scroll-pt-16 overflow-scroll scroll-smooth">
+    <html lang="en" className="scroll-smooth">
       <body
         className={`${inter.className} mx-auto max-w-screen-2xl bg-white/95 text-slate-700 antialiased`}
       >
