@@ -26,6 +26,8 @@ import {
   Features,
   Hero,
   HeroIllustration,
+  Subheading,
+  Tutorials,
 } from "./home"
 
 import {
@@ -81,6 +83,8 @@ export {
   MailIcon,
   PasswordVisibilityToggler,
   PlusIcon,
+  Subheading,
+  Tutorials,
   UserAddedToast,
   UserMenu,
 };
