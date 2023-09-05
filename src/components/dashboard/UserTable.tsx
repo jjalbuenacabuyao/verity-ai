@@ -86,9 +86,9 @@ const UserTable = ({
             </TableCell>
             <TableCell className={`${isLoading ? "hidden" : ""}`}>
               <div className="flex items-center gap-2">
-                <Tooltip content="Edit user permission">
+                <Tooltip content="Edit user's role">
                   <span className="cursor-pointer text-lg text-default-400 active:opacity-50">
-                    <EditIcon />
+                    <EditIcon firstName={name!.firstName} role={role} />
                   </span>
                 </Tooltip>
                 <Tooltip color="danger" content="Delete user">
