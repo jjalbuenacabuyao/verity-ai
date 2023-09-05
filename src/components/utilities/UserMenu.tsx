@@ -7,7 +7,7 @@ import {
   DropdownTrigger,
 } from "@nextui-org/dropdown";
 import { Avatar } from "@nextui-org/avatar";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import { CurrentUser } from "@/types";
 import { signOut } from "next-auth/react";
 import {
@@ -21,13 +21,24 @@ import {
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
 import PasswordVisibilityToggler from "./PasswordVisibilityToggler";
+import axios from "axios";
+import { Close, Root, Title, Viewport } from "@radix-ui/react-toast";
+import { AiFillCloseCircle } from "react-icons/ai";
 
 interface Props {
   currentUser: CurrentUser;
 }
 
 const UserMenu = ({ currentUser }: Props) => {
-  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [isCurrentPassVisible, setIsCurrentPassVisible] = useState(false);
+  const [isNewPassVisible, setIsNewPassVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccessToastOpen, setIsSuccessToastOpen] = useState(false);
+  const [error, setError] = useState({
+    isError: false,
+    errorMessage: "",
+  });
+
   const [passwordInput, setPasswordInput] = useState({
     currentPassword: "",
     newPassword: "",
@@ -38,9 +49,38 @@ const UserMenu = ({ currentUser }: Props) => {
     userNameArray[userNameArray.length - 1].charAt(0);
 
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
-  const toggleVisibility = () => setIsVisible(!isVisible);
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setPasswordInput({ ...passwordInput, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setIsLoading(true);
+
+    const response = await axios
+      .post("/api/changepassword", {
+        email: currentUser.email,
+        ...passwordInput,
+      })
+      .then((res) => res.data);
+
+    const { isError, message }: {
+      isError: boolean;
+      message: string
+    } = response;
+
+    if (isError) {
+      setError({
+        isError: true,
+        errorMessage: message
+      })
+    } else {
+      setIsSuccessToastOpen(true);
+      onClose();
+    }
+
+    setIsLoading(false);
   };
 
   return (
@@ -91,8 +131,8 @@ const UserMenu = ({ currentUser }: Props) => {
         </DropdownMenu>
       </Dropdown>
 
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
-        <form action="">
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange} className="m-4">
+        <form onSubmit={handleSubmit}>
           <ModalContent>
             {(onClose) => (
               <>
@@ -100,8 +140,8 @@ const UserMenu = ({ currentUser }: Props) => {
                   Change Password
                 </ModalHeader>
                 <ModalBody className="gap-6">
-                  <div className="grid gap-2">
-                    <p>
+                  <div>
+                    <p className="mb-2">
                       Enter your{" "}
                       <span className="font-semibold">current password</span>
                     </p>
@@ -111,13 +151,17 @@ const UserMenu = ({ currentUser }: Props) => {
                       name="currentPassword"
                       isRequired
                       onChange={handleChange}
+                      validationState={error.isError ? "invalid" : "valid"}
+                      errorMessage={error.errorMessage}
                       endContent={
                         <PasswordVisibilityToggler
-                          toggleVisibility={toggleVisibility}
-                          isVisible={isVisible}
+                          toggleVisibility={() =>
+                            setIsCurrentPassVisible(!isCurrentPassVisible)
+                          }
+                          isVisible={isCurrentPassVisible}
                         />
                       }
-                      type={isVisible ? "text" : "password"}
+                      type={isCurrentPassVisible ? "text" : "password"}
                     />
                   </div>
                   <div className="grid gap-2">
@@ -133,11 +177,13 @@ const UserMenu = ({ currentUser }: Props) => {
                       onChange={handleChange}
                       endContent={
                         <PasswordVisibilityToggler
-                          toggleVisibility={toggleVisibility}
-                          isVisible={isVisible}
+                          toggleVisibility={() =>
+                            setIsNewPassVisible(!isNewPassVisible)
+                          }
+                          isVisible={isNewPassVisible}
                         />
                       }
-                      type={isVisible ? "text" : "password"}
+                      type={isNewPassVisible ? "text" : "password"}
                     />
                   </div>
                 </ModalBody>
@@ -145,14 +191,28 @@ const UserMenu = ({ currentUser }: Props) => {
                   <Button color="danger" variant="light" onPress={onClose}>
                     Cancel
                   </Button>
-                  <Button color="primary" onPress={onClose}>
-                    Save
+                  <Button color="primary" type="submit" isLoading={isLoading}>
+                    Submit
                   </Button>
                 </ModalFooter>
               </>
             )}
           </ModalContent>
         </form>
+
+        <>
+          <Root
+            open={isSuccessToastOpen}
+            onOpenChange={setIsSuccessToastOpen}
+            className="flex items-center gap-4 rounded-md border bg-green-500 p-5 text-white shadow-lg data-[swipe=cancel]:translate-x-0 data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[state=closed]:animate-hide data-[state=open]:animate-slideIn data-[swipe=end]:animate-swipeOut data-[swipe=cancel]:transition-[transform_200ms_ease-out]"
+          >
+            <Title className="font-semibold">Password updated successfully.</Title>
+            <Close>
+              <AiFillCloseCircle size={20} />
+            </Close>
+          </Root>
+          <Viewport className="fixed bottom-0 right-0 z-[31416] flex max-w-full flex-col gap-3 p-6" />
+        </>
       </Modal>
     </>
   );
