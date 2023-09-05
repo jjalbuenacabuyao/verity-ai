@@ -40,7 +40,7 @@ const EditRoleModal = ({ isOpen, onOpenChange, onClose, firstName, role }: Props
                   </span>
                 </p>
                 <RadioGroup
-                  label={`Change ${firstName}&apos;s to:`}
+                  label={`Change ${firstName}'s to:`}
                   defaultValue={role === "ADMIN" ? "USER" : "ADMIN"}
                 >
                   {["Admin", "User"].map((item) => (
