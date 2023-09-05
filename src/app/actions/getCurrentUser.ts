@@ -10,13 +10,15 @@ export default async function getCurrentUser() {
   try {
     const session = await getSession();
 
-    if (!session?.user?.email){
+    const email = session?.user.email as string;
+
+    if (!email){
       return null;
     }
 
     const currentUser = await prisma.user.findUnique({
       where: {
-        email: session.user.email as string
+        email: email
       },
       select: {
           name: {
@@ -35,6 +37,7 @@ export default async function getCurrentUser() {
     }
 
     return {
+      email: email,
       name: `${currentUser.name?.firstName} ${currentUser.name?.lastName}`,
       role: currentUser.role
     };
