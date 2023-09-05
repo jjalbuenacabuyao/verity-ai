@@ -65,7 +65,7 @@ const LogInButtonAndModal = () => {
         isOpen={isOpen}
         onOpenChange={onOpenChange}
         placement="center"
-        className="mx-4 my-4"
+        className="m-4"
       >
         <ModalContent>
           {(onClose) => (

@@ -90,7 +90,7 @@ const AddUserModal = ({
         onOpenChange={onOpenChange}
         placement="center"
         scrollBehavior="inside"
-        className="mx-4 my-4"
+        className="m-4"
       >
         <form onSubmit={handleSubmit}>
           <ModalContent>
