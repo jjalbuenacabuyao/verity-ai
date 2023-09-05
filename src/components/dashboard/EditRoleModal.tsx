@@ -30,7 +30,7 @@ const EditRoleModal = ({ isOpen, onOpenChange, onClose, firstName, role }: Props
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                Edit user's role
+                Edit user&aposs role
               </ModalHeader>
               <ModalBody className="gap-6">
                 <p>
@@ -45,6 +45,7 @@ const EditRoleModal = ({ isOpen, onOpenChange, onClose, firstName, role }: Props
                 >
                   {["Admin", "User"].map((item) => (
                     <Radio
+                      key={item}
                       value={item.toUpperCase()}
                       isDisabled={role === item.toUpperCase()}
                     >
