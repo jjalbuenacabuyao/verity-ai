@@ -30,17 +30,17 @@ const EditRoleModal = ({ isOpen, onOpenChange, onClose, firstName, role }: Props
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                Edit user&aposs role
+                Edit user&apos;s role
               </ModalHeader>
               <ModalBody className="gap-6">
                 <p>
-                  {firstName}&aposs role is currently:{" "}
+                  {firstName}&apos;s role is currently:{" "}
                   <span className="font-semibold capitalize">
                     {role.toLocaleLowerCase()}
                   </span>
                 </p>
                 <RadioGroup
-                  label={`Change ${firstName}&aposs to:`}
+                  label={`Change ${firstName}&apos;s to:`}
                   defaultValue={role === "ADMIN" ? "USER" : "ADMIN"}
                 >
                   {["Admin", "User"].map((item) => (
