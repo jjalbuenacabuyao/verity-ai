@@ -5,11 +5,12 @@ import React from "react";
 import EditRoleModal from "./EditRoleModal";
 
 interface Props {
+  id: string;
   firstName: string;
   role: string;
 }
 
-const EditIcon = ({ firstName, role }: Props) => {
+const EditIcon = ({ firstName, role, id }: Props) => {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 
   return (
@@ -51,7 +52,7 @@ const EditIcon = ({ firstName, role }: Props) => {
         </svg>
       </button>
 
-      <EditRoleModal isOpen={isOpen} onOpenChange={onOpenChange} onClose={onClose} firstName={firstName} role={role} />
+      <EditRoleModal id={id} isOpen={isOpen} onOpenChange={onOpenChange} onClose={onClose} firstName={firstName} role={role} />
     </>
   );
 };
