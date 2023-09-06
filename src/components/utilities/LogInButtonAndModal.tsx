@@ -107,11 +107,6 @@ const LogInButtonAndModal = () => {
                     error === "Incorrect password" ? "Incorrect password" : ""
                   }
                 />
-                <div className="flex justify-end px-1 py-2">
-                  <Link href="#" className="text-sm text-blue-500">
-                    Forgot password?
-                  </Link>
-                </div>
               </ModalBody>
               <ModalFooter>
                 <Button color="danger" variant="flat" onClick={onClose}>
