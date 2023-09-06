@@ -199,8 +199,9 @@ const UserMenu = ({ currentUser }: Props) => {
             )}
           </ModalContent>
         </form>
+      </Modal>
 
-        <>
+      <>
           <Root
             open={isSuccessToastOpen}
             onOpenChange={setIsSuccessToastOpen}
@@ -213,7 +214,6 @@ const UserMenu = ({ currentUser }: Props) => {
           </Root>
           <Viewport className="fixed bottom-0 right-0 z-[31416] flex max-w-full flex-col gap-3 p-6" />
         </>
-      </Modal>
     </>
   );
 };
