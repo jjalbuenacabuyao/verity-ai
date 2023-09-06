@@ -88,7 +88,7 @@ const UserTable = ({
               <div className="flex items-center gap-2">
                 <Tooltip content="Edit user's role">
                   <span className="cursor-pointer text-lg text-default-400 active:opacity-50">
-                    <EditIcon firstName={name!.firstName} role={role} />
+                    <EditIcon firstName={name!.firstName} role={role} id={id} />
                   </span>
                 </Tooltip>
                 <Tooltip color="danger" content="Delete user">
