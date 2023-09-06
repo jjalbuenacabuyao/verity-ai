@@ -188,10 +188,10 @@ const UserMenu = ({ currentUser }: Props) => {
                   </div>
                 </ModalBody>
                 <ModalFooter>
-                  <Button color="danger" variant="light" onPress={onClose}>
+                  <Button color="danger" variant="flat" onPress={onClose}>
                     Cancel
                   </Button>
-                  <Button color="primary" type="submit" isLoading={isLoading}>
+                  <Button color="primary" type="submit" isLoading={isLoading} className="font-semibold">
                     Submit
                   </Button>
                 </ModalFooter>

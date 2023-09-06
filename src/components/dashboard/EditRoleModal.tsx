@@ -100,10 +100,10 @@ const EditRoleModal = ({
                   </p>
                 </ModalBody>
                 <ModalFooter>
-                  <Button color="danger" variant="light" onPress={onClose}>
+                  <Button color="danger" variant="flat" onPress={onClose}>
                     Cancel
                   </Button>
-                  <Button color="primary" type="submit" isLoading={isLoading}>
+                  <Button color="primary" type="submit" isLoading={isLoading} className="font-semibold">
                     Save
                   </Button>
                 </ModalFooter>

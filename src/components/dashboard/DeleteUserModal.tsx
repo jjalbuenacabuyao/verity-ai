@@ -56,7 +56,7 @@ const DeleteUserModal = ({
               </p>
             </ModalBody>
             <ModalFooter>
-              <Button color="default" variant="light" onPress={onClose}>
+              <Button color="default" variant="flat" onPress={onClose}>
                 Cancel
               </Button>
               <Button color="danger" className="font-semibold" isLoading={isLoading} onPress={deleteUser}>
