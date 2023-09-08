@@ -3,7 +3,7 @@
 import Image from "next/image";
 import React from "react";
 import { workSans } from "@/fonts";
-import LogInButtonAndModal from "./LogInButtonAndModal";
+import LogInButton from "./LogInButton";
 import { Button } from "@nextui-org/button";
 import { useRouter } from "next/navigation";
 
@@ -45,7 +45,7 @@ const AccessDenied = () => {
           you to be logged in. Please log in to your account to continue.
         </p>
         <div className="flex justify-center gap-3 lg:justify-start">
-          <LogInButtonAndModal />
+          <LogInButton />
           <Button
             color="primary"
             variant="bordered"

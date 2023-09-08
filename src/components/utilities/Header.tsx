@@ -12,7 +12,7 @@ import {
 } from "@nextui-org/navbar";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import LogInButtonAndModal from "./LogInButtonAndModal";
+import LogInButton from "./LogInButton";
 import Logo from "./Logo";
 import { usePathname } from "next/navigation";
 import UserMenu from "./UserMenu";
@@ -102,7 +102,7 @@ const Header = () => {
           {currentUser ? (
             <UserMenu currentUser={currentUser} />
           ) : (
-            <LogInButtonAndModal />
+            <LogInButton />
           )}
         </NavbarItem>
       </NavbarContent>
@@ -144,7 +144,7 @@ const Header = () => {
           </NavbarMenuItem>
         )}
 
-        <NavbarItem>{!currentUser && <LogInButtonAndModal />}</NavbarItem>
+        <NavbarItem>{!currentUser && <LogInButton/>}</NavbarItem>
       </NavbarMenu>
     </Navbar>
   );
