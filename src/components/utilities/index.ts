@@ -5,7 +5,8 @@ import EyeFilledIcon from "./EyeFilledIcon";
 import EyeSlashFilledIcon from "./EyeSlashFilledIcon";
 import Header from "./Header";
 import Loader from "./Loader";
-import LogInButtonAndModal from "./LogInButtonAndModal";
+import LogInButton from "./LogInButton";
+import LogInModal from "./LogInModal";
 import Logo from "./Logo";
 import LogOutButton from "./LogOutButton";
 import MailIcon from "./MailIcon";
@@ -22,7 +23,8 @@ export {
   EyeSlashFilledIcon,
   Header,
   Loader,
-  LogInButtonAndModal,
+  LogInButton,
+  LogInModal,
   Logo,
   LogOutButton,
   MailIcon,
@@ -30,4 +32,4 @@ export {
   PlusIcon,
   UserAddedToast,
   UserMenu,
-}
+};
