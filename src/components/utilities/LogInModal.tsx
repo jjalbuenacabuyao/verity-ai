@@ -60,7 +60,6 @@ const LogInModal = ({ isOpen, onOpenChange, onClose }: Props) => {
       onOpenChange={onOpenChange}
       placement="center"
       className="m-4"
-      isDismissable={false}
     >
       <ModalContent>
         {(onClose) => (
