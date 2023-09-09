@@ -27,14 +27,16 @@ export async function POST(
   const paragraphText = sentences.join("");
   const overallWordCount = countWords(paragraphText);
   const wordCountLimit = 300;
-  const aiGenerated = "LABEL_0";
-  const humanWritten = "LABEL_1";
+  // const aiGenerated = "LABEL_0" || "Fake";
+  // const humanWritten = "LABEL_1";
 
   if (overallWordCount <= wordCountLimit) {
     const result = await detectAiGeneratedText(paragraphText);
     const { label, score } = result;
+    const aiGenerated = label === "LABEL_0" || label === "Fake";
+    const humanWritten = label === "LABEL_1" || label === "Real";
 
-    if (label === humanWritten && score >= 90) {
+    if (humanWritten && score >= 90) {
       const detectionResult: DetectionResult = {
         aiGeneratedPercentage: 0,
         aiGeneratedTexts: "All texts are possibly NOT AI-GENERATED.",
@@ -42,7 +44,7 @@ export async function POST(
       return NextResponse.json(detectionResult);
     }
 
-    if (label === aiGenerated && score >= 90) {
+    if (aiGenerated && score >= 90) {
       const detectionResult: DetectionResult = {
         aiGeneratedPercentage: 100,
         aiGeneratedTexts: "All texts are possibly AI-GENERATED.",
@@ -68,7 +70,7 @@ export async function POST(
   // });
 
   const aiGeneratedTexts = results.filter(
-    (item) => item.result.label === "LABEL_0"
+    (item) => item.result.label === "LABEL_0" || item.result.label === "Fake"
   );
 
   const totalPercentage =
@@ -88,8 +90,9 @@ export async function POST(
   const detectionResult: DetectionResult = {
     aiGeneratedPercentage: Math.round(totalPercentage),
     aiGeneratedTexts: results.map(({ text, result }) => {
-      const { score, label } = result;
+      let { score, label } = result;
       text = cleanText(text)
+      label = label === "Fake" ? "LABEL_0" : "LABEL_1";
       return { text, score, label }
     }),
   };
