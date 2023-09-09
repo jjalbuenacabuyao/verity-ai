@@ -6,7 +6,7 @@ const Dashboard = async () => {
   const session = await getSession();
   const totalUsers = (await client.user.findMany()).length;
 
-  if (!session) {
+  if (!session || session.user.role !== "ADMIN") {
     return <AccessDenied />;
   }
 
