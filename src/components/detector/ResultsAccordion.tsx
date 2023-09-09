@@ -27,7 +27,7 @@ const ResultsAccordion = ({ data }: Props) => {
     >
       {data.map((item, index) => {
         const { filename, result } = item;
-        const { aiGeneratedPercentage, aiGeneratedTexts } = result;
+        const { aiGeneratedPercentage, texts } = result;
         const label = `${filename} AI Detection Result`;
         return (
           <AccordionItem
@@ -56,13 +56,13 @@ const ResultsAccordion = ({ data }: Props) => {
                 </div>
               </div>
 
-              {typeof aiGeneratedTexts !== "string" && (
+              {typeof texts !== "string" && (
                 <div className="px-1">
                   <AccordionItemSectionTitle
                     title="Breakdown of Result"
                     description="This section allows you to see which specific paragraphs are more likely to have been created by an AI."
                   />
-                  <ResultBreakdownTable aiGeneratedTexts={aiGeneratedTexts} />
+                  <ResultBreakdownTable texts={texts} />
                 </div>
               )}
             </div>

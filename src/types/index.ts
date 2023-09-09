@@ -2,7 +2,7 @@ import { User, Name } from "@prisma/client";
 
 export interface DetectionResult {
   aiGeneratedPercentage: number;
-  aiGeneratedTexts:
+  texts:
     | {
         text: string;
         score: number;

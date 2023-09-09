@@ -151,14 +151,14 @@ const createDetectionReportDocx = (data: ResultWithFilename[]) => {
       ]
     })
 
-    if (typeof result.aiGeneratedTexts === "string") {
+    if (typeof result.texts === "string") {
       tableRow.addChildElement(
         new TableCell({
           children: [
             new Paragraph({
               children: [
                 new TextRun({
-                  text: `${result.aiGeneratedTexts}`,
+                  text: `${result.texts}`,
                   bold: true,
                 })
               ]
@@ -172,8 +172,8 @@ const createDetectionReportDocx = (data: ResultWithFilename[]) => {
       )
     }
 
-    else {
-      const breakdownResultRow = result.aiGeneratedTexts.map(({text, label, score}) => {
+    else if (typeof result.texts === "object") {
+      const breakdownResultRow = result.texts.map(({text, label, score}) => {
         const textLabel =
           label === "LABEL_0" ? "AI-Generated" : "Human Written";
         return new TableRow({

@@ -39,7 +39,7 @@ export async function POST(
     if (humanWritten && score >= 90) {
       const detectionResult: DetectionResult = {
         aiGeneratedPercentage: 0,
-        aiGeneratedTexts: "All texts are possibly NOT AI-GENERATED.",
+        texts: "All texts are possibly NOT AI-GENERATED.",
       };
       return NextResponse.json(detectionResult);
     }
@@ -47,7 +47,7 @@ export async function POST(
     if (aiGenerated && score >= 90) {
       const detectionResult: DetectionResult = {
         aiGeneratedPercentage: 100,
-        aiGeneratedTexts: "All texts are possibly AI-GENERATED.",
+        texts: "All texts are possibly AI-GENERATED.",
       };
       return NextResponse.json(detectionResult);
     }
@@ -89,25 +89,13 @@ export async function POST(
 
   const detectionResult: DetectionResult = {
     aiGeneratedPercentage: Math.round(totalPercentage),
-    aiGeneratedTexts: results.map(({ text, result }) => {
+    texts: results.map(({ text, result }) => {
       let { score, label } = result;
       text = cleanText(text)
       label = label === "Fake" ? "LABEL_0" : "LABEL_1";
       return { text, score, label }
     }),
   };
-
-  // if (totalScore >= 95) {
-  //   detectionResult.label = Label.AiGenerated;
-  // } else if (totalScore <= 94 && totalScore >= 56) {
-  //   detectionResult.label = Label.MostlyAiGenerated;
-  // } else if (totalScore <= 55 && totalScore >= 45) {
-  //   detectionResult.label = Label.PartlyAiGenerated;
-  // } else if (totalScore <= 44 && totalScore >= 6) {
-  //   detectionResult.label = Label.MostlyHumanWritten;
-  // } else {
-  //   detectionResult.label = Label.HumanWritten;
-  // }
 
   return NextResponse.json(detectionResult);
 }

@@ -9,14 +9,14 @@ import {
 } from "@nextui-org/table";
 
 interface Props {
-  aiGeneratedTexts: {
+  texts: {
     text: string;
     score: number;
     label: string;
   }[];
 }
 
-const ResultBreakdownTable = ({ aiGeneratedTexts }: Props) => {
+const ResultBreakdownTable = ({ texts }: Props) => {
   const screenWidth = screen.width;
   let slicedWords: number;
   if (screenWidth < 640) {
@@ -36,7 +36,7 @@ const ResultBreakdownTable = ({ aiGeneratedTexts }: Props) => {
         <TableColumn key="result">Result</TableColumn>
       </TableHeader>
       <TableBody>
-        {aiGeneratedTexts?.map(({ text, score, label }, index) => (
+        {texts?.map(({ text, score, label }, index) => (
           <TableRow key={index}>
             <TableCell>
               <p className="sm:text-justify">
