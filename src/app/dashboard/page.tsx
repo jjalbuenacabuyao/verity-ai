@@ -1,12 +1,13 @@
-import { getSession } from "../actions/getCurrentUser";
+import { AccessDenied } from "@/components/utilities";
+import getCurrentUser from "../actions/getCurrentUser";
 import client from "../libs/prismadb";
-import { DashboardContents, AccessDenied } from "@/components";
+import { DashboardContents } from "@/components/dashboard";
 
 const Dashboard = async () => {
-  const session = await getSession();
+  const currentUser = await getCurrentUser();
   const totalUsers = (await client.user.findMany()).length;
 
-  if (!session || session.user.role !== "ADMIN") {
+  if (currentUser?.role !== "ADMIN") {
     return <AccessDenied />;
   }
 

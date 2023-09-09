@@ -1,4 +1,4 @@
-import { Header } from "@/components";
+import { Header } from "@/components/utilities";
 import { CurrentUserProvider, ToastProvider, UIProvider } from "@/providers";
 import getCurrentUser from "./actions/getCurrentUser";
 import { inter } from "@/fonts";

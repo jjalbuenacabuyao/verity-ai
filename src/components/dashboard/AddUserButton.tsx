@@ -1,5 +1,5 @@
 "use client";
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { useDisclosure } from "@nextui-org/modal";
 import { Button } from "@nextui-org/button";
 import AddUserModal from "./AddUserModal";

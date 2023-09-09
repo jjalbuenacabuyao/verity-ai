@@ -1,4 +1,4 @@
-import { Features, Hero, Tutorials } from "@/components";
+import { Features, Hero, Tutorials } from "@/components/home";
 
 const Page = () => {
   return (
