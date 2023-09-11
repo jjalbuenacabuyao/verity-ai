@@ -1,9 +1,8 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { Hero } from "@/components/home";
 import "@testing-library/jest-dom";
-import CurrentUserContext, { useCurrentUserContext } from "@/hooks/userContext";
+import CurrentUserContext from "@/hooks/userContext";
 import mockRouter from "next-router-mock";
-import Email from "next-auth/providers/email";
 
 jest.mock("next/navigation", () => jest.requireActual("next-router-mock"));
 
@@ -57,7 +56,7 @@ describe("Hero", () => {
     expect(screen.getByRole("dialog")).toBeInTheDocument();
   });
 
-  test("navigates to the detector page when the button is clicked and the user is logged in", () => {
+  test("navigates to the detector page when the button is clicked and the user is logged in", async () => {
     render(
       <CurrentUserContext.Provider
         value={{
@@ -71,7 +70,7 @@ describe("Hero", () => {
     );
     const button = screen.getByRole("button", { name: /Get Started/i });
     fireEvent.click(button);
-    mockRouter.push("/detector")
+    await act(() => mockRouter.push("/detector"))
     expect(mockRouter).toMatchObject({pathname: "/detector"})
   });
 });
