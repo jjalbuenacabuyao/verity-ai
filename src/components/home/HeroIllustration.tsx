@@ -15,7 +15,7 @@ const HeroIllustration = () => {
           quality={100}
           unoptimized
           priority
-          alt="Photo of AI-detector"
+          alt="Photo of detection report"
           className="static h-auto w-full"
         />
       </div>
