@@ -52,11 +52,11 @@ describe("Hero", () => {
   test("opens the modal when the button is clicked and the user is not logged in", () => {
     render(<Hero />);
     const button = screen.getByRole("button", { name: /Get Started/i });
-    fireEvent.click(button);
+    act(() => fireEvent.click(button))
     expect(screen.getByRole("dialog")).toBeInTheDocument();
   });
 
-  test("navigates to the detector page when the button is clicked and the user is logged in", async () => {
+  test("navigates to the detector page when the button is clicked and the user is logged in", () => {
     render(
       <CurrentUserContext.Provider
         value={{
@@ -69,8 +69,10 @@ describe("Hero", () => {
       </CurrentUserContext.Provider>
     );
     const button = screen.getByRole("button", { name: /Get Started/i });
-    fireEvent.click(button);
-    await act(() => mockRouter.push("/detector"))
+    act(() => {
+      fireEvent.click(button);
+      mockRouter.push("/detector");
+    })
     expect(mockRouter).toMatchObject({pathname: "/detector"})
   });
 });
