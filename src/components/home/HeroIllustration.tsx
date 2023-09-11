@@ -56,6 +56,7 @@ const HeroIllustration = () => {
               name={initials}
               size="sm"
               color="primary"
+              data-testid="avatar"
               classNames={{
                 name: "font-semibold text-[6px] sm:text-[10px]",
                 base: "w-5 h-5 sm:w-7 sm:h-7 ",
@@ -82,6 +83,7 @@ const HeroIllustration = () => {
               value={value}
               color={value === 32 ? "danger" : "primary"}
               size="md"
+              data-testid="circularProgress"
               showValueLabel
               classNames={{
                 value: "text-[10px] font-semibold md:text-base lg:text-xs",
