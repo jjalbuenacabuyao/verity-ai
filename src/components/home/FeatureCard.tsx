@@ -23,14 +23,23 @@ const FeatureCard = ({ title, description, icon }: Props) => {
           whileInView={{ scale: 1 }}
           transition={{ type: "spring", duration: 0.5, delay: 0.3 }}
           className="rounded-full bg-blue-100 p-3 text-blue-500 group-hover:bg-white"
+          data-testid="icon"
         >
           {icon}
         </motion.div>
-        <h3 className="text-lg font-semibold group-hover:text-white">
+        <h3
+          className="text-lg font-semibold group-hover:text-white"
+          data-testid="title"
+        >
           {title}
         </h3>
       </div>
-      <p className="text-slate-500 group-hover:text-white">{description}</p>
+      <p
+        className="text-slate-500 group-hover:text-white"
+        data-testid="description"
+      >
+        {description}
+      </p>
     </motion.div>
   );
 };
