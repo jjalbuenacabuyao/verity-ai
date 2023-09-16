@@ -26,7 +26,7 @@ export async function POST(
 
   const paragraphText = sentences.join("");
   const overallWordCount = countWords(paragraphText);
-  const wordCountLimit = 300;
+  const wordCountLimit = 200;
   // const aiGenerated = "LABEL_0" || "Fake";
   // const humanWritten = "LABEL_1";
 
