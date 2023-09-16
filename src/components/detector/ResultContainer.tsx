@@ -8,6 +8,7 @@ import DownloadReportButton from "./DownloadReportButton";
 import ResultsAccordion from "./ResultsAccordion";
 import axios from "axios";
 import { Spinner } from "@nextui-org/spinner";
+import FileLimitExceededToast from "../utilities/FileLimitExceededToast";
 
 interface Props {
   files: File[];
@@ -18,6 +19,7 @@ const ResultContainer = ({ files }: Props) => {
   const [isToastOpen, setIsToastOpen] = useState<boolean>(false);
   const [errorResult, setErrorResult] = useState<string[]>([]);
   const [results, setResults] = useState<ResultWithFilename[]>([]);
+  const [isFileLimitExceeded, setIsFileLimitExceeded] = useState(false);
 
   useEffect(() => {
     const storedState = localStorage.getItem("detectionResult");
@@ -26,6 +28,11 @@ const ResultContainer = ({ files }: Props) => {
       setIsLoading(false);
     } else {
       setIsLoading(false);
+    }
+
+    if (files.length > 20) {
+      setIsFileLimitExceeded(true);
+      return;
     }
 
     if (files?.length !== 0) {
@@ -115,6 +122,8 @@ const ResultContainer = ({ files }: Props) => {
             setIsOpen={setIsToastOpen}
           />
         ))}
+      
+      <FileLimitExceededToast isOpen={isFileLimitExceeded} setIsOpen={setIsFileLimitExceeded} />
     </div>
   );
 };
