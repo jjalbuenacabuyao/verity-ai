@@ -38,7 +38,7 @@ const instructions = [
         <span className="font-semibold">Browse Files</span> button.
       </p>
     ),
-    imgSource: "/emailandpassword.png",
+    imgSource: "/browsefiles.png",
     altText: "Screenshot of Login Modal",
   },
   {
@@ -60,7 +60,7 @@ const instructions = [
         <span className="font-semibold">Download Report</span> button.
       </p>
     ),
-    imgSource: "/emailandpassword.png",
+    imgSource: "/downloadreport.png",
     altText: "Screenshot of Login Modal",
   },
   {
@@ -75,7 +75,6 @@ const instructions = [
     imgSource: "/emailandpassword.png",
     altText: "Screenshot of Login Modal",
   },
-
   {
     instruction: (
       <p>
@@ -98,7 +97,7 @@ const adminInstructions = [
         the navigation bar.
       </p>
     ),
-    imgSource: "/login.png",
+    imgSource: "/dashboardlink.png",
     altText:
       "Screenshot of VerityAI homepage with arrow pointing to the Login button",
   },
@@ -109,7 +108,7 @@ const adminInstructions = [
         <span className="font-semibold">Add User</span> button on the left.
       </p>
     ),
-    imgSource: "/login.png",
+    imgSource: "/adduser.png",
     altText:
       "Screenshot of VerityAI homepage with arrow pointing to the Login button",
   },
@@ -120,7 +119,7 @@ const adminInstructions = [
         <span className="font-semibold">Create User</span>.
       </p>
     ),
-    imgSource: "/login.png",
+    imgSource: "/adduserdetails.png",
     altText:
       "Screenshot of VerityAI homepage with arrow pointing to the Login button",
   },
@@ -131,7 +130,7 @@ const adminInstructions = [
         to confirm.
       </p>
     ),
-    imgSource: "/login.png",
+    imgSource: "/deleteusericon.png",
     altText:
       "Screenshot of VerityAI homepage with arrow pointing to the Login button",
   },
@@ -142,7 +141,7 @@ const adminInstructions = [
         Click save to confirm user&apos;s permission.
       </p>
     ),
-    imgSource: "/login.png",
+    imgSource: "/edituser.png",
     altText:
       "Screenshot of VerityAI homepage with arrow pointing to the Login button",
   },
@@ -153,7 +152,7 @@ const adminInstructions = [
         it will automatically search for the user.
       </p>
     ),
-    imgSource: "/login.png",
+    imgSource: "/search.png",
     altText:
       "Screenshot of VerityAI homepage with arrow pointing to the Login button",
   },
