@@ -49,7 +49,7 @@ const instructions = [
         upload 20 files each time.
       </p>
     ),
-    imgSource: "/emailandpassword.png",
+    imgSource: "/uploadfiles.png",
     altText: "Screenshot of Login Modal",
   },
   {
@@ -72,7 +72,7 @@ const instructions = [
         <span className="font-semibold">Submit</span> to change the password.
       </p>
     ),
-    imgSource: "/emailandpassword.png",
+    imgSource: "/changepassword.png",
     altText: "Screenshot of Login Modal",
   },
   {
@@ -82,7 +82,7 @@ const instructions = [
         you will be redirected to the the homepage.
       </p>
     ),
-    imgSource: "/emailandpassword.png",
+    imgSource: "/logout.png",
     altText: "Screenshot of Login Modal",
   },
 ];
