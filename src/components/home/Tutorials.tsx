@@ -45,7 +45,7 @@ const instructions = [
     instruction: (
       <p>
         4. Select the files that you want to check and click the{" "}
-        <span>Open</span> button. It is important to remember that you can only
+        <span className="font-semibold">Open</span> button. It is important to remember that you can only
         upload 20 files each time.
       </p>
     ),
