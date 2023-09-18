@@ -2,6 +2,7 @@ import React from "react";
 const EyeFilledIcon = (props: any) => (
   <svg
     aria-hidden="true"
+    data-testid="eyeFilledIcon"
     fill="none"
     focusable="false"
     height="1em"

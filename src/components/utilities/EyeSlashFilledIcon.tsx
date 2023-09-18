@@ -2,6 +2,7 @@ import React from "react";
 const EyeSlashFilledIcon = (props: any) => (
   <svg
     aria-hidden="true"
+    data-testid="eyeSlashFilledIcon"
     fill="none"
     focusable="false"
     height="1em"
