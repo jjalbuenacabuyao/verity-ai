@@ -4,7 +4,6 @@ import EmailAlreadyExistToast from "./EmailAlreadyExistToast";
 import EyeFilledIcon from "./EyeFilledIcon";
 import EyeSlashFilledIcon from "./EyeSlashFilledIcon";
 import Header from "./Header";
-import Loader from "./Loader";
 import LogInButton from "./LogInButton";
 import LogInModal from "./LogInModal";
 import Logo from "./Logo";
@@ -22,7 +21,6 @@ export {
   EyeFilledIcon,
   EyeSlashFilledIcon,
   Header,
-  Loader,
   LogInButton,
   LogInModal,
   Logo,
