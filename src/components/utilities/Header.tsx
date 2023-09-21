@@ -66,7 +66,13 @@ const Header = () => {
         {menuItems.map((item) => (
           <NavbarItem key={item}>
             <Link
-              href={`/${item === "Home" ? "/" : `/#${item.toLowerCase()}`}`}
+              href={`${
+                item === "Home" && currentPath !== "/"
+                  ? "/"
+                  : item === "Home" && currentPath === "/"
+                  ? "#top"
+                  : `/#${item.toLowerCase()}`
+              }`}
               className="text-base font-semibold sm:text-sm"
             >
               {item}
@@ -144,7 +150,7 @@ const Header = () => {
           </NavbarMenuItem>
         )}
 
-        <NavbarItem>{!currentUser && <LogInButton/>}</NavbarItem>
+        <NavbarItem>{!currentUser && <LogInButton />}</NavbarItem>
       </NavbarMenu>
     </Navbar>
   );
