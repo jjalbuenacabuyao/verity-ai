@@ -11,14 +11,14 @@ const FaqAccordion = () => {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     },
     {
-      question: "What is an AI-generated text?",
+      question: "What's an AI-generated text?",
       answer:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     },
   ];
 
   return (
-    <Accordion variant="splitted">
+    <Accordion variant="splitted" className="max-w-2xl mx-auto gap-4">
       {questionsAndAnswers.map(({ question, answer }, index) => (
         <AccordionItem
           key={question}
