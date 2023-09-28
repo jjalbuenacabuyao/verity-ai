@@ -3,11 +3,24 @@ import Image from "next/image";
 
 interface Props {
   data: {
-    instruction: React.ReactNode,
-    imgSource: string,
-    altText: string,
+    instruction: React.ReactNode;
+    imgSource: string;
+    altText: string;
   }[];
 }
+
+/**
+ * Renders an ordered list with instructions and images.
+ *
+ * @component
+ *
+ * @param {Object[]} data - An array of objects containing the instructions and image details.
+ * @param {React.ReactNode} data[].instruction - The instruction to be displayed.
+ * @param {string} data[].imgSource - The source URL of the image.
+ * @param {string} data[].altText - The alternative text for the image.
+ *
+ * @returns {JSX.Element} The rendered ordered list with instructions and images.
+ */
 
 const InstructionList = ({ data }: Props) => {
   return (

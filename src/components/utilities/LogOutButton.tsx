@@ -2,6 +2,13 @@ import React from "react";
 import { signOut } from "next-auth/react";
 import { Button } from "@nextui-org/button";
 
+/**
+ * Renders a button component for logging out.
+ * When the button is clicked, it calls the `signOut` function with a callback URL of "/".
+ *
+ * @returns {JSX.Element} The rendered button component.
+ */
+
 const LogOutButton = () => {
   return (
     <Button

@@ -7,8 +7,16 @@ import { BsFillCpuFill } from "react-icons/bs";
 import FeatureCard from "./FeatureCard";
 import Subheading from "./Subheading";
 
+/**
+ * Renders a section with a list of features.
+ * Each feature is represented by a `FeatureCard` component, which displays an icon, title, and description.
+ *
+ * @returns {JSX.Element}
+ */
+
 const Features = () => {
   const iconSize = 28;
+
   const features = [
     {
       title: "Fast",
@@ -41,10 +49,11 @@ const Features = () => {
       icon: <MdCreditCardOff size={iconSize} />,
     },
   ];
+
   return (
     <section
       id="features"
-      className="relative mt-10 overflow-hidden lg:mt-0 pt-[4.5rem]"
+      className="relative mt-10 overflow-hidden pt-[4.5rem] lg:mt-0"
     >
       <Subheading title="Features" />
       <div className="flex flex-col gap-6 md:grid md:grid-cols-2 lg:grid-cols-3">

@@ -3,6 +3,12 @@
 import { Accordion, AccordionItem } from "@nextui-org/accordion";
 import React from "react";
 
+/**
+ * Renders an accordion component with a list of questions and answers.
+ *
+ * @returns {JSX.Element} The rendered accordion component.
+ */
+
 const FaqAccordion = () => {
   const questionsAndAnswers = [
     {
@@ -18,7 +24,7 @@ const FaqAccordion = () => {
   ];
 
   return (
-    <Accordion variant="splitted" className="max-w-2xl mx-auto gap-4">
+    <Accordion variant="splitted" className="mx-auto max-w-2xl gap-4">
       {questionsAndAnswers.map(({ question, answer }, index) => (
         <AccordionItem
           key={question}

@@ -4,10 +4,16 @@ import { Avatar } from "@nextui-org/avatar";
 import { CircularProgress } from "@nextui-org/progress";
 import { Button } from "@nextui-org/button";
 
+/**
+ * Renders a hero illustration with images, avatars, circular progress bars, and a button.
+ *
+ * @returns {JSX.Element }representing the hero illustration.
+ */
+
 const HeroIllustration = () => {
   return (
-    <div className="relative pb-10 lg:pb-0 sm:pt-16 md:pt-20">
-      <div className="absolute bottom-2 left-1/2 right-0 z-[1] overflow-hidden rounded-lg shadow-lg shadow-slate-300 border lg:-bottom-5">
+    <div className="relative pb-10 sm:pt-16 md:pt-20 lg:pb-0">
+      <div className="absolute bottom-2 left-1/2 right-0 z-[1] overflow-hidden rounded-lg border shadow-lg shadow-slate-300 lg:-bottom-5">
         <Image
           src={"/detection-report.png"}
           width={100}
@@ -70,7 +76,7 @@ const HeroIllustration = () => {
             variant="bordered"
             color="primary"
             radius="full"
-            className="h-6 px-2 text-[6px] leading-none md:h-10 md:text-xs md:px-6 lg:h-8 lg:text-[8px] lg:px-3"
+            className="h-6 px-2 text-[6px] leading-none md:h-10 md:px-6 md:text-xs lg:h-8 lg:px-3 lg:text-[8px]"
           >
             Download Report
           </Button>

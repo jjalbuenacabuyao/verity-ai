@@ -45,8 +45,8 @@ const instructions = [
     instruction: (
       <p>
         4. Select the files that you want to check and click the{" "}
-        <span className="font-semibold">Open</span> button. It is important to remember that you can only
-        upload 20 files each time.
+        <span className="font-semibold">Open</span> button. It is important to
+        remember that you can only upload 20 files each time.
       </p>
     ),
     imgSource: "/uploadfiles.png",
@@ -157,6 +157,15 @@ const adminInstructions = [
       "Screenshot of VerityAI homepage with arrow pointing to the Login button",
   },
 ];
+
+/**
+ * Renders a tutorial section with two tabs: one for a video tutorial and another for step-by-step instructions.
+ * The component uses the `Tabs` and `Tab` components from the `@nextui-org/tabs` library to handle the tab functionality.
+ * The selected tab is stored in the component's state using the `useState` hook.
+ * The component also includes two sub-components: `Subheading` and `InstructionList`, which are responsible for rendering the headings and the list of instructions, respectively.
+ *
+ * @returns {JSX.Element} The rendered tutorial section with two tabs.
+ */
 
 const Tutorials = () => {
   const [selected, setSelected] = useState("Video");

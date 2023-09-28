@@ -9,6 +9,17 @@ interface Props {
   icon: React.ReactNode;
 }
 
+/**
+ * Renders a card with a title, description, and an icon.
+ * Uses the `motion` library from Framer Motion for animations.
+ *
+ * @param {Object} props - The component props.
+ * @param {string} props.title - The title of the card.
+ * @param {string} props.description - The description of the card.
+ * @param {React.ReactNode} props.icon - The icon to be displayed on the card.
+ * @returns {JSX.Element} - The rendered card component.
+ */
+
 const FeatureCard = ({ title, description, icon }: Props) => {
   return (
     <motion.div
