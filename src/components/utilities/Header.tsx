@@ -17,6 +17,12 @@ import Logo from "./Logo";
 import { usePathname } from "next/navigation";
 import UserMenu from "./UserMenu";
 
+/**
+ * Represents the header section of a website that contains the logo, links, button and user menu.
+ *
+ * @returns {JSX.Element} The rendered header component.
+ */
+
 const Header = () => {
   const currentUser = useCurrentUserContext();
 
@@ -63,6 +69,7 @@ const Header = () => {
           className="hidden h-auto py-3 sm:block"
         />
 
+        {/* If the user is in the homepage, the href attribute of Home link will be "#top". If the user is in the other pages such as Detector or Dashboard, the value of href attribute will be "/" */}
         {menuItems.map((item) => (
           <NavbarItem key={item}>
             <Link
@@ -113,6 +120,7 @@ const Header = () => {
         </NavbarItem>
       </NavbarContent>
 
+      {/* Mobile Menu */}
       <NavbarMenu>
         {menuItems.map((item) => (
           <NavbarMenuItem key={item}>

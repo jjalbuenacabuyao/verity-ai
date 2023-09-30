@@ -17,6 +17,16 @@ type Props = {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 };
 
+/**
+ * A component that renders a toast notification for displaying an error message.
+ * 
+ * @param {Object} props - The component props.
+ * @param {string} props.filename - The name of the file that caused the error.
+ * @param {boolean} props.isOpen - A state variable indicating whether the toast notification is open or closed.
+ * @param {function} props.setIsOpen - A state setter function to update the `isOpen` state variable.
+ * @returns {JSX.Element} - The rendered component.
+ */
+
 const DetectionErrorToast: React.FC<Props> = ({ isOpen, setIsOpen, filename }: Props) => {
   return (
     <>

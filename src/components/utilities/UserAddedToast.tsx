@@ -14,6 +14,16 @@ interface Props {
   setUserAdded: Dispatch<SetStateAction<boolean>>;
 }
 
+/**
+ * Renders a toast notification when a user is successfully added.
+ * 
+ * @param {object} props - The component props.
+ * @param {boolean} props.userAdded - Indicates whether a user has been added.
+ * @param {function} props.setUserAdded - A state setter function to update the `userAdded` state.
+ * 
+ * @returns {JSX.Element} The rendered component.
+ */
+
 const UserAddedToast = ({ userAdded, setUserAdded }: Props) => {
   return (
     <>

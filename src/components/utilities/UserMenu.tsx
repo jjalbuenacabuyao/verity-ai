@@ -29,6 +29,13 @@ interface Props {
   currentUser: CurrentUser;
 }
 
+/**
+ * Renders a dropdown menu for the user, allowing them to view their profile information, change their password, and log out.
+ * 
+ * @param {Object} currentUser - The current user object containing the user's name, email, and role.
+ * @returns {JSX.Element} The rendered dropdown menu with user information and options.
+ */
+
 const UserMenu = ({ currentUser }: Props) => {
   const [isCurrentPassVisible, setIsCurrentPassVisible] = useState(false);
   const [isNewPassVisible, setIsNewPassVisible] = useState(false);

@@ -1,4 +1,9 @@
 import React from "react";
+
+/*
+  Mail icon used for email inputs.
+*/
+
 const MailIcon = (props: any) => (
   <svg
     aria-hidden="true"

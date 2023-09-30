@@ -1,4 +1,9 @@
 import React from "react";
+
+/*
+ * This omponent renders an eye icon with slash for the password inputs.
+*/
+
 const EyeSlashFilledIcon = (props: any) => (
   <svg
     aria-hidden="true"

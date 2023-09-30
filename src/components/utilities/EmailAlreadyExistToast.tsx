@@ -9,6 +9,16 @@ interface Props {
   setIsError: Dispatch<SetStateAction<boolean>>;
 }
 
+/**
+ * Renders a toast notification when an email address already exists in the system.
+ * 
+ * @param {Object} props - The component props.
+ * @param {boolean} props.isError - A flag indicating whether an error has occurred.
+ * @param {function} props.setIsError - A function to update the `isError` flag.
+ * 
+ * @returns {JSX.Element} The rendered toast notification.
+ */
+
 const EmailAlreadyExistToast = ({ isError, setIsError }: Props) => {
   return (
     <>

@@ -21,6 +21,16 @@ interface Props {
   onClose: () => void;
 }
 
+/**
+ * Renders a modal window with email and password input for user login.
+ * 
+ * @param {Object} props - The component props.
+ * @param {boolean} props.isOpen - Indicates whether the login modal is open or closed.
+ * @param {function} props.onOpenChange - Callback function to handle the open/close state change of the modal.
+ * @param {function} props.onClose - Callback function to handle the close event of the modal.
+ * @returns {JSX.Element} The rendered component.
+ */
+
 const LogInModal = ({ isOpen, onOpenChange, onClose }: Props) => {
   const router = useRouter();
 

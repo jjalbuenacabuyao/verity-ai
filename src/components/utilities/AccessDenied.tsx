@@ -7,6 +7,12 @@ import LogInButton from "./LogInButton";
 import { Button } from "@nextui-org/button";
 import { useRouter } from "next/navigation";
 
+/**
+ * Renders a page for displaying an access denied message.
+ * 
+ * @returns {JSX.Element} - The rendered access denied page with an image, a heading, a paragraph, a login button, and a button to navigate back to the homepage.
+ */
+
 const AccessDenied = () => {
   const router = useRouter();
 

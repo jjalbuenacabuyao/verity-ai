@@ -7,6 +7,12 @@ import {
 import { Button } from "@nextui-org/button";
 import LogInModal from "./LogInModal";
 
+/**
+ * Renders a button with the label "Log in". When the button is clicked, it opens a modal window for user login.
+ *
+ * @returns The rendered LogInButton component.
+ */
+
 const LogInButton = () => {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 

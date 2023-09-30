@@ -7,6 +7,10 @@ interface Props {
   isVisible: boolean;
 }
 
+/*
+  * The toggler for showing or hiding the password.
+*/
+
 const PasswordVisibilityToggler = ({ toggleVisibility, isVisible }: Props) => {
   return (
     <button
