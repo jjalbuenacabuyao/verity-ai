@@ -1,11 +1,15 @@
 import { cleanText, countWords, detectAiGeneratedText } from "@/utils";
-import { NextApiRequest, NextApiResponse } from "next";
 import { DetectionResult, SliceSentenceResult } from "@/types";
 import { NextResponse } from "next/server";
 
-export async function POST(
-  request: Request
-) {
+/**
+ * Handles a POST request and processes the extracted text.
+ *
+ * @param {Request} request - The POST request object containing a JSON payload with an `extractedText` property.
+ * @returns {Promise<Response>} - A promise that resolves to a response with the AI-generated percentage and the texts with their scores and labels.
+ */
+
+export async function POST(request: Request) {
   const body = await request.json();
   const { extractedText } = body;
   const formatedText: string[] = extractedText
@@ -27,8 +31,6 @@ export async function POST(
   const paragraphText = sentences.join("");
   const overallWordCount = countWords(paragraphText);
   const wordCountLimit = 200;
-  // const aiGenerated = "LABEL_0" || "Fake";
-  // const humanWritten = "LABEL_1";
 
   if (overallWordCount <= wordCountLimit) {
     const result = await detectAiGeneratedText(paragraphText);
@@ -61,14 +63,6 @@ export async function POST(
     results.push({ text: slicedSentence, result: result });
   }
 
-  // const aiGeneratedResults = results.map(({ text, result }) => {
-  //   if (result.label === "LABEL_0") {
-  //     return result.score;
-  //   }
-
-  //   return 100 - Math.trunc(result.score);
-  // });
-
   const aiGeneratedTexts = results.filter(
     (item) => item.result.label === "LABEL_0" || item.result.label === "Fake"
   );
@@ -80,20 +74,13 @@ export async function POST(
       100) /
     overallWordCount;
 
-  // const totalScore =
-  //   aiGeneratedResults.reduce(
-  //     // @ts-ignore
-  //     (accumulator, currentValue) => accumulator + currentValue,
-  //     0
-  //   )! / aiGeneratedResults.length;
-
   const detectionResult: DetectionResult = {
     aiGeneratedPercentage: Math.round(totalPercentage),
     texts: results.map(({ text, result }) => {
       let { score, label } = result;
-      text = cleanText(text)
+      text = cleanText(text);
       label = label === "Fake" ? "LABEL_0" : "LABEL_1";
-      return { text, score, label }
+      return { text, score, label };
     }),
   };
 
