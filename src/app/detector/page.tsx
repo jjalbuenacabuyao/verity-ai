@@ -2,24 +2,20 @@
 
 import React, { useState } from "react";
 import { useCurrentUserContext } from "@/hooks/userContext";
-import { useRouter } from "next/navigation";
-import { useIdleTimer } from "react-idle-timer";
 import { AccessDenied } from "@/components/utilities";
 import { Aside, ResultContainer } from "@/components/detector";
+
+/**
+ * Renders a file detection feature.
+ * 
+ * React component that checks if the user is logged in and displays an access denied message if not. It consists of an `Aside` component for file upload and a `ResultContainer` component for displaying the detection results.
+ * 
+ * @returns {React.JSX.Element} The rendered component based on the user's authentication status.
+ */
 
 const Detector = () => {
   const [files, setFiles] = useState<File[]>([]);
   const currentUser = useCurrentUserContext();
-  const router = useRouter();
-
-  const onIdle = () => {
-    router.refresh();
-  };
-
-  useIdleTimer({
-    onIdle,
-    timeout: 1000 * 60 * 30, // 30 minutes
-  });
 
   if (!currentUser) {
     return <AccessDenied />;
