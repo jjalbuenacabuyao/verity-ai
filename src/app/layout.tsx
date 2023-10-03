@@ -10,6 +10,14 @@ export const metadata = {
   description: "Detect AI-Generated Academic Submissions",
 };
 
+/**
+ * RootLayout is the root layout of the web application.
+ * @param {Object} props - The properties that define the RootLayout component.
+ * @param {React.ReactNode} props.children - The child elements of the RootLayout component.
+ *
+ * @returns {JSX.Element} The rendered RootLayout component.
+ */
+
 export default async function RootLayout({
   children,
 }: {
