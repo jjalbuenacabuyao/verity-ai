@@ -6,7 +6,7 @@ import { workSans } from "@/fonts";
 const Footer = () => {
   return (
     <footer className="flex flex-col items-center gap-2 pt-[4.5rem] pb-10">
-      <Link href={"/"} className="flex gap-1">
+      <Link href={"/"} className="flex gap-1 items-center">
         <Image
           src="/logo.svg"
           width={36}
