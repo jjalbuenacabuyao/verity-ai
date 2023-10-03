@@ -1,4 +1,4 @@
-import { FAQ, Features, Hero, Tutorials } from "@/components/home";
+import { FAQ, Features, Footer, Hero, Tutorials } from "@/components/home";
 
 /**
  * Renders the homepage.
@@ -13,6 +13,7 @@ const Page = () => {
       <Features />
       <Tutorials />
       <FAQ />
+      <Footer />
     </div>
   );
 };
