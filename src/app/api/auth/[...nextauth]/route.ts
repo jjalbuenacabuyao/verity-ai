@@ -5,6 +5,18 @@ import bcrypt from "bcrypt";
 
 import prisma from "@/app/libs/prismadb";
 
+/**
+ * Configuration options for NextAuth.
+ * 
+ * @typedef {Object} AuthOptions
+ * @property {PrismaAdapter} adapter - The Prisma adapter for NextAuth.
+ * @property {Array} providers - The authentication providers.
+ * @property {Object} pages - The pages for sign in.
+ * @property {boolean} debug - Whether to enable debug mode.
+ * @property {Object} session - The session options.
+ * @property {string} secret - The secret for NextAuth.
+ */
+
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
@@ -42,27 +54,26 @@ export const authOptions: AuthOptions = {
       },
     }),
   ],
-  callbacks: {
-    // async signIn({ user, account, profile }) {
-    //   if (user.role === 'ADMIN') {
-    //     return '/dashboard'
-    //   } else if (user.role === 'USER') {
-    //     return '/detector'
-    //   } else {
-    //     return false
-    //   }
-    // }
-  },
+
   pages: {
     signIn: "/",
   },
+
   debug: process.env.NODE_ENV === "development",
+
   session: {
     strategy: "jwt",
     maxAge: 30 * 60,
   },
+  
   secret: process.env.NEXTAUTH_SECRET,
 };
+
+/**
+ * The NextAuth handler.
+ * 
+ * @returns {NextAuth} The NextAuth instance.
+ */
 
 const handler = NextAuth(authOptions);
 
