@@ -1,6 +1,17 @@
 import { HfInference } from "@huggingface/inference";
 import { InferenceApiResult } from "@/types"
 
+/**
+ * Detects if the given text is AI-generated or not using the Hugging Face Inference API.
+ * @param text - The input text to be classified.
+ * @returns An object containing the label and score of the text classification result.
+ * @example
+ * const text = "This is a sample text.";
+ * const result = await detectAiGeneratedText(text);
+ * console.log(result);
+ * // Output: { label: "AI-generated", score: 99 }
+ */
+
 export default async function detectAiGeneratedText(text: string) {
   const apiTokens = process.env.NEXT_PUBLIC_ACCESS_TOKEN!.split(", ");
 
