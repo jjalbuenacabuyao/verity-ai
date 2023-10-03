@@ -4,14 +4,22 @@ import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
+/**
+ * Handles a POST request to create a new user in the database.
+ *
+ * @param {Request} request The HTTP request object containing the user data in the request body.
+ * @returns {Promise<Response>} The created user object as a JSON response.
+ * @throws {Error} If a user with the same email already exists in the database.
+ */
+
 export async function POST(request: Request) {
   const body = await request.json();
   const { email, password, role, firstname, middlename, lastname } = body;
 
   const existingUser = await prisma.user.findUnique({
     where: {
-      email
-    }
+      email,
+    },
   });
 
   if (existingUser) {
@@ -38,6 +46,8 @@ export async function POST(request: Request) {
 
     return NextResponse.json(user);
   } catch (error) {
-    console.log(error);
+    throw new Error(
+      "An error occured while adding the user. Please check your connection and try again."
+    );
   }
 }
