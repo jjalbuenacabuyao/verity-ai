@@ -4,6 +4,13 @@ import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
+/**
+ * Handles a POST request to update the password of a user in the database.
+ * @param {Request} request - The HTTP request object containing the user's email, current password, and new password.
+ * @returns {Promise<object>} - An object indicating the success or failure of the password update.
+ * @throws {Error} - If there is an error retrieving or updating the user's password.
+ */
+
 export async function POST(request: Request) {
   const body = await request.json();
   const { email, currentPassword, newPassword } = body;
