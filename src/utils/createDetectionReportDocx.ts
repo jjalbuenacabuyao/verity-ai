@@ -122,6 +122,18 @@ const innerTableHeading = innerTableHeadingTitles.map(
     })
 );
 
+/**
+ * Generates a Word document (docx) based on a given array of `ResultWithFilename` objects.
+ * The function creates a table in the document with headers and rows representing the detection results.
+ * It also handles different types of result texts, including strings and objects, and generates inner tables for object texts.
+ *
+ * @param {ResultWithFilename[]} data - An array of `ResultWithFilename` objects containing the detection results.
+ * Each object has a `filename` (string) and a `result` (object) property.
+ * The `result` object has properties `aiGeneratedPercentage` (number) and `texts` (string or array of objects).
+ *
+ * @returns {object} - A Document object representing the generated Word document.
+ */
+
 const createDetectionReportDocx = (data: ResultWithFilename[]) => {
   const detectionResultRow = data.map(({filename, result}) => {
     const tableRow = new TableRow({
