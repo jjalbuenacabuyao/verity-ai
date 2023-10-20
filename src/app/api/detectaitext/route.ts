@@ -58,9 +58,15 @@ export async function POST(request: Request) {
   const results: SliceSentenceResult[] = [];
 
   for (let i = 0; i < sentences.length; i += 10) {
-    const slicedSentence = sentences.slice(i, i + 10).join(" ");
-    const result = await detectAiGeneratedText(slicedSentence);
-    results.push({ text: slicedSentence, result: result });
+    try {
+      const slicedSentence = sentences.slice(i, i + 10).join(" ");
+      const result = await detectAiGeneratedText(slicedSentence);
+      results.push({ text: slicedSentence, result: result });
+    } catch (error: any) {
+      const slicedSentence = sentences.slice(i, i + 5).join(" ");
+      const result = await detectAiGeneratedText(slicedSentence);
+      results.push({ text: slicedSentence, result: result });
+    }
   }
 
   const aiGeneratedTexts = results.filter(
