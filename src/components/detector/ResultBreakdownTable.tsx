@@ -39,7 +39,7 @@ const ResultBreakdownTable = ({ texts }: Props) => {
         {texts?.map(({ text, score, label }, index) => (
           <TableRow key={index}>
             <TableCell>
-              <p className="sm:text-justify">
+              <p className="sm:text-justify max-w-xl">
                 {text.split(" ").slice(0, slicedWords).join(" ") + "..."}
               </p>
             </TableCell>
