@@ -71,7 +71,6 @@ export async function POST(request: Request) {
         sliceSize -= 2;
       }
     }
-    
   }
 
   const aiGeneratedTexts = results.filter(
