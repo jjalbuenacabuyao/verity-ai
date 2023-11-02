@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest --silent"
+    "test": "jest --silent",
+    "build:docs": "jsdoc2md --files ./src/**/*.{ts,tsx} --configure ./jsdoc2md.json > ./docs/documentation.md"
   },
   "dependencies": {
     "@huggingface/inference": "^2.6.1",
@@ -55,10 +56,13 @@
     "react-icons": "^4.8.0",
     "react-idle-timer": "^5.7.2",
     "react-loader-spinner": "^5.3.4",
-    "sentence-splitter": "^4.2.1",
-    "typescript": "5.0.4"
+    "sentence-splitter": "^4.2.1"
   },
   "devDependencies": {
+    "@babel/cli": "^7.23.0",
+    "@babel/core": "^7.23.2",
+    "@babel/preset-env": "^7.23.2",
+    "@babel/preset-typescript": "^7.23.2",
     "@mermaid-js/mermaid-cli": "^10.1.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
@@ -69,11 +73,14 @@
     "autoprefixer": "^10.4.14",
     "jest": "^29.5.0",
     "jest-environment-jsdom": "^29.5.0",
+    "jsdoc-babel": "^0.5.0",
+    "jsdoc-to-markdown": "^8.0.0",
     "next-router-mock": "^0.9.9",
     "postcss": "^8.4.24",
     "prettier-plugin-tailwindcss": "^0.3.0",
     "prisma": "^4.15.0",
     "prisma-erd-generator": "^1.7.0",
-    "tailwindcss": "^3.3.2"
+    "tailwindcss": "^3.3.2",
+    "typescript": "^5.2.2"
   }
 }
