@@ -11,38 +11,94 @@ Research Professor: <b>Mr. Arnulfo Jr D. Señores</b>
 ## System Overview
 VerityAI is a web-based system that was designed to identify AI-generated text contents from ChatGPT on student's academic submissions. It uses an open source Large Language Model (LLM) called RoBERTa Base OpenAI Detector from Hugging Face. The users can upload docx and pdf files to the detector and can download the detection report after the detection. Additionally, administrators can also add, delete, and update the permission os users using the dashboard. 
 
-## How to run this code in your machine?
+## How to fork this code in your machine?
+<ol>
+  <li>
+  Clone the repository.
 
-1. Clone the repository.
+  ```bash
+  git clone https://github.com/jjalbuenacabuyao/verity-ai.git
+  ```
+  </li>
 
-```bash
-git clone https://github.com/jjalbuenacabuyao/verity-ai.git
-```
+  <li>
+    Open the folder in your text editor.
+  </li>
 
-2. Open the folder in your text editor.
+  <li>
+    Open the terminal and run the following:
 
-3. Open the terminal and run the following:
 ```bash
 npm install
 ```
+  </li>
 
-4. Create a .env file that contains the following variables:
+  <li>
+  Create a .env file that contains the following variables:
+
 ```
 DATABASE_URL=/*Your database URL*/
 NEXTAUTH_SECRET="NEXTAUTH_SECRET"
 NEXTAUTH_URL="http://localhost:3000"
 ```
+  </li>
 
-5. Create .env.local file that contains the following variables:
+  <li>
+  Create .env.local file that contains the following variables:
+
 ```
 NEXT_PUBLIC_API_URL=/*RoBERTa Base API URL*/
 NEXT_PUBLIC_ACCESS_TOKEN=/*Access tokes from HuggingFace seperated by a comma and a space.*/
 ```
+  </li>
 
-6. Once the modules were installed, run the following command in the terminal:
+  <li>
+  Once the modules were installed, run the following command in the terminal:
+
 ```bash
 npm run dev
 ```
+  </li>
+
+  <li>
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+  </li>
+</ol>
+
+## Programming Language, Libraries, and Frameworks
+<ul>
+<li>
+
+[Next.js](https://nextjs.org/)
+</li>
+
+<li>
+
+[Tailwind](https://tailwindcss.com/)
+</li>
+
+<li>
+
+[TypeScript](https://www.typescriptlang.org/)
+</li>
+
+<li>
+
+[Prisma](https://www.prisma.io/)
+</li>
+
+<li>
+
+[MongoDB](https://www.mongodb.com/)
+</li>
+
+<li>
+
+[NextAuth](https://next-auth.js.org/)
+</li>
+</ul>
+
+## Documentation
+Documentation can be found in docs folder documentation.md file.
 
