@@ -26,7 +26,20 @@ git clone https://github.com/jjalbuenacabuyao/verity-ai.git
 npm install
 ```
 
-4. Once the modules were installed, run the following command in the terminal:
+4. Create a .env file that contains the following variables:
+```
+DATABASE_URL=/*Your database URL*/
+NEXTAUTH_SECRET="NEXTAUTH_SECRET"
+NEXTAUTH_URL="http://localhost:3000"
+```
+
+5. Create .env.local file that contains the following variables:
+```
+NEXT_PUBLIC_API_URL=/*RoBERTa Base API URL*/
+NEXT_PUBLIC_ACCESS_TOKEN=/*Access tokes from HuggingFace seperated by a comma and a space.*/
+```
+
+6. Once the modules were installed, run the following command in the terminal:
 ```bash
 npm run dev
 ```
