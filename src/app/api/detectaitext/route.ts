@@ -89,7 +89,7 @@ export async function POST(request: Request) {
     texts: results.map(({ text, result }) => {
       let { score, label } = result;
       text = cleanText(text);
-      label = label === "Fake" ? "LABEL_0" : "LABEL_1";
+      label = label === "Fake" || label === "LABEL_0" ? "LABEL_0" : "LABEL_1";
       return { text, score, label };
     }),
   };
