@@ -135,7 +135,7 @@ It also handles different types of result texts, including strings and objects, 
 
 <a name="POST"></a>
 
-## POST(request) ⇒ <code>Promise.&lt;NextResponse&gt;</code>
+## changerole -> POST(request) ⇒ <code>Promise.&lt;NextResponse&gt;</code>
 <p>Handles a POST request to update the role of a user in a database using the Prisma ORM.</p>
 
 **Kind**: global function  
@@ -147,7 +147,7 @@ It also handles different types of result texts, including strings and objects, 
 
 <a name="POST"></a>
 
-## POST(request) ⇒ <code>Promise.&lt;NextResponse&gt;</code>
+## delete -> POST(request) ⇒ <code>Promise.&lt;NextResponse&gt;</code>
 <p>Handles a POST request to delete a user from the database.</p>
 
 **Kind**: global function  
@@ -159,7 +159,7 @@ It also handles different types of result texts, including strings and objects, 
 
 <a name="POST"></a>
 
-## POST(request) ⇒ <code>Promise.&lt;Response&gt;</code>
+## detectaitext -> POST(request) ⇒ <code>Promise.&lt;Response&gt;</code>
 <p>Handles a POST request and processes the extracted text.</p>
 
 **Kind**: global function  
@@ -173,7 +173,7 @@ It also handles different types of result texts, including strings and objects, 
 
 <a name="POST"></a>
 
-## POST(request) ⇒ <code>Promise.&lt;Response&gt;</code>
+## register -> POST(request) ⇒ <code>Promise.&lt;Response&gt;</code>
 <p>Handles a POST request to create a new user in the database.</p>
 
 **Kind**: global function  
@@ -189,7 +189,7 @@ It also handles different types of result texts, including strings and objects, 
 
 <a name="GET"></a>
 
-## GET(req) ⇒ <code>Promise.&lt;NextResponse&gt;</code>
+## users -> GET(req) ⇒ <code>Promise.&lt;NextResponse&gt;</code>
 <p>Retrieves users from a database based on search criteria and pagination.</p>
 
 **Kind**: global function  
