@@ -10,6 +10,17 @@ interface Props {
   setUserAdded: Dispatch<SetStateAction<boolean>>;
 }
 
+/**
+ * Renders a button to add a user and opens a modal window for adding a user when clicked.
+ *
+ * @component
+ *
+ * @param {Object} props - The component props.
+ * @param {Function} props.setUserAdded - A function to update the state of whether a user has been added.
+ * @param {boolean} props.userAdded - A boolean value indicating whether a user has been added.
+ *
+ * @returns {JSX.Element} The rendered component.
+ */
 const AddUserButton = ({ setUserAdded, userAdded }: Props) => {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 

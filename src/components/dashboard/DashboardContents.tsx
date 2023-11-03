@@ -12,6 +12,15 @@ interface Props {
   totalUsers: number;
 }
 
+/**
+ * Renders the contents of a dashboard, including a search bar, user table, and statistics.
+ * Fetches a list of users from an API and updates the UI accordingly.
+ *
+ * @component
+ *
+ * @param {number} totalUsers - The total number of users.
+ * @returns {JSX.Element} - The rendered dashboard contents.
+ */
 const DashboardContents = ({ totalUsers }: Props) => {
   const [users, setUsers] = useState<UserType>([]);
   const [userAdded, setUserAdded] = useState<boolean>(false);

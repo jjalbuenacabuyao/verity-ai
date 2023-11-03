@@ -10,6 +10,17 @@ interface Props {
   role: string;
 }
 
+/**
+ * Renders a button with an SVG icon. When the button is clicked, it opens a modal window for editing a user's role.
+ *
+ * @component
+ *
+ * @param {string} props.firstName - The first name of the user.
+ * @param {string} props.role - The role of the user.
+ * @param {number} props.id - The unique identifier of the user.
+ * @returns {JSX.Element} - The rendered button with the SVG icon.
+ */
+
 const EditIcon = ({ firstName, role, id }: Props) => {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 

@@ -6,13 +6,25 @@ type Props = {
   setSearch: Dispatch<SetStateAction<string>>;
 };
 
+/**
+ * Renders a search input field with a search icon.
+ * Allows users to enter a search query and updates the search value using the `setSearch` function passed as a prop.
+ *
+ * @component
+ *
+ * @param {string} props.className - The CSS class name for the search bar component.
+ * @param {function} props.setSearch - The function to update the search value.
+ * @returns {JSX.Element} - The rendered search bar component.
+ */
 const Searchbar = ({ className, setSearch }: Props) => {
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value);
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) =>
+    setSearch(e.target.value);
 
   return (
     <form
       role="search"
-      className={`relative w-full text-sm lg:w-auto ${className}`}>
+      className={`relative w-full text-sm lg:w-auto ${className}`}
+    >
       <label htmlFor="search" className="hidden">
         Search user
       </label>

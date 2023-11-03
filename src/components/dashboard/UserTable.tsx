@@ -27,6 +27,19 @@ interface Props {
   setUserDeleted: Dispatch<SetStateAction<boolean>>;
 }
 
+/**
+ * Renders a table of users.
+ *
+ * @param {Object} props - The props object.
+ * @param {Array} props.users - The list of users to display in the table.
+ * @param {number} props.numOfUsers - The total number of users.
+ * @param {number} props.page - The current page number.
+ * @param {function} props.setPage - A function to update the current page.
+ * @param {boolean} props.isLoading - A flag indicating if the table is currently loading.
+ * @param {string} props.search - The search query entered by the user.
+ * @param {function} props.setUserDeleted - A function to handle user deletion.
+ * @returns {JSX.Element} The rendered table component.
+ */
 const UserTable = ({
   users,
   numOfUsers,

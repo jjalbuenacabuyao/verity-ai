@@ -8,6 +8,19 @@ interface Props {
   setUserDeleted: Dispatch<SetStateAction<boolean>>;
 }
 
+/**
+ * Renders a delete button with a delete icon. When clicked, it opens a modal dialog for confirming the deletion of a user.
+ * 
+ * @component
+ * 
+ * @param {number} id - The ID of the user to be deleted.
+ * @param {string} username - The username of the user to be deleted.
+ * @param {function} setUserDeleted - A callback function to update the state when the user is deleted.
+ * @param {object} props - Additional props to be passed to the button element.
+ * 
+ * @returns {JSX.Element} The delete button component.
+ */
+
 const DeleteButton = ({ id, username, setUserDeleted, ...props }: Props) => {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 

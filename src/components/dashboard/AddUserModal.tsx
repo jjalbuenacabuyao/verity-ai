@@ -19,7 +19,11 @@ import { Input } from "@nextui-org/input";
 import { Button } from "@nextui-org/button";
 import { Radio, RadioGroup } from "@nextui-org/radio";
 import { useRouter } from "next/navigation";
-import { EmailAlreadyExistToast, PasswordVisibilityToggler, UserAddedToast } from "../utilities";
+import {
+  EmailAlreadyExistToast,
+  PasswordVisibilityToggler,
+  UserAddedToast,
+} from "../utilities";
 
 interface User {
   email: string;
@@ -38,6 +42,17 @@ interface Props {
   setUserAdded: Dispatch<SetStateAction<boolean>>;
 }
 
+/**
+ * Renders a modal for adding a new user.
+ *
+ * @param {object} Props - The component props.
+ * @param {boolean} Props.isOpen - Determines whether the modal is open or closed.
+ * @param {function} Props.onOpenChange - Callback function to handle the open/close state change of the modal.
+ * @param {function} Props.setUserAdded - Setter function to update the state of whether a user has been added.
+ * @param {boolean} Props.userAdded - Indicates whether a user has been added.
+ * @param {function} Props.onClose - Callback function to handle the close event of the modal.
+ * @returns {JSX.Element} The rendered modal component.
+ */
 const AddUserModal = ({
   isOpen,
   onOpenChange,

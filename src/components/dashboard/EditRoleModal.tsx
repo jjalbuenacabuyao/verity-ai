@@ -23,6 +23,18 @@ interface Props {
   role: string;
 }
 
+/**
+ * Renders a modal for editing a user's role.
+ *
+ * @param {number} id - The ID of the user.
+ * @param {boolean} isOpen - Determines whether the modal is open or closed.
+ * @param {function} onOpenChange - Callback function to handle the open/close state of the modal.
+ * @param {function} onClose - Callback function to handle the close event of the modal.
+ * @param {string} firstName - The first name of the user.
+ * @param {string} role - The current role of the user.
+ * @returns {JSX.Element} - The rendered modal for editing the user's role.
+ */
+
 const EditRoleModal = ({
   id,
   isOpen,
