@@ -167,6 +167,7 @@ const AddUserModal = ({
                       label="Email"
                       name="email"
                       variant="bordered"
+                      type="email"
                       isRequired
                       onChange={handleChange}
                     />
@@ -183,6 +184,8 @@ const AddUserModal = ({
                         />
                       }
                       type={isVisible ? "text" : "password"}
+                      pattern=".{8,}"
+                      title="Minimum 8 characters required"
                     />
                   </fieldset>
                 </ModalBody>
