@@ -76,7 +76,17 @@ const AddUserModal = ({
   const toggleVisibility = () => setIsVisible(!isVisible);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+    if (["firstname", "middlename", "lastname"].includes(e.target.name)) {
+      setUser({
+        ...user,
+        [e.target.name]: e.target.value
+          .split(" ")
+          .map((name) => name.charAt(0).toUpperCase() + name.slice(1))
+          .join(" "),
+      });
+    } else {
+      setUser({ ...user, [e.target.name]: e.target.value });
+    }
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
