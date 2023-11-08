@@ -9,6 +9,15 @@ interface Props {
   isLoading: boolean;
 }
 
+/**
+ * Generates and downloads a detection report in the form of a DOCX file when a button is clicked.
+ * 
+ * @param {Object} props - The component props.
+ * @param {Array} props.results - An array of detection results.
+ * @param {boolean} props.isLoading - A flag indicating whether the data is currently being loaded.
+ * @returns {JSX.Element} - The DownloadReportButton component.
+ */
+
 const DownloadReportButton = ({ results, isLoading }: Props) => {
   const generatedDocx = createDetectionReportDocx(results);
 

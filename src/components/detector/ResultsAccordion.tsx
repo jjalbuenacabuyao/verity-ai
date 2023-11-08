@@ -11,6 +11,20 @@ interface Props {
   data: ResultWithFilename[];
 }
 
+/**
+ * Renders an accordion component with multiple items representing results.
+ * Each item displays the overall result and a breakdown if available.
+ *
+ * @component
+ *
+ * @param {Object[]} data - An array of objects representing the results with filenames.
+ * @param {string} data[].filename - The filename of the result.
+ * @param {Object} data[].result - The result object.
+ * @param {number} data[].result.aiGeneratedPercentage - The percentage of AI-generated text.
+ * @param {string|string[]} data[].result.texts - The text or array of texts representing the breakdown of the result.
+ * @returns {JSX.Element} The rendered accordion component.
+ */
+
 const ResultsAccordion = ({ data }: Props) => {
   return (
     <Accordion

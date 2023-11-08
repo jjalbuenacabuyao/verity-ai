@@ -5,6 +5,16 @@ interface Props {
   setFiles: Dispatch<SetStateAction<File[]>>;
 }
 
+/**
+ * Renders a file upload section for selecting and uploading PDF and DOCX files.
+ *
+ * @component
+ *
+ * @param {Object} props - The component props.
+ * @param {function} props.setFiles - A function to set the selected files in the state.
+ *
+ * @returns {JSX.Element} The rendered component.
+ */
 const Aside = ({ setFiles }: Props) => {
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const fileInput = event.target.files;
@@ -26,12 +36,13 @@ const Aside = ({ setFiles }: Props) => {
           <img
             src="/upload.png"
             alt="Upload files icon - Made by Freepik from www.flaticon.com"
-            className="w-20 h-20 group-hover:scale-105 transition-all duration-300"
+            className="h-20 w-20 duration-300 transition-all group-hover:scale-105"
           />
           <h1 className="mb-6 mt-4">Upload pdf and docx files</h1>
           <label
             htmlFor="file"
-            className="flex cursor-pointer items-center gap-2 rounded-full bg-blue-600 px-6 py-2 text-sm font-medium tracking-wide text-white transition-all hover:bg-blue-800 hover:shadow-md hover:shadow-slate-400">
+            className="flex cursor-pointer items-center gap-2 rounded-full bg-blue-600 px-6 py-2 text-sm font-medium tracking-wide text-white transition-all hover:bg-blue-800 hover:shadow-md hover:shadow-slate-400"
+          >
             Browse Files
             <input
               className="hidden"
@@ -44,15 +55,18 @@ const Aside = ({ setFiles }: Props) => {
           </label>
         </div>
 
-        <div className="p-3 shadow-lg border rounded-lg">
+        <div className="rounded-lg border p-3 shadow-lg">
           <p className="text-sm">
-            <span className="font-medium">Important 🚨:</span> You can upload maximum of <span className="font-medium">20</span> files each time.
+            <span className="font-medium">Important 🚨:</span> You can upload
+            maximum of <span className="font-medium">20</span> files each time.
           </p>
         </div>
 
-        <div className="p-3 shadow-lg border rounded-lg">
+        <div className="rounded-lg border p-3 shadow-lg">
           <p className="text-sm">
-            <span className="font-medium">Important 🚨:</span> Only <span className="font-medium">docx and pdf</span> files are supported.
+            <span className="font-medium">Important 🚨:</span> Only{" "}
+            <span className="font-medium">docx and pdf</span> files are
+            supported.
           </p>
         </div>
       </div>

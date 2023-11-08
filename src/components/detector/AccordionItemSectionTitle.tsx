@@ -6,6 +6,17 @@ interface Props {
   description: string;
 }
 
+/**
+ * Renders a section title and description within an accordion item.
+ *
+ * @component
+ *
+ * @param {Object} props - The component props.
+ * @param {string} props.title - The title of the section.
+ * @param {string} props.description - The description of the section.
+ *
+ * @returns {JSX.Element} The rendered component.
+ */
 const AccordionItemSectionTitle = ({ title, description }: Props) => {
   return (
     <div className="mb-3 grid grid-cols-[auto_1fr] gap-2">

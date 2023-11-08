@@ -16,6 +16,34 @@ interface Props {
   }[];
 }
 
+/**
+ * Renders a table with paragraphs and their corresponding detection results.
+ * The number of words in each paragraph is determined based on the screen width.
+ * The table is populated with data from the `texts` prop.
+ *
+ * @component
+ * @example
+ * import { ResultBreakdownTable } from "./ResultBreakdownTable";
+ *
+ * const texts = [
+ *   { text: "Lorem ipsum dolor sit amet", score: 80, label: "LABEL_0" },
+ *   { text: "Consectetur adipiscing elit", score: 90, label: "LABEL_1" },
+ *   // more text objects...
+ * ];
+ *
+ * const App = () => {
+ *   return (
+ *     <div>
+ *       <h1>Result Breakdown</h1>
+ *       <ResultBreakdownTable texts={texts} />
+ *     </div>
+ *   );
+ * };
+ *
+ * @param {Object[]} texts - An array of objects representing the paragraphs to be displayed in the table.
+ * Each object should have the properties `text` (string), `score` (number), and `label` (string).
+ * @returns {JSX.Element} - The rendered table component.
+ */
 const ResultBreakdownTable = ({ texts }: Props) => {
   const screenWidth = screen.width;
   let slicedWords: number;
@@ -28,9 +56,12 @@ const ResultBreakdownTable = ({ texts }: Props) => {
   }
 
   return (
-    <Table aria-label="Detection Result Breakdown" classNames={{
-      wrapper: "mb-2",
-    }}>
+    <Table
+      aria-label="Detection Result Breakdown"
+      classNames={{
+        wrapper: "mb-2",
+      }}
+    >
       <TableHeader>
         <TableColumn key="paragraph">Paragraphs</TableColumn>
         <TableColumn key="result">Result</TableColumn>
@@ -39,7 +70,7 @@ const ResultBreakdownTable = ({ texts }: Props) => {
         {texts?.map(({ text, score, label }, index) => (
           <TableRow key={index}>
             <TableCell>
-              <p className="sm:text-justify max-w-xl">
+              <p className="max-w-xl sm:text-justify">
                 {text.split(" ").slice(0, slicedWords).join(" ") + "..."}
               </p>
             </TableCell>

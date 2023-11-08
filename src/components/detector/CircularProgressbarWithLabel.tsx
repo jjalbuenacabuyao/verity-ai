@@ -7,11 +7,18 @@ interface Props {
   label: string;
 }
 
-const CircularProgressbarWithLabel = ({
-  value,
-  icon,
-  label,
-}: Props) => {
+/**
+ * Renders a circular progress bar with a label and an icon.
+ *
+ * @component
+ *
+ * @param {Object} props - The component props.
+ * @param {number} props.value - The value of the progress bar, ranging from 0 to 100.
+ * @param {ReactElement} props.icon - An optional icon to display next to the label.
+ * @param {string} props.label - The label to display below the progress bar.
+ * @returns {JSX.Element} - The rendered component.
+ */
+const CircularProgressbarWithLabel = ({ value, icon, label }: Props) => {
   return (
     <div className="flex items-center">
       <CircularProgress
@@ -20,7 +27,9 @@ const CircularProgressbarWithLabel = ({
         value={value}
         showValueLabel={true}
         classNames={{
-          svg: `${label === "AI-Generated" ? "text-red-500" : "text-blue-500"} w-16 h-16`,
+          svg: `${
+            label === "AI-Generated" ? "text-red-500" : "text-blue-500"
+          } w-16 h-16`,
           value: "text-xs font-semibold",
         }}
       />
