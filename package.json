@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest --silent",
-    "build:docs": "jsdoc2md --files ./src/components/dashboard/*.tsx --configure ./jsdoc2md.json > ./docs/pages5.md"
+    "build:docs": "jsdoc2md --files ./src/utils/*.ts --configure ./jsdoc2md.json > ./docs/pages6.md"
   },
   "dependencies": {
     "@huggingface/inference": "^2.6.1",
