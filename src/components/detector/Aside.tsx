@@ -24,7 +24,9 @@ const Aside = ({ setFiles }: Props) => {
       }
 
       const fileArray: File[] = [...fileInput];
-      setFiles(fileArray);
+
+      const acceptedFiles = fileArray.filter((file) => file.size < 10485760);
+      setFiles(acceptedFiles);
     }
   };
 
