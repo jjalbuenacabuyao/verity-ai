@@ -60,6 +60,7 @@ const ResultContainer = ({ files }: Props) => {
           setErrorMessage("File too large.");
           setErrorResult([...errorResult, file.name]);
           setIsToastOpen(true);
+          return;
         }
 
         const extractedText = await getTextFromFiles(file);
