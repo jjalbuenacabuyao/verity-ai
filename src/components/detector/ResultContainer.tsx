@@ -35,6 +35,7 @@ const ResultContainer = ({ files }: Props) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isToastOpen, setIsToastOpen] = useState<boolean>(false);
   const [errorResult, setErrorResult] = useState<string[]>([]);
+  const [errorMessage, setErrorMessage] = useState<string>("");
   const [results, setResults] = useState<ResultWithFilename[]>([]);
   const [isFileLimitExceeded, setIsFileLimitExceeded] = useState(false);
 
@@ -55,6 +56,12 @@ const ResultContainer = ({ files }: Props) => {
     if (files?.length !== 0) {
       setIsLoading(true);
       const result = files!.map(async (file) => {
+        if (file.size > 20971520) {
+          setErrorMessage("File too large.");
+          setErrorResult([...errorResult, file.name]);
+          setIsToastOpen(true);
+        }
+
         const extractedText = await getTextFromFiles(file);
         const response = await axios.post("/api/detectaitext", {
           extractedText,
@@ -99,6 +106,7 @@ const ResultContainer = ({ files }: Props) => {
           const rejectedFiles = filenames.filter(
             (filename) => !fulfilledFiles.includes(filename)
           );
+          setErrorMessage("Sentences are too long.");
           setErrorResult(rejectedFiles);
           setIsToastOpen(true);
           setIsLoading(false);
@@ -137,6 +145,7 @@ const ResultContainer = ({ files }: Props) => {
             filename={filename}
             isOpen={isToastOpen}
             setIsOpen={setIsToastOpen}
+            errorMessage={errorMessage}
           />
         ))}
 
