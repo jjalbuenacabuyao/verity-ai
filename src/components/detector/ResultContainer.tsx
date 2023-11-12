@@ -9,6 +9,7 @@ import ResultsAccordion from "./ResultsAccordion";
 import axios from "axios";
 import { Spinner } from "@nextui-org/spinner";
 import FileLimitExceededToast from "../utilities/FileLimitExceededToast";
+import FileTooLargeToast from "../utilities/FileTooLargeToast";
 
 interface Props {
   files: File[];
@@ -35,9 +36,9 @@ const ResultContainer = ({ files }: Props) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isToastOpen, setIsToastOpen] = useState<boolean>(false);
   const [errorResult, setErrorResult] = useState<string[]>([]);
-  const [errorMessage, setErrorMessage] = useState<string>("");
   const [results, setResults] = useState<ResultWithFilename[]>([]);
   const [isFileLimitExceeded, setIsFileLimitExceeded] = useState(false);
+  const [isFileTooLarge, setIsFileTooLarge] = useState(false);
 
   useEffect(() => {
     const storedState = localStorage.getItem("detectionResult");
@@ -57,9 +58,7 @@ const ResultContainer = ({ files }: Props) => {
       setIsLoading(true);
       const result = files!.map(async (file) => {
         if (file.size > 10485760) {
-          setErrorMessage("File too large.");
-          setErrorResult([...errorResult, file.name]);
-          setIsToastOpen(true);
+          setIsFileTooLarge(true);
           return;
         }
 
@@ -107,7 +106,6 @@ const ResultContainer = ({ files }: Props) => {
           const rejectedFiles = filenames.filter(
             (filename) => !fulfilledFiles.includes(filename)
           );
-          setErrorMessage("Sentences are too long.");
           setErrorResult(rejectedFiles);
           setIsToastOpen(true);
           setIsLoading(false);
@@ -146,13 +144,17 @@ const ResultContainer = ({ files }: Props) => {
             filename={filename}
             isOpen={isToastOpen}
             setIsOpen={setIsToastOpen}
-            errorMessage={errorMessage}
           />
         ))}
 
       <FileLimitExceededToast
         isOpen={isFileLimitExceeded}
         setIsOpen={setIsFileLimitExceeded}
+      />
+
+      <FileTooLargeToast
+        isOpen={isFileTooLarge}
+        setIsOpen={setIsFileTooLarge}
       />
     </div>
   );
