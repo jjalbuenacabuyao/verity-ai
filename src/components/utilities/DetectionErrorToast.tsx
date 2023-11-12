@@ -15,6 +15,7 @@ type Props = {
   filename: string;
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
+  errorMessage: string;
 };
 
 /**
@@ -27,7 +28,7 @@ type Props = {
  * @returns {JSX.Element} - The rendered component.
  */
 
-const DetectionErrorToast: React.FC<Props> = ({ isOpen, setIsOpen, filename }: Props) => {
+const DetectionErrorToast: React.FC<Props> = ({ isOpen, setIsOpen, filename, errorMessage }: Props) => {
   return (
     <>
       <Root
@@ -37,7 +38,7 @@ const DetectionErrorToast: React.FC<Props> = ({ isOpen, setIsOpen, filename }: P
         
         <BiErrorCircle size={32} className="area-error-icon" />
 
-        <Title className="area-title leading-none text-sm">Error occured while processing:</Title>
+        <Title className="area-title leading-none text-sm">{errorMessage}</Title>
 
         <Description className="area-description font-medium leading-none">
           {filename}
