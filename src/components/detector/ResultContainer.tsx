@@ -56,7 +56,7 @@ const ResultContainer = ({ files }: Props) => {
     if (files?.length !== 0) {
       setIsLoading(true);
       const result = files!.map(async (file) => {
-        if (file.size > 20971520) {
+        if (file.size > 10485760) {
           setErrorMessage("File too large.");
           setErrorResult([...errorResult, file.name]);
           setIsToastOpen(true);
