@@ -28,7 +28,7 @@ const Detector = () => {
     lg:grid-cols-[1fr_2.5fr] lg:gap-10 lg:px-24 lg:supports-clamp:px-fluid xl:px-28
     xl:supports-clamp:px-fluid">
       <Aside setFiles={setFiles} />
-      <ResultContainer files={files} />
+      <ResultContainer files={files} userEmail={currentUser.email} />
     </div>
   );
 };
