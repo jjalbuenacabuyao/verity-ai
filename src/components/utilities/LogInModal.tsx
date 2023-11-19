@@ -58,6 +58,10 @@ const LogInModal = ({ isOpen, onOpenChange, onClose }: Props) => {
       setError(response.error);
       setIsLoading(false);
     } else {
+      localStorage.setItem(
+        "userEmail",
+        JSON.stringify(data.email)
+      );
       router.push("/detector");
       router.refresh();
       onClose();
