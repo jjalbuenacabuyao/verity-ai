@@ -12,6 +12,7 @@ import FileLimitExceededToast from "../utilities/FileLimitExceededToast";
 
 interface Props {
   files: File[];
+  userEmail: string;
 }
 
 /**
@@ -31,7 +32,7 @@ interface Props {
  * @description
  * This component initializes state variables for loading status, error results, and detected text results. On component mount or when the `files` prop changes, it checks if there are stored results in local storage. If found, it sets the results and marks loading as complete. If there are more than 20 files in the `files` prop, it sets the `isFileLimitExceeded` state variable to `true` and returns early. If there are files to process, it sets loading status to `true` and starts processing each file asynchronously. For each file, it extracts the text content using the `getTextFromFiles` utility function and sends a POST request to the `/api/detectaitext` endpoint with the extracted text. The component waits for all the requests to settle using `Promise.allSettled` and processes the results. Fulfilled results are stored in the `results` state variable and also saved in local storage. If there are rejected results, the component sets the `errorResult` state variable with the filenames of the rejected files and displays an error toast. Finally, the component renders the results, a download button, and error toasts based on the state variables.
  */
-const ResultContainer = ({ files }: Props) => {
+const ResultContainer = ({ files, userEmail }: Props) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isToastOpen, setIsToastOpen] = useState<boolean>(false);
   const [errorResult, setErrorResult] = useState<string[]>([]);
@@ -39,8 +40,10 @@ const ResultContainer = ({ files }: Props) => {
   const [isFileLimitExceeded, setIsFileLimitExceeded] = useState(false);
 
   useEffect(() => {
+    const storedUserEmail = localStorage.getItem("userEmail");
     const storedState = localStorage.getItem("detectionResult");
-    if (storedState) {
+    
+    if (storedState && JSON.parse(storedUserEmail!) === userEmail) {
       setResults(JSON.parse(storedState));
       setIsLoading(false);
     } else {
@@ -105,7 +108,7 @@ const ResultContainer = ({ files }: Props) => {
         }
       });
     }
-  }, [files, setIsLoading]);
+  }, [files, setIsLoading, userEmail]);
 
   return (
     <div className="mb-8 border-t pt-16 lg:mb-0 lg:border-t-0 lg:pt-10">
