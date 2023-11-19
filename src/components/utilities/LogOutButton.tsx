@@ -12,7 +12,10 @@ import { Button } from "@nextui-org/button";
 const LogOutButton = () => {
   return (
     <Button
-      onClick={() => signOut({ callbackUrl: "/" })}
+      onClick={() => {
+        localStorage.removeItem("userEmail");
+        signOut({ callbackUrl: "/" });
+      }}
       variant="solid"
       radius="full"
       className="bg-blue-500 text-sm font-semibold tracking-wide text-white">
