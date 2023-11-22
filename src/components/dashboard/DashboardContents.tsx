@@ -10,6 +10,7 @@ import axios from "axios";
 
 interface Props {
   totalUsers: number;
+  currentUserEmail: string;
 }
 
 /**
@@ -19,9 +20,10 @@ interface Props {
  * @component
  *
  * @param {number} totalUsers - The total number of users.
+ * @param {string} currentUserEmail - The email of the current logged in user.
  * @returns {JSX.Element} - The rendered dashboard contents.
  */
-const DashboardContents = ({ totalUsers }: Props) => {
+const DashboardContents = ({ totalUsers, currentUserEmail }: Props) => {
   const [users, setUsers] = useState<UserType>([]);
   const [userAdded, setUserAdded] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -32,8 +34,8 @@ const DashboardContents = ({ totalUsers }: Props) => {
   useEffect(() => {
     async function fetchUsers() {
       setIsLoading(true);
-      const fetchedUsers = await axios(
-        `/api/users?page=${page}&search=${search}`
+      const fetchedUsers: UserType = await axios(
+        `/api/users?page=${page}&search=${search}&useremail=${currentUserEmail}`
       ).then((res) => res.data);
       setUsers(fetchedUsers);
       setIsLoading(false);
