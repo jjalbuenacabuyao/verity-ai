@@ -21,7 +21,7 @@ const Dashboard = async () => {
 
   return (
     <div className="px-6 pb-10 pt-8 supports-clamp:px-fluid md:px-16 md:supports-clamp:px-fluid lg:px-24 lg:supports-clamp:px-fluid xl:px-28 xl:supports-clamp:px-fluid">
-      <DashboardContents totalUsers={totalUsers} />
+      <DashboardContents totalUsers={totalUsers} currentUserEmail={currentUser.email} />
     </div>
   );
 };
