@@ -42,7 +42,7 @@ const DashboardContents = ({ totalUsers, currentUserEmail }: Props) => {
     }
 
     fetchUsers();
-  }, [search, page, userAdded, userDeleted]);
+  }, [search, page, userAdded, userDeleted, currentUserEmail]);
 
   return (
     <>
