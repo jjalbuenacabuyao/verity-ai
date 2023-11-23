@@ -20,9 +20,8 @@ import { Button } from "@nextui-org/button";
 import { Radio, RadioGroup } from "@nextui-org/radio";
 import { useRouter } from "next/navigation";
 import {
-  EmailAlreadyExistToast,
   PasswordVisibilityToggler,
-  UserAddedToast,
+  Toast,
 } from "../utilities";
 
 interface User {
@@ -180,6 +179,12 @@ const AddUserModal = ({
                       type="email"
                       isRequired
                       onChange={handleChange}
+                      validationState={isError ? "invalid" : "valid"}
+                      errorMessage={
+                        isError
+                          ? "The email address you entered is already associated with an existing account."
+                          : ""
+                      }
                     />
                     <Input
                       label="Password"
@@ -195,12 +200,33 @@ const AddUserModal = ({
                       }
                       type={isVisible ? "text" : "password"}
                       pattern=".{8,}"
-                      title="Minimum 8 characters required"
+                      validationState={
+                        isError && user.password.length < 8
+                          ? "invalid"
+                          : "valid"
+                      }
+                      title={
+                        isError && user.password.length < 8
+                          ? "Minimum 8 characters required."
+                          : ""
+                      }
+                      errorMessage={
+                        isError && user.password.length < 8
+                          ? "Minimum 8 characters required."
+                          : ""
+                      }
                     />
                   </fieldset>
                 </ModalBody>
                 <ModalFooter>
-                  <Button color="danger" variant="flat" onClick={onClose}>
+                  <Button
+                    color="danger"
+                    variant="flat"
+                    onClick={() => {
+                      onClose();
+                      setIsError(false);
+                    }}
+                  >
                     Close
                   </Button>
                   <Button isLoading={isLoading} color="primary" type="submit">
@@ -212,11 +238,14 @@ const AddUserModal = ({
           </ModalContent>
         </form>
       </Modal>
+      
       {userAdded && (
-        <UserAddedToast userAdded={userAdded} setUserAdded={setUserAdded} />
-      )}
-      {isError && (
-        <EmailAlreadyExistToast isError={isError} setIsError={setIsError} />
+        <Toast
+          type="userIsAdded"
+          title="User added successfully."
+          isOpen={userAdded}
+          onOpenChange={setUserAdded}
+        />
       )}
     </>
   );
