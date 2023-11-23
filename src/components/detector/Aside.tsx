@@ -1,5 +1,8 @@
+"use client";
+
 /* eslint-disable @next/next/no-img-element */
-import React, { ChangeEvent, Dispatch, SetStateAction } from "react";
+import React, { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
+import { Toast } from "../utilities";
 
 interface Props {
   setFiles: Dispatch<SetStateAction<File[]>>;
@@ -16,16 +19,22 @@ interface Props {
  * @returns {JSX.Element} The rendered component.
  */
 const Aside = ({ setFiles }: Props) => {
+  const [largeFiles, setLargeFiles] = useState<string[]>([]);
+  const [fileSizeExceeded, setFileSizeExceeded] = useState(false);
+
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const fileInput = event.target.files;
     if (fileInput) {
-      if (fileInput.length > 50) {
-        return;
-      }
-
       const fileArray: File[] = [...fileInput];
 
-      const acceptedFiles = fileArray.filter((file) => file.size < 10485760);
+      const acceptedFiles = fileArray.filter((file) => file.size <= 10485760);
+      const largeFiles = fileArray
+        .filter((file) => file.size > 10485760)
+        .map((file) => file.name);
+      if (largeFiles.length > 0) {
+        setLargeFiles(largeFiles);
+        setFileSizeExceeded(true);
+      }
       setFiles(acceptedFiles);
     }
   };
@@ -72,6 +81,18 @@ const Aside = ({ setFiles }: Props) => {
           </p>
         </div>
       </div>
+
+      {fileSizeExceeded && (
+        largeFiles.map((filename, index) => (
+          <Toast
+            key={index}
+            type="fileSizeExceeded"
+            isOpen={fileSizeExceeded}
+            onOpenChange={setFileSizeExceeded}
+            title="File size must be not more than 10mb."
+            description={`${filename} is too large.`}
+          />
+        )))}
     </aside>
   );
 };
