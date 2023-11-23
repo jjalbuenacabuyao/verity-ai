@@ -11,6 +11,7 @@ import LogOutButton from "./LogOutButton";
 import MailIcon from "./MailIcon";
 import PasswordVisibilityToggler from "./PasswordVisibilityToggler";
 import PlusIcon from "./PlusIcon";
+import Toast from "./Toast";
 import UserAddedToast from "./UserAddedToast";
 import UserMenu from "./UserMenu";
 
@@ -28,6 +29,7 @@ export {
   MailIcon,
   PasswordVisibilityToggler,
   PlusIcon,
+  Toast,
   UserAddedToast,
   UserMenu,
 };
