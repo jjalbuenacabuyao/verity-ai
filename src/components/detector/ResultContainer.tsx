@@ -3,12 +3,12 @@
 import React, { useEffect, useState } from "react";
 import { getTextFromFiles } from "@/utils";
 import { DetectionResult, ResultWithFilename } from "@/types";
-import { DetectionErrorToast } from "../utilities";
+import { Toast } from "../utilities";
 import DownloadReportButton from "./DownloadReportButton";
 import ResultsAccordion from "./ResultsAccordion";
 import axios from "axios";
 import { Spinner } from "@nextui-org/spinner";
-import FileLimitExceededToast from "../utilities/FileLimitExceededToast";
+
 
 interface Props {
   files: File[];
@@ -42,7 +42,7 @@ const ResultContainer = ({ files, userEmail }: Props) => {
   useEffect(() => {
     const storedUserEmail = localStorage.getItem("userEmail");
     const storedState = localStorage.getItem("detectionResult");
-    
+
     if (storedState && JSON.parse(storedUserEmail!) === userEmail) {
       setResults(JSON.parse(storedState));
       setIsLoading(false);
@@ -135,17 +135,21 @@ const ResultContainer = ({ files, userEmail }: Props) => {
 
       {errorResult.length > 0 &&
         errorResult.map((filename, index) => (
-          <DetectionErrorToast
+          <Toast
+            type="detectionError"
             key={index}
-            filename={filename}
+            description={filename}
             isOpen={isToastOpen}
-            setIsOpen={setIsToastOpen}
+            onOpenChange={setIsToastOpen}
+            title="Error occured while processing:"
           />
         ))}
-
-      <FileLimitExceededToast
+      
+      <Toast
+        type="fileLimitExceeded"
         isOpen={isFileLimitExceeded}
-        setIsOpen={setIsFileLimitExceeded}
+        onOpenChange={setIsFileLimitExceeded}
+        description="You can only upload a maximum of 20 files each time."
       />
     </div>
   );
