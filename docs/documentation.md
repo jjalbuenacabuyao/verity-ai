@@ -239,13 +239,6 @@ The component also includes two sub-components: <code>Subheading</code> and <cod
 <dd><p>Renders an <code>&lt;h3&gt;</code> element with a dynamic class name based on the <code>secondary</code> prop value.</p></dd>
 <dt><a href="#AccessDenied">AccessDenied()</a> ⇒ <code>JSX.Element</code></dt>
 <dd><p>Renders a page for displaying an access denied message.</p></dd>
-<dt><a href="#DetectionErrorToast">DetectionErrorToast(props)</a> ⇒ <code>JSX.Element</code></dt>
-<dd><p>A component that renders a toast notification for displaying an error message.</p></dd>
-<dt><a href="#EmailAlreadyExistToast">EmailAlreadyExistToast(props)</a> ⇒ <code>JSX.Element</code></dt>
-<dd><p>Renders a toast notification when an email address already exists in the system.</p></dd>
-<dt><a href="#FileLimitExceededToast">FileLimitExceededToast(props)</a> ⇒ <code>JSX.Element</code></dt>
-<dd><p>Renders a toast notification when the file upload limit is exceeded.
-The toast notification includes a message and a close button.</p></dd>
 <dt><a href="#Header">Header()</a> ⇒ <code>JSX.Element</code></dt>
 <dd><p>Represents the header section of a website that contains the logo, links, button and user menu.</p></dd>
 <dt><a href="#LogInButton">LogInButton()</a> ⇒</dt>
@@ -258,8 +251,8 @@ When the button is clicked, it calls the <code>signOut</code> function with a ca
 <dt><a href="#Logo">Logo()</a> ⇒ <code>JSX.Element</code></dt>
 <dd><p>Renders a logo image and text inside a <code>NavbarBrand</code> component.
 The logo image is wrapped in a <code>Link</code> component that navigates to the home page when clicked.</p></dd>
-<dt><a href="#UserAddedToast">UserAddedToast(props)</a> ⇒ <code>JSX.Element</code></dt>
-<dd><p>Renders a toast notification when a user is successfully added.</p></dd>
+<dt><a href="#Toast">Toast(props)</a> ⇒ <code>JSX.Element</code></dt>
+<dd><p>enders a toast notification with the specified content and appearance based on the provided props.</p></dd>
 <dt><a href="#UserMenu">UserMenu(currentUser)</a> ⇒ <code>JSX.Element</code></dt>
 <dd><p>Renders a dropdown menu for the user, allowing them to view their profile information, change their password, and log out.</p></dd>
 </dl>
@@ -668,52 +661,7 @@ The component also includes two sub-components: <code>Subheading</code> and <cod
 **Kind**: global function  
 **Returns**: <code>JSX.Element</code> - <ul>
 <li>The rendered access denied page with an image, a heading, a paragraph, a login button, and a button to navigate back to the homepage.</li>
-</ul>  
-<a name="DetectionErrorToast"></a>
-
-## DetectionErrorToast(props) ⇒ <code>JSX.Element</code>
-<p>A component that renders a toast notification for displaying an error message.</p>
-
-**Kind**: global function  
-**Returns**: <code>JSX.Element</code> - <ul>
-<li>The rendered component.</li>
-</ul>  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| props | <code>Object</code> | <p>The component props.</p> |
-| props.filename | <code>string</code> | <p>The name of the file that caused the error.</p> |
-| props.isOpen | <code>boolean</code> | <p>A state variable indicating whether the toast notification is open or closed.</p> |
-| props.setIsOpen | <code>function</code> | <p>A state setter function to update the <code>isOpen</code> state variable.</p> |
-
-<a name="EmailAlreadyExistToast"></a>
-
-## EmailAlreadyExistToast(props) ⇒ <code>JSX.Element</code>
-<p>Renders a toast notification when an email address already exists in the system.</p>
-
-**Kind**: global function  
-**Returns**: <code>JSX.Element</code> - <p>The rendered toast notification.</p>  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| props | <code>Object</code> | <p>The component props.</p> |
-| props.isError | <code>boolean</code> | <p>A flag indicating whether an error has occurred.</p> |
-| props.setIsError | <code>function</code> | <p>A function to update the <code>isError</code> flag.</p> |
-
-<a name="FileLimitExceededToast"></a>
-
-## FileLimitExceededToast(props) ⇒ <code>JSX.Element</code>
-<p>Renders a toast notification when the file upload limit is exceeded.
-The toast notification includes a message and a close button.</p>
-
-**Kind**: global function  
-**Returns**: <code>JSX.Element</code> - <p>The rendered component.</p>  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| props | <code>object</code> | <p>The component props.</p> |
-| props.isOpen | <code>boolean</code> | <p>Determines whether the toast notification is open or closed.</p> |
-| props.setIsOpen | <code>function</code> | <p>Updates the value of <code>isOpen</code>.</p> |
+</ul>
 
 <a name="Header"></a>
 
@@ -760,19 +708,22 @@ The logo image is wrapped in a <code>Link</code> component that navigates to the
 
 **Kind**: global function  
 **Returns**: <code>JSX.Element</code> - <p>The rendered logo component.</p>  
-<a name="UserAddedToast"></a>
+<a name="Toast"></a>
 
-## UserAddedToast(props) ⇒ <code>JSX.Element</code>
-<p>Renders a toast notification when a user is successfully added.</p>
+## Toast(props) ⇒ <code>JSX.Element</code>
+<p>Renders a toast notification with the specified content and appearance based on the provided props.</p>
 
 **Kind**: global function  
-**Returns**: <code>JSX.Element</code> - <p>The rendered component.</p>  
+**Returns**: <code>JSX.Element</code> - <p>The rendered Toast component.</p>  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | props | <code>object</code> | <p>The component props.</p> |
-| props.userAdded | <code>boolean</code> | <p>Indicates whether a user has been added.</p> |
-| props.setUserAdded | <code>function</code> | <p>A state setter function to update the <code>userAdded</code> state.</p> |
+| props.type | <code>string</code> | <p>The type of toast notification. Possible values include "userIsAdded", "fileLimitExceeded", "detectionError", and "fileSizeExceeded".</p> |
+| props.isOpen | <code>boolean</code> | <p>Indicates whether the toast is currently open or closed.</p> |
+| props.onOpenChange | <code>function</code> | <p>A callback function that is called when the open state of the toast changes.</p> |
+| props.title | <code>string</code> | <p>The title of the toast notification.</p> |
+| props.title | <code>description</code> | <p>The description or message of the toast notification.</p> |
 
 <a name="UserMenu"></a>
 
