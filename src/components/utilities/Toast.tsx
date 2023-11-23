@@ -24,6 +24,18 @@ type Props = {
   description?: string | undefined;
 };
 
+/**
+ * Renders a toast notification with the specified content and appearance based on the provided props.
+ * 
+ * @param {Object} props - The props for the Toast component.
+ * @param {string} props.type - The type of toast notification. Possible values include "userIsAdded", "fileLimitExceeded", "detectionError", and "fileSizeExceeded".
+ * @param {boolean} props.isOpen - Indicates whether the toast is currently open or closed.
+ * @param {function} props.onOpenChange - A callback function that is called when the open state of the toast changes.
+ * @param {string} props.title - The title of the toast notification.
+ * @param {string} props.description - The description or message of the toast notification.
+ * @returns {JSX.Element} The rendered Toast component.
+ */
+
 const Toast = ({ type, isOpen, onOpenChange, title, description }: Props) => {
   return (
     <>
