@@ -40,10 +40,9 @@ const ResultContainer = ({ files, userEmail }: Props) => {
   const [isFileLimitExceeded, setIsFileLimitExceeded] = useState(false);
 
   useEffect(() => {
-    const storedUserEmail = localStorage.getItem("userEmail");
-    const storedState = localStorage.getItem("detectionResult");
+    const storedState = localStorage.getItem(userEmail);
 
-    if (storedState && JSON.parse(storedUserEmail!) === userEmail) {
+    if (storedState) {
       setResults(JSON.parse(storedState));
       setIsLoading(false);
     } else {
@@ -85,7 +84,7 @@ const ResultContainer = ({ files, userEmail }: Props) => {
 
         setResults(fulfilledValues);
         localStorage.setItem(
-          "detectionResult",
+          userEmail,
           JSON.stringify(fulfilledValues)
         );
         setIsLoading(false);
