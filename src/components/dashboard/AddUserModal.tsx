@@ -19,10 +19,7 @@ import { Input } from "@nextui-org/input";
 import { Button } from "@nextui-org/button";
 import { Radio, RadioGroup } from "@nextui-org/radio";
 import { useRouter } from "next/navigation";
-import {
-  PasswordVisibilityToggler,
-  Toast,
-} from "../utilities";
+import { PasswordVisibilityToggler, Toast } from "../utilities";
 
 interface User {
   email: string;
@@ -71,8 +68,13 @@ const AddUserModal = ({
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
   const router = useRouter();
+  const [isPasswordInvalid, setIsPasswordInvalid] = useState<boolean>(false);
+  const [isEmailInvalid, setIsEmailInvalid] = useState<boolean>(false);
 
   const toggleVisibility = () => setIsVisible(!isVisible);
+
+  const validateEmail = (value: string) =>
+    value.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/gi);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     if (["firstname", "middlename", "lastname"].includes(e.target.name)) {
@@ -92,6 +94,21 @@ const AddUserModal = ({
     event.preventDefault();
 
     setIsLoading(true);
+    setIsPasswordInvalid(false);
+    setIsEmailInvalid(false);
+
+    if (!validateEmail(user.email)) {
+      setIsEmailInvalid(true);
+      setIsLoading(false);
+      return;
+    }
+
+    if (user.password.length < 8) {
+      setIsPasswordInvalid(true);
+      setIsLoading(false);
+      return;
+    }
+
     try {
       const response = await axios.post("/api/register", user);
       setIsLoading(false);
@@ -176,13 +193,17 @@ const AddUserModal = ({
                       label="Email"
                       name="email"
                       variant="bordered"
-                      type="email"
+                      type="text"
                       isRequired
                       onChange={handleChange}
-                      validationState={isError ? "invalid" : "valid"}
+                      validationState={
+                        isError || isEmailInvalid ? "invalid" : "valid"
+                      }
                       errorMessage={
                         isError
                           ? "The email address you entered is already associated with an existing account."
+                          : isEmailInvalid
+                          ? "Invalid email."
                           : ""
                       }
                     />
@@ -199,19 +220,9 @@ const AddUserModal = ({
                         />
                       }
                       type={isVisible ? "text" : "password"}
-                      pattern=".{8,}"
-                      validationState={
-                        isError && user.password.length < 8
-                          ? "invalid"
-                          : "valid"
-                      }
-                      title={
-                        isError && user.password.length < 8
-                          ? "Minimum 8 characters required."
-                          : ""
-                      }
+                      validationState={isPasswordInvalid ? "invalid" : "valid"}
                       errorMessage={
-                        isError && user.password.length < 8
+                        isPasswordInvalid
                           ? "Minimum 8 characters required."
                           : ""
                       }
@@ -238,7 +249,7 @@ const AddUserModal = ({
           </ModalContent>
         </form>
       </Modal>
-      
+
       {userAdded && (
         <Toast
           type="userIsAdded"
