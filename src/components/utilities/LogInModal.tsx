@@ -47,6 +47,7 @@ const LogInModal = ({ isOpen, onOpenChange, onClose }: Props) => {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsLoading(true);
+    setIsEmailInvalid(false);
 
     const email = event.currentTarget.email.value;
     const password = event.currentTarget.password.value;
