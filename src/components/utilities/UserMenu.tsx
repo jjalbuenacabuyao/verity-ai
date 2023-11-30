@@ -45,6 +45,7 @@ const UserMenu = ({ currentUser }: Props) => {
     isError: false,
     errorMessage: "",
   });
+  const [isPasswordInvalid, setIsPasswordInvalid] = useState<boolean>(false);
 
   const [passwordInput, setPasswordInput] = useState({
     currentPassword: "",
@@ -64,6 +65,13 @@ const UserMenu = ({ currentUser }: Props) => {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsLoading(true);
+    setIsPasswordInvalid(false);
+
+    if (passwordInput.newPassword.length < 8) {
+      setIsPasswordInvalid(true);
+      setIsLoading(false);
+      return;
+    }
 
     const response = await axios
       .post("/api/changepassword", {
@@ -191,6 +199,12 @@ const UserMenu = ({ currentUser }: Props) => {
                         />
                       }
                       type={isNewPassVisible ? "text" : "password"}
+                      validationState={
+                        isPasswordInvalid
+                          ? "invalid"
+                          : "valid"
+                      }
+                      errorMessage={isPasswordInvalid ? "Minimum 8 characters required." : ""}
                     />
                   </div>
                 </ModalBody>
@@ -198,7 +212,12 @@ const UserMenu = ({ currentUser }: Props) => {
                   <Button color="danger" variant="flat" onPress={onClose}>
                     Cancel
                   </Button>
-                  <Button color="primary" type="submit" isLoading={isLoading} className="font-semibold">
+                  <Button
+                    color="primary"
+                    type="submit"
+                    isLoading={isLoading}
+                    className="font-semibold"
+                  >
                     Submit
                   </Button>
                 </ModalFooter>
@@ -209,18 +228,20 @@ const UserMenu = ({ currentUser }: Props) => {
       </Modal>
 
       <>
-          <Root
-            open={isSuccessToastOpen}
-            onOpenChange={setIsSuccessToastOpen}
-            className="flex items-center gap-4 rounded-md border bg-green-500 p-5 text-white shadow-lg data-[swipe=cancel]:translate-x-0 data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[state=closed]:animate-hide data-[state=open]:animate-slideIn data-[swipe=end]:animate-swipeOut data-[swipe=cancel]:transition-[transform_200ms_ease-out]"
-          >
-            <Title className="font-semibold">Password updated successfully.</Title>
-            <Close>
-              <AiFillCloseCircle size={20} />
-            </Close>
-          </Root>
-          <Viewport className="fixed bottom-0 right-0 z-[31416] flex max-w-full flex-col gap-3 p-6" />
-        </>
+        <Root
+          open={isSuccessToastOpen}
+          onOpenChange={setIsSuccessToastOpen}
+          className="flex items-center gap-4 rounded-md border bg-green-500 p-5 text-white shadow-lg data-[swipe=cancel]:translate-x-0 data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[state=closed]:animate-hide data-[state=open]:animate-slideIn data-[swipe=end]:animate-swipeOut data-[swipe=cancel]:transition-[transform_200ms_ease-out]"
+        >
+          <Title className="font-semibold">
+            Password updated successfully.
+          </Title>
+          <Close>
+            <AiFillCloseCircle size={20} />
+          </Close>
+        </Root>
+        <Viewport className="fixed bottom-0 right-0 z-[31416] flex max-w-full flex-col gap-3 p-6" />
+      </>
     </>
   );
 };
