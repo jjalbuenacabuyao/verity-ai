@@ -23,7 +23,7 @@ interface Props {
 
 /**
  * Renders a modal window with email and password input for user login.
- * 
+ *
  * @param {Object} props - The component props.
  * @param {boolean} props.isOpen - Indicates whether the login modal is open or closed.
  * @param {function} props.onOpenChange - Callback function to handle the open/close state change of the modal.
@@ -37,18 +37,31 @@ const LogInModal = ({ isOpen, onOpenChange, onClose }: Props) => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [isEmailInvalid, setIsEmailInvalid] = useState<boolean>(false);
 
   const toggleVisibility = () => setIsVisible(!isVisible);
 
+  const validateEmail = (value: string) =>
+    value.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/gi);
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setIsLoading(true);
+
+    const email = event.currentTarget.email.value;
+    const password = event.currentTarget.password.value;
+
+    if (!validateEmail(email)) {
+      setIsEmailInvalid(true);
+      setIsLoading(false);
+      return;
+    }
 
     const data: { email: string; password: string } = {
-      email: event.currentTarget.email.value,
-      password: event.currentTarget.password.value,
+      email: email,
+      password: password,
     };
 
-    setIsLoading(true);
     const response = await signIn("credentials", {
       ...data,
       redirect: false,
@@ -86,10 +99,16 @@ const LogInModal = ({ isOpen, onOpenChange, onClose }: Props) => {
                 isRequired
                 variant="bordered"
                 validationState={
-                  error === "User does not exist" ? "invalid" : "valid"
+                  error === "User does not exist" || isEmailInvalid
+                    ? "invalid"
+                    : "valid"
                 }
                 errorMessage={
-                  error === "User does not exist" ? "User does not exist" : ""
+                  error === "User does not exist"
+                    ? "User does not exist"
+                    : isEmailInvalid
+                    ? "Invalid email."
+                    : ""
                 }
               />
               <Input
