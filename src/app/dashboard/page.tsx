@@ -13,7 +13,17 @@ import { DashboardContents } from "@/components/dashboard";
 
 const Dashboard = async () => {
   const currentUser = await getCurrentUser();
-  const totalUsers = (await client.user.findMany()).length;
+  const totalUsers = (
+    await client.user.findMany({
+      where: {
+        role: {
+          not: {
+            equals: "SUPERADMIN",
+          },
+        },
+      },
+    })
+  ).length;
 
   if (currentUser?.role !== "ADMIN" && currentUser?.role !== "SUPERADMIN") {
     return <AccessDenied />;
