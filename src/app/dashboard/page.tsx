@@ -15,7 +15,7 @@ const Dashboard = async () => {
   const currentUser = await getCurrentUser();
   const totalUsers = (await client.user.findMany()).length;
 
-  if (currentUser?.role !== "ADMIN") {
+  if (currentUser?.role !== "ADMIN" && currentUser?.role !== "SUPERADMIN") {
     return <AccessDenied />;
   }
 
