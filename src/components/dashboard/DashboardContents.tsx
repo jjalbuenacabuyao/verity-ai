@@ -7,6 +7,7 @@ import Searchbar from "./Searchbar";
 import AddUserButton from "./AddUserButton";
 import UserTable from "./UserTable";
 import axios from "axios";
+import { useCurrentUserContext } from "@/hooks/userContext";
 
 interface Props {
   totalUsers: number;
@@ -24,6 +25,8 @@ interface Props {
  * @returns {JSX.Element} - The rendered dashboard contents.
  */
 const DashboardContents = ({ totalUsers, currentUserEmail }: Props) => {
+  const currentUser = useCurrentUserContext();
+
   const [users, setUsers] = useState<UserType>([]);
   const [userAdded, setUserAdded] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -35,7 +38,7 @@ const DashboardContents = ({ totalUsers, currentUserEmail }: Props) => {
     async function fetchUsers() {
       setIsLoading(true);
       const fetchedUsers: UserType = await axios(
-        `/api/users?page=${page}&search=${search}&useremail=${currentUserEmail}`
+        `/api/users?page=${page}&search=${search}`
       ).then((res) => res.data);
       setUsers(fetchedUsers);
       setIsLoading(false);
@@ -68,7 +71,11 @@ const DashboardContents = ({ totalUsers, currentUserEmail }: Props) => {
               Total Users
             </p>
           </div>
-          <AddUserButton userAdded={userAdded} setUserAdded={setUserAdded} />
+
+          {currentUser?.role === "SUPERADMIN" && (
+            <AddUserButton userAdded={userAdded} setUserAdded={setUserAdded} />
+          )}
+
           <Searchbar className="lg:hidden" setSearch={setSearch} />
         </aside>
         <UserTable
