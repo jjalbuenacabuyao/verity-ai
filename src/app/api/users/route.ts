@@ -32,6 +32,12 @@ export async function GET(req: Request) {
           }
         },
 
+        role: {
+          not: {
+            equals: "SUPERADMIN",
+          }
+        },
+
         name: {
           OR: [
             {
@@ -64,19 +70,29 @@ export async function GET(req: Request) {
 
   const users = await prisma.user.findMany({
     where: {
-      NOT: {
-        email: {
+      email: {
+        not: {
           equals: currentUserEmail!,
-        }
+        },
+      },
+
+      role: {
+        not: {
+          equals: "SUPERADMIN",
+        },
       },
     },
+
     take: usersPerPage,
+
     skip,
+
     orderBy: {
       name: {
         firstName: "asc",
       },
     },
+
     include: {
       name: true,
     },
