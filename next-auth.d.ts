@@ -6,6 +6,13 @@ declare module "next-auth" {
     id: string;
     hashedPassword: string;
     role: string;
+    resetPasswordToken: string;
+    logtime: Date;
+    Name: {
+      firstName: string;
+      middleName: string;
+      lastName: string;
+    };
   }
 
   interface Session {
