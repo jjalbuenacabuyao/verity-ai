@@ -98,7 +98,7 @@ const Header = () => {
           </NavbarItem>
         )}
 
-        {currentUser?.role === "ADMIN" || currentUser?.role === "SUPERADMIN" && (
+        {(currentUser?.role === "ADMIN" || currentUser?.role === "SUPERADMIN") && (
           <NavbarItem>
             <Link
               href={"/dashboard"}
@@ -146,7 +146,7 @@ const Header = () => {
           </NavbarMenuItem>
         )}
 
-        {currentUser?.role === "ADMIN" || currentUser?.role === "SUPERADMIN" && (
+        {(currentUser?.role === "ADMIN" || currentUser?.role === "SUPERADMIN") && (
           <NavbarMenuItem>
             <Link
               href={"/dashboard"}
