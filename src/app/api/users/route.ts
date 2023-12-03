@@ -16,7 +16,6 @@ export async function GET(req: Request) {
   const page = Number(url.searchParams.get("page"));
   const search = url.searchParams.get("search") as string;
   const skip = (page - 1) * usersPerPage;
-  const currentUserEmail = url.searchParams.get("useremail");
 
   if (search !== "") {
     const searchResult = await prisma.user.findMany({
@@ -26,12 +25,6 @@ export async function GET(req: Request) {
         },
       },
       where: {
-        email: {
-          not: {
-            equals: currentUserEmail!,
-          }
-        },
-
         role: {
           not: {
             equals: "SUPERADMIN",
@@ -70,12 +63,6 @@ export async function GET(req: Request) {
 
   const users = await prisma.user.findMany({
     where: {
-      email: {
-        not: {
-          equals: currentUserEmail!,
-        },
-      },
-
       role: {
         not: {
           equals: "SUPERADMIN",
