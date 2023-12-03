@@ -16,6 +16,7 @@ import EditIcon from "./EditIcon";
 import { Spinner } from "@nextui-org/spinner";
 import { UserType } from "@/types";
 import DeleteButton from "./DeleteButton";
+import { useCurrentUserContext } from "@/hooks/userContext";
 
 interface Props {
   users: UserType;
@@ -49,9 +50,11 @@ const UserTable = ({
   search,
   setUserDeleted,
 }: Props) => {
+  const currentUser = useCurrentUserContext();
+
   const usersPerPage = 5;
   const pages = Math.ceil(numOfUsers / usersPerPage);
-  const tableHeadings = ["Name", "Role", "Action"];
+  let tableHeadings = ["Name", "Role", "Action"];
 
   return (
     <Table
@@ -76,9 +79,13 @@ const UserTable = ({
       }}
     >
       <TableHeader>
-        {tableHeadings.map((heading) => (
-          <TableColumn key={heading}>{heading}</TableColumn>
-        ))}
+        {tableHeadings.map((heading) => {
+          if (currentUser?.role === "ADMIN" && heading === "Action") {
+            return <TableColumn className="hidden">None</TableColumn>;
+          } else {
+            return <TableColumn key={heading}>{heading}</TableColumn>;
+          }
+        })}
       </TableHeader>
       <TableBody
         isLoading={isLoading}
@@ -91,30 +98,42 @@ const UserTable = ({
             <TableCell className={`${isLoading ? "hidden" : ""}`}>
               <p className="font-medium">
                 {`${name?.firstName} ${name?.middleName} ${name?.lastName}`}
+                {" "}
+                {currentUser?.email === email && (
+                  <span className="font-bold">(You)</span>
+                )}
               </p>
               <p className="text-xs">{email}</p>
             </TableCell>
             <TableCell className={`${isLoading ? "hidden" : ""}`}>
               {role.charAt(0) + role.slice(1).toLocaleLowerCase()}
             </TableCell>
-            <TableCell className={`${isLoading ? "hidden" : ""}`}>
-              <div className="flex items-center gap-2">
-                <Tooltip content="Edit user's role">
-                  <span className="cursor-pointer text-lg text-default-400 active:opacity-50">
-                    <EditIcon firstName={name!.firstName} role={role} id={id} />
-                  </span>
-                </Tooltip>
-                <Tooltip color="danger" content="Delete user">
-                  <span className="cursor-pointer text-lg text-danger active:opacity-50">
-                    <DeleteButton
-                      id={id}
-                      username={`${name?.firstName} ${name?.lastName}`}
-                      setUserDeleted={setUserDeleted}
-                    />
-                  </span>
-                </Tooltip>
-              </div>
-            </TableCell>
+            {currentUser?.role === "SUPERADMIN" ? (
+              <TableCell className={`${isLoading ? "hidden" : ""}`}>
+                <div className="flex items-center gap-2">
+                  <Tooltip content="Edit user's role">
+                    <span className="cursor-pointer text-lg text-default-400 active:opacity-50">
+                      <EditIcon
+                        firstName={name!.firstName}
+                        role={role}
+                        id={id}
+                      />
+                    </span>
+                  </Tooltip>
+                  <Tooltip color="danger" content="Delete user">
+                    <span className="cursor-pointer text-lg text-danger active:opacity-50">
+                      <DeleteButton
+                        id={id}
+                        username={`${name?.firstName} ${name?.lastName}`}
+                        setUserDeleted={setUserDeleted}
+                      />
+                    </span>
+                  </Tooltip>
+                </div>
+              </TableCell>
+            ) : (
+              <TableCell className="hidden">None</TableCell>
+            )}
           </TableRow>
         ))}
       </TableBody>
