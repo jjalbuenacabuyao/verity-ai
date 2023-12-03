@@ -50,6 +50,15 @@ export const authOptions: AuthOptions = {
           throw new Error("Incorrect password");
         }
 
+        await prisma.user.update({
+          where: {
+            email: credentials.email,
+          },
+          data: {
+            logtime: new Date(),
+          }
+        })
+
         return user as User;
       },
     }),
