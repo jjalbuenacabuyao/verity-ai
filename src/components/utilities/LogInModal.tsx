@@ -14,6 +14,8 @@ import PasswordVisibilityToggler from "./PasswordVisibilityToggler";
 import { Input } from "@nextui-org/input";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import axios from "axios";
+
 
 interface Props {
   isOpen: boolean;
@@ -38,6 +40,8 @@ const LogInModal = ({ isOpen, onOpenChange, onClose }: Props) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [isEmailInvalid, setIsEmailInvalid] = useState<boolean>(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const toggleVisibility = () => setIsVisible(!isVisible);
 
@@ -52,11 +56,15 @@ const LogInModal = ({ isOpen, onOpenChange, onClose }: Props) => {
     const email = event.currentTarget.email.value;
     const password = event.currentTarget.password.value;
 
+
     if (!validateEmail(email)) {
       setIsEmailInvalid(true);
       setIsLoading(false);
       return;
     }
+
+    setEmail(email);
+    setPassword(password);
 
     const data: { email: string; password: string } = {
       email: email,
@@ -76,6 +84,14 @@ const LogInModal = ({ isOpen, onOpenChange, onClose }: Props) => {
       router.refresh();
       onClose();
     }
+  };
+
+  const handleClick = async () => {
+    if (error === "User does not exist") return;
+
+    const response = await axios.post("/api/forgotPassword", {
+      email: email
+    })
   };
 
   return (
@@ -131,6 +147,9 @@ const LogInModal = ({ isOpen, onOpenChange, onClose }: Props) => {
                   error === "Incorrect password" ? "Incorrect password" : ""
                 }
               />
+              <div className="flex justify-end">
+                <button type="button" onClick={handleClick}>Forgot password?</button>
+              </div>
             </ModalBody>
             <ModalFooter>
               <Button color="danger" variant="flat" onClick={onClose}>
