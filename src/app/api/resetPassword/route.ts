@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
   const { id, password } = await request.json();
 
-  const hashedPassword = await bcrypt.hash(password, 12)
+  const hashedPassword = await bcrypt.hash(password, 12);
 
   try {
     await client.user.update({
@@ -13,9 +13,9 @@ export async function POST(request: Request) {
         id: id,
       },
       data: {
-        hashedPassword: hashedPassword
-      }
-    })
+        hashedPassword: hashedPassword,
+      },
+    });
 
     await client.token.delete({
       where: {
@@ -23,8 +23,8 @@ export async function POST(request: Request) {
       },
     });
 
-    return NextResponse.json({status: 200})
+    return NextResponse.json({ status: 200 });
   } catch (error: any) {
-    throw new Error("Error occured.")
+    return NextResponse.json({ status: 500 });
   }
 }
