@@ -14,8 +14,8 @@ import PasswordVisibilityToggler from "./PasswordVisibilityToggler";
 import { Input } from "@nextui-org/input";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
-import axios from "axios";
-import Toast from "./Toast";
+import Link from "next/link";
+import { validateEmail } from "@/utils";
 
 interface Props {
   isOpen: boolean;
@@ -42,15 +42,8 @@ const LogInModal = ({ isOpen, onOpenChange, onClose }: Props) => {
   const [isEmailInvalid, setIsEmailInvalid] = useState<boolean>(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isEmptyEmailToastOpen, setIsEmptyEmailToastOpen] = useState(false);
-  const [isForgotPasswordEmailSent, setIsForgotPasswordEmailSent] =
-    useState(false);
-  const [userExist, setUserExist] = useState(true);
 
   const toggleVisibility = () => setIsVisible(!isVisible);
-
-  const validateEmail = (value: string) =>
-    value.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/gi);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -81,25 +74,8 @@ const LogInModal = ({ isOpen, onOpenChange, onClose }: Props) => {
       router.refresh();
       onClose();
     }
-  };
 
-  const handleClick = async () => {
-    if (email === "" || !validateEmail(email)) {
-      setIsEmptyEmailToastOpen(true);
-      return;
-    }
-
-    const response: {
-      status: 200 | 500;
-    } = await axios
-      .post("/api/forgotPassword", {
-        email: email,
-      })
-      .then((res) => res.data);
-
-    response.status == 200
-      ? setIsForgotPasswordEmailSent(true)
-      : setUserExist(false);
+    setIsLoading(false);
   };
 
   return (
@@ -162,9 +138,9 @@ const LogInModal = ({ isOpen, onOpenChange, onClose }: Props) => {
                 }
               />
               <div className="flex justify-end">
-                <button type="button" onClick={handleClick}>
+                <Link href={"/forgot-password"} onClick={() => onClose()}>
                   Forgot password?
-                </button>
+                </Link>
               </div>
             </ModalBody>
             <ModalFooter>
@@ -183,27 +159,6 @@ const LogInModal = ({ isOpen, onOpenChange, onClose }: Props) => {
           </form>
         )}
       </ModalContent>
-
-      <Toast
-        type="fileLimitExceeded"
-        isOpen={isEmptyEmailToastOpen}
-        onOpenChange={setIsEmptyEmailToastOpen}
-        description="Please enter a valid email address."
-      />
-
-      <Toast
-        type="fileLimitExceeded"
-        isOpen={!userExist}
-        onOpenChange={setUserExist}
-        description="User does not exist."
-      />
-
-      <Toast
-        type="userIsAdded"
-        isOpen={isForgotPasswordEmailSent}
-        onOpenChange={setIsForgotPasswordEmailSent}
-        description="An email for password rest was sent."
-      />
     </Modal>
   );
 };
