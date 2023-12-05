@@ -54,7 +54,7 @@ const UserTable = ({
 
   const usersPerPage = 5;
   const pages = Math.ceil(numOfUsers / usersPerPage);
-  let tableHeadings = ["Name", "Role", "Action"];
+  let tableHeadings = ["Name", "Role", "Action", "Log Time"];
 
   return (
     <Table
@@ -80,7 +80,10 @@ const UserTable = ({
     >
       <TableHeader>
         {tableHeadings.map((heading) => {
-          if (currentUser?.role === "ADMIN" && heading === "Action") {
+          if (
+            currentUser?.role === "ADMIN" &&
+            (heading === "Action" || heading === "Log Time")
+          ) {
             return <TableColumn className="hidden">None</TableColumn>;
           } else {
             return <TableColumn key={heading}>{heading}</TableColumn>;
@@ -93,12 +96,11 @@ const UserTable = ({
           <Spinner size="lg" label="Loading..." className="pt-12 text-sm" />
         }
       >
-        {users.map(({ id, name, email, role }) => (
+        {users.map(({ id, name, email, role, logtime }) => (
           <TableRow key={id}>
             <TableCell className={`${isLoading ? "hidden" : ""}`}>
               <p className="font-medium">
-                {`${name?.firstName} ${name?.middleName} ${name?.lastName}`}
-                {" "}
+                {`${name?.firstName} ${name?.middleName} ${name?.lastName}`}{" "}
                 {currentUser?.email === email && (
                   <span className="font-bold">(You)</span>
                 )}
@@ -130,6 +132,14 @@ const UserTable = ({
                     </span>
                   </Tooltip>
                 </div>
+              </TableCell>
+            ) : (
+              <TableCell className="hidden">None</TableCell>
+            )}
+
+            {currentUser?.role === "SUPERADMIN" ? (
+              <TableCell className={`${isLoading ? "hidden" : ""}`}>
+                {logtime ? new Date(logtime).toLocaleString() : "..."}
               </TableCell>
             ) : (
               <TableCell className="hidden">None</TableCell>
