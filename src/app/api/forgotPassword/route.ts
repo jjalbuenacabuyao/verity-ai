@@ -18,6 +18,8 @@ export async function POST(request: Request) {
     },
   });
 
+  if (!user) return NextResponse.json({ status: 500 });
+
   if (user?.resetPasswordToken) {
     await client.token.delete({
       where: {
