@@ -199,7 +199,7 @@ const LogInModal = ({ isOpen, onOpenChange, onClose }: Props) => {
       />
 
       <Toast
-        type="fileLimitExceeded"
+        type="userIsAdded"
         isOpen={isForgotPasswordEmailSent}
         onOpenChange={setIsForgotPasswordEmailSent}
         description="An email for password rest was sent."
