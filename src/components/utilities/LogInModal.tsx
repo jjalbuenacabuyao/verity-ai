@@ -8,14 +8,14 @@ import {
   ModalFooter,
   ModalHeader,
 } from "@nextui-org/modal";
-import React, { FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import MailIcon from "./MailIcon";
 import PasswordVisibilityToggler from "./PasswordVisibilityToggler";
 import { Input } from "@nextui-org/input";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import axios from "axios";
-
+import Toast from "./Toast";
 
 interface Props {
   isOpen: boolean;
@@ -42,6 +42,10 @@ const LogInModal = ({ isOpen, onOpenChange, onClose }: Props) => {
   const [isEmailInvalid, setIsEmailInvalid] = useState<boolean>(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isEmptyEmailToastOpen, setIsEmptyEmailToastOpen] = useState(false);
+  const [isForgotPasswordEmailSent, setIsForgotPasswordEmailSent] =
+    useState(false);
+  const [userExist, setUserExist] = useState(true);
 
   const toggleVisibility = () => setIsVisible(!isVisible);
 
@@ -53,18 +57,11 @@ const LogInModal = ({ isOpen, onOpenChange, onClose }: Props) => {
     setIsLoading(true);
     setIsEmailInvalid(false);
 
-    const email = event.currentTarget.email.value;
-    const password = event.currentTarget.password.value;
-
-
     if (!validateEmail(email)) {
       setIsEmailInvalid(true);
       setIsLoading(false);
       return;
     }
-
-    setEmail(email);
-    setPassword(password);
 
     const data: { email: string; password: string } = {
       email: email,
@@ -87,11 +84,22 @@ const LogInModal = ({ isOpen, onOpenChange, onClose }: Props) => {
   };
 
   const handleClick = async () => {
-    if (error === "User does not exist") return;
+    if (email === "" || !validateEmail(email)) {
+      setIsEmptyEmailToastOpen(true);
+      return;
+    }
 
-    const response = await axios.post("/api/forgotPassword", {
-      email: email
-    })
+    const response: {
+      status: 200 | 500;
+    } = await axios
+      .post("/api/forgotPassword", {
+        email: email,
+      })
+      .then((res) => res.data);
+
+    response.status == 200
+      ? setIsForgotPasswordEmailSent(true)
+      : setUserExist(false);
   };
 
   return (
@@ -127,6 +135,9 @@ const LogInModal = ({ isOpen, onOpenChange, onClose }: Props) => {
                     ? "Invalid email."
                     : ""
                 }
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  setEmail(e.target.value)
+                }
               />
               <Input
                 endContent={
@@ -146,9 +157,14 @@ const LogInModal = ({ isOpen, onOpenChange, onClose }: Props) => {
                 errorMessage={
                   error === "Incorrect password" ? "Incorrect password" : ""
                 }
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  setPassword(e.target.value)
+                }
               />
               <div className="flex justify-end">
-                <button type="button" onClick={handleClick}>Forgot password?</button>
+                <button type="button" onClick={handleClick}>
+                  Forgot password?
+                </button>
               </div>
             </ModalBody>
             <ModalFooter>
@@ -167,6 +183,27 @@ const LogInModal = ({ isOpen, onOpenChange, onClose }: Props) => {
           </form>
         )}
       </ModalContent>
+
+      <Toast
+        type="fileLimitExceeded"
+        isOpen={isEmptyEmailToastOpen}
+        onOpenChange={setIsEmptyEmailToastOpen}
+        description="Please enter a valid email address."
+      />
+
+      <Toast
+        type="fileLimitExceeded"
+        isOpen={!userExist}
+        onOpenChange={setUserExist}
+        description="User does not exist."
+      />
+
+      <Toast
+        type="fileLimitExceeded"
+        isOpen={isForgotPasswordEmailSent}
+        onOpenChange={setIsForgotPasswordEmailSent}
+        description="An email for password rest was sent."
+      />
     </Modal>
   );
 };
