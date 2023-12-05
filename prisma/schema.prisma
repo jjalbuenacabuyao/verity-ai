@@ -11,8 +11,8 @@ datasource db {
 }
 
 model User {
-  id                 String   @id @default(auto()) @map("_id") @db.ObjectId
-  email              String   @unique
+  id                 String    @id @default(auto()) @map("_id") @db.ObjectId
+  email              String    @unique
   hashedPassword     String
   role               String
   name               Name?
@@ -35,4 +35,10 @@ model Token {
   expiration DateTime @db.Date
   user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId     String   @unique @db.ObjectId
+}
+
+model RegistrationTokens {
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  registrationToken String
+  expiration        DateTime @db.Date
 }
