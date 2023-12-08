@@ -20,6 +20,7 @@ import { Button } from "@nextui-org/button";
 import { Radio, RadioGroup } from "@nextui-org/radio";
 import { useRouter } from "next/navigation";
 import { PasswordVisibilityToggler, Toast } from "../utilities";
+import { validateEmail } from "@/utils";
 
 interface User {
   email: string;
@@ -72,9 +73,6 @@ const AddUserModal = ({
   const [isEmailInvalid, setIsEmailInvalid] = useState<boolean>(false);
 
   const toggleVisibility = () => setIsVisible(!isVisible);
-
-  const validateEmail = (value: string) =>
-    value.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/gi);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     if (["firstname", "middlename", "lastname"].includes(e.target.name)) {
