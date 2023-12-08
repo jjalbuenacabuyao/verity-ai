@@ -35,3 +35,12 @@ export interface SliceSentenceResult {
 export type UserType = (User & {
   name: Name | null;
 })[];
+
+export interface RegistrationData {
+  email: string;
+  password: string;
+  role: string;
+  firstname: string;
+  middlename: string;
+  lastname: string;
+}
