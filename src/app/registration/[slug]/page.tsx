@@ -1,4 +1,5 @@
 import client from "@/app/libs/prismadb";
+import { Registration } from "@/components/registration";
 import { AccessDenied } from "@/components/utilities";
 import React from "react";
 
@@ -21,7 +22,9 @@ const page = async ({ params }: Param) => {
     return <AccessDenied />;
   }
 
-  return <div>page</div>;
+  return (
+    <Registration />
+  )
 };
 
 export default page;
