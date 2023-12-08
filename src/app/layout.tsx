@@ -4,9 +4,13 @@ import getCurrentUser from "./actions/getCurrentUser";
 import { inter } from "@/fonts";
 import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
-
-export const metadata = {
-  title: "VerityAI",
+import { Metadata } from 'next'
+ 
+export const metadata: Metadata = {
+  title: {
+    template: "%s | VerityAI",
+    default: "VerityAI", // a default is required when creating a template
+  },
   description: "Detect AI-Generated Academic Submissions",
 };
 
