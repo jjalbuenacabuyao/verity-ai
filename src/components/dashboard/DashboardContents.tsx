@@ -8,6 +8,7 @@ import AddUserButton from "./AddUserButton";
 import UserTable from "./UserTable";
 import axios from "axios";
 import { useCurrentUserContext } from "@/hooks/userContext";
+import SendRegistrationLinkButton from "./SendRegistrationLinkButton";
 
 interface Props {
   totalUsers: number;
@@ -73,7 +74,7 @@ const DashboardContents = ({ totalUsers, currentUserEmail }: Props) => {
           </div>
 
           {currentUser?.role === "SUPERADMIN" && (
-            <AddUserButton userAdded={userAdded} setUserAdded={setUserAdded} />
+            <SendRegistrationLinkButton />
           )}
 
           <Searchbar className="lg:hidden" setSearch={setSearch} />
