@@ -2,7 +2,13 @@
 
 import { RegistrationData } from "@/types";
 import { Input } from "@nextui-org/input";
-import React, { ChangeEvent, Dispatch, FormEvent, SetStateAction, useState } from "react";
+import React, {
+  ChangeEvent,
+  Dispatch,
+  FormEvent,
+  SetStateAction,
+  useState,
+} from "react";
 import { MailIcon, PasswordVisibilityToggler } from "../utilities";
 import { Button } from "@nextui-org/button";
 import { validateEmail } from "@/utils";
@@ -12,12 +18,16 @@ type Props = {
   registrationData: RegistrationData;
   setRegistrationData: Dispatch<SetStateAction<RegistrationData>>;
   setRegistrationPhase: Dispatch<SetStateAction<string>>;
+  setEmailVerified: Dispatch<SetStateAction<boolean>>;
+  emailVerified: boolean;
 };
 
 const EmailAndPasswordInput = ({
   registrationData,
   setRegistrationData,
   setRegistrationPhase,
+  emailVerified,
+  setEmailVerified,
 }: Props) => {
   const [isEmailInvalid, setIsEmailInvalid] = useState(false);
   const [isPasswordInvalid, setIsPasswordInvalid] = useState(false);
@@ -28,8 +38,11 @@ const EmailAndPasswordInput = ({
   const toggleVisibility = () => setIsVisible(!isVisible);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setRegistrationData({ ...registrationData, [event.target.name]: event.target.value });
-  }
+    setRegistrationData({
+      ...registrationData,
+      [event.target.name]: event.target.value,
+    });
+  };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event?.preventDefault();
@@ -51,22 +64,29 @@ const EmailAndPasswordInput = ({
       return;
     }
 
-    const response: {
-      status: 200 | 500
-    } = await axios.post("/checkuseremail", {
-      email: registrationData.email
-    }).then(res => res.data);
+    if (!emailVerified) {
+      const response: {
+        status: 200 | 500;
+      } = await axios
+        .post("/api/checkuseremail", {
+          email: registrationData.email,
+        })
+        .then((res) => res.data);
 
-    if (response.status == 200) {
-      setIsLoading(false);
-      setRegistrationPhase("termsAndCondition");
-      return;
-    } else {
-      setIsLoading(false);
-      setUserDoesNotExist(true);
-      return;
+      if (response.status == 200) {
+        setIsLoading(false);
+        setRegistrationPhase("termsAndCondition");
+        return;
+      } else {
+        setIsLoading(false);
+        setUserDoesNotExist(true);
+        return;
+      }
     }
-  }
+
+    setIsLoading(false);
+    setRegistrationPhase("termsAndCondition");
+  };
 
   return (
     <form className="grid gap-8" onSubmit={handleSubmit}>
@@ -115,7 +135,7 @@ const EmailAndPasswordInput = ({
         />
       </fieldset>
       <div className="flex justify-end gap-4">
-        <Button color="danger" variant="flat" onClick={() => setRegistrationPhase("name")}>
+        <Button variant="flat" onClick={() => setRegistrationPhase("name")}>
           Back
         </Button>
         <Button
