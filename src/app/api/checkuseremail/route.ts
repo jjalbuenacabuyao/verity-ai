@@ -10,5 +10,9 @@ export async function POST(request: Request) {
     }
   })
 
-  user ? NextResponse.json({ status: 500 }) : NextResponse.json({ status: 200 })
+  if (user) {
+    return NextResponse.json({ status: 500 })
+  } else {
+    return NextResponse.json({ status: 200 })
+  }
 }
