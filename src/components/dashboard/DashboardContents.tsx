@@ -4,7 +4,6 @@ import { workSans } from "@/fonts";
 import { UserType } from "@/types";
 import React, { useEffect, useState } from "react";
 import Searchbar from "./Searchbar";
-import AddUserButton from "./AddUserButton";
 import UserTable from "./UserTable";
 import axios from "axios";
 import { useCurrentUserContext } from "@/hooks/userContext";
@@ -29,7 +28,6 @@ const DashboardContents = ({ totalUsers, currentUserEmail }: Props) => {
   const currentUser = useCurrentUserContext();
 
   const [users, setUsers] = useState<UserType>([]);
-  const [userAdded, setUserAdded] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [userDeleted, setUserDeleted] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
@@ -41,12 +39,21 @@ const DashboardContents = ({ totalUsers, currentUserEmail }: Props) => {
       const fetchedUsers: UserType = await axios(
         `/api/users?page=${page}&search=${search}`
       ).then((res) => res.data);
-      setUsers(fetchedUsers);
+
+      if (currentUser?.role === "ADMIN") {
+        const filteredUsers = fetchedUsers.filter(
+          (user) => user.role === "USER" || user.email === currentUser.email
+        );
+        setUsers(filteredUsers);
+      } else {
+        setUsers(fetchedUsers);
+      }
+
       setIsLoading(false);
     }
 
     fetchUsers();
-  }, [search, page, userAdded, userDeleted, currentUserEmail]);
+  }, [search, page, userDeleted, currentUserEmail]);
 
   return (
     <>
@@ -66,16 +73,14 @@ const DashboardContents = ({ totalUsers, currentUserEmail }: Props) => {
               aria-describedby="title"
               className={`${workSans.className} text-4xl font-bold`}
             >
-              {totalUsers}
+              {totalUsers + 1}
             </p>
             <p id="title" className="text-sm font-semibold">
               Total Users
             </p>
           </div>
 
-          {currentUser?.role === "SUPERADMIN" && (
-            <SendRegistrationLinkButton />
-          )}
+          {currentUser?.role === "SUPERADMIN" && <SendRegistrationLinkButton />}
 
           <Searchbar className="lg:hidden" setSearch={setSearch} />
         </aside>
