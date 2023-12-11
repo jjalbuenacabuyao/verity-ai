@@ -59,9 +59,9 @@ const DataPrivacyConsent = ({
           your personal data at any time. You can do this by contacting us.
         </p>
         <p>
-          By clicking "I agree" below, you confirm that you have read and
-          understood this consent form and that you consent to the collection,
-          use, and sharing of your personal data as described above.
+          By clicking &quot;I agree&quot; below, you confirm that you have read
+          and understood this consent form and that you consent to the
+          collection, use, and sharing of your personal data as described above.
         </p>
 
         <form className="mt-4 flex flex-col gap-2" onSubmit={handleSubmit}>
