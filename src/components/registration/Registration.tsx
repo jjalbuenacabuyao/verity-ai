@@ -5,8 +5,14 @@ import NameInput from "./NameInput";
 import { RegistrationData } from "@/types";
 import EmailAndPasswordInput from "./EmailAndPasswordInput";
 import TermsAndCondition from "./TermsAndCondition";
+import DataPrivacyConsent from "./DataPrivacyConsent";
+import RegistrationComplete from "./RegistrationComplete";
 
-const Registration = () => {
+type Props = {
+  token: string;
+}
+
+const Registration = ({ token }: Props) => {
   const [registrationPhase, setRegistrationPhase] = useState("name");
   const [termsAndConditionAccepted, setTermsAndConditionsAccepted] =
     useState(false);
@@ -23,7 +29,10 @@ const Registration = () => {
 
   return (
     <div className="mx-6 my-10 max-w-lg p-6 sm:mx-auto">
-      <h1 className="text-center text-2xl font-bold mb-4">Registration</h1>
+      {registrationPhase !== "registrationComplete" && (
+        <h1 className="mb-4 text-center text-2xl font-bold">Registration</h1>
+      )}
+
       {registrationPhase === "name" && (
         <NameInput
           setRegistrationPhase={setRegistrationPhase}
@@ -48,6 +57,20 @@ const Registration = () => {
           setTermsAndConditionsAccepted={setTermsAndConditionsAccepted}
           termsAndConditionAccepted={termsAndConditionAccepted}
         />
+      )}
+
+      {registrationPhase === "dataPrivacyConsent" && (
+        <DataPrivacyConsent
+          token={token}
+          dataConsentAccepted={dataConsentAccepted}
+          registrationData={registrationData}
+          setDataConsentAccepted={setDataConsentAccepted}
+          setRegistrationPhase={setRegistrationPhase}
+        />
+      )}
+
+      {registrationPhase === "registrationComplete" && (
+        <RegistrationComplete />
       )}
     </div>
   );
