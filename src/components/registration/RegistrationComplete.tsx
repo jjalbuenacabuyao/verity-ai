@@ -1,11 +1,17 @@
-import React from 'react'
+"use client";
 
-type Props = {}
+import React from "react";
+import { LogInButton } from "../utilities";
+
+type Props = {};
 
 const RegistrationComplete = (props: Props) => {
   return (
-    <div>RegistrationComplete</div>
-  )
-}
+    <div className="flex flex-col gap-5 items-center text-center">
+      <h1 className="text-4xl font-bold text-blue-500 leading-4">Registration Complete</h1>
+      <LogInButton />
+    </div>
+  );
+};
 
-export default RegistrationComplete
+export default RegistrationComplete;
