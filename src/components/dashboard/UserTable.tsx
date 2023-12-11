@@ -84,7 +84,7 @@ const UserTable = ({
             currentUser?.role === "ADMIN" &&
             (heading === "Action" || heading === "Log Time")
           ) {
-            return <TableColumn className="hidden">None</TableColumn>;
+            return <TableColumn className="hidden" key={heading}>None</TableColumn>;
           } else {
             return <TableColumn key={heading}>{heading}</TableColumn>;
           }
