@@ -18,17 +18,42 @@ export const metadata: Metadata = {
 
 const Dashboard = async () => {
   const currentUser = await getCurrentUser();
-  const totalUsers = (
-    await client.user.findMany({
-      where: {
-        role: {
-          not: {
-            equals: "SUPERADMIN",
-          },
+  let totalUsers: number;
+
+  if (currentUser?.role === "ADMIN") {
+    totalUsers = (
+      await client.user.findMany({
+        where: {
+          NOT: [
+            {
+              role: {
+                equals: "ADMIN",
+              }
+            },
+            {
+              role: {
+                equals: "SUPERADMIN"
+              }
+            }
+          ]
         },
-      },
-    })
-  ).length;
+      })
+    ).length;
+  } else {
+    totalUsers = (
+      await client.user.findMany({
+        where: {
+          NOT: [
+            {
+              role: {
+                equals: "SUPERADMIN",
+              },
+            },
+          ],
+        },
+      })
+    ).length;
+  }
 
   if (currentUser?.role !== "ADMIN" && currentUser?.role !== "SUPERADMIN") {
     return <AccessDenied />;
