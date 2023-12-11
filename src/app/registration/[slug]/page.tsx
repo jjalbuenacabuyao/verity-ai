@@ -23,7 +23,7 @@ const page = async ({ params }: Param) => {
   }
 
   return (
-    <Registration />
+    <Registration token={params.slug} />
   )
 };
 
