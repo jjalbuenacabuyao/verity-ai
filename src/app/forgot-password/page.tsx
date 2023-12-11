@@ -8,7 +8,7 @@ import axios from "axios";
 import React, { FormEvent, useState } from "react";
 
 
-const page = () => {
+const Page = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isEmailInvalid, setIsEmailInvalid] = useState(false);
   const [isEmailSent, setIsEmailSent] = useState(false);
@@ -49,8 +49,8 @@ const page = () => {
       className="mx-auto flex max-w-lg flex-col gap-4 px-6 py-10"
     >
       <p className="mb-4 font-bold">
-        Enter your user account's email address and we will send you a password
-        reset link.
+        Enter your user account&apos;s email address and we will send you a
+        password reset link.
       </p>
 
       <Input
@@ -93,4 +93,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
