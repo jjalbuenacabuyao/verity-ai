@@ -76,7 +76,7 @@ const SendRegistrationLinkButton = (props: Props) => {
               {(onClose) => (
                 <>
                   <ModalHeader className="flex flex-col gap-1">
-                    Add user
+                    Send registration link
                   </ModalHeader>
                   <ModalBody>
                     <Input
