@@ -37,7 +37,7 @@ const Contact = () => {
       <Subheading title="Contact us" />
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {superAdmins.map((admin) => (
-          <div className="flex items-center gap-4 rounded-2xl border p-5 shadow">
+          <div className="flex items-center gap-4 rounded-2xl border p-5 shadow" key={admin.name}>
             <img
               src={admin.img}
               alt={`Image of ${admin.name}`}
