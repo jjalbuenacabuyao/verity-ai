@@ -25,11 +25,10 @@ export async function GET(req: Request) {
         },
       },
       where: {
-        role: {
-          not: {
-            equals: "SUPERADMIN",
-          }
-        },
+        NOT: [
+          { role: { equals: "SUPERADMIN" } },
+          { role: { equals: "ADMIN" } },
+        ],
 
         name: {
           OR: [
