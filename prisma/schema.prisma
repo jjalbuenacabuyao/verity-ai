@@ -31,7 +31,7 @@ model Name {
 
 model Token {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  token      String
+  token      String   @unique
   expiration DateTime @db.Date
   user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId     String   @unique @db.ObjectId
@@ -39,6 +39,6 @@ model Token {
 
 model RegistrationTokens {
   id                String   @id @default(auto()) @map("_id") @db.ObjectId
-  registrationToken String
+  registrationToken String   @unique
   expiration        DateTime @db.Date
 }
