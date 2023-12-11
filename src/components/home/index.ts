@@ -1,3 +1,4 @@
+import Contact from "./Contact";
 import FeatureCard from "./FeatureCard";
 import Features from "./Features";
 import Hero from "./Hero";
@@ -9,6 +10,7 @@ import FaqAccordion from "./FaqAccordion";
 import Footer from "./Footer";
 
 export {
+  Contact,
   FAQ,
   FaqAccordion,
   FeatureCard,
