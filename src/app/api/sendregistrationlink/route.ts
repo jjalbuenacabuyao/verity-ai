@@ -28,7 +28,7 @@ export async function POST(request: Request) {
     to: email,
     from: process.env.EMAIL_FROM,
     subject: "Registration link",
-    text: `You are receiving this because you have requested a VerityAI account.\n\nPlease click on the following link, or paste this into your browser to complete the registration process within one hour of receiving it:\n\nhttp://localhost:3000/registration/${token}\n\nIf you did not request this, please ignore this email.\n`,
+    text: `You are receiving this because you have requested a VerityAI account.\n\nPlease click on the following link, or paste this into your browser to complete the registration process within one hour of receiving it:\n\nhttps://verity-ai.vercel.app/registration/${token}\n\nIf you did not request this, please ignore this email.\n`,
   };
 
   try {
