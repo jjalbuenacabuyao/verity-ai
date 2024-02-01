@@ -31,7 +31,7 @@ const DataPrivacyConsent = ({
 
     try {
       await axios.post("/api/register", registrationData);
-      await axios.post("/api/deletetoken", token);
+      await axios.post("/api/deletetoken", {token});
       setIsLoading(false);
       setRegistrationPhase("registrationComplete");
     } catch (e) {
