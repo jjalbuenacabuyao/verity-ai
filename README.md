@@ -1,4 +1,4 @@
-# Research Paper: VerityAI: Web-Based Artificial Intelligence Generated Text Detector
+# Research Paper: VerityAI: Enhancing Academic Integrity Through a Web-Based Detector for AI-Generated Text
 
 Website: <a target="_blank" href="https://verity-ai.vercel.app">VerityAI</a><br>
 Researchers: <b>Joel J. Cabuyao</b><br>
