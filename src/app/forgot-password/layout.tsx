@@ -1,6 +1,6 @@
 import { inter } from "@/fonts";
 
-export default function ForgotPasswordLayout({
+export default async function ForgotPasswordLayout({
   children,
 }: {
   children: React.ReactNode;
