@@ -44,52 +44,51 @@ const Page = () => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="mx-auto flex max-w-lg flex-col gap-4 px-6 py-10"
-    >
-      <p className="mb-4 font-bold">
-        Enter your user account&apos;s email address and we will send you a
-        password reset link.
-      </p>
-
-      <Input
-        autoFocus
-        endContent={
-          <MailIcon className="pointer-events-none flex-shrink-0 text-2xl text-default-400" />
-        }
-        label="Email"
-        name="email"
-        isRequired
-        variant="bordered"
-        validationState={
-          userExist == false || isEmailInvalid ? "invalid" : "valid"
-        }
-        errorMessage={
-          userExist == false
-            ? "User does not exist."
-            : isEmailInvalid
-            ? "Invalid email."
-            : ""
-        }
-      />
-
-      <Button
-        isLoading={isLoading}
-        type="submit"
-        variant="solid"
-        className="bg-blue-500 text-sm font-semibold tracking-wide text-white"
+    <div className="mx-auto flex max-w-lg">
+      <form
+        onSubmit={handleSubmit}
+        className="flex-col gap-4 px-6 py-10"
       >
-        {isLoading ? "Sending" : "Send password reset email"}
-      </Button>
-
-      <Toast
-        type="userIsAdded"
-        isOpen={isEmailSent}
-        onOpenChange={setIsEmailSent}
-        description="An email for password rest was sent."
-      />
-    </form>
+        <p className="mb-4 font-bold">
+          Enter your user account&apos;s email address and we will send you a
+          password reset link.
+        </p>
+        <Input
+          autoFocus
+          endContent={
+            <MailIcon className="pointer-events-none flex-shrink-0 text-2xl text-default-400" />
+          }
+          label="Email"
+          name="email"
+          isRequired
+          variant="bordered"
+          validationState={
+            userExist == false || isEmailInvalid ? "invalid" : "valid"
+          }
+          errorMessage={
+            userExist == false
+              ? "User does not exist."
+              : isEmailInvalid
+              ? "Invalid email."
+              : ""
+          }
+        />
+        <Button
+          isLoading={isLoading}
+          type="submit"
+          variant="solid"
+          className="bg-blue-500 text-sm font-semibold tracking-wide text-white"
+        >
+          {isLoading ? "Sending" : "Send password reset email"}
+        </Button>
+        <Toast
+          type="userIsAdded"
+          isOpen={isEmailSent}
+          onOpenChange={setIsEmailSent}
+          description="An email for password rest was sent."
+        />
+      </form>
+    </div>
   );
 };
 
