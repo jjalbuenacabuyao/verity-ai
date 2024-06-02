@@ -44,10 +44,10 @@ const Page = () => {
   };
 
   return (
-    <div className="mx-auto flex max-w-lg">
+    <div className="mx-auto max-w-lg">
       <form
         onSubmit={handleSubmit}
-        className="flex-col gap-4 px-6 py-10"
+        className="flex flex-col gap-4 px-6 py-10"
       >
         <p className="mb-4 font-bold">
           Enter your user account&apos;s email address and we will send you a
